@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- div for body of calculater -->
+    <div class="calc-body">
+        <form name="calculator">
+
+            <!-- return window, displays input data -->
+            <div class="view-window">  </div>
+            <!-- div container for integers and operand buttons-->
+            <div class= "buttons">
+            <div class="top-oper">  
+                <input class="operand" type="button" value="AC"></input>
+                <input class="operand" type="button" value="+/-"></input>
+                <input class="operand" type="button" value="%"></input>
+            </div>
+
+                <!-- container for integers, decimal and equal -->
+                <div class="mid-oper">
+                <input class="mid-integer" type="button" value="1"></input>
+                <input class="mid-integer" type="button" value="2"></input>
+                <input class="mid-integer" type="button" value="3"></input>
+                <input class="mid-integer" type="button" value="4"></input>
+                <input class="mid-integer" type="button" value="5"></input>
+                <input class="mid-integer" type="button" value="6"></input>
+                <input class="mid-integer" type="button" value="7"></input>
+                <input class="mid-integer" type="button" value="8"></input>
+                <input class="mid-integer" type="button" value="9"></input>
+                <input class="mid-integer" type="button" value="."></input>
+                <input class="mid-integer" type="button" value="0"></input>
+                <input class="mid-integer" type="button" value="="></input>
+                </div>
+
+                <!-- container for operators -- needs to be moved to the right side-->
+                <div class="right-col-oper">
+                <input class="operand" id ="right-lane" type="button" value="÷"></input>
+                <input class="operand" id ="right-lane" type="button" value="x"></input>
+                <input class="operand" id ="right-lane" type="button" value="+"></input>
+                <input class="operand" id ="right-lane" type="button" value="-"></input>
+                </div>
+            </div>
+        </form> 
+    </div>
+    
+<script src="index.js"></script>
+</body>
+</html>
