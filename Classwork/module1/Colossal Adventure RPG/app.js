@@ -1,8 +1,34 @@
 var readline = require("readline-sync");
 var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
-function nameWrong = function(){
 
+// Functions //
+function nameWrong() {
+    var sum = Math.floor(Math.random() * 13) 
+    Math.floor(Math.random() * 13)
+    if (sum = 0){
+        return "Pa"
+    } else if (sum == 2){
+        return "Ho"
+    } else if (sum == 10){
+        return "Fa"
+    } else if (sum == 3){
+        return "Ga"
+    } else if (sum == 4){
+        return "Za"
+    } else if (sum == 5) {
+        return "Na"
+    } else if (sum == 6) {
+        return "Ph"
+    } else if (sum == 7){
+        return "Gri"
+    } else if (sum == 8) {
+        return "La"
+    } else if (sum == 9){
+        return "Wa"
+    } else {
+        return "Ru"
+    }
 }
 
 // const inventory = [];
@@ -39,19 +65,22 @@ while (colossalRPG) {
     readline.keyInPause("-ACTUALLY, I don't care but my name is Felicia.")
     readline.keyInPause("I've always wanted to be a human. I picked out my own name. I wanted something that sounded more.. Human.")
     readline.keyInPause("The other humans laughed at me when I told them that so I had to kill them. You're kind of quiet but you didn't laugh at me. Maybe we can be friends.")
-    readline.keyInPause("Come on, let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
-    var command = readline.keyIn("*PRESS W TO WALK*")
+    readline.keyInPause("Come on, "+nameWrong()+playerName.toLowerCase()+ " let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
+    var command = readline.keyIn("*PRESS W TO WALK*", "w")
 
-    function walk(e) {
+    while () {
+    function walk() {
         var sum = Math.floor(Math.random() * 13) 
         Math.floor(Math.random() * 13) 
-        if( command == w ){ 
+        if(command == w){ 
             return "walking.."
         } else {
-            return "Where are you going "+nameWrong+playerName+"?"
+            return "Where are you going "+nameWrong()+playerName.toLowerCase()+"?"
         }
     }
+    }
 
+}
     //         if (i=walk;i ;i++) {
     //         }
 
@@ -93,7 +122,7 @@ while (colossalRPG) {
 
 
 
-    }
+
     // readline.question();
 
     // const Enemy (type, health, attack, courage, voiceSound) {
@@ -136,11 +165,3 @@ while (colossalRPG) {
     //     var unknown = new Weapon()
     //     var blunt = new Weapon()
     //     var weapon = new Weapon()
-
-    
-
-
-
-
-}
-
