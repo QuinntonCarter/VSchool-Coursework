@@ -6,30 +6,31 @@ var noOptions = ["Fine", "..."]
 function nameWrong() {
     var sum = Math.floor(Math.random() * 13) 
     Math.floor(Math.random() * 13)
-    if (sum = 0){
+    if (sum === 0){
         return "Pa"
-    } else if (sum == 2){
+    } else if (sum/2 === 2){
         return "Ho"
-    } else if (sum == 10){
-        return "Fa"
-    } else if (sum == 3){
+    } else if (sum/3 === 6){
+        return "Fa" 
+    } else if (sum/4 === 3){
         return "Ga"
-    } else if (sum == 4){
+    } else if (sum/5 === 4){
         return "Za"
-    } else if (sum == 5) {
+    } else if (sum === 5) {
         return "Na"
-    } else if (sum == 6) {
+    } else if (sum === 6) {
         return "Ph"
-    } else if (sum == 7){
+    } else if (sum === 7){
         return "Gri"
     } else if (sum == 8) {
         return "La"
-    } else if (sum == 9){
+    } else if (sum == 12){
         return "Wa"
     } else {
         return "Ru"
     }
 }
+
 
 // const inventory = [];
 // var battle = ["run", "cry", sword:"+5 physical damage +10 humiliation", Felicia: magic""];
@@ -66,9 +67,9 @@ while (colossalRPG) {
     readline.keyInPause("I've always wanted to be a human. I picked out my own name. I wanted something that sounded more.. Human.")
     readline.keyInPause("The other humans laughed at me when I told them that so I had to kill them. You're kind of quiet but you didn't laugh at me. Maybe we can be friends.")
     readline.keyInPause("Come on, "+nameWrong()+playerName.toLowerCase()+ " let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
-    var command = readline.keyIn("*PRESS W TO WALK*", "w")
+    var command = readline.keyIn("*PRESS W TO WALK*", {limit: "w"})
 
-    while () {
+    while (colossalRPG){
     function walk() {
         var sum = Math.floor(Math.random() * 13) 
         Math.floor(Math.random() * 13) 
@@ -80,7 +81,7 @@ while (colossalRPG) {
     }
     }
 
-}
+// }}
     //         if (i=walk;i ;i++) {
     //         }
 
@@ -164,4 +165,4 @@ while (colossalRPG) {
     //     var bow = new Weapon("")
     //     var unknown = new Weapon()
     //     var blunt = new Weapon()
-    //     var weapon = new Weapon()
+    //     var weapon = new Weapon()//
