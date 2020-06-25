@@ -1,13 +1,16 @@
 var readline = require("readline-sync");
 var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
+function nameWrong = function(){
+
+}
 
 // const inventory = [];
 // var battle = ["run", "cry", sword:"+5 physical damage +10 humiliation", Felicia: magic""];
 
 let colossalRPG = true
 
-readline.keyInPause ("You feel the ridges in a cold tile floor pressing against your skin.");
+readline.keyInPause ("Warm night air rustles dry grass around you...");
 readline.keyInPause ("Opening your eyes you come face to face with a small, red goblin. Their face couldn't be any closer to your own.");
 readline.keyInPause ("They croak: \n 'Do you want to play a game with me?'");
 
@@ -37,13 +40,18 @@ while (colossalRPG) {
     readline.keyInPause("I've always wanted to be a human. I picked out my own name. I wanted something that sounded more.. Human.")
     readline.keyInPause("The other humans laughed at me when I told them that so I had to kill them. You're kind of quiet but you didn't laugh at me. Maybe we can be friends.")
     readline.keyInPause("Come on, let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
-    
-
+    var command = readline.keyIn("*PRESS W TO WALK*")
 
     function walk(e) {
-        return e.Math.floor(Math.random() * 11) 
+        var sum = Math.floor(Math.random() * 13) 
+        Math.floor(Math.random() * 13) 
+        if( command == w ){ 
+            return "walking.."
+        } else {
+            return "Where are you going "+nameWrong+playerName+"?"
         }
-        
+    }
+
     //         if (i=walk;i ;i++) {
     //         }
 
