@@ -1,0 +1,51 @@
+#flag {
+    display: block;
+    margin-top: 300px;
+    margin-left: 850px;
+}
+
+#flagContainer {
+    border: rgb(255, 255, 255) solid;
+    height: 450px;
+    width: 675px;
+    display: flex;
+    justify-content: stretch;
+    flex-direction: column;
+    position: relative;
+}
+
+#flagContainer > div {
+    background-color: rgb(9, 101, 155);
+    height: 65px;
+}
+
+#flagContainer > div.white {
+    background-color: white;
+    height: 65px;
+}
+
+#blueBlock {
+position: absolute;
+background-color: rgb(9, 101, 155);
+height: 250px;
+width: 235px;
+display: flex;
+margin-top: -454px;
+margin-left: 3px;
+}
+
+#blueBlock > div.whiteVert {
+    background-color: white;
+    height: 250px;
+    width: 50px;
+    margin-left: 89px;
+}
+
+
+#blueBlock > div.whiteHori {
+    background-color:white;
+    height: 50px;
+    width: 250px;
+    margin-left: -136px;
+    margin-top: 100px;
+}

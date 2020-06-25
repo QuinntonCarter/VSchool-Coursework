@@ -1,0 +1,32 @@
+#flagBase {
+    margin-top: 200px;
+    margin-left: 800px;
+    background-color: red;
+    display: flex;
+    height: 500px;
+    width: 1000px;
+}
+
+div.container {
+    border-top: rgba(0, 0, 0, 0.425) solid 5px;
+    border-left: rgba(0, 0, 0, 0.425) solid 5px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background: rgb(255, 255, 255);
+    height: 250px;
+    width: 440px;
+}
+div.crossVert {
+    position: relative;
+    background: rgb(255, 0, 0);
+    height: 180px;
+    width: 60px;
+}
+div.crossHori {
+    position: absolute;
+    background: rgb(255, 0, 0);
+    width: 190px;
+    height: 60px;
+}

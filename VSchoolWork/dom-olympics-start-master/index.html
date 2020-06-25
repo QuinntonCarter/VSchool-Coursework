@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title> DOM Olympics </title>
+</head>
+
+<!-- body -->
+<body>
+    <header id="header"> </header>
+    <div id='container'> <span id='name'> </span> wrote the script </div>
+    <label> Theme </label>
+
+<!-- drop down themes -->
+    <select id="theme-drop-down">
+        <option value="theme-one"> blue/brown </option>
+        <option value="theme-two"> red/black </option>
+    </select>
+
+<!-- input form -->
+    <div id="main">
+
+        <!-- reset button -->
+        <button id='clear-button' type='reset' onclick='erase()'> Reset </button>
+
+        <!-- reset button end +messages start -->
+        <div id="messages">
+            <div class="message left">
+                I have something serious to talk about
+            </div>
+            <div class="message right">
+                I don't want to talk
+            </div>
+            <div class="message left">
+                You have to, you're the police
+            </div>
+            <div class="message right">
+                I'm just a simple farmer
+            </div>
+        </div>
+
+<!-- submit form -->
+<form name="out_message" id="out_message">
+        <input type='text' name='sent' id='input_id' minlength="0" maxlength="1000" value=''/>
+        <button name='submit'> Send </button>
+</form>
+    </div>
+        
+    <script src="index.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+#flag {
+top:150px;
+left: 800px;
+flex-direction: column;
+position: relative;
+display: flex;
+background-color: royalblue;
+height: 500px;
+width: 880px;
+}
+
+#flag > div.vert {
+    left: 255px;
+    position: absolute;
+    background: yellow;
+    height: 500px;
+    width: 100px;
+}
+
+#flag > div.hori {
+    top: 195px;
+    position: absolute;
+    background-color: yellow;
+    height: 100px;
+    width: 880px;
+}

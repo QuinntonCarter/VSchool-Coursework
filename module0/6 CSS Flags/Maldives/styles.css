@@ -1,0 +1,28 @@
+#flag {
+    margin-left: 775px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 78, 78);
+    height: 500px;
+    width: 850px;
+}
+
+#flag > div.greenBox {
+    position: absolute;
+    background-color: rgb(34, 126, 34);
+    height: 250px;
+    width: 600px;
+}
+
+#flag > div.crescentMoon {
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    left: 365px;
+    background: transparent;
+    border-radius: 100%;
+    box-shadow: inset 36px 0px white, inset 16px 0px 1px
+}
+

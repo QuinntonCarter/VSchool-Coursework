@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://coursework.vschool.io/javascript-dom-manipulation/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Javascript DOM Manipulation</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="./Javascript DOM Manipulation_files/screen.css">
+
+    <link rel="shortcut icon" href="https://coursework.vschool.io/favicon.png" type="image/png">
+    <link rel="canonical" href="https://coursework.vschool.io/javascript-dom-manipulation/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="https://coursework.vschool.io/javascript-dom-manipulation/amp/">
+    
+    <meta property="og:site_name" content="V School | Better Humans, Better Outcomes">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Javascript DOM Manipulation">
+    <meta property="og:description" content="In this write-up, we&#39;ll learn how to:  Select elements using JavaScript  Alter properties of the elements  Create new elements and add them to the DOM  The DOM The DOM (Document Object Model) is a object that represents the HTML and CSS of a web page. The DOM allows us to">
+    <meta property="og:url" content="https://coursework.vschool.io/javascript-dom-manipulation/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ">
+    <meta property="article:published_time" content="2016-08-25T20:39:03.000Z">
+    <meta property="article:modified_time" content="2019-08-30T22:53:53.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Javascript DOM Manipulation">
+    <meta name="twitter:description" content="In this write-up, we&#39;ll learn how to:  Select elements using JavaScript  Alter properties of the elements  Create new elements and add them to the DOM  The DOM The DOM (Document Object Model) is a object that represents the HTML and CSS of a web page. The DOM allows us to">
+    <meta name="twitter:url" content="https://coursework.vschool.io/javascript-dom-manipulation/">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Eric Jones">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1620">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "V School | Better Humans, Better Outcomes",
+        "logo": "https://coursework.vschool.io/content/images/2020/02/VS_Logo_Full_Black.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Eric Jones",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://coursework.vschool.io/content/images/2016/10/P.jpeg",
+            "width": 200,
+            "height": 200
+        },
+        "url": "https://coursework.vschool.io/author/eric/",
+        "sameAs": []
+    },
+    "headline": "Javascript DOM Manipulation",
+    "url": "https://coursework.vschool.io/javascript-dom-manipulation/",
+    "datePublished": "2016-08-25T20:39:03.000Z",
+    "dateModified": "2019-08-30T22:53:53.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ",
+        "width": 1080,
+        "height": 1620
+    },
+    "description": "In this write-up, we&#x27;ll learn how to:\n\nSelect  elements using JavaScript\nAlter  properties of the elements\nCreate  new elements and add them to the DOM\n\nThe DOM\nThe DOM (Document Object Model) is a object that represents the HTML and CSS of\na web page. The DOM allows us to use JavaScript to interface with what the user\nsees.\n\nYou can think of the DOM as a tree. Think of how we usually nest HTML elements.\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;&lt;/title&gt;\n    &lt;meta/&gt;\n    &lt;meta/&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  ",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coursework.vschool.io/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.4">
+    <link rel="alternate" type="application/rss+xml" title="V School | Better Humans, Better Outcomes" href="https://coursework.vschool.io/rss/">
+    <link href="./Javascript DOM Manipulation_files/css" rel="stylesheet" type="text/css">
+<style>
+    /*body, h1, h2, h3, h4, h5, h6,  
+    .main-nav a,
+    .subscribe-button,
+    .page-title,
+    .post-meta,
+    .read-next-story .post:before,
+    .pagination,
+    .site-footer,
+    [class^="icon-"]:before, [class*=" icon-"]:before {
+        font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; /* }*/
+    .page-title {
+        background-color: rgba(68, 68, 68, 0.46);
+        font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 200;
+    }
+    .page-description {
+        background-color: rgba(68, 68, 68, 0.46);
+    }
+    code {
+        color: #c25;
+    }
+
+    a {
+        color: #60B2B0;
+    }
+
+    hr {
+        border-top: #dedede 1px solid;    
+    }
+
+    pre[class*="language-"] {
+        margin: .5em 0 2em;
+    }
+    
+    .search-container #search-field, .search-container .search-button {
+		color: black;
+    }
+
+</style>
+
+<script>
+  var ghosthunter_key = '8fc62573dadd1f0f32ff591ab9';
+  var ghost_root_url = "/ghost/api/v2"
+</script>
+
+</head>
+
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header">
+    <div class="outer site-nav-main">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left-wrapper">
+        <div class="site-nav-left">
+                <a class="site-nav-logo" href="https://coursework.vschool.io/"><img src="./Javascript DOM Manipulation_files/VS_Logo_Full_Black.png" alt="V School | Better Humans, Better Outcomes"></a>
+            <div class="site-nav-content">
+                    <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="https://coursework.vschool.io/">Home</a></li>
+    <li class="nav-career" role="menuitem"><a href="https://coursework.vschool.io/tag/career/">Career</a></li>
+    <li class="nav-student-life" role="menuitem"><a href="https://coursework.vschool.io/tag/student-life/">Student Life</a></li>
+</ul>
+
+                    <span class="nav-post-title ">Javascript DOM Manipulation</span>
+            </div>
+        </div>
+    </div>
+    <div class="site-nav-right">
+            <div class="social-links">
+            </div>
+                <a class="rss-button" href="https://feedly.com/i/subscription/feed/https://coursework.vschool.io/rss/" title="RSS" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+
+    </div>
+</nav>
+    </div>
+</div></header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+
+                <h1 class="post-full-title">Javascript DOM Manipulation</h1>
+
+
+                <div class="post-full-byline">
+
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+                            <li class="author-list-item">
+
+                                <div class="author-card">
+                                    <img class="author-profile-image" src="./Javascript DOM Manipulation_files/P.jpeg" alt="Eric Jones">
+                                    <div class="author-info">
+                                        <h2>Eric Jones</h2>
+                                        <p>Read <a href="https://coursework.vschool.io/author/eric/" target="_blank">more posts</a> by this author.</p>
+                                    </div>
+                                </div>
+
+                                <a href="https://coursework.vschool.io/author/eric/" class="author-avatar" target="_blank">
+                                    <img class="author-profile-image" src="./Javascript DOM Manipulation_files/P.jpeg" alt="Eric Jones">
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <section class="post-full-byline-meta">
+                            <h4 class="author-name"><a href="https://coursework.vschool.io/author/eric/" target="_blank">Eric Jones</a></h4>
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2016-08-25">25 Aug 2016</time>
+                                <span class="byline-reading-time"><span class="bull">•</span> 5 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            <figure class="post-full-image">
+                <img srcset="https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ 300w,
+                            https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ 600w,
+                            https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ 1000w,
+                            https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ 2000w" sizes="(max-width: 800px) 400px,
+                        (max-width: 1170px) 1170px,
+                            2000px" src="./Javascript DOM Manipulation_files/photo-1518495973542-4542c06a5843" alt="Javascript DOM Manipulation">
+            </figure>
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <!--kg-card-begin: markdown--><p>In this write-up, we'll learn how to:</p>
+<p><a href="https://coursework.vschool.io/javascript-dom-manipulation/#select" target="_blank">Select</a> elements using JavaScript<br>
+<a href="https://coursework.vschool.io/javascript-dom-manipulation/#alter" target="_blank">Alter</a> properties of the elements<br>
+<a href="https://coursework.vschool.io/javascript-dom-manipulation/#create" target="_blank">Create</a> new elements and add them to the DOM</p>
+<h1 id="thedom">The DOM</h1>
+<p>The DOM (Document Object Model) is a object that represents the HTML and CSS of a web page. The DOM allows us to use JavaScript to interface with what the user sees.</p>
+<p>You can think of the DOM as a tree. Think of how we usually nest HTML elements.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;meta/&gt;
+    &lt;meta/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;&lt;/h1&gt;
+    &lt;p&gt;
+        &lt;a&gt;&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>The following is a visual of how your browser organizes this HTML in the DOM</p>
+<p><img src="./Javascript DOM Manipulation_files/dom_tree.gif" alt="dom_tree"></p>
+<p>It's a tree! And we'll use terminology that we would when talking about a family tree, like "parent", "child", "ancestor", and "sibling".</p>
+<p>How can we interact with this tree you ask? In any way we please! We can remove children, add children, and change properties of elements like their content and styling.</p>
+<h1 id="select">Select</h1>
+<p>There are a few ways to select elements from the DOM.</p>
+<pre><code class="language-js">document.getElementById()
+document.getElementsByClassName()
+document.querySelector()
+</code></pre>
+<p>Given this HTML:</p>
+<pre><code class="language-html">&lt;div id="greeting"&gt;Hello!&lt;/div&gt;
+</code></pre>
+<p>We can select is by it's <code>id</code>. <code>.getElementById</code> returns the element as an object. In this example, we will assign that element to the variable <code>myGreeting</code>.</p>
+<pre><code class="language-js">const myGreeting = document.getElementById("greeting")
+</code></pre>
+<p><code>document.getElementById("greeting")</code> will return <code>null</code> if no elements have <code>id="greeting"</code>.</p>
+<p>Now that we have that element selected, we can <a href="https://coursework.vschool.io/javascript-dom-manipulation/#alter" target="_blank">alter</a> anything property we want to about it! That's the fun stuff, so feel free to skip to that section.</p>
+<p>In the meantime, there are some other useful methods.</p>
+<h3 id="byclassname">By Class Name</h3>
+<pre><code class="language-js">const greetingArr = document.getElementsByClassName("greeting")
+</code></pre>
+<p>Notice the "s" on elements in <code>getElementsByClassName</code>. Any DOM method with the plural elements will return an array. You are able to loop over each element, or select an individual element with bracket notation.</p>
+<p><code>greetingArr[0]</code> would give us the first one.</p>
+<h3 id="byacssselector">By a CSS selector</h3>
+<p>You can do some more sophisticated selections with <code>document.querySelector()</code>. This method will return the first element it finds that matches the CSS selector given it. Here are a few examples:</p>
+<pre><code class="language-js">`document.querySelector(".my-class")`
+`document.querySelector("#my-id")`
+`document.querySelector("p.black")`
+</code></pre>
+<p><code>document.querySelectorAll()</code> is similar, but returns an array.</p>
+<p>Here is the coolest use case I have run into with <code>document.querySelectorAll()</code></p>
+<pre><code class="language-js">const checkedBoxes = document.querySelectorAll("input[name=likes]:checked");
+</code></pre>
+<p>Here, we can select all input boxes with <code>name="likes"</code></p>
+<h1 id="alter">Alter</h1>
+<p>Let's use our HTML from above:</p>
+<pre><code class="language-html">&lt;div id="greeting"&gt;Hello!&lt;/div&gt;
+</code></pre>
+<p>For practice, type out how you would select this div and assign that element to the variable <code>myGreeting</code>.</p>
+<p>Now, <code>console.dir(myGreeting)</code></p>
+<p>Explore this object in the console. Try to figure out how to change it by changing it's different properties.</p>
+<p><img src="./Javascript DOM Manipulation_files/Screen-Shot-2019-08-29-at-9.34.01-AM.png" alt="Screen-Shot-2019-08-29-at-9.34.01-AM"></p>
+<p>As you can see, we have access to the <code>className</code>, <code>id</code>, <code>children</code>, and content our element. We can reassign these attributes. Try to manipulate these properties on your own.</p>
+<p>To you you started, our goal will be to change the background color of the greeting and the text.</p>
+<h4 id="styling">Styling</h4>
+<p>If you'd like to try this on your own, it would be great practice. A good property to look at is the <code>.style</code> properties.</p>
+<p><code>console.log(myGreeting.style)</code></p>
+<p>The style object has properties for every CSS property. We can assign those properties to any value we'd like.</p>
+<pre><code class="language-js">myGreeting.style.backgroundColor = "blue"
+</code></pre>
+<h4 id="textandcontent">Text and Content</h4>
+<p>We can also manipulate the contents of elements.</p>
+<pre><code class="language-js">const myGreeting = document.getElementById("greeting")
+myGreeting.textContent = "Long time no see!"
+</code></pre>
+<pre><code class="language-js">myGreeting.textContent = "Long time no see!"
+</code></pre>
+<p><code>.textContent</code> will replace any text.</p>
+<p>See what happens if you run the following:</p>
+<pre><code class="language-js">myGreeting.textContent = "&lt;h1&gt;Long time no see!&lt;/h1&gt;"
+</code></pre>
+<p>If we'd like the text to be inside a HTML <code>&lt;h1&gt;</code>, we can use <code>.innerHTML</code></p>
+<pre><code class="language-js">myGreeting.innerHTML = "&lt;h1&gt;Long time no see!&lt;/h1&gt;"
+</code></pre>
+<p>But that isn't the only or best way to add a new <code>&lt;h1&gt;</code> to the DOM. The DOM API also gives us a method to create new elements.</p>
+<h1 id="create">Create</h1>
+<p>In our most recent use of <code>.innerHTML</code>, we used a JavaScript string to wrap our text in an <code>&lt;h1&gt;</code>. We now want to do that using <code>document.createElement()</code> and <code>.textContent</code>.</p>
+<p><code>document.createElement()</code> takes a string of the tag name you want to create. It then returns the element.</p>
+<p>While we're at it, let's assign a variable to the element that <code>document.createElement()</code> returns and add some text to it.</p>
+<pre><code class="language-js">const h1 = document.createElement("h1")
+h1.textContent = "Long time no see!"
+</code></pre>
+<p>This <code>h1</code> exists in memory only. Now on the DOM. The most common way to append this to the DOM is to first <code>select</code> the parent, and call it's <code>.appendChild</code>.</p>
+<pre><code class="language-js">const h1 = document.createElement("h1")
+h1.textContent = "Long time no see!"
+myGreeting.appendChild(h1)
+</code></pre>
+<p>Practice <code>.appendChild()</code> and <code>document.createElement()</code> by listing an array of string to an unordered list</p>
+<p>Using just JavaScript, Make this array an HTML list:</p>
+<pre><code class="language-js">const animals = ["dog", "cat", "mouse"]
+</code></pre>
+<p>Here's a complimentary <code>ul</code> to append to.</p>
+<pre><code class="language-html">&lt;ul id="list"&gt;&lt;/ul&gt;
+</code></pre>
+<p>Final Product:</p>
+<ul>
+    <li>dog</li>
+    <li>cat</li>
+    <li>mouse</li>
+</ul>
+<p>You may be asking why we wouldn't just write this in our HTML.</p>
+<p>JavaScript helps us dynamically render our apps. We'll be using JavaScript to get us dynamic data, and then change how the webpage looks depending.</p>
+<p>If a user wanted to take things from a list, or add to a list, we would use JavaScript to control that.</p>
+<p>Much of your DOM manipulation will happen after the user does something. To complete what you've started in this article, making the user able to change what they see, you'll need to learn to use <a href="https://coursework.vschool.io/event-listeners/" target="_blank">event listeners</a></p>
+<!--kg-card-end: markdown-->
+                </div>
+            </section>
+
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post ">
+
+    <a class="post-card-image-link" href="https://coursework.vschool.io/angular-madlib/" target="_blank">
+        <img class="post-card-image" srcset="/content/images/size/w300/2016/09/madLib.jpeg 300w,
+                    /content/images/size/w600/2016/09/madLib.jpeg 600w,
+                    /content/images/size/w1000/2016/09/madLib.jpeg 1000w,
+                    /content/images/size/w2000/2016/09/madLib.jpeg 2000w" sizes="(max-width: 1000px) 400px, 700px" src="./Javascript DOM Manipulation_files/madLib.jpeg" alt="Angular MadLib">
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="https://coursework.vschool.io/angular-madlib/" target="_blank">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Angular MadLib</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>Angular Mad Lib! A mad lib is a sort of word game that asks you to provide certain types of words (nouns, adjectives, adverbs, etc...) and then puts your words</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Tanner Plauche
+                    </div>
+            
+                    <a href="https://coursework.vschool.io/author/tanner/" class="static-avatar" target="_blank">
+                        <img class="author-profile-image" src="./Javascript DOM Manipulation_files/tanner.jpg" alt="Tanner Plauche">
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="https://coursework.vschool.io/author/tanner/" target="_blank">Tanner Plauche</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-09-02">2 Sep 2016</time> <span class="bull">•</span> 1 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+
+                <article class="post-card post no-image no-image">
+
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="https://coursework.vschool.io/bootstraps-grid-system/" target="_blank">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">Bootstrap's Grid System</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                    <p>CSS is a very powerful and fully-fledged design tool. However, there are a lot of quirks that take years as a web designer to understand and master. Some of the most difficult (or mundane) things to do in CSS include:  Layout Positioning Responsive Design</p>
+            </section>
+
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+            
+                    <div class="author-name-tooltip">
+                        Eric Jones
+                    </div>
+            
+                    <a href="https://coursework.vschool.io/author/eric/" class="static-avatar" target="_blank">
+                        <img class="author-profile-image" src="./Javascript DOM Manipulation_files/P.jpeg" alt="Eric Jones">
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span><a href="https://coursework.vschool.io/author/eric/" target="_blank">Eric Jones</a></span>
+                <span class="post-card-byline-date"><time datetime="2016-08-23">23 Aug 2016</time> <span class="bull">•</span> 14 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+        </div>
+    </div>
+</aside>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://coursework.vschool.io/">V School | Better Humans, Better Outcomes</a> © 2020
+                </section>
+                <nav class="site-footer-nav">
+                    <a href="https://coursework.vschool.io/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="./Javascript DOM Manipulation_files/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+        </script>
+    <script src="./Javascript DOM Manipulation_files/casper.js"></script>
+
+    <script>
+        // Parse the URL parameter
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Give the parameter a variable name
+        var action = getParameterByName('action');
+
+        $(document).ready(function () {
+            if (action == 'subscribe') {
+                $('body').addClass("subscribe-success");
+            }
+
+            $('.subscribe-success-message .subscribe-close').click(function () {
+                $('.subscribe-success-message').addClass('close');
+            });
+
+            // Reset form on opening subscrion overlay
+            $('.subscribe-button').click(function () {
+                $('.subscribe-overlay form').removeClass();
+                $('.subscribe-email').val('');
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src="./Javascript DOM Manipulation_files/jquery.ghosthunter.js"></script>
+
+    <script>
+        $("#search-field").ghostHunter({
+            results: "#results",
+            onPageLoad: true,
+            onKeyUp: true,
+            displaySearchInfo: false
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // FitVids - start
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        // FitVids - end
+
+        // Replace nav with title on scroll - start
+        Casper.stickyNavTitle({
+            navSelector: '.site-nav-main',
+            titleSelector: '.post-full-title',
+            activeClass: 'nav-post-title-active'
+        });
+        // Replace nav with title on scroll - end
+
+        // Hover on avatar
+        var hoverTimeout;
+        $('.author-list-item').hover(function () {
+            var $this = $(this);
+
+            clearTimeout(hoverTimeout);
+
+            $('.author-card').removeClass('hovered');
+            $(this).children('.author-card').addClass('hovered');
+
+        }, function () {
+            var $this = $(this);
+
+            hoverTimeout = setTimeout(function () {
+                $this.children('.author-card').removeClass('hovered');
+            }, 800);
+        });
+    });
+</script>
+
+
+    <!-- You can safely delete this line if your theme does not require jQuery -->
+<script type="text/javascript" src="./Javascript DOM Manipulation_files/jquery-1.11.3.min.js"></script>
+
+<script>  
+  $('.post a').attr('target', '_blank');
+  $('h2.post-title a').attr('target', '_self');
+</script>
+
+
+
+</body></html>

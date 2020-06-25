@@ -1,0 +1,97 @@
+h3 {
+    text-align: center;
+    font-family: manuskriptGothisch;
+    margin-bottom: -100px;
+    text-color: rgba(24, 112, 12, 0.616)
+}
+
+h1 {
+    text-shadow: 3px 3px rgba(63, 65, 63, 0.356);
+    padding: 15px;
+    font-size: 160px;
+    letter-spacing: px;
+    text-align: center;
+    font-family: manuskriptGothisch;
+    border: 25px double;
+    border-color: rgba(0, 0, 0, 0.637);
+}
+
+h6{
+    position: -webkit-sticky;
+    text-align: center;
+    display: block;
+    padding: 50px;
+    margin-top: -180px;
+    margin-bottom: 45px;
+    font-size: 20px;
+    background-color: white;
+    width: 300px;
+    margin-left: 512px;
+    color: rgba(30, 32, 30, 0.877);
+    font-family: manuskriptGothisch;
+}
+
+span.deal{
+    position: -webkit-sticky;
+    margin-top: -90px;
+    text-align: center;
+    display: block;
+    font-size: 90px;
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+}
+
+span.vie{
+    font-size: 66px;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    margin-top: 10px;
+}
+
+span.if{
+    font-style: italic;
+}
+
+.img{
+    object-fit: relative;
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.temple{
+    object-fit: relative;
+    display: block;
+    max-width: 150px;
+    height: auto;
+}
+
+@font-face{
+    font-family: goth;
+    src: url(/Users/quinntoncarter/Documents/VSchool/Newsies/ManuskriptGothischUNZ1A.ttf);
+}
+
+span.artOne{
+margin-top: 2px;
+display: block;
+columns: 300px;
+column-count: 3;
+column-gap: 40px;
+column-rule: 4px double rgba(30, 32, 30, 0.651)
+}
+
+span.guy{
+    font-weight: bolder;
+    font-style: italic;
+}
+
+span.LDS{
+    font-size: small;
+    margin-left: 260px;
+    display: block;
+    margin-top: -160px;
+    margin-left: 160px;
+    columns: unset;
+    
+}

@@ -1,0 +1,21 @@
+*{
+    left: 775px;
+    top: 300px;
+}
+
+#flag{
+    position: relative;
+    border: rgba(0, 0, 0, 0.836) solid;
+    height:570px;
+    width: 850px;
+}
+
+#flag > div.risingSun {
+    position: absolute;
+    top: 150px;
+    left: 305px;
+    width: 255px;
+    height: 265px;
+    background: red;
+    border-radius: 50%;
+}

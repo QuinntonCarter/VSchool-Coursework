@@ -1,0 +1,35 @@
+#flag {
+    left: 800px;
+    top: 150px;
+    flex-direction: column;
+    border: black solid;
+    display: flex;
+    height: 600px;
+    width: 800px;
+    position: relative;
+}
+
+#flag > div.orangeBlock {
+    background-color: rgb(252, 96, 40);
+    height: 200px;
+}
+
+#flag > div.whiteBlock {
+    background-color: white;
+    height: 200px;
+}
+
+#flag > div.greenBlock {
+    background-color: rgb(0, 155, 0);
+    height: 200px;
+}
+
+#flag > div.circle {
+    position: absolute;
+    background: rgb(252, 96, 40);
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    top: 215px;
+    left: 325px;
+}

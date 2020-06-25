@@ -1,0 +1,17 @@
+* {
+    align-items: center;
+    justify-content: center;
+}
+
+#container {
+    /* width: 500px; */
+    display: grid;
+    grid-template-columns: auto;
+}
+
+button {
+    height: 20px;
+    border: solid 1px black;
+    background-color: purple;
+}
+

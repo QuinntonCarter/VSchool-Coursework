@@ -1,0 +1,33 @@
+#flag {
+    margin-top: 200px;
+    margin-left: 850px;
+    background-color: red;
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 800px;
+}
+
+div.container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background: red;
+    height: 350px;
+    width: 350px;
+}
+div.crossVert {
+    position: relative;
+    background: white;
+    height: 3500px;
+    width: 100px;
+}
+div.crossHori {
+    position: absolute;
+    background: rgb(255, 255, 255);
+    width: 350px;
+    height: 100px;
+}

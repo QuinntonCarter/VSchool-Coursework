@@ -1,0 +1,53 @@
+div.container-fluid {
+    padding: 90px;
+    position: relative;
+}
+
+div.col-md-3 {
+    height: 100px;
+    border: white 1px solid;
+}
+
+div.col-md-6{ 
+    height: 100px;
+    border: white 1px solid;
+}
+
+div.col-md-4 {
+    height: 100px;
+    border: white 1px solid;
+}
+
+div.col-md-8 {
+    height: 100px;
+    border: white 1px solid;
+}
+
+div.col-md {
+    height: 100px;
+    border: white 1px solid;
+}
+
+#p {
+    background-color: #F5C6D6;
+}
+
+#hp {
+    background-color: #EE2E84;
+}
+
+#b1 {
+    background-color: #85CFD8;
+}
+
+#b2 {
+    background-color: #85CFD8;
+}
+
+#g {
+    background-color: #8DC63F;
+}
+
+#o {
+    background-color: #E76E34;
+}
