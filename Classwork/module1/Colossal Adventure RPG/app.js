@@ -3,6 +3,30 @@ var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
 
 // Functions //
+function walk(){
+    var sum = Math.floor(Math.random()*13)
+    Math.floor(Math.random() * 13)
+    if (sum === 0){
+        return "Dark, swap grass softly crunches beneath your feet..."
+    } else if (sum/2 === 2){
+        return "find mushroom const placeholder"
+    } else if (sum/5 === 4){
+        return "Felicia comment placeholder.."
+    } else if (sum === 5) {
+        return "Mud sucks your feet toward the Earth with each step..."
+    } else if (sum === 6) {
+        return "find health object const"
+    } else if (sum === 7){
+        return "battle const placeholder"
+    } else if (sum == 8) {
+        return "battle const placeholder"
+    } else if (sum == 12){
+        return "You stumble over a large, solid object hidden by the grass and darkness..."
+    } else {
+        return "monster sounds const placeholder (or just delete)"
+    }
+}
+
 function nameWrong() {
     var sum = Math.floor(Math.random() * 13) 
     Math.floor(Math.random() * 13)
@@ -15,7 +39,7 @@ function nameWrong() {
     } else if (sum/4 === 3){
         return "Ga"
     } else if (sum/5 === 4){
-        return "Za"
+        return "Sch"
     } else if (sum === 5) {
         return "Na"
     } else if (sum === 6) {
@@ -59,28 +83,28 @@ while (colossalRPG) {
     } else if (askAgain === 0) {
         console.log("I REALLY thought I'd have to kill you like all the others! Not so fun after the first 100 or so.")
         introFelicia();
-    }
-
+    } break
+    
     function introFelicia() {
     let playerName = readline.question("What is your name?");
     readline.keyInPause("-ACTUALLY, I don't care but my name is Felicia.")
     readline.keyInPause("I've always wanted to be a human. I picked out my own name. I wanted something that sounded more.. Human.")
     readline.keyInPause("The other humans laughed at me when I told them that so I had to kill them. You're kind of quiet but you didn't laugh at me. Maybe we can be friends.")
     readline.keyInPause("Come on, "+nameWrong()+playerName.toLowerCase()+ " let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
-    var command = readline.keyIn("*PRESS W TO WALK*", {limit: "w"})
+    var command = readline.keyIn("*PRESS W TO WALK*")
+    let explore = true
 
-    while (colossalRPG){
-    function walk() {
-        var sum = Math.floor(Math.random() * 13) 
-        Math.floor(Math.random() * 13) 
-        if(command == w){ 
-            return "walking.."
-        } else {
-            return "Where are you going "+nameWrong()+playerName.toLowerCase()+"?"
-        }
+    while (explore){
+        var command = readline.keyIn("*PRESS W TO WALK*")
+        while (command == "w"){ 
+            walk()
+        } if (command != "w") {
+            console.log("Where are you going "+nameWrong()+playerName.toLowerCase()+"? This way..")
+        } 
     }
     }
-
+}
+    
 // }}
     //         if (i=walk;i ;i++) {
     //         }
