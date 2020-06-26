@@ -3,46 +3,46 @@ var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
 
 // Constructors //
-    const Enemy (type, health, attack, courage, voiceSound) {
-        this.type = type
-        this.health = health
-        this.attack = attack
-        this.courage = courage
-        this.voiceSound = voiceSound
-        }
+    // const Enemy (type, health, attack, courage, voiceSound) {
+    //     this.type = type
+    //     this.health = health
+    //     this.attack = attack
+    //     this.courage = courage
+    //     this.voiceSound = voiceSound
+    //     }
 
-        // enemy vocalization function
-        Enemy.prototype.voiceSound = function() {
-            console.log(this.voiceSound)
-        }
+    //     // enemy vocalization function
+    //     Enemy.prototype.voiceSound = function() {
+    //         console.log(this.voiceSound)
+    //     }
 
 
-        // enemy types // 
-        var skeleton = new Enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
-        var goblin = new Enemy ("Goblin", 20, 10, 15, "Felicia? Is that you?")
-        var rat = new Enemy ("Rat", 4, 2, 7, "*squeak* Gramblgort *squeak* You're not a human!! *squeak squeak*")
-        var zombie = new Enemy ("Zombie", 8, 9, 100, "Aaauuuhggg.." ) 
-        var foragerHippie = new Enemy ("Forager",100,100,100, "Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
+    //     // enemy types // 
+    //     var skeleton = new Enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
+    //     var goblin = new Enemy ("Goblin", 20, 10, 15, "Felicia? Is that you?")
+    //     var rat = new Enemy ("Rat", 4, 2, 7, "*squeak* Gramblgort *squeak* You're not a human!! *squeak squeak*")
+    //     var zombie = new Enemy ("Zombie", 8, 9, 100, "Aaauuuhggg.." ) 
+    //     var foragerHippie = new Enemy ("Forager",100,100,100,"Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
 
-        // weapon constructor
-        const Weapon (typeOf, damage, intimidation, defense, descWeapon){
-            this.typeOf = typeOf
-            this.damage = damage
-            this.intimidation = intimidation
-            this.defense = defense
-            this.descWeapon = descWeapon
-        }
+    //     // weapon constructor
+    //     const Weapon (typeOf, damage, intimidation, defense, descWeapon){
+    //         this.typeOf = typeOf
+    //         this.damage = damage
+    //         this.intimidation = intimidation
+    //         this.defense = defense
+    //         this.descWeapon = descWeapon
+    //     }
 
-        // weapon description+why intimidation //
-        Weapon.prototype.description = function() {
-            console.log(this.descWeapon)
-        }
+    //     // weapon description+why intimidation //
+    //     Weapon.prototype.description = function() {
+    //         console.log(this.descWeapon)
+    //     }
 
-        // weapon types // 
-        var bow = new Weapon("")
-        var unknown = new Weapon()
-        var blunt = new Weapon()
-        var weapon = new Weapon()//
+    //     // weapon types // 
+    //     var bow = new Weapon("")
+    //     var unknown = new Weapon()
+    //     var blunt = new Weapon()
+    //     var weapon = new Weapon()//
 
 
 // Functions //
@@ -50,13 +50,13 @@ function walk(){
     var sum = Math.floor(Math.random()*13)
     Math.floor(Math.random() * 13)
     if (sum === 0){
-        return "Dark, swap grass softly crunches beneath your feet..."
+        return "monster sound const placeholder"
     } else if (sum/2 === 2){
         return "find mushroom const placeholder"
     } else if (sum/5 === 4){
-        return "Felicia comment placeholder.."
+        return feliciaComment()
     } else if (sum === 5) {
-        return "Mud sucks your feet toward the Earth with each step..."
+        return "*Mud sucks your feet toward the Earth with each step...*"
     } else if (sum === 6) {
         return "find health object const"
     } else if (sum === 7){
@@ -64,9 +64,9 @@ function walk(){
     } else if (sum == 8) {
         return "battle const placeholder"
     } else if (sum == 12){
-        return "You stumble over a large, solid object hidden by the grass and darkness..."
+        return "*You stumble over a large, solid object hidden by the grass and darkness...*"
     } else {
-        return "monster sounds const placeholder (or just delete)"
+        return "*Dark, swap grass softly crunches beneath your feet...*"
     }
 }
 
@@ -95,6 +95,35 @@ function nameWrong() {
         return "Wa"
     } else {
         return "Ru"
+    }
+}
+
+function feliciaComment() {
+    var sum = Math.floor(Math.random() * 13) 
+    Math.floor(Math.random() * 13)
+    if (sum === 0){
+        var favBand = readline.question("Who's your favorite band or musician?")
+        readline.keyInPause("Hell yeah! I like their older stuff. My favorite band is GWAR!")
+    } else if (sum/2 === 2){
+        return "comment 2"
+    } else if (sum/3 === 6){
+        return "comment 3" 
+    } else if (sum/4 === 3){
+        return "comment 4"
+    } else if (sum/5 === 4){
+        return "comment 5"
+    } else if (sum === 5) {
+        return "comment 6"
+    } else if (sum === 6) {
+        return "comment 7"
+    } else if (sum === 7){
+        return "comment 8"
+    } else if (sum == 8) {
+        return "comment 9"
+    } else if (sum == 12){
+        return "comment 10"
+    } else {
+        return "comment 11"
     }
 }
 
@@ -139,13 +168,12 @@ while (colossalRPG) {
 
     while (explore){
         if (command === "w"){ 
-            console.log(walk())
+            console.log (walk())
             var command = readline.keyIn("*PRESS W TO WALK*")
-        } else if (command != "w") {
-            console.log("Where are you going "+nameWrong()+playerName.toLowerCase()+"? This way..")
+        } else {
+            return "Where are you going "+nameWrong()+playerName.toLowerCase()+"? This way.."
             var command = readline.keyIn("*PRESS W TO WALK*")
         } 
     }
     }
 }
-
