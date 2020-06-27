@@ -1,15 +1,18 @@
 var readline = require("readline-sync");
 var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
+// const inventory = [];
+// var battle = ["run", "cry", sword:"+5 physical damage +10 humiliation", Felicia: magic""];
+var health = 
 
 // Constructors //
-    // const Enemy (type, health, attack, courage, voiceSound) {
-    //     this.type = type
-    //     this.health = health
-    //     this.attack = attack
-    //     this.courage = courage
-    //     this.voiceSound = voiceSound
-    //     }
+    function Enemy (type, health, attack, courage, voiceSound) {
+        this.type = type
+        this.health = health
+        this.attack = attack
+        this.courage = courage
+        this.voiceSound = voiceSound
+        }
 
     //     // enemy vocalization function
     //     Enemy.prototype.voiceSound = function() {
@@ -18,31 +21,31 @@ var noOptions = ["Fine", "..."]
 
 
     //     // enemy types // 
-    //     var skeleton = new Enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
-    //     var goblin = new Enemy ("Goblin", 20, 10, 15, "Felicia? Is that you?")
-    //     var rat = new Enemy ("Rat", 4, 2, 7, "*squeak* Gramblgort *squeak* You're not a human!! *squeak squeak*")
-    //     var zombie = new Enemy ("Zombie", 8, 9, 100, "Aaauuuhggg.." ) 
-    //     var foragerHippie = new Enemy ("Forager",100,100,100,"Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
+        var skeleton = new Enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
+        var goblin = new Enemy ("Goblin", 20, 10, 20, "Felicia? Is that you?")
+        var rat = new Enemy ("Rat", 4, 2, 13, "*squeak* Gramblgort *squeak* You're not a human!! *squeak squeak*")
+        var zombie = new Enemy ("Zombie", 8, 9, 100, "Aaauuuhggg.." ) 
+        var foragerHippie = new Enemy ("Forager",100,100,100,"Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
 
     //     // weapon constructor
-    //     const Weapon (typeOf, damage, intimidation, defense, descWeapon){
-    //         this.typeOf = typeOf
-    //         this.damage = damage
-    //         this.intimidation = intimidation
-    //         this.defense = defense
-    //         this.descWeapon = descWeapon
-    //     }
+        function Weapon (typeOf, damage, intimidation, defense, descWeapon) {
+            this.typeOf = typeOf
+            this.damage = damage
+            this.intimidation = intimidation
+            this.defense = defense
+            this.descWeapon = descWeapon
+        }
 
     //     // weapon description+why intimidation //
-    //     Weapon.prototype.description = function() {
-    //         console.log(this.descWeapon)
-    //     }
+        // Weapon.prototype.description = function() {
+        //     console.log(this.descWeapon)
+        // }
 
     //     // weapon types // 
-    //     var bow = new Weapon("")
-    //     var unknown = new Weapon()
-    //     var blunt = new Weapon()
-    //     var weapon = new Weapon()//
+        var bow = new Weapon("Elfo's Bow", 5, 0, 2,"A small bow... You nearly mistook it for a novelty toy")
+        var glassBottle = new Weapon("Broken Beer Bottle", 7, 20, 4, "The Champagne of Beers")
+        var staff = new Weapon("Mighty Wizard's Staff", 10, 20, 7,"Felicia: Whoa, that staff belongs to... Nevermind. Can you even use magick? I suppose you could use it as a blunt object. Just take care of the priceless gem embedded in the end.")
+        var sandal = new Weapon("Ancient Swamp Artifact", 50, 12, 30,"A size 12 men's sandal embued with the mythical and deadly poison, swamp foot stench.") //
 
 
 // Functions //
@@ -50,7 +53,7 @@ function walk(){
     var sum = Math.floor(Math.random()*13)
     Math.floor(Math.random() * 13)
     if (sum === 0){
-        return "monster sound const placeholder"
+        return enemyComment()
     } else if (sum/2 === 2){
         return "find mushroom const placeholder"
     } else if (sum/5 === 4){
@@ -105,15 +108,15 @@ function feliciaComment() {
         var favBand = readline.question("Who's your favorite band or musician?")
         readline.keyInPause("Hell yeah! I like their older stuff. My favorite band is GWAR!")
     } else if (sum/2 === 2){
-        return "comment 2"
+        return "I know exactly where we are."
     } else if (sum/3 === 6){
-        return "comment 3" 
+        return "Too bad my data is up for the month. We could be listening to "+favBand
     } else if (sum/4 === 3){
-        return "comment 4"
+        return "I have no idea where we are..."
     } else if (sum/5 === 4){
         return "comment 5"
     } else if (sum === 5) {
-        return "comment 6"
+        return "Haven't we passed through here already?"
     } else if (sum === 6) {
         return "comment 7"
     } else if (sum === 7){
@@ -127,9 +130,20 @@ function feliciaComment() {
     }
 }
 
+function enemyComment() {
+    var sum = Math.floor(Math.random() * 4) 
+    Math.floor(Math.random() * 4)
+    if (sum === 0){
+        return "*Somewhere close in the night you hear: *bones clanking*"
+    } else if (sum === 32){
+        return "*Somewhere close in the night you hear whispers: Is.. That Gramblgort?"
+    } else if (sum === 1){
+        return "*Somewhere close in the night you hear: *The shrill howl of a wolf*"
+    } else {
+        return "*Somewhere close in the night you hear frantic movement through the tall grass.."
+    }
+}
 
-// const inventory = [];
-// var battle = ["run", "cry", sword:"+5 physical damage +10 humiliation", Felicia: magic""];
 
 let colossalRPG = true
 
@@ -163,15 +177,15 @@ while (colossalRPG) {
     readline.keyInPause("I've always wanted to be a human. I picked out my own name. I wanted something that sounded more.. Human.")
     readline.keyInPause("The other humans laughed at me when I told them that so I had to kill them. You're kind of quiet but you didn't laugh at me. Maybe we can be friends.")
     readline.keyInPause("Come on, "+nameWrong()+playerName.toLowerCase()+ " let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
-    var command = readline.keyIn("*PRESS w TO WALK*",{limit: '$<w>'})
+    var command = readline.keyIn("*PRESS w TO WALK*")
     let explore = true
 
     while (explore){
-        if (command === "w"){ 
+        if (command === "w") { 
             console.log (walk())
             var command = readline.keyIn("*PRESS W TO WALK*")
-        } else {
-            return "Where are you going "+nameWrong()+playerName.toLowerCase()+"? This way.."
+        } else if (command !== "w") {
+            console.log("Where are you going "+nameWrong()+playerName.toLowerCase()+"? This way..")
             var command = readline.keyIn("*PRESS W TO WALK*")
         } 
     }
