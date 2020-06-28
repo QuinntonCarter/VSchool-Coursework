@@ -2,11 +2,38 @@ var readline = require("readline-sync");
 var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
 // const inventory = [];
-// var battle = ["run", "cry", sword:"+5 physical damage +10 humiliation", Felicia: magic""];
-var health = 
+var battleOptions = [flee(), warFace(), attack(), feliciaMagic()];
+
+
+    if (inventory.mushrooms.length >= 5){
+        let healthSum = 60
+    } else {
+        let healthSum = 30
+    }
+    for(let i = 0; i < healthSum; i++){
+    console.log()
+    }
+
+// enemy types // 
+    var skeleton = new enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
+    var goblin = new enemy ("Goblin", 20, 10, 20, "Felicia? Is that you?")
+    var rat = new enemy ("Rat", 4, 2, 13, "*squeak* Gramblgort *squeak* You're not a human!! *squeak squeak*")
+    var zombie = new enemy ("Zombie", 8, 9, 100, "Aaauuuhggg.." ) 
+    var foragerHippie = new enemy ("Forager",50,100,100,"Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
+
+// weapon types // 
+    var bow = new Weapon("Elfo's Bow", 4, 0, 2,"A small bow... You nearly mistook it for a novelty toy")
+    var glassBottle = new Weapon("Broken Beer Bottle", 6, 20, 4, "The Champagne of Beers")
+    var staff = new Weapon("Mighty Wizard's Staff", 10, 20, 7,"Felicia: Whoa, that staff belongs to... Nevermind. Can you even use magick? I suppose you could use it as a blunt object. Just take care of the priceless gem embedded in the end.")
+    var sandal = new Weapon("Ancient Swamp Artifact", 50, 12, 30,"A size 12 men's sandal embued with the mythical and deadly poison, swamp foot stench.")
+
+// enemy vocalization function *call when walking and battle start
+    enemy.prototype.voiceSound = function() {
+        console.log(this.voiceSound)
+    }
 
 // Constructors //
-    function Enemy (type, health, attack, courage, voiceSound) {
+    function enemy (type, health, attack, courage, voiceSound) {
         this.type = type
         this.health = health
         this.attack = attack
@@ -14,41 +41,27 @@ var health =
         this.voiceSound = voiceSound
         }
 
-    //     // enemy vocalization function
-    //     Enemy.prototype.voiceSound = function() {
-    //         console.log(this.voiceSound)
-    //     }
+        // weapon description+why intimidation *call when weapon is found//
+    weapon.prototype.description = function() {
+        console.log(this.descWeapon)
+    }
+
+    function weapon (typeOf, damage, intimidation, defense, descWeapon) {
+        this.typeOf = typeOf
+        this.damage = damage
+        this.intimidation = intimidation
+        this.defense = defense
+        this.descWeapon = descWeapon
+    }
 
 
-    //     // enemy types // 
-        var skeleton = new Enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
-        var goblin = new Enemy ("Goblin", 20, 10, 20, "Felicia? Is that you?")
-        var rat = new Enemy ("Rat", 4, 2, 13, "*squeak* Gramblgort *squeak* You're not a human!! *squeak squeak*")
-        var zombie = new Enemy ("Zombie", 8, 9, 100, "Aaauuuhggg.." ) 
-        var foragerHippie = new Enemy ("Forager",100,100,100,"Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
-
-    //     // weapon constructor
-        function Weapon (typeOf, damage, intimidation, defense, descWeapon) {
-            this.typeOf = typeOf
-            this.damage = damage
-            this.intimidation = intimidation
-            this.defense = defense
-            this.descWeapon = descWeapon
-        }
-
-    //     // weapon description+why intimidation //
-        // Weapon.prototype.description = function() {
-        //     console.log(this.descWeapon)
-        // }
-
-    //     // weapon types // 
-        var bow = new Weapon("Elfo's Bow", 5, 0, 2,"A small bow... You nearly mistook it for a novelty toy")
-        var glassBottle = new Weapon("Broken Beer Bottle", 7, 20, 4, "The Champagne of Beers")
-        var staff = new Weapon("Mighty Wizard's Staff", 10, 20, 7,"Felicia: Whoa, that staff belongs to... Nevermind. Can you even use magick? I suppose you could use it as a blunt object. Just take care of the priceless gem embedded in the end.")
-        var sandal = new Weapon("Ancient Swamp Artifact", 50, 12, 30,"A size 12 men's sandal embued with the mythical and deadly poison, swamp foot stench.") //
 
 
-// Functions //
+
+
+
+
+// Gameplay functions //
 function walk(){
     var sum = Math.floor(Math.random()*13)
     Math.floor(Math.random() * 13)
@@ -73,6 +86,7 @@ function walk(){
     }
 }
 
+// Comment functions //
 function nameWrong() {
     var sum = Math.floor(Math.random() * 13) 
     Math.floor(Math.random() * 13)
