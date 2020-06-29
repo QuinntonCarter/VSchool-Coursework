@@ -2,7 +2,7 @@ var readline = require("readline-sync");
 var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
 // const inventory = [];
-
+// var battleOptions = ["Flee", "Intimidation", "Attack", "Felicia Attack"]
 
 for(let i = 0; i < healthSum; i++){
     var healthSum = 30
@@ -55,40 +55,95 @@ function weapon (typeOf, damage, intimidation, defense, descWeapon) {
 
 // Battle Menu //
 function battleMenu() {
-    while(HP > 0){
-    readline.setDefaultOptions([flee(), warFace(), attack(), feliciaMagic()])
-
-}}
-
+    let HP = 30
+    for (var i = 0; i < HP; i++ ){
+    // while(HP > 0){
+    let input = readline.keyInSelect(["Flee", "Intimidation", "Attack", "Felicia Attack"])
+    if (input === 0){
+        console.log(flee())
+    } else if (input === 1){
+        console.log(warFace())
+    } else if (input === 2){
+        console.log(attack())
+    } else if (input === 3){
+        console.log(feliciaMagic())
+    } else {
+        return "Felicia: Are you alright?! Don't freeze up now!"
+        readline.keyInSelect(["Flee", "Intimidation", "Attack", "Felicia Attack"])
+    }
+break
+}
+}
 
 
 // Battle Variables/functions [flee(), warFace(), attack(), feliciaMagic()]; //
 function flee() {
-    var sum = Math.floor(Math.random())
-    Math.floor(Math.random())
-    if (sum === 1) {
-
-    } else if (sum === 0) {
-
+    var sum = Math.floor(Math.random()*2)
+    Math.floor(Math.random()*2)
+    if (sum > 0) {
+    readline.keyInPause("The "+enemy.type+" blocks your escape!")
+    console.log(battleMenu())
+    } else {
+        return "You and Felicia stumble over one another into the night!"
     }
 }
 
 function warFace() {
-    var sum = Math.floor(Math.random())
-    Math.floor(Math.random())
-    
+    var sum = Math.floor(Math.random()*2)
+    Math.floor(Math.random()*2)
+    if (sum > enemy.courage) {
+        readline.keyInPause("The "+enemy.type+ ": Damn, you're ugly." +sum)
+        readline.keyInPause("The "+enemy.type+ " is unfazed by your ugly face..")
+    } else if (sum === enemy.courage){
+        readline.keyInPause("The "+enemy.type+ " is frozen with fear!"+sum)
+        battleMenu()
+    } else {
+        readline.keyInPause("The "+enemy.type+ " fled!")
+        readline.keyInPause("Felicia: That's right, get outta here!"+sum)
+        "return to exploration *placeholder"
+    }
 }
 
 function attack(){
     var sum = Math.floor(Math.random())
     Math.floor(Math.random())
-
+    if (sum === 0){
+        return "reg hit"
+    } else if (sum/2 === 2){
+        return "crit"
+    } else if (sum/3 === 6){
+        return "reg hit" 
+    } else if (sum/4 === 3){
+        return "crit"
+    } else if (sum/5 === 4){
+        return "reg hit"
+    } else if (sum == 8) {
+        return "crit"
+    } else if (sum == 12){
+        return "reg hit"
+    } else {
+        return "reg hit"
+    }
 }
 
-function feliciaMagic(){
-    var sum = Math.floor(Math.random())
-    Math.floor(Math.random())
 
+function feliciaMagic(){
+    var sum = Math.floor(Math.random()*3)
+    Math.floor(Math.random()*3)
+    if (sum >= 4) {
+        readline.keyInPause("HIYYAAAAAA!!")
+        readline.keyInPause("CRITICAL HIT!" +sum)
+        readline.keyInPause("return damage placeholder")
+        battleMenu()
+    } else if (sum <= 10){
+        readline.keyInPause("HIYYAAAAAA!!")
+        readline.keyInPause("return damage placeholder"+sum)
+        battleMenu()
+    } else {
+        readline.keyInPause("HIYYAAAAAA!!")
+        readline.keyInPause("Felicia missed!"+sum)
+        battleMenu()
+    }
 }
 
 // Gameplay functions //
@@ -108,11 +163,11 @@ function walk() {
     } else if (sum === 7){
         readline.keyIn("A silhouette appears amongst the trees!")
         readline.keyIn(battleCry())
-        readline.setDefaultOptions(battleOptions)
+        battleMenu()
     } else if (sum == 8) {
         readline.keyIn("A silhouette appears amongst the trees!")
         readline.keyIn(battleCry())
-        readline.setDefaultOptions(battleOptions)
+        battleMenu()
     } else if (sum == 12){
         return "*You stumble over a large, solid object hidden by the grass and darkness...*"
     } else {
@@ -196,15 +251,15 @@ function battleCry() {
     var sum = Math.floor(Math.random() * 4) 
     Math.floor(Math.random() * 4)
     if (sum === 0){
-        return skeleton.voiceSound+sum
+        return skeleton.voiceSound
     } else if (sum === 32){
-        return goblin.voiceSound+sum
+        return goblin.voiceSound
     } else if (sum === 1){
-        return rat.voiceSound+sum
+        return rat.voiceSound
     } else if (sum/2 === 8) {
-        foragerHippie.voiceSound+sum
+        return foragerHippie.voiceSound
     } else {
-        return zombie.voiceSound+sum
+        return zombie.voiceSound
     }
 }
 
@@ -241,7 +296,7 @@ while (colossalRPG) {
     readline.keyInPause("I've always wanted to be a human. I picked out my own name. I wanted something that sounded more.. Human.")
     readline.keyInPause("The other humans laughed at me when I told them that so I had to kill them. You're kind of quiet but you didn't laugh at me. Maybe we can be friends.")
     readline.keyInPause("Come on, "+nameWrong()+playerName.toLowerCase()+ " let's walk. The poison certainly should've worn off enough for your pathetic body to do at least that.")
-    var command = readline.keyIn("*PRESS w TO WALK*")
+    var command = readline.keyIn("*PRESS W TO WALK*")
     let explore = true
 
     while (explore){
