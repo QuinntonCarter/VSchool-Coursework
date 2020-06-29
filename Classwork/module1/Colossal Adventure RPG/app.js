@@ -2,17 +2,14 @@ var readline = require("readline-sync");
 var optionsYesNo = ["Yes", "No"];
 var noOptions = ["Fine", "..."]
 // const inventory = [];
-var battleOptions = [flee(), warFace(), attack(), feliciaMagic()];
+var battleOptions = readline.setDefaultOptions([flee(), warFace(), attack(), feliciaMagic()])
 
-
+for(let i = 0; i < healthSum; i++){
     if (inventory.mushrooms.length >= 5){
         let healthSum = 60
     } else {
         let healthSum = 30
-    }
-    for(let i = 0; i < healthSum; i++){
-    console.log()
-    }
+    }}
 
 // enemy types // 
     var skeleton = new enemy ("Skeleton", 7, 5, 2, "*bones clanking*")
@@ -22,15 +19,15 @@ var battleOptions = [flee(), warFace(), attack(), feliciaMagic()];
     var foragerHippie = new enemy ("Forager",50,100,100,"Hey man, I'm gathering mushrooms and herbs. Have you--Yooo, my duuude! Is that a Goblin?!")
 
 // weapon types // 
-    var bow = new Weapon("Elfo's Bow", 4, 0, 2,"A small bow... You nearly mistook it for a novelty toy")
-    var glassBottle = new Weapon("Broken Beer Bottle", 6, 20, 4, "The Champagne of Beers")
+    var bow = new Weapon("Elfo's Bow", 4, 0, 2,"A small bow... You nearly mistook it for a novelty toy.")
+    var glassBottle = new Weapon("Broken Beer Bottle", 6, 20, 4, "'The Champagne of Beers'")
     var staff = new Weapon("Mighty Wizard's Staff", 10, 20, 7,"Felicia: Whoa, that staff belongs to... Nevermind. Can you even use magick? I suppose you could use it as a blunt object. Just take care of the priceless gem embedded in the end.")
     var sandal = new Weapon("Ancient Swamp Artifact", 50, 12, 30,"A size 12 men's sandal embued with the mythical and deadly poison, swamp foot stench.")
 
-// enemy vocalization function *call when walking and battle start
-    enemy.prototype.voiceSound = function() {
-        console.log(this.voiceSound)
-    }
+// enemy vocalization function *call when walking and battle start **don't need..? //
+    // enemy.prototype.voiceSound = function() {
+    //     console.log(this.voiceSound)
+    // }
 
 // Constructors //
     function enemy (type, health, attack, courage, voiceSound) {
@@ -41,10 +38,10 @@ var battleOptions = [flee(), warFace(), attack(), feliciaMagic()];
         this.voiceSound = voiceSound
         }
 
-        // weapon description+why intimidation *call when weapon is found//
-    weapon.prototype.description = function() {
-        console.log(this.descWeapon)
-    }
+// weapon description *call when weapon is found **don't need..? //
+    // weapon.prototype.description = function() {
+    //     console.log(this.descWeapon)
+    // }
 
     function weapon (typeOf, damage, intimidation, defense, descWeapon) {
         this.typeOf = typeOf
@@ -54,15 +51,39 @@ var battleOptions = [flee(), warFace(), attack(), feliciaMagic()];
         this.descWeapon = descWeapon
     }
 
+// Battle Menu //
 
+// Battle Variables/functions [flee(), warFace(), attack(), feliciaMagic()]; //
+function flee() {
+    var sum = Math.floor(Math.random())
+    Math.floor(Math.random())
+    if (sum === 1) {
 
+    } else if (sum === 0) {
 
+    }
+}
 
+function warFace() {
+    var sum = Math.floor(Math.random())
+    Math.floor(Math.random())
+    
+}
 
+function attack(){
+    var sum = Math.floor(Math.random())
+    Math.floor(Math.random())
 
+}
+
+function feliciaMagic(){
+    var sum = Math.floor(Math.random())
+    Math.floor(Math.random())
+
+}
 
 // Gameplay functions //
-function walk(){
+function walk() {
     var sum = Math.floor(Math.random()*13)
     Math.floor(Math.random() * 13)
     if (sum === 0){
@@ -76,7 +97,9 @@ function walk(){
     } else if (sum === 6) {
         return "find health object const"
     } else if (sum === 7){
-        return "battle const placeholder"
+        return "A silhouette appears amongst the trees!"
+
+        
     } else if (sum == 8) {
         return "battle const placeholder"
     } else if (sum == 12){
@@ -201,7 +224,7 @@ while (colossalRPG) {
         } else if (command !== "w") {
             console.log("Where are you going "+nameWrong()+playerName.toLowerCase()+"? This way..")
             var command = readline.keyIn("*PRESS W TO WALK*")
-        } 
+        }
     }
     }
 }
