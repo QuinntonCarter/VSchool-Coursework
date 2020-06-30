@@ -1,38 +1,93 @@
 var readline = require("readline-sync");
 var inventory = []
 
+// Enemy Class //
+function enemy (name, health, attack, voiceSound) {
+    this.name = name
+    this.health = health
+    this.attack = attack
+    this.voiceSound = voiceSound
+    }
+
+// Enemy Variables //
+    var mid =  {
+        name:"Skeleton", 
+        health: 7, 
+        attack: 5, 
+        voiceSound: "*bones clanking*"
+    }
+    var boss = {
+        name: "Cyclops", 
+        health: 27, 
+        attack: 10, 
+        voiceSound: "RAAAAAGGHHH!"
+    }
+    var low = {
+        name: "Rat",
+        health: 4,
+        attack: 2,
+        voiceSound: "*squeak* *squeak*"
+    }
+
 // Battle Menu Options //
 function tryToFlee() {
-    var sum = Math.floor(Math.random * 2)
-    if (sum === 1) {
+    var sum = Math.floor(Math.random() * 2)
+    if (sum === 0){
         readline.keyInPause("The enemy blocks your path!")
-        console.log(battleMenu())
+        battleMenu()
     } else {
-        return ("You and Felicia stumble over one another into the night!")
-        console.log(walk())
+        readline.keyInPause("You rush down an adjacent corridor and escape!")
+        walk()
     }
 }
 
 function attack() {
+    var sum = Math.floor(Math.random() * 3)
+    if (sum === 0){
+        console.log("Hit!"+sum)
+        readline.keyInPause("weapon reg damage placeholder")
+        battleMenu()
+    } else if (sum === 2){
+        console.log("Hit!"+sum)
+        readline.keyInPause("weapon reg damage placeholder")
+        battleMenu()
+    } else {
+        console.log("THWWAAAACK!!")
+        readline.keyInPause("weapon crit damage placeholder"+sum)
+        battleMenu()
+    }
+}
+
+// Walk events //
+function enemyAppear() {
     var sum = Math.floor(Math.random() * 2)
     if (sum === 0){
-        console.log("reg hit")
-        return "damage amount placeholder"
+        return low.name
+    } else if (sum === 1){
+        return boss.name
     } else {
-        console.log("crit hit")
-        return "damage amount placeholder"
+        return mid.name
+    }
+}
+
+function findItem() {
+    var sum = Math.floor(Math.random() * 3)
+    if (sum === 0){
+        readline.keyInPause("You found " + + "!")
+        placeholderitem.push
+    } else if (sum === 1) {
+
     }
 }
 
 // Battle Menu //
-
-var battleMenu = function() {
+function battleMenu() {
         let input = readline.keyInSelect(["Flee", "Attack"])
         if (input === 0){
-        console.log(tryToFlee())
-        } else if (input === 1){
-        console.log(attack())
-        } else if (input === 2){
+        tryToFlee()
+        } else if (input === 1) {
+        attack()
+        } else {
             return "Invalid input"
         }
     }
@@ -41,11 +96,12 @@ var battleMenu = function() {
 function walk() {
     var sum = Math.floor(Math.random()* 3)
     if (sum === 0){
-        return "You make your way through the corridors"
-    } else if (sum/2 === 2){
-        return "test"
+        console.log("You make your way through the dimly lit corridors")
+    } else if (sum === 2){
+        readline.keyInPause(enemyAppear()+" appears!")
+        battleMenu()
     } else if (sum === 1) {
-        return "Your footsteps echo through the halls"
+        console.log("Your footsteps echo through the halls")
     }
 }
 
@@ -61,7 +117,7 @@ while (rpg) {
 
         while (explore) {
             if (command === "w") { 
-                console.log(walk())
+                walk()
                 var command = readline.keyIn("*PRESS W TO WALK*")
             } else if (command !== "w") {
                 console.log("Wrong button "+playerName)
