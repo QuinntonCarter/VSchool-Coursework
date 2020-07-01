@@ -1,0 +1,19 @@
+#body {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}
+#multi {
+    padding: 15px;
+    background-color: rgb(241, 212, 172);
+}
+
+#add {
+    padding: 15px;
+    background-color: rgb(184, 252, 229);
+}
+
+#sub {
+    padding: 15px;
+    background-color: rgb(234, 253, 162);
+}

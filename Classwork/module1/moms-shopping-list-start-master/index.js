@@ -9,7 +9,6 @@ form.addEventListener("submit", function(e) {
     e.preventDefault()
     // const item value var
     var item = form.itemName.value
-    // const edit = editButton(e);
     // sets the value of input back to nothing upon submission
     form.itemName.value =""
     // const variable of new li element 
