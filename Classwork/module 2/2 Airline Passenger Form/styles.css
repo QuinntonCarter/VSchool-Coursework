@@ -11,3 +11,7 @@ body {
     width: 50%;
     border: double rgb(23, 143, 241) 5px;
 }
+
+div > h2 {
+    color: rgb(23, 143, 241);
+}

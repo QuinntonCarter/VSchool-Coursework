@@ -1,7 +1,7 @@
 var form = document["passengerInfo"];
 
 form.addEventListener("submit", function(e){
-    e.preventDefault()
+    // e.preventDefault()
 
     const firstNameCollect = form.firstname.value
     const lastNameCollect = form.lastname.value
@@ -18,35 +18,22 @@ form.addEventListener("submit", function(e){
     // reg text inputs
     const otherCollect = form.other.value
     const ageCollect = form.age.value
-    // how to collect option/select selection
-
-
-    // const passengerInformation = fullName+\n+genderCollect+\n+dietCollected+\n+otherCollect+\n+ageCollect+\n+destinationCollect+\n+"Thank you "+fullName+" for choosing Mile High!"
-    
-    alert(destination)
+    // how to collect option/select selection - same as others bc JS is smert
+    const destination = form.destination.value
+    // variable that concats all variables and organizes for alert return
+    const passengerInformation = "Passenger Name: "+fullName+"\nGender Identity: "+genderCollect+"\nDietary Restrictions: "+dietCollect+", "+otherCollect+"\nAge: "+ageCollect+"\nFlight Destination: "+destination+"\nThank you "+fullName+"\nfor choosing Mile High!"
+    // alert func for passenger info
+    alert(passengerInformation)
 })
 
 // ----------------------------------------- //
-// reference code for checked/radio
-document.animals.addEventListener("submit", function(e){
-    e.preventDefault()
-    var checkedAnimals = [];
-    var checkedBoxes = document.querySelectorAll("input[name=likes]:checked");
-    for (var i = 0; i < checkedBoxes.length; i++) {
-        checkedAnimals.push(checkedBoxes[i].value);
-    }
-    console.log(checkedAnimals)
-});
-
-// 2
+// reference syntax for checked/radio
 // document.animals.addEventListener("submit", function(e){
 //     e.preventDefault()
-//     var animals = document.animals.likes
-//     var checkedAnimals = []
-//     for (var i = 0; i < animals.likes.length; i++) {
-//     if(animals[i].checked){
-//         checkedAnimals.push(animals[i].value)
+//     var checkedAnimals = [];
+//     var checkedBoxes = document.querySelectorAll("input[name=likes]:checked");
+//     for (var i = 0; i < checkedBoxes.length; i++) {
+//         checkedAnimals.push(checkedBoxes[i].value);
 //     }
-// }
 //     console.log(checkedAnimals)
-// })
+// });
