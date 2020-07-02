@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Passenger Boarding Form </title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+
+    <h3> <label> <div><h2> Mile High Airlines <h2></div> Passenger Information </label> </h3>
+    <form name="passengerInfo">
+        <label> Name
+            <br>
+        <input name="firstname" placeholder="First Name" required/>
+        <input name="lastname" placeholder="Last Name" required/>
+        </label>
+        <br>
+        <br>
+
+        <label for="gender"> Gender Identity</label>
+        <br>
+        <label>
+        <input value="Male"name="gender" type="radio" required/>
+        Male </label>
+        <label>
+        <input value="Female" name="gender" type="radio" required/>
+        Female </label>
+        <label>
+        <input value="Other" name="gender" type="radio" required/>
+        Other </label>
+        <label>
+        <input value="Prefer not to answer" name="gender" type="radio" required/>
+        Prefer not to answer </label>
+        <br>
+        <br>
+
+        <label> Any Dietary Restrictions? </label>
+        <br>
+        <label>
+        <input value="Vegetarian" name="diet" type="checkbox"/>
+        Vegetarian </label>
+        <label>
+        <input value="Vegan" name="diet" type="checkbox"/>
+        Vegan </label>
+        <label>
+        <input value="Celiac/Gluten Free" name="diet" type="checkbox"/>
+        Celiac/Gluten Free </label>
+        <label>
+        <input name="other" placeholder="Type 'none' here if n/a"/>
+        Other </label>
+        <br>
+        <br>
+
+        <label> Age 
+            <br>
+        <input name="age" placeholder="Age" type="number" min="0" max="120" required/>
+        </label>
+        <br>
+        <br>
+        <label> Destinations
+            <br>
+        <select name="destination">
+            <option> - Please select a destination - </option>
+            <option value="Salt Lake City, UT"> Salt Lake City, UT </option>
+            <option value="Indianapolis, IN"> Indianapolis, IN </option>
+            <option value="Chicago, IL"> Chicago, IL </option>
+            <option value="Atlanta, GA "> Atlanta, GA </option>
+            <option value="New York City, NY"> New York City, NY </option>
+            <option value="Memphis, TN"> Memphis, TN </option>
+            <option value="Boston, MA"> Boston, MA </option>
+        </select>
+        </label>
+        <br>
+        <br>
+        <button class="button" name="submit"> Click to Submit </button>
+    </form>
+<script src="app.js"> </script>
+
+
+</body>
+</html>
