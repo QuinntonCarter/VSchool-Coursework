@@ -1,83 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Passenger Boarding Form </title>
+    <title> Mario's Pest Control Services </title>
+    <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css'>
     <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
+    <!-- Page Header -->
+            <header class="navbar-item"> <h2 class="main"> <strong> Mario's Pest Control </strong> </h2> 
+                <div class="column"><h3> Extermination Request </h3></div> </header>
 
-    <h3> <label> <div><h2> Mile High Airlines <h2></div> Passenger Information </label> </h3>
-    <form name="passengerInfo">
-        <label> Name
-            <br>
-        <input name="firstname" placeholder="First Name" required/>
-        <input name="lastname" placeholder="Last Name" required/>
+<!-- Extermination form -->
+
+    <div id="extermination" class="columns">
+        
+        <br>
+
+    <form name="extermination-form">
+        <img class="goombamug" src="Images/Goomba_-_MarioPartyStarRush.png"/>
+        <br>
+        <label class=""> Goomba
+            <input name="goombacheck" id="" type="checkbox"value="5">
+            <input name="customergoombas" type="number" placeholder="$5 per" min="0" required/>
         </label>
         <br>
         <br>
-
-        <label for="gender"> Gender Identity</label>
+        <img class="Cheepcheep" src="Images/1226px-CheepCheepNSMBU.png"/>
         <br>
-        <label>
-        <input value="Male"name="gender" type="radio" required/>
-        Male </label>
-        <label>
-        <input value="Female" name="gender" type="radio" required/>
-        Female </label>
-        <label>
-        <input value="Other" name="gender" type="radio" required/>
-        Other </label>
-        <label>
-        <input value="Prefer not to answer" name="gender" type="radio" required/>
-        Prefer not to answer </label>
-        <br>
-        <br>
-
-        <label> Any Dietary Restrictions? </label>
-        <br>
-        <label>
-        <input value="Vegetarian" name="diet" type="checkbox"/>
-        Vegetarian </label>
-        <label>
-        <input value="Vegan" name="diet" type="checkbox"/>
-        Vegan </label>
-        <label>
-        <input value="Celiac/Gluten Free" name="diet" type="checkbox"/>
-        Celiac/Gluten Free </label>
-        <label>
-        <input name="other" placeholder="Type 'none' here if n/a"/>
-        Other </label>
-        <br>
-        <br>
-
-        <label> Age 
-            <br>
-        <input name="age" placeholder="Age" type="number" min="0" max="120" required/>
+        <label class=""> Cheep-cheep
+            <input name="cheepcheck" id="" type="checkbox" value="11">
+            <input name="customercheeps" type="number" placeholder="$11 per" min="0" required/>
         </label>
         <br>
         <br>
-        <label> Destinations
-            <br>
-        <select name="destination">
-            <option> - Please select a destination - </option>
-            <option value="Salt Lake City, UT"> Salt Lake City, UT </option>
-            <option value="Indianapolis, IN"> Indianapolis, IN </option>
-            <option value="Chicago, IL"> Chicago, IL </option>
-            <option value="Atlanta, GA "> Atlanta, GA </option>
-            <option value="New York City, NY"> New York City, NY </option>
-            <option value="Memphis, TN"> Memphis, TN </option>
-            <option value="Boston, MA"> Boston, MA </option>
-        </select>
+        <img name="check" class="Bobomb" src="Images/Bobomb_-_MarioPartyStarRush.png"/>
+        <br>
+        <label  class=""> Bob-ombs
+            <input name="check" id="bobombcheck" type="checkbox" value="7">
+            <input name="customerbobombs" type="number" placeholder="$7 per" min="0" required/>
         </label>
         <br>
         <br>
-        <button class="button" name="submit"> Click to Submit </button>
+        <br>
+        <div name="totalreturn">  </div>
+        <br>
+        <button class="button is-warning" name="totalbutton"> Click for Total </button>
     </form>
+</div>
+
+<!-- footer -->
+
+<footer class="navbar-item">
+    Contact <br>
+    Email: ItsaMe@Mario.wahoo <br>
+    MarioPestControl.net <br>
+    Green Pipe Lane #3, <br>
+    30124 Venezia VE, <br>
+    Italy
+
+
+</footer>
+
 <script src="app.js"> </script>
-
-
 </body>
 </html>

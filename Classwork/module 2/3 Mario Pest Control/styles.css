@@ -1,17 +1,85 @@
+/* General Page styling */
 html {
-    margin-top: 50px;
-    background-color: rgb(133, 247, 255);
+    margin: 35px;
+    background-color: rgb(255, 253, 115);
 }
 
-body {
+body.columns {
+    position: relative;
+    /* background-color: white;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    width: 450px;
+    border: ridge rgb(0, 68, 214) 5px; */
+}
+
+
+header{
+    /* border: black solid; */
+    /* margin: auto; */
+    text-align: center;
+    width: 50%;
+    justify-content: center;
+    margin: auto;
+
+}
+
+#extermination.columns {
     background-color: white;
     padding: 20px;
     text-align: center;
     margin: auto;
     width: 50%;
-    border: double rgb(23, 143, 241) 5px;
+    border-radius: 30px;
+    border-top: white;
+    border: solid rgb(0, 175, 0) 5px;
 }
 
-div > h2 {
-    color: rgb(23, 143, 241);
+/* // font styling // */
+h2.main > strong {
+    font-size: xx-large;
+    color: rgb(20, 35, 255);
+    font-style: normal;
+}
+
+h3 {
+    color: rgb(233, 0, 0);
+    font-style: italic;
+}
+
+/* img styling */
+img.goombamug{
+    height: 15%;
+    width: 20%;
+    margin: 5px;
+}
+
+img.Cheepcheep {
+    height: 15%;
+    width: 25%;
+    margin: 5px;
+}
+
+img.Bobomb{
+    height: 18%;
+    width: 30%;
+    margin: 5px;
+}
+
+/* header and footer */
+
+header{
+    background-color: white;
+    border-radius: 50px;
+    border: solid rgb(0, 175, 0) 5px;
+    border-bottom: transparent;
+}
+
+footer {
+    /* position: relative; */
+    text-align: center;
+    width: 50%;
+    justify-content: center;
+    margin: auto;
 }

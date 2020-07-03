@@ -4,11 +4,11 @@ Extra Credit
 Build Mario Pest Control website to be responsive,
 meaning it looks great when shrunk down to the screen size of a smart phone.
 
-Pricing:
+Pricing: X
 
-Goombas: 5 Coins
-Bob-ombs: 7 Coins
-Cheep-cheeps: 11 Coins
+Goombas: 5 Coins X
+Bob-ombs: 7 Coins X
+Cheep-cheeps: 11 Coins X
 Baddies Caught:
 
 The number of baddies caught will be entered into thier input fields. 
@@ -16,23 +16,25 @@ Each baddies type will have their own input feild.
 
 Total Price
 
-This will be dynamicly depending on how many baddies were caught.
+This will be dynamic depending on how many baddies were caught.
 
 Project Requirements
 The website must contain the following:
-
+1.
 A list displaying each baddie by type. Each list item must:
-Have baddie image
-Have baddie name
-Show price of that baddie
-Have an input box to enter the total caught of that type
-A total price at the bottom that adds sums the total cost of baddies caught
+Have baddie image X
+Have baddie name X
+Show price of that baddie X
+Have an input box to enter the total caught of that type X
+A total price at the bottom that sums the total cost of baddies caught /
 (must use Javascript for this math - no hard coded values)
+
+2.
 A footer showing:
-Mario's email address
-Mario's company website url
-Mario's physical address
-A large title at the top of the page entitled "Mario Pest Control"
+Mario's email address X
+Mario's company website url X
+Mario's physical address X
+A large title at the top of the page entitled "Mario Pest Control" X
 Passing Criteria: Visual Inspection by Instructor
 Student demonstrated a solid understanding with the following levels of the skills tree:
 

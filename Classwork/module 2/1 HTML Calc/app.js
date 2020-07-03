@@ -15,6 +15,19 @@ function mult(x,y){
     multForm.append(h1)
 }
 
+function mult(x,y){
+    // converts input values to integers + declares as variables
+    let first = parseInt(x)
+    let second = parseInt(y)
+    // declares sum var and performs mult operation
+    sum = first * second
+    //assigns sum as h1 text content
+    h1.textContent = sum
+    // appends h1 text content(sum) to mult form and overwrites previous data
+    multForm.append(h1)
+}
+
+
 function add(x,y) {
     // see above
     let first = parseInt(x)
