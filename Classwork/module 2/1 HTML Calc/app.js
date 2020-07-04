@@ -72,3 +72,4 @@ subForm.addEventListener("submit", function(e){
 
     sub(firstS,secS)
 })
+

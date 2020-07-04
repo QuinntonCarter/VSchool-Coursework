@@ -1,32 +1,15 @@
-// // Disable the widescreen breakpoint
-// $widescreen-enabled: false
-
-// // Disable the fullhd breakpoint
-// $fullhd-enabled: false
-
 const form = document["extermination-form"]
-const goombaClick = document.getElementsByClassName("goombamug")
-const cheepcheepClick = document.getElementsByClassName("Cheepcheep")
-const bobombClick = document.getElementsByClassName("Bobomb")
+const h1 = document.createElement("h1")
 
-// add click funct that checks box if image is clicked
-// cheepcheepClick.addEventListener("click", function(){
-//     e.
-// })
 
-// // add click funct that checks box if image is clicked
-// bobombClick.addEventListener("click", function(){
-//     e.
-// })
-// need to figure out how to multiply values and return them to form to be added together
 function add(x,y,z){
     addsum = x+y+z
-
+    return addsum    
 }
 
 function mult(x,y){
     multsum = x * y
-
+    return multsum
 }
 
 
@@ -64,9 +47,11 @@ form.addEventListener("submit", function(e){
     const totalGoombas = mult(goombasBaseVal,goombaCustInt)
     const totalCheeps = mult(cheepsBaseVal,cheepsCustInt)
     const totalBobombs = mult(bobombBaseVal,custBobombsInt)
-    
+   //returning undefined. not possible to pull value from a function? 
     const total = add(totalGoombas,totalCheeps,totalBobombs)
-    alert(total)
+    
+    h1.textContent = total
+    form.append("Your total before tax: $"+h1.textContent)
 
 })
 

@@ -6,18 +6,10 @@ html {
 
 body.columns {
     position: relative;
-    /* background-color: white;
-    padding: 20px;
-    text-align: center;
-    margin: auto;
-    width: 450px;
-    border: ridge rgb(0, 68, 214) 5px; */
 }
 
 
 header{
-    /* border: black solid; */
-    /* margin: auto; */
     text-align: center;
     width: 50%;
     justify-content: center;
@@ -39,7 +31,7 @@ header{
 /* // font styling // */
 h2.main > strong {
     font-size: xx-large;
-    color: rgb(20, 35, 255);
+    color: rgb(58, 104, 255);
     font-style: normal;
 }
 
