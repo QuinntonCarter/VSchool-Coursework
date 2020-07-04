@@ -1,4 +1,4 @@
-const counted = document["counthere"]
+const counter = document["counthere"]
 const newdiv = document.createElement("div")
 var count= 0
 
@@ -6,9 +6,10 @@ var count= 0
 document.body.addEventListener("click", function(e){
     e.preventDefault(e)
     // increments var count by one and returns result //
-    ++count
+    let counted = ++count
+    
     // assigns count var to new div element //
-    newdiv.textContent = count
+    newdiv.textContent = counted
     // appends new div w/ count value to 'counthere' div //
-    counted.append(newdiv)
+    counter.append(newdiv)
 })
