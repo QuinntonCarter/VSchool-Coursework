@@ -1,0 +1,50 @@
+# .sort()
+    Returns: The array sorted but sort also mutates the original array, so capturing the returned value is not necessary.
+    Purpose: To sort an unsorted array of items.
+
+------- *** for sorting objects alphabetically *** ------
+
+Suppose you have an array users. 
+You may use users.sort and pass a function that 
+takes two arguments and compare them (comparator)
+
+It should return
+
+something negative if first argument is less than second 
+(should be placed before the second in resulting array)
+something positive if first argument is greater 
+(should be placed after second one)
+0 if those two elements are equal.
+In our case if two elements are a and b we want to 
+compare a.firstname and b.firstname
+
+Example:
+
+    users.sort(function(a, b){
+        if(a.firstname < b.firstname) { return -1; }
+        if(a.firstname > b.firstname) { return 1; }
+        return 0;
+    })
+This code is going to work with any type.
+
+** Note that in "real life"™ you often want to ignore case, 
+correctly sort diacritics, weird symbols like ß, 
+etc when you compare strings, so you may want to use 
+localeCompare. See other answers for clarity. **
+
+
+------------- other --------------
+
+# .forEach
+Returns: Undefined 
+Purpose: Used in place of a for-loop
+    Caveat: For-loops allow you to customize where the loop starts, stops, and increments by.
+            forEach will always loop the entire length of the array.
+                
+# .find()
+    Returns: The first item it finds in the array that matches your criteria
+    Purpose: Finding an item in an array
+    
+# .findIndex()
+    Returns: The index number of the first item it finds in the array that matches your criteria
+    Purpose: Finding the index number of an item in an array
