@@ -28,6 +28,10 @@ let people = [{
 
 
 // 2) Take an array of numbers and make them strings
+let stringer = arr.map(function (num){
+    return JSON.stringify(num)
+})
+// or...
 // let stringer = arr.map(num => JSON.stringify(num))
 
 // console.log(stringer)
