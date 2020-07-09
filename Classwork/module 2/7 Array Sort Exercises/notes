@@ -4,7 +4,7 @@
 
 ------- *** for sorting objects alphabetically *** ------
 
-Suppose you have an array users. 
+Suppose you have an array of users. 
 You may use users.sort and pass a function that 
 takes two arguments and compare them (comparator)
 

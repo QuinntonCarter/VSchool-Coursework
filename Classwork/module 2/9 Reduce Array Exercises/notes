@@ -66,4 +66,4 @@ const voterObj = voters.reduce(function(final, voter){
     return final
 }, { didVote: 0, didntVote: 0 })
 
-console.log(voterObj) 
+console.log(voterObj)

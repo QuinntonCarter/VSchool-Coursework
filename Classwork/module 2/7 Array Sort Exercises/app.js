@@ -36,7 +36,7 @@ let string = [
     // console.log(string)
 
 
-// 4) Sort an array alphabetically --- explained in notes--->
+// 4) Sort an array alphabetically --- explained in notes---> ****
     // string.sort(function(a,b){
     //     if(a.name < b.name) { return -1; }
     //     if(a.name > b.name) { return 1; }
@@ -45,8 +45,8 @@ let string = [
     // console.log(string)
 
 // 5) Sort the objects in the array by age
-string.sort(function(a,b){
-    return a.age - b.age
-})
+// string.sort(function(a,b){
+//     return a.age - b.age
+// })
 
-console.log(string)
+// console.log(string)
