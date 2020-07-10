@@ -47,21 +47,16 @@ var peopleArray = [
     }
 ]
 
-let sorter = peopleArray.sort(function(a,b) {
-    if (a.firstName < b.firstName) { 
+let sorter = peopleArray.sort(function(final,current) {
+    if (final.firstName < current.firstName) { 
         return -1
     }
-    if (a.firstName > b.firstName) { 
+    if (final.firstName > current.firstName) { 
         return 1 
-    }
+    } return sorter
+} if(peopleArray.age <= 18 ){
+    return peopleArray
 })
 
 // build reduce function with sorter as arg in some capacity
 
-let megafunk = peopleArray.reduce(function(final,people){
-    if(peopleArray.age >= 18){
-        final.push(people)
-    } return final
-}, sorter)
-
-console.log(megafunk)
