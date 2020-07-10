@@ -59,5 +59,9 @@ let sorter = peopleArray.sort(function(a,b) {
 // build reduce function with sorter as arg in some capacity
 
 let megafunk = peopleArray.reduce(function(final,people){
-    
+    if(peopleArray.age >= 18){
+        final.push(people)
+    } return final
 }, sorter)
+
+console.log(megafunk)
