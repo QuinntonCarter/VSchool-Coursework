@@ -59,4 +59,3 @@ let sorter = peopleArray.sort(function(final,current) {
 })
 
 // build reduce function with sorter as arg in some capacity
-
