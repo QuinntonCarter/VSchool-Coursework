@@ -2,28 +2,28 @@
 // Throw an error if either argument is not of the data type 'number':
 
 function add(x,y){
-    parseInt(x)
-    parseInt(y)
+    x = parseInt(x)
+    y = parseInt(y)
     sum = x + y
-    if (sum !== NaN){
+    if (isNaN(x) || isNaN(y)){
+        throw new Error('One or more input is not a number');
+    } if (sum === NaN){
+        throw new Error('Output is not a number');
+    } else {
     return sum
-    }
-    else if (sum == NaN){
-        throw new Error("Something went wrong")
     }
 }
 
 try {
-    add()
-    console.log("ran try")
+    add(2,3)
+    add('were','gild')
+    console.log(sum)
 } catch(error) {
-    console.log("An error occured: " +error)
-    console.log("ran catch")
+    console.log('Something went wrong! '+error)
 } finally {
-    console.log("always running in the back")
+    console.log('always running in the back')
 }
 
-console.log(add("sdf",3))
 
 // 1b) Call the sum function inside a try block using "1" and "2" as arguments. 
 // Use console.log within a catch block to inform the user of the error.
