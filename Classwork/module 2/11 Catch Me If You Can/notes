@@ -1,5 +1,26 @@
 < --------------------- syntax --------------------- >
+example:
+// function add(x,y){
+//     x = parseInt(x)
+//     y = parseInt(y)
+//     sum = x + y
+//     if (isNaN(x) || isNaN(y)){
+//         throw new Error('One or more input is not a number');
+//     } if (sum === NaN){
+//         throw new Error('Output is not a number');
+//     } else {
+//     return sum
+//     }
+// }
 
+// try {
+//     add(2,3)
+//     console.log(sum)
+// } catch(error) {
+//     console.log('Something went wrong! '+error)
+// } finally {
+//     console.log('always running in the back')
+// }
 
 
 < --------------------- reference --------------------- >
