@@ -1,0 +1,10 @@
+div#square {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 500px;
+    width: 500px;
+    border: solid black; 
+    background-color: whitesmoke;
+}
+
