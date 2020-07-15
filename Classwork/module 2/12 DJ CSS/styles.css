@@ -1,10 +1,134 @@
-div#square {
+div#square.blue {
     align-content: center;
     justify-content: center;
     margin: auto;
-    height: 500px;
-    width: 500px;
+    height: 150px;
+    width: 150px;
     border: solid black; 
-    background-color: whitesmoke;
+    background-color: blue;
+    margin: 15px;
 }
 
+div#square.red {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    border: solid black; 
+    background-color: red;
+    margin: 15px;
+}
+
+div#square.gold {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    border: solid black; 
+    background-color: gold;
+    margin: 15px;
+}
+
+div#square.forestgreen {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    border: solid black; 
+    background-color: forestgreen;
+    margin: 15px;
+}
+
+div#square.darkorange {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    border: solid black; 
+    background-color: orange;
+    margin: 15px;
+}
+
+div#square.orchid {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    border: solid black; 
+    background-color: orchid;
+    margin: 15px;
+}
+
+/* ------- hover styles ------- */
+
+div#square.blue:hover {
+
+    margin: 15px;
+    height: 150px;
+    border: solid blue;
+    background-color: mediumaquamarine;
+}
+
+div#square.red:hover {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin: 15px;
+    height: 150px;
+    border: solid red; 
+    background-color: maroon;
+}
+
+div#square.gold:hover {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin: 15px;
+    height: 150px;
+    border: solid gold;
+    background-color: chocolate;
+}
+
+div#square.forestgreen:hover {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin: 15px;
+    height: 150px;
+    border: solid forestgreen;
+    background-color: mediumseagreen;
+}
+
+div#square.darkorange:hover {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin: 15px;
+    height: 150px;
+    border: solid darkorange; 
+    background-color: peru;
+}
+
+div#square.orchid:hover {
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin: 15px;
+    height: 150px;
+    border: solid purple; 
+    background-color: mediumpurple;
+}
+
+div#square:hover{
+    width: 300px;
+    border-radius: 100px;
+}
+
+div#square {
+    transition: width 3s linear, background-color 1.5s ease-in-out, border-radius 2s;
+}
