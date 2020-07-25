@@ -1,0 +1,71 @@
+// Why is ageRange not defined?
+it is defined locally within the function itself so it it can be changed
+depending on if conditions are met.
+
+// How can we fix this function with var? 
+create an array of objects with var with properties to avoid reassigning
+ageRange constantly with let.
+
+// How can we fix this function avoiding the use of var?
+we can use const instead and apply the same logic as mentioned above
+
+// Why would you use const vs let? //
+const signifies that the identifier is not reassignable/won't be reassigned.
+let signifies that the identifier is reassignable; such as a 
+counter or a loop, or value swap in an algorithm; let identifiers are 
+assigned only in the block it's defined in (both scopt to 
+nearest curly braces)
+(var is most malleable, may or may not be reassigned, variable may or
+may not be used for an entire function, of just for the purpose 
+of a block loop).
+***With ES6 let and const are no longer safe to check for an identifier's 
+existence using typeof***
+
+function getAgeRange(person){
+    if(person.age < 18){
+        let ageRange = "Child"
+    } else if(person.age >= 18 && person.age < 80){
+        let ageRange = "Adult"
+    } else {
+        let ageRange = "Elderly Person"
+    }
+
+    return ageRange
+}
+// What would the above function potentially look like if we 
+destructured the person parameter?
+function getAgeRange({age}){
+    let ageRange
+    if(age < 18){
+        ageRange = "Child"
+    } else if(age >= 18 && age < 80){
+        ageRange = "Adult"
+    } else {
+        ageRange = "Elderly Person"
+    }
+
+    return ageRange
+}
+
+const person = { name: "Andrea", age: 27 }
+// Why can we add .ageRange to person when we used const to define person?
+person.ageRange = getAgeRange(person) // feel free to 
+comment out lines that cause errors
+// or lines that clutter the console
+
+
+console.log("The " + person.ageRange + ", " + person.name + ", 
+is " + person.age + " years old.")
+// change the above concatented string into a template literal
+--console.log(`The ${person.ageRange}, ${person.name}, is ${person.age} years old.`)
+
+const springMonths = ["March", "April", "May"]
+const fallMonths = ["September", "October", "November"]
+// replace this line with one that uses a spread operator 
+to do the same thing as concat
+const fringeMonths = springMonths.concat(fallMonths)
+--const fringeMonths = [...springMonths, ...fallMonths]
+
+// console.log(springMonths, fallMonths, fringeMonths)
+
+ES6 PT. 2

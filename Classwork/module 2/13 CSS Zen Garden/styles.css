@@ -1,0 +1,70 @@
+* {
+    background: pink;
+}
+
+div.container {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    grid-template-rows: repeat(6, 300px);
+    /* margin-top: -10px; */
+    /* padding-left: 100px; */
+    /* padding-right: 100px; */
+}
+
+div.header {
+    border-top: solid rgba(0, 46, 19, 0.589) 10px;
+    background: #325050;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 3.2em;
+    font: white;
+    /* padding: 50px; */
+    align-content: center;
+    justify-content: center;
+    /* z-index: 0; */
+    grid-area: header;
+
+}
+
+div > h3 {
+    background: #325050;
+}
+
+div.subheader {
+    background: rgba(255, 255, 255, 0.219);
+    border:  limegreen solid 3px;
+}
+
+div.text1 {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}
+
+div.text2 {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}
+
+div.text3 {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}
+
+div.credits {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}
+
+div.icons {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}
+
+div.misclinks {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}
+
+div.stylelinks {
+    padding: 50px;
+    border:  limegreen solid 3px;
+}

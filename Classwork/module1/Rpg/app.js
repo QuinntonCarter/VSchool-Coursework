@@ -1,6 +1,12 @@
 var readline = require("readline-sync");
 var inventory = [ ];
 var hP = 30;
+const textDisplay = document["forText"]
+
+textDisplay.addEventListener('submit', function {
+
+})
+
 // readline.getRawInput("Print", console.log(playerName+hP+(...inventory)))
 
 // Enemy Class //
@@ -206,6 +212,7 @@ function walk() {
 }
 
 //  ------------------------Game Start------------------------------ //
+
 let rpg = true
 while (rpg) {
         readline.keyInPause("Welcome to the dungeon")

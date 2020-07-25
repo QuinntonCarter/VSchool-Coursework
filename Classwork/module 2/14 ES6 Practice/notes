@@ -1,0 +1,4 @@
+Be aware that if JavaScript sees a { directly after the => it will think it's starting 
+a function, and not starting an object, so the : will be an unexpected symbol.
+
+** Arrow functions cannot be named **
