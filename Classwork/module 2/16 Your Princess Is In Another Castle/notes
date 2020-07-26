@@ -1,0 +1,106 @@
+// ES6 Classes
+class Vehicle {
+    constructor(make, model){
+        this.make = make
+        this.model = model
+    }
+    
+    honk(){
+        console.log("hooonk")
+    }
+    
+    drive(){
+        console.log("Vrooom")
+    }
+}
+
+// Don't repeat yourself --- DRY
+
+class Motorcyle extends Vehicle {
+    constructor(make, model, hasSideCar){
+        // super tells class to look at its' parent class to 
+        // inherit the preceding properties from said class
+        super(make, model)
+        // can also add new properties unique to the class itself
+        this.hasSideCar = hasSideCar
+    }
+}
+
+// so the created objects would look like this..
+
+const jeep = new Vehicle("jeep", "cherokee")
+
+const harley = new Motorcycle("Harley", "davidson", true)
+
+// can also call methods from parent class
+harley.honk()
+// would return //
+> "hooonk"
+
+// if wanted to edit honk() sound.. //
+// first edit in referenced blueprint //
+
+honk(){
+    // add this. to cause reference to whatever new object is calling method
+    console.log(this.honkSound)
+}
+
+class Motorcycle extends Vehicle {
+    constructor(make, model, honkSound, hasSideCar){
+        super(make, model, honkSound)
+        this.hasSideCar = hasSideCar
+    }
+}
+
+// finally, edit object's property
+
+const harley = new Motorcycle("Harley", "davidson", "Honkey", true)
+
+harley.honk()
+// returns //
+>"Honkey"
+
+< --------------- more examples from Scrimba --------------- >
+
+1.) 
+
+class Player {
+    constructor(name, country) {
+        this.name = name;
+        this.country = country;
+    }
+    
+    introduce() {
+        console.log(`${this.name} was born in ${this.country}`);
+    }
+}
+
+const messi = new Player("Messi", "Argentina");
+
+messi.introduce();
+//returns//
+>Messi was born in Argentina
+
+1b.) 
+class TennisPlayer extends Player {
+    constructor(name, country, age) {
+        super(name, country);
+        this.age = age;
+    }
+    
+    playTennis() {
+        console.log(`${this.name} is ${this.age} years old and knows how to play Tennis`);
+    }
+}
+
+const roger = new TennisPlayer( "Roger Federer", "Spain", 38);
+
+roger.playTennis();
+- console logs -
+> Roger Federer was born in Spain
+
+// can also access introduce() so.. //
+
+roger.introduce();
+- console logs -
+> Roger Federer is 38 years old and knows how to play Tennis
