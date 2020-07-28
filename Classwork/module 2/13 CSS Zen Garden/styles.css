@@ -1,70 +1,102 @@
 * {
-    background: pink;
+    background: rgb(234, 243, 231);
 }
 
 div.container {
     display: grid;
-    grid-template-columns: 65% 35%;
-    grid-template-rows: repeat(6, 300px);
-    /* margin-top: -10px; */
-    /* padding-left: 100px; */
-    /* padding-right: 100px; */
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 200px 1000px 1000px 1000px 266px 180px;
+    border: black solid 3px;
 }
 
-div.header {
-    border-top: solid rgba(0, 46, 19, 0.589) 10px;
+div.navbar {
     background: #325050;
+    margin: auto;
+    text-align: center;
+    text-justify: center;
+    grid-column: 1/2;
+    max-width: auto;
+}
+
+div > header {
+    border-top: solid rgba(0, 80, 56, 0.589) 10px;
     font-family: 'Julius Sans One', sans-serif;
     font-size: 3.2em;
     font: white;
-    /* padding: 50px; */
-    align-content: center;
-    justify-content: center;
-    /* z-index: 0; */
-    grid-area: header;
 
 }
 
-div > h3 {
+div > h1 {
+    font-style: italic;
+    text-align: center;
+    text-justify: center;
     background: #325050;
 }
 
-div.subheader {
-    background: rgba(255, 255, 255, 0.219);
-    border:  limegreen solid 3px;
+div.viewdesigns {
+    font-size: 1.5em;
+    margin: auto;
+    text-align: center;
+    text-justify: center;
+    background: rgba(255, 255, 255, 0.212);
+    padding: 20px;
 }
 
-div.text1 {
+div.stylelinks {
+    background: rgba(126, 150, 143, 0.212);
+    grid-column: 2/3;
+    grid-row: 2/3;
+    padding: 50px;
+    border:  red solid 3px;
+}
+
+div.misclinks {
+    background: rgba(126, 150, 143, 0.212);
+    padding: 50px;
+    grid-row: 3/4;
+    grid-column: 2/3;
+    border:  red solid 3px;
+}
+
+div.empty {
+    background: rgba(126, 150, 143, 0.212);
+    padding: 50px;
+    grid-row: 4/5;
+    grid-column: 2/3;
+    border:  red solid 3px;
+
+}
+
+div.enlightenment {
+    margin: 20px;
     padding: 50px;
     border:  limegreen solid 3px;
 }
 
-div.text2 {
+div.participation {
+    margin: 20px;
     padding: 50px;
     border:  limegreen solid 3px;
 }
 
-div.text3 {
+div.requirements {
+    margin: 20px;
     padding: 50px;
     border:  limegreen solid 3px;
 }
 
 div.credits {
+    font-size: 45px;
     padding: 50px;
+    text-align: center;
+    text-justify: center;
     border:  limegreen solid 3px;
+    grid-row: 5/6;
+    grid-column: 1/3;
 }
 
 div.icons {
-    padding: 50px;
-    border:  limegreen solid 3px;
-}
-
-div.misclinks {
-    padding: 50px;
-    border:  limegreen solid 3px;
-}
-
-div.stylelinks {
-    padding: 50px;
-    border:  limegreen solid 3px;
+    background: rgb(0, 87, 75);
+    grid-row: 6/6;
+    grid-column: 1/3;
 }
