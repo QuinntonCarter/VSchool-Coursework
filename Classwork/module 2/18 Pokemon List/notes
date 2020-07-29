@@ -1,0 +1,43 @@
+Working with AJAX
+Below is an example of how to create a new XMLHttpRequest object and how 
+to use it to get data and use that data without having to refresh the page. 
+We'll walk through each piece below:
+--
+
+// we use the built-in JavaScript XMLHttpRequest constructor to create a //
+// new object that we can use to perform an AJAX request //
+const xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange = function () {
+    // checks for successful response data from server //
+    if (xhr.readyState === 4 && xhr.status === 200) {
+    // we can find the data inside the responseText property of the XHR object (xhr.responseText) //
+    // if "if statement" conditions are met //
+        const jsonData = xhr.responseText;
+    // We need to use JSON.parse() to change the JSON data into a useable JavaScript object // 
+    // This is what var data = JSON.parse(jsonData); is doing //
+        const data = JSON.parse(jsonData);
+    // Now we have the data variable which contains the //
+    // JavaScript object version of the JSON data we received back from the server //
+        const name = data.name;
+        document.getElementById("demo1").textContent = "JSON results: " + jsonData;
+        document.getElementById("demo2").textContent = "Parsed JSON's 'name' property: " + data.name;
+        spaceshipurl = data.starships[0];
+        console.log(spaceshipurl);
+    }
+};
+
+// The open method on the XHR object allows us to specify a few bits of //
+// additional information dealing with the AJAX request. //
+// 1) In the first parameter, we specify the type of request //
+// we would like to make. In this case we tell the server we want to receive (GET) information rather //
+// than submit (POST) information. //
+// 2) The second parameter is the URL address of where this data resides. //
+// When you make an XHR request to that URL, the data that comes back is that JSON, //
+// which can then be turned into a JavaScript object and used in your web app //
+// 3) The third parameter is a boolean of whether or not we want the request to be asynchronous. //
+          1)              2)                     3)
+xhr.open("GET", "http://swapi.co/api/people/1/", true);
+// the send method is what kicks off the whole process // 
+// It simply sends the request to the specified address //
+xhr.send();
