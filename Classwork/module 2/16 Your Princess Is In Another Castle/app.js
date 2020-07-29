@@ -1,96 +1,54 @@
-let status = ["Powered Up", "Big", "Small", "Dead"];
-let gameActive = true
-
-const randomize = function(){
-    sum = Math.floor(Math.random() * 3)
-    if (sum === 0){
-        gotHit()
-    } if (sum === 1){
-        gotPowerup()
-    } if (sum === 2){
-        addCoin()
-    } else if (gameActive === false) {
-        return "Game Over"
-    }
-}
-
-
-
-
 class Player {
-    constructor(name, totalCoins, status, hasStar){
+    constructor(name, totalCoins, status, hasStar) {
         this.name = name
         this.totalCoins = totalCoins
         this.status = status
         this.hasStar = hasStar
     }
 
-    setName(namePicked){
-        sum = Math.floor(Math.random() * 3)
-        if (sum === 0){
-            namePicked = "Mario"
-        } else {
-            namePicked = "Luigi"
-        }
+    print(){
+        return "Name: "+this.name+"\n Coins: "+this.totalCoins+"\n Status: "+this.status+"\n Star: "+this.hasStar
     }
 
     gotHit(){
-
-    }
-
-    gotPowerUp(){
-
-    }
-
-    addCoin(){
-        totalCoins+=
-    }
-
-    gameActive(status = true){
-        if (status = false){
-            break
+        if (this.status === 'big'){
+            this.status = 'small'
+        } if (this.status === 'powered up'){
+            this.status = 'big'
+        }  else if (this.status === 'small'){
+            console.log("Game Over")
         }
     }
 
-}
-
-while (gameActive){
-    setInterval (function(){
-        if(gameActive = true){
-        randomize()
-    }}, 4500);
+    gotPowerUp(){
+        if (this.status === 'small'){
+            this.status = 'big'
+        } if (this.status === 'big'){
+            this.status = 'powered up'
+        } else if (this.status === 'powered up') {
+            this.hasStar = true
+        }
     }
 
+    addCoin(){
+        this.totalCoins+=1
+    }
+}
 
-// gotHit(){
-//     status === "dead"
-// }
 
-// gotPowerUp(){
-//     console.log("powerup")
-// }
+let mario = new Player('Mario', 0, 'small', false)
+let luigi = new Player('Luigi', 0, 'small', false )
 
-// addCoin(){
-//     console.log("working coin")
-// }
+function randomNum(){
+    sum = Math.floor(Math.random() * 3)
+    if (sum === 0){
+        mario.gotHit()
+    } if (sum === 1){
+        mario.gotPowerUp()
+    } else if (sum === 2){
+        mario.addCoin()
+    }
+    mario.print()
+}
 
-// print(){
-//     return "Player: "+name+"\n Coins: "+totalCoins+"\n Status: "+status+"\nStar: "+hasStar
-// }
-// status(){
-//     const sum = Math.floor(Math.random() * 3)
-//     if(sum === 0){
-//         gotHit()
-//         print()
-//     } if(sum === 1){
-//         gotPowerUp()
-//         print()
-//     } else {
-//         addCoin()
-//         print()
-//     } if (status === "dead") {
-//         console.log("game over")
-//         game = false
-//         break
-//     }
-// }
+setInterval(randomNum, 1000)

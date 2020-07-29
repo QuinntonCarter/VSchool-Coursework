@@ -1,0 +1,73 @@
+// <------------------ JSON Data cont.d ------------------>
+
+// # JSON
+//     - Javascript Object Notation
+//     - JSON is a data format for transfering data that shares a strong resemblance to a Javascript object.
+//     - JSON can be used to transfer:
+//         - strings
+//         - numbers
+//         - booleans
+//         - arrays
+//         - objects
+//     - JSON can be coverted to javascript using the JSON.parse() method.
+//     - Javascript can be converted to JSON using the JSON.stringify() method.
+    
+//     Rules:
+//         - Must use double quotes
+//         - No trailing comma on the last entry in a JSON object
+        
+//     - jsonlint.com - validate your json
+//     - It is very similar to regular JavaScript objects with a few exceptions. 
+//             --The keys always need quotation marks.
+//             --The quotation marks always need to be double (" <-- correct VS. ' <-- incorrect).
+
+//     If we received some data from Instagram that we wanted for our site, the data might look like this.
+
+// Example 1:
+
+{
+    "userName": "johndoe",
+    "images": ["smile.img", "frown.img"]
+}
+//     // so.. //
+//     - What are the keys and what are the values in this example?
+
+//         -- userName and images are the keys, and the stuff on the right side of the colon are the values. 
+//     - Notice images has an array as its value, just like JavaScript. The value could also be an object.
+
+// example 2:
+
+    {
+    "data": [
+        {
+            "name": "Steve",
+            "age": 20,
+            "isAlive": true,
+            "friends": ["john", "betty", "jake"],
+            "address": {
+                "street": "123 street",
+                "city": "SLC"
+            }
+        },
+        {
+            "name": "Steve",
+            "age": 20,
+            "isAlive": true,
+            "friends": ["john", "betty", "jake"],
+            "address": {
+                "street": "123 street",
+                "city": "SLC"
+            }
+        },
+        {
+            "name": "Steve",
+            "age": 20,
+            "isAlive": true,
+            "friends": ["john", "betty", "jake"],
+            "address": {
+                "street": "123 street",
+                "city": "SLC"
+            }
+        }
+    ]
+}

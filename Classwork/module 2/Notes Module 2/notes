@@ -64,8 +64,7 @@ const fallMonths = ["September", "October", "November"]
 // replace this line with one that uses a spread operator 
 to do the same thing as concat
 const fringeMonths = springMonths.concat(fallMonths)
---const fringeMonths = [...springMonths, ...fallMonths]
+-- const fringeMonths = [...springMonths, ...fallMonths]
 
 // console.log(springMonths, fallMonths, fringeMonths)
 
-ES6 PT. 2

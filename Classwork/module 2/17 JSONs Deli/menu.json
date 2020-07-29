@@ -1,0 +1,129 @@
+{
+    
+    "menu": [
+        {
+            "appetizers": [
+                {
+                    "item": "Hummus, veggies, and pita", 
+                    "price": "$3.00", 
+                    "ingredients": "Choose from regular or red pepper hummus with house veggies and wheat or white pita bread"
+                }, 
+                {
+                    "item": "Potato Chips",
+                    "price": "1.50",
+                    "ingredients": "Choose from BBQ, salt and vinegar, or regular kettle style potato chips"
+                },
+                {
+                    "item": "Jalapeno Poppers",
+                    "price": "$3.00",
+                    "ingredients": "Fried brussel sprouts filled with our house mix of Jalapenos and cream cheese"
+                }, {
+                    "item": "Fruit Bowl",
+                    "price": "$4.00",
+                    "ingredients": "Fresh seasonal fruit"
+                    } 
+                ]
+        }, 
+        {
+            "deli sandwiches":[
+                {
+                    "item": "Italian Sub", 
+                    "price": "$6.00", 
+                    "ingredients": "provolone cheese, salami, capacola, onions, lettuce, dijon mustard, mayonaise, italian seasoning on fresh subs baked daily"
+                }, 
+                {
+                    "item": "Roast Beef",
+                    "price": "$6.00",
+                    "ingredients": "Cold cut roast beef, smoked gouda, house dressing "
+                }, 
+                {
+                    "item": "Chicken Salad Sandwich",
+                    "price": "$6.00",
+                    "ingredients": "Chicked, sliced fuji apple, sliced celery mixed with mayo and your choice of cheese"
+                }, 
+                {
+                    "item": "Tuna Sandwich",
+                    "price": "$6.00",
+                    "ingredients": "Smoked gouda, house tuna mix with veggies and mayo"
+                }, 
+                {
+                    "item": "Veggie Sandwich",
+                    "price": "$6.00",
+                    "ingredients": "Your choice of cheese, basil, avocado, bell pepper, house dressing, cucumber, sprouts. +.50 to add egg."
+                    }
+                ]
+        },
+        {
+            "paninis/hot sandwiches": [
+                {
+                "item": "Salmon Wrap",
+                "price": "$6.00",
+                "ingredients": "Salmon on a spinach wrap with house dressing and veggie mix."
+                }, 
+            {
+                "item": "Italian Panini",
+                "price": "$6.00",
+                "ingredients": "Salami, capacola, provolone, dijon, lettuce, tomato, onion. Panini or toasted."
+                }, 
+            {
+                "item": "Cuban",
+                "price": "$6.00",
+                "ingredients": "Classic cuban sandwich with house dressing. Panini or toasted"
+                }, 
+            {
+                "item": "Tuna Melt",
+                "price": "$6.00",
+                "ingredients": "Classic tuna melt with house mix of veggies. Panini or toasted."
+                }, 
+            {
+                "item": "Spicy Chicken Melt",
+                "price": "$6.00",
+                "ingredients": "Special spicy dressing, smoked gouda, with lettuce. Panini or toasted."
+                }, 
+            {
+                "items":"Veggie Avocado Melt",
+                "price": "$6.00",
+                "ingredients": "Your choice of cheese, basil, avocado, bell pepper, house dressing, cucumber, and sprouts, toasted or grilled on panini maker. +.50 to add egg."
+                }
+            ]
+        },
+        {
+            "desserts": [
+                {
+                    "item": "Tres Leches",
+                    "price": "$5",
+                    "ingredients": "House Made Tres Leches"
+                    }, 
+                    {
+                    "item": "Ice Cream Sandwich",
+                    "price": "$3",
+                    "ingredients": "Fat Boy Ice Cream Sandwich"
+                    }, 
+                    {
+                    "item": "Cookie",
+                    "price": "$3",
+                    "ingredients": "Snickerdoodle, Chocolate Chip w/ Oatmeal, or Chocolate Chip" 
+                    }, 
+                    {
+                    "item:": "Donut",
+                    "price": "$2",
+                    "ingredients": "Banbury Cross Donut"
+                        }
+                            ]
+                                
+        },
+        {
+            "drinks": [
+                {
+                "item": "Sprite"
+                }, 
+                {
+                "item": "Sparkling Water"
+                }, 
+                {
+                "item": "Sweet House Yerba Mate"
+                }
+            ]
+        }
+    ]
+}
