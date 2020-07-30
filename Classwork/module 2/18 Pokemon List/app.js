@@ -17,25 +17,19 @@
 // and some DOM mamnipulation to add nodes for each Pokemon.
 
 
-// const xhr = new XMLHttpRequest();
-// const axios = require('axios');
+const xhr = new XMLHttpRequest();
 
-// axios.get('https://api.vschool.io/pokemon').then(function(resp){
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        const jsonData = xhr.responseText;
+        const data = JSON.parse(jsonData);
+        const pokemon = data.pokemon;
+        document.getElementsByClassName("here").textContent = "Name: "+jsonData+"\nResource_URI: "+data.name;
+        // document.getElementsByClassName("demo2").append();
+        pokeUrl = data.pokemon[0];
+        console.log(pokeUrl);
+    }
+};
 
-//     console.log(resp.data);
-// });
-
-// xhr.onreadystatechange = function() {
-//     if (xhr.readyState === 4 && xhr.status === 200) {
-//         const jsonData = xhr.responseText;
-//         const data = JSON.parse(jsonData);
-//         const pokemon = data.pokemon;
-//         document.getElementsByClassName("here").textContent = "Name: "+jsonData+"\nResource_URI: "+data.name;
-//         // document.getElementsByClassName("demo2").append();
-//         pokeUrl = data.pokemon[0];
-//         console.log(pokeUrl);
-//     }
-// };
-
-// xhr.open("GET", "https://api.vschool.io/pokemon", true);
-// xhr.send();
+xhr.open("GET", "https://api.vschool.io/pokemon", true);
+xhr.send();
