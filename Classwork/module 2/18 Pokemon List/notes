@@ -3,7 +3,10 @@ Below is an example of how to create a new XMLHttpRequest object and how
 to use it to get data and use that data without having to refresh the page. 
 We'll walk through each piece below:
 --
+// After installing w npm install XMLHttpRequest //
 
+
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 // we use the built-in JavaScript XMLHttpRequest constructor to create a //
 // new object that we can use to perform an AJAX request //
 const xhr = new XMLHttpRequest();
