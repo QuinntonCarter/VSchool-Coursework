@@ -17,7 +17,6 @@
 // You will be using a for loop to iterate through each pokemon object, 
 // and some DOM mamnipulation to add nodes for each Pokemon.
 
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const xhr = new XMLHttpRequest();
 
 xhr.open("GET", "https://api.vschool.io/pokemon", true);
@@ -25,17 +24,17 @@ xhr.send();
 
 xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-        const JSONData = xhr.responseText
-        const data = JSON.parse(JSONData)
-        showData(data.results)
+        const JSONdata = xhr.responseText
+        const data = JSON.parse(JSONdata)
+        showData(data.objects[0].pokemon)
     }
 }
 
 function showData(arr){
-    const h1 = document.createElement('h1')
-    h1.textContent = poke.name
-    document.body.appendChild(h1)
+    for (i=0; i<arr.length;i++){
+        const h1 = document.createElement('h1')
+        h1.textContent = arr[i].name
+        document.body.appendChild(h1)
+    }
 }
 
-
-// document.getElementsByClassName("here").textContent = "Name: "+jsonData+"\nResource_URI: "+data.name;
