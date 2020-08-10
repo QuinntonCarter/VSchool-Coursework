@@ -5,7 +5,8 @@
 div.container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 200px 1000px 1000px 1000px 266px 180px;
+    grid-template-rows: 200px 1000px 1000px 1000px 266px 180px;    
+
 }
 
 div.navbar {
