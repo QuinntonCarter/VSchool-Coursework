@@ -1,6 +1,6 @@
 var form = document["todoform"];
 var listOl = document.getElementById('todolist')
-
+// -------------
 const clearFormBut = document.createElement('button')
 clearFormBut.textContent = "Clear List"
 document.body.appendChild(clearFormBut)
@@ -8,6 +8,7 @@ clearFormBut.addEventListener('click', function(){
     listOl.innerHTML = ""
 })
 
+// -------------
 
 // GET   list from api
 axios.get("https://api.vschool.io/quinntoncarter/todo/")
@@ -19,6 +20,8 @@ axios.get("https://api.vschool.io/quinntoncarter/todo/")
 .catch(function(err){
     alert(err+"\n Try reloading the page.")
 });
+
+// -------------
 
 
 function addAPIObjects(obj){
@@ -41,10 +44,11 @@ function addAPIObjects(obj){
 
     // eventlisteners for erase, 
     eraseBut.addEventListener('click', function(e){
-        //selects listOl and orders removeChild event to target parentElement
-        listOl.removeChild(e.target.parentElement)
-        // create and add funciton for deletion here, removes from database
-        })
+    //selects listOl and orders removeChild event to target parentElement
+    listOl.removeChild(e.target.parentElement)
+    // create and add funciton for deletion here, removes from database
+    // removeAPI(todoObject[0])
+    })
 
     // and checkbox buttons
     checkBox.addEventListener("change", function(){
@@ -57,32 +61,21 @@ function addAPIObjects(obj){
 
 
 
-}
+}}
 
-}
+// -------------
 
 function postAPIDatabase(ap){
     // adds submitted data to API database w axios put? or post?
-    // construct var for title time and file and maybe consolidate them into on
-var object = {
-    title: form.title.value
-    // description: form.time.value,
-    // imgURL: form.file
+    axios.post("https://api.vschool.io/quinntoncarter/todo/", ap)
+    .then(response => alert(response.data))
+    .catch(error => alert(error))
 }
 
-axios.post("https://api.vschool.io/quinntoncarter/todo/", object)
-.then(function(response){
-    console.log(response)
-})
-.catch(error => alert(error))
-
-}
-
-
+// -------------
 
 form.addEventListener('submit', function(e){
     e.preventDefault(e)
-
     // variables for form values
     const todoTitle = form.title.value
     const todoTime = form.time.value
@@ -90,6 +83,11 @@ form.addEventListener('submit', function(e){
     const todoItem = todoTitle+", Time: "+todoTime+", "+todoFile
     let li = document.createElement('li')
     li.textContent = todoItem
+    var todoObject = {
+        title: form.title.value,
+        description: form.time.value,
+        // imgURL: form.file
+    }
 
     // erase button, clear button, and checkbox
     const eraseBut = document.createElement('button')
@@ -107,10 +105,15 @@ form.addEventListener('submit', function(e){
     form.time.value = ""
     form.files = 0
 
+
+    // **** how do to select api and remove from database
     // eventlisteners for erase, 
     eraseBut.addEventListener('click', function(e){
         //selects listOl and orders removeChild event to target parentElement
         listOl.removeChild(e.target.parentElement)
+        axios.delete("https://api.vschool.io/quinntoncarter/todo"+this.todoObject)
+        .then(response => (response.data))
+        .catch(error => alert(error))
         })
 
     // and checkbox buttons
@@ -121,22 +124,10 @@ form.addEventListener('submit', function(e){
             li.style = "text-decoration: none"
         }
     })
-    //create function that adds li to API database
-    addAPIDatabase(li)
+    
+    // function which adds todoObject to API database
+    postAPIDatabase(todoObject)
 })
 
 
-
-
 // scraps
-
-// // GET   list from api
-// axios.get("https://api.vschool.io/quinntoncarter/todo/")
-// .then(function(response) {
-//     for (i=0; i < response.data.length;i++){
-//         addAPIObjects(response)
-//     }
-// })
-// .catch(function(err){
-//     alert(err+"\n Try reloading the page.")
-// });
