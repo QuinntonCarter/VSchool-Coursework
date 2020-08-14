@@ -8,15 +8,20 @@
 </head>
 <body>
     <form name="todoform">
-        <input type="text" name="todoval" placeholder="Title"/>
-        <button name="submit"> Submit </button>
+        <input type="text" name="title" placeholder="To-do List"/>
+        <br>
+        <input type="text" name="time" placeholder="Time">
+        <br>
+        <input type="file" name="file" placeholder = "Attach image/files">
+        <br>
+        <button id="submit"> Add To List </button>
     </form>
 
-    <div id="todolist">
+    <ol id="todolist">
 
-    </div>
+    </ol>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-    <script src='app.js'> </script>
+    <script src='app2.js'> </script>
 </body>
 </html>
