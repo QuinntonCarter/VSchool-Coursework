@@ -13,9 +13,9 @@ clearFormBut.addEventListener('click', function(){
 // GET full list from api
 axios.get("https://api.vschool.io/quinntoncarter/todo/")
 .then(function(response) {
-    for (i=0; i < response.data.length;i++){
+    // for (i=0; i < response.data.length;i++){
         addAPIObjects(response)
-    }
+    // }
 })
 .catch(function(err){
     alert(err+"\n Try reloading the page.")
@@ -25,10 +25,8 @@ axios.get("https://api.vschool.io/quinntoncarter/todo/")
 
 function addAPIObjects(obj){
     for (i=0; i < obj.data.length;i++){
-
     let li = document.createElement('li')
     li.innerHTML = obj.data[i].title
-
 // erase button, clear button, and checkbox
     const eraseBut = document.createElement('button')
     eraseBut.textContent = 'Erase'
@@ -42,7 +40,7 @@ function addAPIObjects(obj){
     listOl.append(li)
 
 
-//////// ignore ////////
+////////// ignore /////////
 // // eventlisteners for erase, 
 //     eraseBut.addEventListener('click', function(e){
 // //selects listOl and orders removeChild event to target parentElement
@@ -55,14 +53,14 @@ function addAPIObjects(obj){
 /// create get function that gets individual API and returns then calls 
 /// removeAPI func w said response as arg
 
-// function for API deletion
+/// function for API deletion
 function removeAPI(api){
     delete(`https://api.vschool.io/quinntoncarter/todo/${api}`)
         .then(response => console.log(response.data))
         .catch(error => alert(error))
     }
-// **** how do to select individual apis and remove from database? ****
-// eventlisteners for erase, 
+/// **** how do to select individual apis and remove from database? ****
+/// eventlisteners for erase, 
     eraseBut.addEventListener('click', function(e){
         //selects listOl and orders removeChild event to target parentElement
         var item = e.target.parentElement
@@ -70,7 +68,7 @@ function removeAPI(api){
         removeAPI(item.id)
     })
 
-// and checkbox buttons
+/// and checkbox buttons
     checkBox.addEventListener("change", function(){
         if (this.checked){
             li.style = "text-decoration: line-through"
@@ -83,20 +81,20 @@ function removeAPI(api){
 
 }}
 
-// ----- --------
+/// ----- --------
 
 function postAPIDatabase(ap){
-// adds submitted data to API database w axios put? or post?
+/// adds submitted data to API database w axios put? or post?
     axios.post("https://api.vschool.io/quinntoncarter/todo/", ap)
     .then(response => console.log(response.data))
     .catch(error => alert(error))
 }
 
-// ------ -------
+/// ------ -------
 
 form.addEventListener('submit', function(e){
     e.preventDefault(e)
-// variables for form values
+/// variables for form values
     const todoTitle = form.title.value
     const todoTime = form.time.value
     const todoFile = form.file.value
