@@ -1,14 +1,6 @@
 var form = document["todoform"];
 var listOl = document.getElementById('todolist')
-// ------ -------
-const clearFormBut = document.createElement('button')
-clearFormBut.textContent = "Clear List"
-document.body.appendChild(clearFormBut)
-clearFormBut.addEventListener('click', function(){
-    listOl.innerHTML = ""
-})
-
-// ------ -------
+/// ----- --------
 
 // GET full list from api
 axios.get("https://api.vschool.io/quinntoncarter/todo/")
@@ -26,47 +18,31 @@ axios.get("https://api.vschool.io/quinntoncarter/todo/")
 function addAPIObjects(obj){
     for (i=0; i < obj.data.length;i++){
     let li = document.createElement('li')
-    li.innerHTML = obj.data[i].title
+// creates .id for manipulation later in code
+    li.id = obj.data[i]._id
+    let title = obj.data[i].title
+    let time = obj.data[i].description
+    let file = obj.data[i].imgURL
+    let item = title+", \nTime: "+time+", \n"+file
+    li.innerHTML = item
 // erase button, clear button, and checkbox
     const eraseBut = document.createElement('button')
     eraseBut.textContent = 'Erase'
     eraseBut.style = "margin: 15px"
-    li.appendChild(eraseBut)
+
+/// eventlisteners for erase, 
+eraseBut.addEventListener('click', function(e){
+    //selects listOl and orders removeChild event to target parentElement
+    var item = e.target.parentElement
+    listOl.removeChild(item)
+    removeAPI(item.id)
+})
 
     const checkBox = document.createElement('input')
     checkBox.type = "checkbox"
-    li.prepend(checkBox)
-
-    listOl.append(li)
 
 
-////////// ignore /////////
-// // eventlisteners for erase, 
-//     eraseBut.addEventListener('click', function(e){
-// //selects listOl and orders removeChild event to target parentElement
-//     listOl.removeChild(e.target.parentElement)
-// // create and add funciton for deletion here, removes from database
-// // removeAPI(todoObject[i].id)
-//     })
-////////// ignore /////////
 
-/// create get function that gets individual API and returns then calls 
-/// removeAPI func w said response as arg
-
-/// function for API deletion
-function removeAPI(api){
-    delete(`https://api.vschool.io/quinntoncarter/todo/${api}`)
-        .then(response => console.log(response.data))
-        .catch(error => alert(error))
-    }
-/// **** how do to select individual apis and remove from database? ****
-/// eventlisteners for erase, 
-    eraseBut.addEventListener('click', function(e){
-        //selects listOl and orders removeChild event to target parentElement
-        var item = e.target.parentElement
-        listOl.removeChild(item)
-        removeAPI(item.id)
-    })
 
 /// and checkbox buttons
     checkBox.addEventListener("change", function(){
@@ -77,30 +53,46 @@ function removeAPI(api){
         }
     })
 
-
-
+// li append and prepends here
+li.prepend(checkBox)
+li.appendChild(eraseBut)
+listOl.append(li)
 }}
 
-/// ----- --------
-
 function postAPIDatabase(ap){
-/// adds submitted data to API database w axios put? or post?
-    axios.post("https://api.vschool.io/quinntoncarter/todo/", ap)
-    .then(response => console.log(response.data))
-    .catch(error => alert(error))
-}
+    /// adds submitted data to API database w axios put? or post?
+        axios.post("https://api.vschool.io/quinntoncarter/todo/", ap)
+        .then(response => console.log(response))
+        .catch(error => alert(error))
+    }
+    
+    /// ------ -------
+/// ----- --------
+/// function for API deletion
+function removeAPI(api){
+    axios.delete(`https://api.vschool.io/quinntoncarter/todo/${api}`)
+        .then(response => console.log(response))
+        .catch(error => alert(error))
+    }
+// ------ -------
+const clearFormBut = document.createElement('button')
+clearFormBut.textContent = "Clear List"
+document.body.appendChild(clearFormBut)
+clearFormBut.addEventListener('click', function(){
+    listOl.innerHTML = ""
+})
+// ------ -------
 
-/// ------ -------
 
 form.addEventListener('submit', function(e){
     e.preventDefault(e)
 /// variables for form values
+    let li = document.createElement('li')
     const todoTitle = form.title.value
     const todoTime = form.time.value
-    const todoFile = form.file.value
-    const todoItem = todoTitle+", \nTime: "+todoTime+", \n"+todoFile
-    let li = document.createElement('li')
-    li.textContent = todoItem
+    // const todoFile = form.file.value
+    const todoItem = todoTitle+", \nTime: "+todoTime
+    li.innerHTML = todoItem
     var todoObject = {
         title: form.title.value,
         description: form.time.value,
@@ -111,17 +103,16 @@ form.addEventListener('submit', function(e){
     const eraseBut = document.createElement('button')
     eraseBut.textContent = 'Erase'
     eraseBut.style = "margin: 15px"
-    li.appendChild(eraseBut)
+
+    eraseBut.addEventListener('click', function(e){
+        //selects listOl and orders removeChild event to target parentElement
+        var item = e.target.parentElement
+        listOl.removeChild(item)
+        removeAPI(item.id)
+    })
 
     const checkBox = document.createElement('input')
     checkBox.type = "checkbox"
-    li.prepend(checkBox)
-
-    listOl.appendChild(li)
-
-    form.title.value = ""
-    form.time.value = ""
-    form.files = 0
 
 // and checkbox buttons
     checkBox.addEventListener("change", function(){
@@ -132,7 +123,16 @@ form.addEventListener('submit', function(e){
         }
     })
     
+
+// appends item
+    li.appendChild(eraseBut)
+    li.prepend(checkBox)
+    listOl.appendChild(li)
 // function which adds todoObject to API database
     postAPIDatabase(todoObject)
+
+    form.title.value = ""
+    form.time.value = ""
+    form.files = 0
 })
 
