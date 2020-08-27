@@ -59,14 +59,14 @@ li.appendChild(eraseBut)
 listOl.append(li)
 }}
 
-function postAPIDatabase(ap){
-    /// adds submitted data to API database w axios put? or post?
+function postAPIDatabase(ap,item){
+    /// adds submitted data to API database w axios post
         axios.post("https://api.vschool.io/quinntoncarter/todo/", ap)
-        .then(response => console.log(response))
+        .then(response => item.id = response.data._id)
         .catch(error => alert(error))
     }
     
-    /// ------ -------
+
 /// ----- --------
 /// function for API deletion
 function removeAPI(api){
@@ -129,7 +129,7 @@ form.addEventListener('submit', function(e){
     li.prepend(checkBox)
     listOl.appendChild(li)
 // function which adds todoObject to API database
-    postAPIDatabase(todoObject)
+    postAPIDatabase(todoObject,li)
 
     form.title.value = ""
     form.time.value = ""
