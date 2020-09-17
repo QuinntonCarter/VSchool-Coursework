@@ -15,4 +15,4 @@ function SpotCard(spot){
     );
 }
 
-export default SpotCard
+export default SpotCard;
