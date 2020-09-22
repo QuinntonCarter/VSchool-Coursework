@@ -1,0 +1,6 @@
+.pad-style {
+    height: 50px;
+    width: 50px;
+    border: black solid;
+    background: rgb(207, 207, 207);
+}

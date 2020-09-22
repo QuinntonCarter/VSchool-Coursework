@@ -1,0 +1,59 @@
+.crumbs1 {
+    margin-left: 90px;
+    /* margin-top: -200px; */
+    color: white;
+}
+
+.crumbs2 {
+    padding-left: 900px;
+    margin-top: -20px;
+    color: white;
+}
+
+.navbar {
+    position: static;
+    background-color:rgba(0, 0, 0, 0.507);
+    padding: 1px;
+}
+
+.header {
+    position: relative;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    padding: 200px;
+    background-color: rgba(0, 0, 0, 0.507);
+}
+
+.blog-list {
+    /* background-color: red;
+    text-justify: center;
+    justify-content: center; */
+    background-color: blue;
+
+}
+
+.post-container {
+    padding: 25px;
+    justify-content: center;
+    text-align: center;
+    width: 700px;
+    background-color: red;
+}
+
+.title {
+
+}
+
+.sub {
+
+}
+
+.credit-date {
+    color: rgb(36, 36, 36);
+}
+
+.footer {
+    justify-content: center;
+    text-align: center;
+}

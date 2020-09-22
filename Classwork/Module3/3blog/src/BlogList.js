@@ -1,9 +1,11 @@
 import React from 'react'
-import BlogData from './BlogData'
+import BlogPost from './BlogPost'
 
 function BlogList(){
     return(
-        
+        <div className='blog-list'>
+        <BlogPost/>
+        </div>
     )
 }
 

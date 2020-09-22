@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function FriendDisplay(props){
 
@@ -10,8 +10,14 @@ function FriendDisplay(props){
         <h3>
             {props.age}
         </h3>
+        <h3>
+            {props.pets}
+        </h3>
+        <h3>
+            {props.pets.breed}
+        </h3>
         </div>
     )
 }
 
-export default FriendDisplay
+export default FriendDisplay;

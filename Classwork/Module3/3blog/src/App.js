@@ -1,17 +1,19 @@
 import React from 'react';
-import Navbar from './Navbar';
 import Header from './Header';
 import BlogList from './BlogList';
-import BlogPost from './BlogPost';
+import BlogData from './BlogData'
 import Footer from './Footer';
+import BlogPost from './BlogPost';
+
 
 function App() {
+  const BlogComponents = BlogData.map(post => <BlogPost key={post.date} title={post.title} subTitle={post.subTitle} author={post.author} date={post.date}/>
+    );
   return (
   <div className="App">
     <Header />
-      <Navbar />
     <BlogList />
-      <BlogPost />
+    {BlogComponents}
     <Footer />
   </div>
   );

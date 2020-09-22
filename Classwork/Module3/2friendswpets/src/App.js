@@ -1,17 +1,17 @@
 import React from 'react';
-import PetsDisplay from './PetsDisplay';
-import FriendDisplay from './FriendDisplay'
-import FriendsList from './FriendsList'
+// import PetsDisplay from './PetsDisplay';
+import FriendDisplay from './FriendDisplay';
+import FriendsList from './FriendsList';
 
 function App() {
-  const petComponents = FriendsList.map(person => <PetsDisplay pet={person.pets.name} breed={person.pets.breed}/>
+  const friendComponents = FriendsList.map(friend => <FriendDisplay name={friend.name} age={friend.age} pets={friend.pets}/>
     );
-  const friendComponents = FriendsList.map(friend => <FriendDisplay name={friend.name} age={friend.age}/>
-    );
+  // const petComponents = FriendsList.map(person => <PetsDisplay  pet={person.pets.}/>
+    // );
   return (
     <div>
       {friendComponents}
-      {petComponents}
+      {/* {petComponents} */}
     </div>
   );
 }

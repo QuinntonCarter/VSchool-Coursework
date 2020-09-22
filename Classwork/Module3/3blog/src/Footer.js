@@ -3,8 +3,8 @@ import BlogData from './BlogData'
 
 function Footer(){
     return(
-        <footer>
-            <h1>Copyright © Your Website 2020</h1>
+        <footer className='footer'>
+            <h4>Copyright © Your Website 2020</h4>
         </footer>
     )
 }

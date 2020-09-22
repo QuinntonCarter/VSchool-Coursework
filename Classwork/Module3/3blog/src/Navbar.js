@@ -3,13 +3,15 @@ import React from 'react'
 
 function Navbar(){
     return(
+        <div className='navbar'>
         <nav>
-            <h3 className='crumbs1'>Start Bootstrap</h3>
-            <h3 className='crumbs2'>Home</h3>
-            <h3 className='crumbs2'>About</h3>
-            <h3 className='crumbs2'>Sample Post</h3>
-            <h3 className='crumbs2'>Contact</h3>
+            <h3 className='crumbs1'> Start Bootstrap
+            <div className='crumbs2'> Home
+            About
+            Sample Post
+            Contact</div></h3>
         </nav>
+        </div>
     )
 }
 
