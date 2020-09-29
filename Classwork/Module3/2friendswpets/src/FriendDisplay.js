@@ -10,12 +10,12 @@ function FriendDisplay(props){
         <h3>
             {props.age}
         </h3>
-        <h3>
-            {props.pets}
-        </h3>
-        <h3>
-            {props.pets.breed}
-        </h3>
+        <h6>
+            {props.petname}
+        </h6>
+        <h6>
+            {props.petbreed}
+        </h6>
         </div>
     )
 }

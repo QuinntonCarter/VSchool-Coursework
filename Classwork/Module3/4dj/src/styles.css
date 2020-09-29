@@ -1,6 +1,55 @@
+*{
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.pad-container {
+    border: darkgray groove;
+    height: 201px;
+    width: 215px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background: pink;
+}
+
 .pad-style {
     height: 50px;
     width: 50px;
-    border: black solid;
-    background: rgb(207, 207, 207);
+    border: rgb(53, 53, 53) solid 2px;
+}
+
+.black-button {
+    height: 50px;
+    width: 50px;
+    border: rgb(53, 53, 53) solid 2px;
+    background-color: black;
+}
+
+.white-button {
+    height: 50px;
+    width: 50px;
+    border: rgb(53, 53, 53) solid 2px;
+    background-color: white;
+}
+
+.buttonTrueP {
+    background-color: purple;
+}
+
+.blue-button { 
+    height: 50px;
+    width: 50px;
+    border: rgb(53, 53, 53) solid 2px;
+    background-color: rgb(5, 5, 253);
+}
+
+.buttonTrue {
+    background-color: white;
+}
+
+.buttonFalse {
+    background-color: black;
+    color: white;
 }
