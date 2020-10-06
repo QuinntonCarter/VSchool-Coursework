@@ -1,18 +1,22 @@
 import React from 'react';
 import FriendDisplay from './FriendDisplay';
 import FriendsList from './FriendsList';
-
+// turn to class and try using state to render friendlist and pet list
 function App() {
-  const friendComponents = FriendsList.map(friend => <FriendDisplay name={friend.name} age={friend.age}/>
+  Constructor()
+    super()
+    this.state = {
+    }
+  const friendComponents = FriendsList.map(friend => <FriendDisplay name={friend.name} age={friend.age} pets={friend.pets}/>
     );
-  const petComponents = FriendsList.map(person => <FriendDisplay petname={person.pets.name} petbreed={person.pets.breed}/>
-    );
+    
   return (
     <div>
-      {friendComponents}
-      {petComponents}
+      {friendComponents} 
     </div>
   );
 }
 
+
 export default App;
+

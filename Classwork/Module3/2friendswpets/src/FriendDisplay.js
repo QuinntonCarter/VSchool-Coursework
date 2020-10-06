@@ -1,23 +1,21 @@
 import React from 'react';
+import FriendsList from './FriendsList';
 
-function FriendDisplay(props){
+const FriendDisplay = ({name , age , pets}) => {
 
     return(
         <div>
         <h1>
-            {props.name}
+            Name: {name}
         </h1>
         <h3>
-            {props.age}
+            Age: {age}
         </h3>
-        <h6>
-            {props.petname}
-        </h6>
-        <h6>
-            {props.petbreed}
-        </h6>
+        <p>
+            Pets: {pets}
+        </p>
         </div>
-    )
-}
+    );
+};
 
 export default FriendDisplay;
