@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Roll(){
+function Roll(props){
 
     return(
         <div>
-            
+        <button className='diceDisplay' onClick={props.roll}/> Click to roll 
         </div>
     )
 }

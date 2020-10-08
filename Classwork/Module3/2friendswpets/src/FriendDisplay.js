@@ -1,21 +1,16 @@
 import React from 'react';
-import FriendsList from './FriendsList';
+import FriendList from './FriendList';
+import FriendContainer from './FriendContainer';
 
-const FriendDisplay = ({name , age , pets}) => {
+function FriendDisplay(){
+
+    const mappedFriendList = FriendList.map(friend => <div><p>{friend.name}</p><h3> <FriendContainer  age={friend.age} pets={friend.pets}/> </h3></div>)
 
     return(
         <div>
-        <h1>
-            Name: {name}
-        </h1>
-        <h3>
-            Age: {age}
-        </h3>
-        <p>
-            Pets: {pets}
-        </p>
+        <h1> {mappedFriendList} </h1>
         </div>
-    );
+    )
 };
 
 export default FriendDisplay;

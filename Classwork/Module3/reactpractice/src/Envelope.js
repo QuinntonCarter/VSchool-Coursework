@@ -13,9 +13,9 @@ class Envelope extends React.Component{
     }
 
     handleClick(e){
-        const { value, name }= e.target
+        const { value, name } = e.target
         this.setState({
-            [name]:value
+            [name]: value
         })
     }
 

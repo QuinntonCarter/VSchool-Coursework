@@ -2,11 +2,12 @@ import React from 'react';
 import './styles.css';
 
 
-function Pad(){
+function Pad(props){
 
     return (
         <div>
-            <button />
+            <button name='black' className={props.className} onClick={props.handleClick} />
+            {/* <button className={props.colors} onClick={props.handleClick} /> */}
         </div>
     )
 }

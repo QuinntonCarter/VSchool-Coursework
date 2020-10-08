@@ -6,24 +6,29 @@ class Dice extends React.Component{
     constructor(){
         super()
         this.state = {
-            roll: [1,2,3,4,5,6]
+            roll: function(){
+                Math.random(Math.floor * 6)
+            }
         };
         this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick(){
+    handleClick(e){
         const { value, name } = e.target
-        let sum = Math.random(Math.floor() * 6)
-        sum = value
         this.setState({
             [name]: value
         })
 
     }
+        // let sum = Math.random(Math.floor() * 6)
+        // sum = value
+
 
     render(){
         return(
-            <Roll handleClick={this.handleClick} {...this.state}/>
+            <div className='square'>
+            <Roll handleClick= {this.handleClick} {...this.state}/>
+            </div>
         )
     }
 }
