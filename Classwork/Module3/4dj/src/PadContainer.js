@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React from 'react';
 import Pad from './Pad';
 
@@ -7,23 +6,27 @@ class PadContainer extends React.Component{
     constructor(){
         super()
         this.state = {
-                toggle: false
+                colors: ['white', 'black', 'purple', 'blue']
             }
             this.handleClick = this.handleClick.bind(this)
     }
 
     handleClick(e){
         e.target.onClick = true
-
     }
 
     render(){
+        const mappedPads = this.state.colors.map(color => 
+            <Pad />,
+            <Pad />,
+            <Pad />,
+            <Pad />
+        </div>
+        );
         return (
             <div className='padcontainer'>
-                <Pad {...this.state} handleClick={this.handleClick}/>
-                <Pad {...this.state} handleClick={this.handleClick}/>
-                {/* <Pad name='three' onClick={this.handleClick}/>
-                <Pad name='four' onClick={this.handleClick}/> */}
+                {/* <Pad /> */}
+                {mappedPads}
             </div>
         )
     }

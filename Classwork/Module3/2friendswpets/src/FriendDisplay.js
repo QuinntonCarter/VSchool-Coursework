@@ -7,9 +7,10 @@ function FriendDisplay(){
     const mappedFriendList = friendList.map(friend => 
     <div>
         {/* displays friend's name via accessing array with dot notation */}
-        <h1> {friend.name} </h1>
+        <h1> Name: {friend.name} </h1>
+        <h2> Age: {friend.age} </h2>
         {/* sends ea/friend down to FriendContainer component to be received as props by FriendContainer function */}
-        <p> <FriendContainer  age={friend.age} pets={friend.pets}/> </p>
+        <p> <FriendContainer pets={friend.pets}/> </p>
     </div>
     );
 

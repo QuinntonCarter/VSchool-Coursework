@@ -8,7 +8,7 @@ function FriendContainer(props){
     //places {mappedPetList} to be rendered
     return (
         <div>
-            {mappedPetList}
+            Pets: {mappedPetList}
         </div>
     );
 }
