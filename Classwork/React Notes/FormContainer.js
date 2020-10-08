@@ -29,9 +29,11 @@ class FormContainer extends Component {
   render() {
     return(
     <div>
+      {/* passing arg down via this component */}
         <FormComponent 
             handleChange={this.handleChange}
-            {...this.state} // adding spread operator to pass the whole state object to simplify
+            {...this.state} 
+            // adding spread operator to pass the whole state object to simplify
             // instead of:  
             // firstName = {this.state.firstName}, lastName = {this.state.lastName}, favoriteColor = {this.state.favoriteColor}
             

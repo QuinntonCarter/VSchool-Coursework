@@ -7,7 +7,7 @@ import React from "react";
 // knowledge and understanding of React
 function FormComponent(props) {
 
-  return (
+return (
     <div>
         <form> 
             <input 
@@ -16,16 +16,18 @@ function FormComponent(props) {
                 placeholder="First Name" 
                 onChange={props.handleChange}
             />
+
             <input 
-                name="lastName" 
+                name="lastName"
                 value={props.lastName} 
-                placeholder="Last Name" 
+                placeholder="Last Name"
                 onChange={props.handleChange}
             />
+
             <select name="favoriteColor" value={props.favoriteColor} onChange={props.handleChange}>
-                <option value="Pink">Pink</option>
-                <option value="Red">Red</option>
-                <option value="Blue">Blue</option>
+                <option value="Pink"> Pink </option>
+                <option value="Red"> Red </option>
+                <option value="Blue"> Blue </option>
             </select>
         </form>
 
@@ -35,7 +37,7 @@ function FormComponent(props) {
         <p>Favorite color: {props.favoriteColor}</p>
     </div>
 
-  );
+);
 }
 
 export default FormComponent;
