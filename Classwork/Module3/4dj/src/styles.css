@@ -4,17 +4,21 @@
     margin: auto;
 }
 
+/* .half{
+    display: flex;
+} */
+
 .padcontainer {
     border: darkgray groove;
     height: 100px;
-    width: 150px;
+    width: 200px;
     display: flex;
     justify-content: center;
     text-align: center;
     background: pink;
 }
 
-.djpad { 
+button { 
     height: 50px;
     width: 50px;
     border: rgb(53, 53, 53) solid 2px;

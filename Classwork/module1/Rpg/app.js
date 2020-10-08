@@ -3,9 +3,9 @@ var inventory = [ ];
 var hP = 30;
 const textDisplay = document["forText"]
 
-textDisplay.addEventListener('submit', function {
+// textDisplay.addEventListener('submit', function {
 
-})
+// })
 
 // readline.getRawInput("Print", console.log(playerName+hP+(...inventory)))
 
