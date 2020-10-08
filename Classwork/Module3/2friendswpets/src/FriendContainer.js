@@ -1,10 +1,11 @@
 import React from 'react';
 
 
-//try using state to render friendlist and pet list
+    // receives ea/friend from mappedFriendList as prop(s)
 function FriendContainer(props){
-    const mappedPetList = props.pets.map(pet => <div><p>{pet}</p></div>);
-
+    // applies props(ea/friend) to mappedPetList and extracts ea/pet from the friend to be listed in a <li>
+    const mappedPetList = props.pets.map(pet => <div><li>{pet}</li></div>);
+    //places {mappedPetList} to be rendered
     return (
         <div>
             {mappedPetList}

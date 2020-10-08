@@ -1,4 +1,4 @@
-const FriendList = [
+const friendList = [
         {
         
         name: "Ben",
@@ -24,4 +24,4 @@ const FriendList = [
 ];
 
 
-export default FriendList;
+export default friendList;
