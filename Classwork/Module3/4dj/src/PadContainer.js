@@ -1,31 +1,28 @@
 import React from 'react';
 import Pad from './Pad';
+import './styles.css';
 
 class PadContainer extends React.Component{
-    // create map that sends props/values to pad to assign color/style
+    // create map that sends props/values to indv pad w assigned color/style
     constructor(){
         super()
         this.state = {
-                colors: ['white', 'black', 'purple', 'blue']
-            }
+            colors: ['black', 'white', 'blue', 'purple']
+        }
             this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick(e){
-        e.target.onClick = true
-    }
+    handleClick(){
 
+    }
     render(){
-        const mappedPads = this.state.colors.map(color => 
-            <Pad />,
-            <Pad />,
-            <Pad />,
-            <Pad />
-        </div>
-        );
+        const mappedPads = this.state.colors.map(color =>
+    <div>
+        <Pad handleClick={this.handleClick} color={color} />
+    </div>
+    );
         return (
             <div className='padcontainer'>
-                {/* <Pad /> */}
                 {mappedPads}
             </div>
         )

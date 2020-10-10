@@ -1,17 +1,17 @@
 import React from 'react';
 
-
-    // receives ea/friend from mappedFriendList as prop(s)
 function FriendContainer(props){
-    // applies props(ea/friend) to mappedPetList and extracts ea/pet from the friend to be listed in a <li>
-    const mappedPetList = props.pets.map(pet => <div><li>{pet}</li></div>);
-    //places {mappedPetList} to be rendered
-    return (
+    const mappedPets = props.pets.map(pets =>
         <div>
-            Pets: {mappedPetList}
+            <li>
+                {pets}
+            </li>
+        </div>)
+    return(
+        <div>
+            {mappedPets}
         </div>
-    );
+    )
 }
-
 
 export default FriendContainer;
