@@ -4,25 +4,38 @@
     margin: auto;
 }
 
-/* .half{
-    display: flex;
-} */
+.djpad {
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    background-color: rgb(180, 180, 180);
+    border: inset gray;
+}
+
+button {
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    background-color: rgb(180, 180, 180);
+    border: inset gray;
+}
 
 .padcontainer {
     border: darkgray groove;
-    height: 100px;
-    width: 200px;
+    height: 200px;
+    width: 350px;
     display: flex;
     justify-content: center;
     text-align: center;
-    background: pink;
+    background: rgb(31, 31, 31);
 }
 
-button { 
-    height: 50px;
+div.pads > div { 
+    height: 40px;
     width: 50px;
     border: rgb(53, 53, 53) solid 2px;
     background-color: rgb(95, 95, 95);
+    margin-bottom: 5px;
 }
 
 .black { 

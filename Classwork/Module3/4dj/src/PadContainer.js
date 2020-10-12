@@ -1,40 +1,48 @@
 import React from 'react';
-import Pad from './Pad';
+import Pads from './Pads';
 import './styles.css';
+import Buttons from './Buttons'
 
 class PadContainer extends React.Component{
-    // create map that sends props/values to indv pad w assigned color/style
     constructor(){
         super()
         this.state = {
-            colors: [
-                {
-                    name: 'black',
-                    id: 1
-                },
-                {
-                    name: 'white',
-                    id: 2
-                }, 
-                {
-                    name: 'blue',
-                    id: 3
-                }, 
-                {
-                    name: 'purple',
-                    id: 4
-                }
-            ]
+            color: ['']
         }
-
+            this.handleClick = this.handleClick.bind(this)
+            // this.purpleClick = this.purpleClick.bind(this)
     }
+
+    // sets state to black or white depending on current state
+    handleClick(){
+        if (this.state.color === 'white'){
+        this.setState({
+            color: 'black'
+        })
+        } else {
+            this.setState({
+                color: 'white'
+            })
+        }
+    }
+
+    // handleClick(){
+        // if (this.state.color === 'black' || 'white' || ''){
+        // this.setState({
+        //     color: 'purple'
+        // })   
+    // } else {
+    //     this.setState({
+    //         color: ''
+    //     })
+    // }
+// }
 
     render(){
         return (
             <div className='padcontainer'>
-                <div>
-                    <Pad handleClick={this.handleClick} color={this.state.colors} />
-                </div>
+                    <Pads color={this.state.color} />
+                    <Buttons purpleClick={this.purple} handleClick={this.handleClick} />
             </div>
         )
     }
