@@ -7,23 +7,34 @@ class PadContainer extends React.Component{
     constructor(){
         super()
         this.state = {
-            colors: ['black', 'white', 'blue', 'purple']
+            colors: [
+                {
+                    name: 'black',
+                    id: 1
+                },
+                {
+                    name: 'white',
+                    id: 2
+                }, 
+                {
+                    name: 'blue',
+                    id: 3
+                }, 
+                {
+                    name: 'purple',
+                    id: 4
+                }
+            ]
         }
-            this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick(){
 
     }
+
     render(){
-        const mappedPads = this.state.colors.map(color =>
-    <div>
-        <Pad handleClick={this.handleClick} color={color} />
-    </div>
-    );
         return (
             <div className='padcontainer'>
-                {mappedPads}
+                <div>
+                    <Pad handleClick={this.handleClick} color={this.state.colors} />
+                </div>
             </div>
         )
     }
