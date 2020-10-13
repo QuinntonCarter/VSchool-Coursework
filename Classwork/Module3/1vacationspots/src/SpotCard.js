@@ -1,12 +1,11 @@
 import React from 'react';
-import SpotData from './SpotData'
 
 
 function SpotCard(props){
     let season = props.timeToGo
     let price = props.price
 
-    if(price < 100){
+    if (price < 100){
         price = '$'
     } else if (price > 100 && price < 500){
         price = '$$'
@@ -14,16 +13,18 @@ function SpotCard(props){
         price = '$$$'
     }
 
-    if(season === 'Winter'){
-        season = 'blue'
+    if (season === 'Winter'){
+        season = 'royalblue'
     } else if (season === 'Summer') {
         season = 'gold'
-    } else {
+    } else if (season === 'Fall') {
         season = 'orangered'
+    } else {
+        season = 'pink'
     }
 
     return (
-    <div style={{backgroundColor:[season]}}>
+    <div style={{background:[season]}}>
         <ul>
             <li>
                 <h2> Location: {props.place} </h2>
@@ -34,7 +35,6 @@ function SpotCard(props){
     </div>
     )
 }
-
 
 
 export default SpotCard;
