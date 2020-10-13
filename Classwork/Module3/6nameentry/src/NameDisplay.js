@@ -1,11 +1,11 @@
 import React from 'react';
 
-function NameDisplay(){
+function NameDisplay(props){
     return(
-        <div className='namedisplaystyle'>
-            <p>
-                Test
-            </p>
+        <div>
+                <li>
+                    {props.name}
+                </li>
         </div>
 
     )
