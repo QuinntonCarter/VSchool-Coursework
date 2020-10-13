@@ -12,6 +12,11 @@ function App() {
 
   return (
     <div> 
+    <h1>
+      <center>
+        Vacation Spots
+      </center>
+      </h1>
       {spotComponents}
     </div>
   );

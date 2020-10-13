@@ -1,10 +1,9 @@
 import React from 'react'
-import BlogData from './BlogData'
 
 function Footer(){
     return(
         <footer className='footer'>
-            <h4>Copyright © Your Website 2020</h4>
+            <h4> Copyright © Your Website 2020 </h4>
         </footer>
     )
 }
