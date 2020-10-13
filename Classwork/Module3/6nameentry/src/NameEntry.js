@@ -5,7 +5,8 @@ class NameEntry extends Component {
     constructor(){
         super()
         this.state={
-            name: ['']
+            name: [''],
+            testNames: ['Finn', 'Jake']
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -19,20 +20,18 @@ class NameEntry extends Component {
 
     handleSubmit(e){
         e.preventDefault()
-        this.setState(prevState => {
-        prevState.appendChild(name =>
+        const mappedNames = this.state.name.map(name =>
             <ul>
-                <NameDisplay name={name}/>
+                <NameDisplay names={name} />
             </ul>
         )
-        })
     }
 
     render(){
         return(
             <div className='namedisplaystyle'>
                 <form>
-                    <input  name='name' type='text' onChange={this.handleChange}/>
+                    <input name='name' type='text' onChange={this.handleChange}/>
                     <button name='button' onClick={this.handleSubmit} > Submit </button>
                     <h3> {this.state.name} </h3>
                     

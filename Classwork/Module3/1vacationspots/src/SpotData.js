@@ -27,4 +27,4 @@ const SpotData = [
     }
 ]
 
-export default SpotData
+export default SpotData;

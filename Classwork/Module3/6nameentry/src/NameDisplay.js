@@ -4,7 +4,7 @@ function NameDisplay(props){
     return(
         <div>
                 <li>
-                    {props.name}
+                    {props.names}
                 </li>
         </div>
 

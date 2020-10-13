@@ -1,18 +1,40 @@
-import React from 'react'
+import React from 'react';
+import SpotData from './SpotData'
 
 
-function SpotCard(spot){
+function SpotCard(props){
+    let season = props.timeToGo
+    let price = props.price
+
+    if(price < 100){
+        price = '$'
+    } else if (price > 100 && price < 500){
+        price = '$$'
+    } else {
+        price = '$$$'
+    }
+
+    if(season === 'Winter'){
+        season = 'blue'
+    } else if (season === 'Summer') {
+        season = 'gold'
+    } else {
+        season = 'orangered'
+    }
+
     return (
-        <div className='spotCard'>
+    <div style={{backgroundColor:[season]}}>
         <ul>
-        <li>
-        <h2> Location: {spot.place} </h2>
-        <h4> Price: ${spot.price}</h4>
-        <h4> When to go: {spot.timeToGo}</h4>
-        </li>
+            <li>
+                <h2> Location: {props.place} </h2>
+                <h4> Price: {price} </h4>
+                <h4> When to go: {props.timeToGo} </h4>
+            </li>
         </ul>
-        </div>
-    );
+    </div>
+    )
 }
+
+
 
 export default SpotCard;
