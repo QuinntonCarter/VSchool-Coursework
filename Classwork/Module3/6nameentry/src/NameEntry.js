@@ -5,36 +5,39 @@ class NameEntry extends Component {
     constructor(){
         super()
         this.state={
-            name: [''],
-            testNames: ['Finn', 'Jake']
+            name: '',
+            names: []
         }
-        this.handleChange = this.handleChange.bind(this)
+
     }
 
-    handleChange(e){
+    handleChange = (e) => {
         const { name, value } = e.target
-            this.setState({
-                [name]: value
-            })
+        this.setState({
+            [name]: value,
+        })
     }
 
-    handleSubmit(e){
+    handleSubmit = (e) => {
         e.preventDefault()
-        const mappedNames = this.state.name.map(name =>
-            <ul>
-                <NameDisplay names={name} />
-            </ul>
-        )
-    }
+        this.setState(prevState => ({
+            names: [...prevState.names, prevState.name]
+            })
+    )}
 
     render(){
+        const allNames = this.state.names.map((name) => {
+                return  <ul>
+                            <NameDisplay names={name}/>
+                        </ul>
+        })
         return(
             <div className='namedisplaystyle'>
                 <form>
-                    <input name='name' type='text' onChange={this.handleChange}/>
+                    <input name='name' type='text' value={this.state.name} onChange={this.handleChange}/>
                     <button name='button' onClick={this.handleSubmit} > Submit </button>
-                    <h3> {this.state.name} </h3>
-                    
+                    <h1> {this.state.name} </h1>
+                    <h3> {allNames} </h3>
                 </form>
             </div>
         )

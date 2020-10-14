@@ -2,8 +2,7 @@ import React from 'react'
 import BlogPost from './BlogPost'
 
 function BlogList(){
-
-    return(
+    return (
         <div className='blog-list'>
             <BlogPost />
         </div>
