@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 
 function BlogPost(props){
@@ -11,4 +11,4 @@ function BlogPost(props){
     )
 }
 
-export default BlogPost
+export default BlogPost;
