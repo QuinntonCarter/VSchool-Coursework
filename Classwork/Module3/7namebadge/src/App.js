@@ -1,5 +1,5 @@
 import React from 'react';
-import NameBadge from './NameBadge'
+import NameBadge from './NameBadge';
 
 function App() {
   return (
