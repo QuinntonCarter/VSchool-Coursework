@@ -43,12 +43,6 @@ class NameBadge extends Component{
         )
     }
 
-    handleTel = (e) => {
-            if(e.target.value === Number){
-                console.log('working')
-            }
-    }
-
     render(){
         const mappedDetails = this.state.userCollected.map(details =>
             <div>
