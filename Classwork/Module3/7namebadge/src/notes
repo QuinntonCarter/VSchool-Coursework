@@ -1,0 +1,10 @@
+The user should be able to enter their information in the badge fields. XX
+Upon submit, the badge fields should be cleared, XX
+and a new badge should be displayed below the badge form. XX
+Each time the user submits a badge, each badge will be printed below the form. OO
+Specify input types to correspond with the required information. XX
+Add a minimal character count of 3 for each field. XX
+Note: The new badge should not appear until after it is submitted. XX
+If any of the input fields are empty the Submit button should be disabled XX
+Write validation code to make sure the phone number field only has 
+numbers (no dashes or special characters, must look like this 9757653323 (?? tel doesn't work)

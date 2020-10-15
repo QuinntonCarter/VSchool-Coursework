@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import UserDetails from './UserDetails';
 
-
 class NameBadge extends Component{
     constructor() {
         super()
@@ -13,67 +12,72 @@ class NameBadge extends Component{
                 phone: '',
                 favfood: '',
                 about: '',
-                userCollected: [
-                    
-                    // firstname: 'finn',
-                    // lastname: 'jake',
-                    // email: 'testing',
-                    // birthplace: 'this',
-                    // phone: 'out',
-                    // favfood: '.',
-                    // about: 'yer'
-            ]
+                userCollected: [ ]
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
         this.setState(prevState => ({
-            userCollected:[
-                prevState.firstname, 
-                prevState.lastname, 
-                prevState.email, 
-                prevState.birthplace,
-                prevState.phone,
-                prevState.favfood,
-                prevState.about
-            ]
-        })
-    )
-}
+            userCollected: [
+                prevState, ...this.state.userCollected
+                ],
+                    firstname: '',
+                    lastname: '',
+                    email: '',
+                    birthplace: '',
+                    phone: '',
+                    favfood: '',
+                    about: '',
+            })
+        )
+    }
+
+    handleChange = (e) => {
+        const { name, value } = e.target
+            this.setState({
+                [name]: value
+            }
+        )
+    }
 
     render(){
         const mappedDetails = this.state.userCollected.map(details =>
             <div>
                 <UserDetails 
-                name={details.firstname + details.lastname} 
-                email={details.email} 
-                birthplace={details.birthplace} 
-                phone={details} 
-                favfood={details.favfood} 
-                about={details.aboutme}
+                    key = {details.email}
+                    firstname={details.firstname} lastname={details.lastname}
+                    email={details.email} 
+                    birthplace={details.birthplace} 
+                    phone={details.phone} 
+                    favfood={details.favfood} 
+                    aboutme={details.about}
                 />
             </div>)
+
+
+
         return(
         <div>
             <div className='badgeinput'>
-                <form className='badgeform'>
-                    <input placeholder='First Name' name='firstname' value={this.state.firstname} />
-                    <input placeholder='Last Name' name='lastname' value={this.state.lastname} />
+                <h1> Badge Creator </h1> 
+                <form onSubmit={this.handleSubmit} className='badgeform'>
+                    <input className='form' type='text' minLength='3' placeholder='First Name' name='firstname' value={this.state.firstname} onChange={this.handleChange} required/>
+                    <input className='form' type='text' minLength='3' placeholder='Last Name' name='lastname' value={this.state.lastname} onChange={this.handleChange} required/>
                     <br/>
-                    <input placeholder='Email' name='email' value={this.state.email} />
-                    <input placeholder='Birthplace' name='birthplace' value={this.state.birthplace} />
+                    <input className='form' type='email' minLength='3' placeholder='Email' name='email' value={this.state.email} onChange={this.handleChange} required/>
+                    <input className='form' type='text' minLength='3' placeholder='Birthplace' name='birthplace' value={this.state.birthplace} onChange={this.handleChange} required/>
                     <br/>
-                    <input placeholder='Phone Number' name='phone' value={this.state.phone} />
-                    <input placeholder='Favorite Food' name='favfood' value={this.state.favfood} />
+                    <input className='form' type='tel' minLength='3' maxLength='10' placeholder='Phone Number' name='phone' value={this.state.phone} onChange={this.handleChange} required/>
+                    <input className='form' type='text' minLength='3' placeholder='Favorite Food' name='favfood' value={this.state.favfood} onChange={this.handleChange} required/>
                     <br/>
-                    <textarea placeholder='About Yourself' name='about' value={this.state.about} />
+                    <textarea className='form' maxLength='125' placeholder='About Yourself' name='about' value={this.state.about} onChange={this.handleChange} required/>
                     <br/>
-                    <button onClick={this.handleSubmit}> Generate Badge </button>
+                    <button> Generate Badge </button>
                 </form>
             </div>
-            {mappedDetails}
-        </div>
+        {mappedDetails}
+    </div>
         )
     }
 }
