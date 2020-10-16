@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Target from './Target'
 
 class HitList extends Component {
     constructor(){
@@ -24,34 +25,26 @@ class HitList extends Component {
         componentDidMount() {
             fetch("https://raw.githubusercontent.com/VSchool/vschool-api/master/static/hitlist.json")
             .then(response => response.json())
-            .then(data => {
-                data.map(target => (
+            .then(data =>
                     this.setState({
-                        targets: target.name
+                    targets: data
                     })
-                )
                 )}
-            )}
 
     render(){
         // ** doesn't work ** //
-        // const mappedTargets = this.state.targets.map(target =>
-        //         <div>
-        //             <ul>
-        //                 <li>
-        //                     Target: {target.name}
-        //                 </li>
-        //             </ul>
-        //         </div>
-        //     )
+        const mappedTargets = this.state.targets.map(target =>
+            <div>
+                    <Target target = {target.name} />
+            </div>
+        )
+
         return(
             <div>
-                <h4>
-                    {this.state.targets}
-                </h4>
-                <h6>
+                    {mappedTargets}
+                {/* <h6>
                     {this.state.whacked}
-                </h6>
+                </h6> */}
             </div>
         )
     }
