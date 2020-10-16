@@ -7,7 +7,7 @@ function FriendDisplay(){
         <div>
             <h2> Name: {friend.name} </h2>
             <h5> Age: {friend.age} </h5>
-            <FriendContainer pets={friend.pets}/>
+            <FriendContainer pets={friend.pets} />
         </div>)
     return(
         <div>

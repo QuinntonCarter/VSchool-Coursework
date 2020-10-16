@@ -1,6 +1,5 @@
 const friendList = [
         {
-        
         name: "Ben",
         age: 29,
         pets: ['Spot', 'Bear', 'Moo']
