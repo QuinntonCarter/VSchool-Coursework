@@ -23,16 +23,16 @@ class HitList extends Component {
         return (
             <div>
                     {this.state.targets.map(target =>
-                        <ul>
+                        <ol>
                             <li>
                                 <h3> Target: </h3>
                                 <br/>
                                 <img src={target.image} height='400px'/>
                                 <br/>
                                 <br/>
-                                Alias: {target.name}
+                                <h2> Alias: {target.name} </h2>
                             </li>
-                        </ul>)}
+                        </ol>)}
             </div>
         )
     }
