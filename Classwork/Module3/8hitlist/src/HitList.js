@@ -27,7 +27,7 @@ class HitList extends Component {
                             <li>
                                 <h3> Target: </h3>
                                 <br/>
-                                <img src={target.image} height='400px'/>
+                                <img alt={target.name} src={target.image} height='400px'/>
                                 <br/>
                                 <br/>
                                 <h2> Alias: {target.name} </h2>
