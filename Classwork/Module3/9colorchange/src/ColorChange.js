@@ -22,8 +22,7 @@ class ColorChange extends Component {
     render(){
         return(
             <div>
-                {/* figure out how to render state as background color */}
-                <div style={{height:['400px'], width: ['550px'], border:['solid gray 3px'], backgroundColor:[JSON.stringify(this.state.color.new_color)]}}/>
+                <div style={{height:['400px'], width: ['550px'], border:['solid gray 3px'], backgroundColor:["#"+this.state.color.new_color]}}/>
             </div>
             )
         }
