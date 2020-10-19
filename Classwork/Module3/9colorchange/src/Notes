@@ -1,0 +1,7 @@
+Create a component that uses axios to GET a random color from the random color API 
+and sets that component's background color to that random color.
+
+Use this url for your get request, making sure to use the back ticks instead 
+of regular quotes to surround the string:
+
+`http://www.colr.org/json/color/random?timestamp=${new Date().getTime()}`
