@@ -1,4 +1,5 @@
 .setBackground {
   height: 400px;
   width: 550px;
+  border: gray solid 2px;
 }
