@@ -23,7 +23,7 @@ class HitList extends Component {
         return (
             <div>
                     {this.state.targets.map(target =>
-                        <ol>
+                        <ul>
                             <li>
                                 <h3> Target: </h3>
                                 <br/>
@@ -32,7 +32,8 @@ class HitList extends Component {
                                 <br/>
                                 <h2> Alias: {target.name} </h2>
                             </li>
-                        </ol>)}
+                        </ul>
+                        )}
             </div>
         )
     }
