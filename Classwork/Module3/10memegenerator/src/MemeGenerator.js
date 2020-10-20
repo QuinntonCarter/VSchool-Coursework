@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
-// includes depreciated api, try redoing later by replacing w/ new one
+////
+// includes depreciated api data, try redoing later by replacing w/ new one
+////
 
 class MemeGenerator extends Component {
     constructor(){
