@@ -1,5 +1,18 @@
-Write a function that takes an array of numbers and returns the largest (without using Math.max()).
+Your program will receive two inputs:
 
-Write a function that takes an array of words and a character and returns each word that has that character present.
+The text to be encoded
+The number positions to shift each letter (to the right)
 
-Write a function that takes a num1 and num2 and returns whether num1 is divisible by num2.
+You only have to shift letters that are part of the 26-letter alphabet. Any other characters (such as spaces) should be printed as they were received. The shift value will always be on the interval [0, 26].
+
+Here is some code to get you started:
+
+From terminal:
+
+# cd into your caesar-cipher folder first, then run:
+npm install readline-sync
+In your code:
+
+var readline = require('readline-sync');
+var input = readline.question('What phrase would you like to encrypt? ').toLowerCase();
+var shift = parseInt(readline.question('How many letters would you like to shift? '));
