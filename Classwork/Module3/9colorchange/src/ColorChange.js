@@ -22,7 +22,15 @@ class ColorChange extends Component {
     render(){
         return(
             <div>
-                <div style={{height:['400px'], width: ['550px'], border:['solid gray 3px'], backgroundColor:[`#${this.state.color.new_color}`]}}/>
+                <div style={
+                    // dbl curly braces signify object, single is for jsx
+                    {
+                        height:'400px', 
+                        width: '550px', 
+                        border:'solid gray 3px', 
+                        backgroundColor:`#${this.state.color.new_color}`
+                    }
+                }/>
             </div>
             )
         }

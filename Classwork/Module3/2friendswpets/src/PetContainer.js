@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FriendContainer(props){
+function PetContainer(props){
     const mappedPets = props.pets.map(pets =>
         <div>
             <li>
@@ -14,4 +14,4 @@ function FriendContainer(props){
     )
 }
 
-export default FriendContainer;
+export default PetContainer;

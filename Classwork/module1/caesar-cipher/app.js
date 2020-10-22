@@ -3,7 +3,9 @@ var readline = require('readline-sync');
 function caesar(input,shift){
     encrypted = '';
     for( var i=0; i < input.length; i++){
+    // finds ascii nums for input and defines in num var
         num = (input[i].charCodeAt())
+    // sets parameters for 
         if(num >= 97 && num <= 109){
             encrypted += String.fromCharCode( num + shift )
         } else if (num >= 110 &&  num <= 122){
@@ -13,11 +15,15 @@ function caesar(input,shift){
     return encrypted
 }
 
-var input = readline.question('What phrase would you like to encrypt? ').toLowerCase();
-console.log("Okay, "+input+" it is")
-var shift = parseInt(readline.question('How many letters would you like to shift? '));
-console.log("Okay, let's shift "+shift+ " letters.")
+// ask about limiting character entry to a-z
+var input = readline.question('What phrase would you like to encrypt? ', { charlist: '$<A-z>'}).toLowerCase();
 
-console.log(caesar(input,shift))
+//example 
+console.log(`Okay, ${input} it is`)
 
-// 97 - 122 //
+// ask about setting min and max for integers
+var shift = parseInt(readline.questionInt('How many letters would you like to shift? ', { length: '$<1-13>' }));
+console.log(`Okay, lets shift ${shift} letters`)
+
+
+console.log(`Encrypted: ${caesar(input,shift)}`)
