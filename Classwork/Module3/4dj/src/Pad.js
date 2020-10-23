@@ -1,9 +1,11 @@
 import React from 'react';
 
 function Pad(props){
-    
+
     return(
-        <div className='djpad'/>
+        <div>
+            <div className='djpad' style={{backgroundColor:props.color}}> </div>
+        </div>
     )
 }
 
