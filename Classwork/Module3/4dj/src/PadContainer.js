@@ -9,9 +9,11 @@ class PadContainer extends Component {
             colors: ['black', 'white','purple', 'blue'],
         }
     }
-    
+
     ////// //////// * /////// ///////
     bwClick = () => {
+        var heal = document.getElementById('heal')
+        heal.play()
         // if condition is met..
         if(this.state.colors[0] === 'white' || this.state.colors[0] === 'gray'){
         // sets colors state to..
@@ -94,7 +96,7 @@ class PadContainer extends Component {
     render(){
         return(
             <div className='padcontainer'>
-                <div className='djpad' style={{backgroundColor:this.state.colors[0]}} />
+                <div className='djpad' onChange={this.heal} style={{backgroundColor:this.state.colors[0]}} />
                 <div className='djpad' style={{backgroundColor:this.state.colors[1]}} />
                 <div className='djpad' style={{backgroundColor:this.state.colors[2]}} />
                 <div className='djpad' style={{backgroundColor:this.state.colors[3]}} />
