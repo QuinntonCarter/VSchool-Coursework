@@ -7,6 +7,13 @@ class Form extends Component {
         uglyURL: '',
         uglyDesc: ''
     }
+
+    handleChange = (e) => {
+        const {name,value} = e.target
+        this.setState({
+            [name]: value
+        })
+    }
     
     render(){
         return(
@@ -14,14 +21,14 @@ class Form extends Component {
                 <center>
                     <FormContextConsumer>
                     {context =>(
-                        <form onSubmit={context.handleSubmit}>
-                        <div className='formdiv'>
-                            <input placeholder='Ugly thing' type='text' name='uglyThing' value={this.state.uglyThing} onChange={context.handleChange}/>
-                            <input placeholder='Img URL' type='img' name='uglyURL' value={this.state.uglyURL} onChange={context.handleChange}/>
-                            <br/>
-                            <textarea placeholder='Brief description' name='uglyDesc' value={this.state.uglyDesc} onChange={context.handleChange}/>
-                            <br/>
-                            <button> Add to Collection </button>
+                        <form>
+                            <div className='formdiv'>
+                                <input placeholder='Ugly thing' type='text' name='uglyThing' value={this.state.uglyThing} onChange={this.handleChange}/>
+                                <input placeholder='Img URL' type='img' name='uglyURL' value={this.state.uglyURL} onChange={this.handleChange}/>
+                                <br/>
+                                <textarea placeholder='Brief description' name='uglyDesc' value={this.state.uglyDesc} onChange={this.handleChange}/>
+                                <br/>
+                                <button onClick={context.handleSubmit}> Add to Collection </button>
                             </div>
                         </form>
                         )}

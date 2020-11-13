@@ -6,23 +6,14 @@ class FormContextProvider extends Component {
         uglyThings: [ ]
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (e, thing) => {
         e.preventDefault()
-        this.setState(prevState=> ({
-            uglyThing: [
-                prevState, ...this.state.uglyThings
-            ]
-        })
-        )
-        console.log(this.state.uglyThings)
-    }
-    
-
-    handleChange = (e) => {
-        const {name,value} = e.target
         this.setState({
-            [name]: value
+            uglyThings: thing
         })
+        
+        console.log(this.state.uglyThings)
+        console.log('suh dude')
     }
 
     render(){
@@ -30,7 +21,6 @@ class FormContextProvider extends Component {
             <Provider value={{
                 uglything: this.state.uglyThings, 
                 handleSubmit: this.handleSubmit, 
-                handleChange: this.handleChange
                 }}>
                 {this.props.children}
             </Provider>
