@@ -6,7 +6,7 @@ import Footer from './Footer';
 import { ThemeContextConsumer } from './themeProvider';
 
 function App() {
-  return (
+  return(
     <ThemeContextConsumer>
       {context => (
         <div className={`${context.theme}`}>

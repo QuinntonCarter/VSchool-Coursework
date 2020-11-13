@@ -23,4 +23,4 @@ class ThemeContextProvider extends Component {
     }
 }
 
-export {ThemeContextProvider, Consumer as ThemeContextConsumer}
+export { ThemeContextProvider, Consumer as ThemeContextConsumer }

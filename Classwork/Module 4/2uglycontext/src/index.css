@@ -1,0 +1,17 @@
+form {
+  height: 300px;
+  max-width: 100%;
+  border: black solid 3px;
+  background-color: khaki;
+  padding: 40px;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+}
+
+textarea {
+  height: 100px;
+  width: 300px;
+}
