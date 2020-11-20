@@ -11,7 +11,6 @@ class FormContextProvider extends Component {
         this.setState({
             uglyThings: thing
         })
-        
         console.log(this.state.uglyThings)
         console.log('suh dude')
     }

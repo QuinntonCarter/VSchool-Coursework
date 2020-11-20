@@ -1,10 +1,10 @@
 import React from 'react'
 import { FormContextConsumer } from './formContext'
 
-function NewListItem(){
+function NewListItem(props){
     return(
             <FormContextConsumer>
-                {context =>(
+                {context.map(thing =>
                     <div className='newlistitem'>
                         <h3 value={context.uglything.uglyThing}> </h3>
                         <img src={context.uglything.uglyURL}/>

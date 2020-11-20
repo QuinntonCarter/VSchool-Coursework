@@ -1,5 +1,5 @@
 import React from 'react'
-import {ThemeContextConsumer} from './themeProvider'
+import {ThemeContextConsumer} from './themeContext'
 
 function Main(props){
     return(
