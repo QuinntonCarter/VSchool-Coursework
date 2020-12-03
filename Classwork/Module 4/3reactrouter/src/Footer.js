@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { AiFillFastBackward, AiFillFastForward } from "react-icons/ai";
+
 
 function Footer(){
     return(
         <div>
-            <i class='AiFillFastBackward'/>
-            <i class='AiFillFastForward'/>
+            <AiFillFastBackward />
+            <AiFillFastForward />
         </div>
     )
 }
