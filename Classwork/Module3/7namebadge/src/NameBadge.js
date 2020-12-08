@@ -20,10 +20,9 @@ class NameBadge extends Component{
         e.preventDefault()
         this.setState(prevState => ({
             // gathers prev state and current usercollected data for
-            // return/rendering of badge. prepends new data in front of old
-            userCollected: [
-                prevState, ...this.state.userCollected
-                ],
+            // return/rendering of badge.
+            userCollected: [ prevState, ...this.state.userCollected ],
+                // sets state back to empty strings
                     firstname: '',
                     lastname: '',
                     email: '',
@@ -46,6 +45,7 @@ class NameBadge extends Component{
     render(){
         const mappedDetails = this.state.userCollected.map(details =>
             <div>
+                {/* user details is more so the badge than this component, NameBadge */}
                 <UserDetails 
                     key = {details.email}
                     firstname={details.firstname} lastname={details.lastname}
@@ -56,8 +56,6 @@ class NameBadge extends Component{
                     aboutme={details.about}
                 />
             </div>)
-
-
 
         return(
         <div>
@@ -78,6 +76,7 @@ class NameBadge extends Component{
                     <button className='button'> Generate Badge </button>
                 </form>
             </div>
+            {/* displays mapped details when present */}
         {mappedDetails}
     </div>
         )

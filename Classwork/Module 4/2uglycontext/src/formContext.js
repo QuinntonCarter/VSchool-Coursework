@@ -1,30 +1,51 @@
 import React, { Component } from 'react'
-const { Consumer, Provider } = React.createContext()
+const { Provider, Consumer } = React.createContext()
 
 class FormContextProvider extends Component {
     state = {
-        uglyThings: [ ]
+        uglyThing: '',
+        uglyURL: '',
+        uglyDesc: '',
+        collected:[ ]
     }
 
-    handleSubmit = (e, thing) => {
-        e.preventDefault()
-        this.setState({
-            uglyThings: thing
+    handleChange = (e) => {
+        const {name, value} = e.target
+        this.setState(prevState => {
+            return {
+                ...prevState,
+            [name]: value
+            }
         })
-        console.log(this.state.uglyThings)
-        console.log('suh dude')
+    }
+    
+    handleSubmit = (e) => {
+        e.preventDefault()
+        this.setState(prevState => {
+            return {
+            collected: [prevState, ...this.state.collected],
+            uglyThing: '',
+            uglyURL: '',
+            uglyDesc: ''
+            }
+        })
     }
 
-    render(){
-        return(
-            <Provider value={{
-                uglything: this.state.uglyThings, 
-                handleSubmit: this.handleSubmit, 
-                }}>
-                {this.props.children}
-            </Provider>
-        )
-    }
-}
 
-export { FormContextProvider, Consumer as FormContextConsumer }
+        render(){
+            return(
+                <Provider value={{
+                    item: this.state.uglyThing, 
+                    URL: this.state.uglyURL, 
+                    desc: this.state.uglyDesc, 
+                    collected: this.state.collected,
+                    handleChange: this.handleChange,
+                    handleSubmit: this.handleSubmit
+                    }}>
+                    {this.props.children}
+                </Provider>
+            )
+        }
+    }
+
+export {FormContextProvider, Consumer as FormContextConsumer}

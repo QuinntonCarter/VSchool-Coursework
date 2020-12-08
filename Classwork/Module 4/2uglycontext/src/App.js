@@ -1,12 +1,11 @@
 import React from 'react'
 import Form from './Form'
-import NewListItem from './NewListItem'
+import ListItem from './ListItem'
 
 function App (){
     return(
       <div>
         <Form/>
-        <NewListItem/>
       </div>
     )
 }

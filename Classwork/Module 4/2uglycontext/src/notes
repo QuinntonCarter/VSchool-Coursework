@@ -13,3 +13,26 @@ Optional
 Have 3 images horizontally on each row
 Allow each image to have one or more user-submitted comments
 Allow the ability to delete specific comments
+
+
+// don't think in only components
+try implement conditional render onClick
+recombine ugly thing desc and collected
+mb
+const submitted = this.state.handleSubmit
+render(){
+{ submitted ? return(<div> {context to send state info through } </div>) : <h5> no items </h5>}
+}
+
+ex:
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      {isLoggedIn ? (
+        <LogoutButton onClick={this.handleLogoutClick} />
+      ) : (
+        <LoginButton onClick={this.handleLoginClick} />
+      )}
+    </div>
+  );

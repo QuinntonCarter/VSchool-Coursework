@@ -1,7 +1,6 @@
 import React from 'react';
 
 function UserDetails(props){
-
     return (
         <div className='badge'>
             <h1 className='badgeheader'> Badge: {props.firstname+" "+props.lastname} </h1>
