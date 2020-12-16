@@ -57,8 +57,30 @@
     /* component views */
     .main {
         border: solid black 2px;
+        border-left: transparent;
+        border-right: transparent;
         height: 550px;
         margin-top: 50px;
         background-color: rgba(0, 0, 0, 0.356);
     }
+
+    .weeklyDisp {
+        color: white;
+
+    }
+
+    /* table views */
+    thead {
+        background-color: rgba(77, 77, 77);
+    }
+
+    .firstday{
+
+    }
+
+    .secday{
+
+    }
+
+
 }

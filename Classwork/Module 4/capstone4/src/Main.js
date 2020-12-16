@@ -5,7 +5,7 @@ import { ThemeContextConsumer } from './ThemeContext'
 
 // for date retrieval and display
 var d = new Date()
-var day = d.getDay()
+var day = d.getDate()
 var month = [];
 month[0] = "January";
 month[1] = "February";
@@ -29,21 +29,22 @@ class Main extends Component {
         daily: {}
     }
 
-    // api get //
+    // api GET for weather//
     componentDidMount(){
-        fetch("https://api.openweathermap.org/data/2.5/weather?id=5780993&appid=5ae7b3c76c2e696e51c9f8585a68c324")
+        fetch("https://api.openweathermap.org/data/2.5/weather?id=5780993&units=imperial&appid=5ae7b3c76c2e696e51c9f8585a68c324")
+        // one call daily
         // fetch("https://api.openweathermap.org/data/2.5/onecall?lat=40.767&lon=-111.8904&exclude=minutely&appid=5ae7b3c76c2e696e51c9f8585a68c324")
         .then(response => response.json())
         .then(data => {
             this.setState({
                 daily: data
             })
-            console.log(data)
         })
     }
 
     render(){
-        const temp = this.state.daily?.main?.temp
+        const temp = this.state.daily?.main?.temp;
+
         return(
             <div className='main'>
                 {/* <ThemeContextConsumer> */}
@@ -52,6 +53,7 @@ class Main extends Component {
                             <h1 style={{padding: '15px'}}> {day} {n} </h1>
                             <h2> {this.state.daily.name} </h2>
                             <h1> {temp}{`º`} </h1>
+                            {/* ?. checks  */}
                             <h3> {this.state.daily?.weather?.[0]?.description} </h3>
                             <h4>{`humidity`} {this.state.daily?.main?.humidity}{`%`} </h4> 
                             
