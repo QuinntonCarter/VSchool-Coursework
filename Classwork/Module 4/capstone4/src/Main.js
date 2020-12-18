@@ -21,8 +21,6 @@ month[10] = "November";
 month[11] = "December";
 var n = month[d.getMonth()];
 
-// api retrieval 
-
 
 class Main extends Component {
     state = {
@@ -47,8 +45,8 @@ class Main extends Component {
 
         return(
             <div className='main'>
-                {/* <ThemeContextConsumer> */}
-                    {/* {context =>( */}
+                <ThemeContextConsumer>
+                    {context =>(
                         <div>
                             <h1 style={{padding: '15px'}}> {day} {n} </h1>
                             <h2> {this.state.daily.name} </h2>
@@ -56,10 +54,9 @@ class Main extends Component {
                             {/* ?. checks  */}
                             <h3> {this.state.daily?.weather?.[0]?.description} </h3>
                             <h4>{`humidity`} {this.state.daily?.main?.humidity}{`%`} </h4> 
-                            
                         </div>
-                    {/* )} */}
-                {/* </ThemeContextConsumer> */}
+                    )}
+                </ThemeContextConsumer>
             </div>
         )
     }

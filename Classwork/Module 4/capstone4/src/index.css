@@ -1,5 +1,7 @@
 * {
-    background-color: rgb(51, 116, 236);
+    background-color: rgba(141, 141, 141, 0.616);
+    /* insert image that changes depending upon forecast */
+    background-image: ;
     text-align: center;
     text-justify: center;
 }
@@ -38,7 +40,7 @@
     .weekly {
         border: solid black 2px;
         height: 550px;
-        margin-top: 50px;
+        /* margin-top: 50px; */
         display: grid;
         background-color: rgba(0, 0, 0, 0.356);
     }
@@ -56,12 +58,15 @@
 
     /* component views */
     .main {
-        border: solid black 2px;
+        /* border: solid black 2px;
         border-left: transparent;
-        border-right: transparent;
+        border-right: transparent; */
         height: 550px;
         margin-top: 50px;
-        background-color: rgba(0, 0, 0, 0.356);
+        font-size: 13px;
+        text-align: center;
+        text-justify: center;
+        /* background-color: rgba(0, 0, 0, 0.356); */
     }
 
     .weeklyDisp {
@@ -71,16 +76,22 @@
 
     /* table views */
     thead {
-        background-color: rgba(77, 77, 77);
+        background-color: rgba(77, 77, 77, 0);
     }
 
-    .firstday{
+    td {
+        height: 30px;
+        border-spacing: 20px;
+        border: solid transparent 12px;
+    }
 
+    th {
+        text-align: center;
+        text-justify: center;
+        font-size: larger;
     }
 
     .secday{
 
     }
-
-
 }

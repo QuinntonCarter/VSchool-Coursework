@@ -17,14 +17,14 @@ function Navbar(){
             <ThemeContextConsumer>
                 {context => (
                     <div>
-                        {/* ternary meant to render cloud icon unless weather projected to be sunny */}
-                        { context.theme === 'sunny' ? <FaSun className='sun'/> : <FaCloud className='cloud'/> }
+                        {/* ternary meant to render cloud icon unless weather projected to be sun */}
+                        { context.theme === 'sun' ? <FaSun className='sun'/> : <FaCloud className='cloud'/> }
                         <Link className='link' to='/'> Daily </Link>
 
-                        { context.theme === 'sunny' ? <FaSun className='sun'/> : <FaCloud className='cloud'/> }
-                        <Link className='link' to='/Weekly'> Week </Link>
+                        { context.theme === 'sun' ? <FaSun className='sun'/> : <FaCloud className='cloud'/> }
+                        <Link className='link' to='/Weekly'> 7 Day </Link>
 
-                        { context.theme === 'sunny' ? <FaSun className='sun'/> : <FaCloud className='cloud'/> }
+                        { context.theme === 'sun' ? <FaSun className='sun'/> : <FaCloud className='cloud'/> }
                         <Link className='link' to='/About'> About </Link>
 
                         <Switch>

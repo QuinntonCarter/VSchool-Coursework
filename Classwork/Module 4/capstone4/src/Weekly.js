@@ -16,7 +16,6 @@ class Weekly extends Component{
             this.setState({
                 weekly: data
             })
-            console.log(data)
         })
     }
 
@@ -24,49 +23,6 @@ class Weekly extends Component{
         return(
             // return 7 day forecast and style here
             <div className='main'>
-{/*             w/out props pass
-                <p> {this.state.weekly?.daily?.[0]?.temp?.max} </p>
-                <p>{this.state.weekly?.daily?.[0]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[0]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[0]?.weather?.[0].description}</p>
-
-                <p>{this.state.weekly?.daily?.[1]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[1]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[1]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[1]?.weather?.[0].description}</p>
-
-
-                <p>{this.state.weekly?.daily?.[2]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[2]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[2]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[2]?.weather?.[0].description}</p>
-
-                <p>{this.state.weekly?.daily?.[3]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[3]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[3]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[3]?.weather?.[0].description}</p>
-
-                <p>{this.state.weekly?.daily?.[4]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[4]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[4]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[4]?.weather?.[0].description}</p>
-
-                <p>{this.state.weekly?.daily?.[5]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[5]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[5]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[5]?.weather?.[0].description}</p>
-
-                <p>{this.state.weekly?.daily?.[6]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[6]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[6]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[6]?.weather?.[0].description}</p>
-
-                <p>{this.state.weekly?.daily?.[7]?.temp?.max}</p>
-                <p>{this.state.weekly?.daily?.[7]?.temp?.min}</p>
-                <p>{this.state.weekly?.daily?.[7]?.humidity}{`º`}</p>
-                <p>{this.state.weekly?.daily?.[7]?.weather?.[0].description}</p> */}
-
-{/*             w props pass             */}
                 <WeeklyDisplay 
                 key={this.state.weekly?.current?.dt}
 
