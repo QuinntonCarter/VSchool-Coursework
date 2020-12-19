@@ -1,19 +1,23 @@
 * {
-    background-color: rgba(141, 141, 141, 0.616);
     /* insert image that changes depending upon forecast */
-    background-image: ;
     text-align: center;
     text-justify: center;
+    
 }
+
 
 @media only screen and (min-width: 375px) {
     /* icons */
     .sun {
-        color: rgb(250, 212, 0);
+        color: rgba(250, 192, 0, 0.651);
     }
 
     .cloud {
-        color: rgb(161, 173, 194);
+        color: rgba(161, 173, 194, 0.671);
+    }
+
+    .snow {
+        color: rgba(181, 250, 255, 0.781);
     }
 
     /* links */
@@ -21,6 +25,7 @@
         text-decoration: none;
         font-weight: bold;
         margin: 15px;
+        color: white;
     }
 
     .link:visited {
@@ -39,44 +44,59 @@
 
     .weekly {
         border: solid black 2px;
-        height: 550px;
-        /* margin-top: 50px; */
+        height: 600px;
         display: grid;
-        background-color: rgba(0, 0, 0, 0.356);
     }
 
     .about {
         color: white;
         font-weight: 450px;
-        height: 554px;
+        height: 600px;
         margin-top: 50px;
+        background-color: rgba(85, 85, 85, 0.384);
+        border: solid rgba(129, 129, 129, 0.247) 2px; 
     }
 
     .footer {
-        color:rgb(1, 47, 133);
+        color:white;
+        background-color: rgba(85, 85, 85, 0.384);
     }
 
     /* component views */
     .main {
-        /* border: solid black 2px;
-        border-left: transparent;
-        border-right: transparent; */
-        height: 550px;
+        background-color: rgba(85, 85, 85, 0.384);
+        border: solid rgba(129, 129, 129, 0.247) 2px; 
+        /* border-left: transparent; */
+        /* border-right: transparent;  */
+        height: 600px;
         margin-top: 50px;
+        /* margin-left: -27px; */
         font-size: 13px;
         text-align: center;
         text-justify: center;
         /* background-color: rgba(0, 0, 0, 0.356); */
+        color: white;
     }
 
     .weeklyDisp {
         color: white;
+        border: solid rgba(129, 129, 129, 0.247) 2px; 
+        background-color: rgba(85, 85, 85, 0.384);
+        /* border: solid black 2px; */
+        /* border-left: transparent;
+        border-right: transparent; */
+        height: 600px;
+        margin-top: 50px;
+        margin-left: -27px;
+        font-size: 13px;
+        text-align: center;
+        text-justify: center;
 
     }
 
     /* table views */
     thead {
-        background-color: rgba(77, 77, 77, 0);
+
     }
 
     td {
@@ -93,5 +113,39 @@
 
     .secday{
 
+    }
+
+    /* backgrounds for weather conditions */
+    div.cloud {
+        background-image: url(https://bloximages.chicago2.vip.townnews.com/tucson.com/content/tncms/assets/v3/editorial/d/f8/df8e368c-4521-11e9-8b2b-9fcb141d7381/5c884633ceb74.image.jpg?resize=1200%2C648);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 600px;
+
+    }
+
+    div.broken {
+        background-image: url(https://s7d2.scene7.com/is/image/TWCNews/clouds_jpg_jpg-2);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 600px;
+    }
+
+    div.broken {
+        background-color: rgb(104, 104, 104);
+    }
+
+    div.snow {
+        background-image: url(https://www.brilliant-creation.org/fileadmin/naturephotos/3/mountains/snow_clouds.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 600px;
+    }
+
+    div.rain {
+        background-image: url(https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/salt-lake-city-in-the-rain-ii-marilyn-hunt.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 600px;
     }
 }

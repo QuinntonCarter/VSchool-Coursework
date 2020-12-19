@@ -8,7 +8,9 @@ class ThemeContextProvider extends Component {
     }
 
     // how to change theme if keyword is detected..?
-
+    themeSet = () => {
+        
+    }
 
     // reads current forecast from API
     componentDidMount(){

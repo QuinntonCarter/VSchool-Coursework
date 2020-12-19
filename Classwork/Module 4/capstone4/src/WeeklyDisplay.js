@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { ThemeContextConsumer } from './ThemeContext'
+
 const d = new Date()
 const date = d.getDate()
 const tmrw = d.getDate()+1
@@ -25,124 +27,129 @@ var n = month[d.getMonth()];
 
 function WeeklyDisplay(props){
     return(
-        <div className='weeklyDisp'>
-            {/* format props: make table to display * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table */}
-            <table>
-                <thead>
-                        {/* <th> </th>
-                        <th> 7 Day </th>
-                        <th> Forecast </th> */}
-                </thead>
-                <tbody>
-                    <tr className='firstday'>
-                        <td>{n+' '+date}</td>
-                        <td>
-                            {props.firstMax}
-                        </td>
-                        <td>
-                            {props.firstMin}
-                        </td>
-                        <td>
-                            {props.firstHum}{`%`}
-                        </td>
-                        <td>
-                            {props.firstDesc}
-                        </td>
-                    </tr>
-                    <tr className='secday'>
-                    <td>{n+' '+tmrw}</td>
-                        <td>
-                            {props.secMax}
-                        </td>
-                        <td>
-                            {props.secMin}
-                        </td>
-                        <td>
-                            {props.secHum}{`%`}
-                        </td>
-                        <td>
-                            {props.secDesc}
-                        </td>
-                    </tr>
-                    <tr className='thirdday'>
-                        <td> {n+' '+thirdDay} </td>
-                        <td>
-                            {props.thirdMax}
-                        </td>
-                        <td>
-                            {props.thirdMin}
-                        </td>
-                        <td>
-                            {props.thirdHum}{`%`}
-                        </td>
-                        <td>
-                            {props.thirdDesc}
-                        </td>
-                    </tr>
-                    <tr className='fourthday'>
-                        <td> {n+' '+fourthDay} </td>
-                        <td>
-                            {props.fourthMax}
-                        </td>
-                        <td>
-                            {props.fourthMin}
-                        </td>
-                        <td>
-                            {props.fourthHum}{`%`}
-                        </td>
-                        <td>
-                            {props.fourthDesc}
-                        </td> 
-                    </tr>
-                    <tr className='fifthday'>
-                        <td> {n+' '+fifthDay} </td>
-                        <td>
-                            {props.fifthMax}
-                        </td>
-                        <td>
-                            {props.fifthMin}
-                        </td>
-                        <td>
-                            {props.fifthHum}{`%`}
-                        </td>
-                        <td>
-                            {props.fifthDesc}
-                        </td>
-                    </tr>
-                    <tr className='sixthday'>
-                        <td> {n+' '+sixthDay} </td>
-                        <td>
-                            {props.sixthMax}
-                        </td>
-                        <td>
-                            {props.sixthMin}
-                        </td>
-                        <td>
-                            {props.sixthHum}{`%`}
-                        </td>
-                        <td>
-                            {props.sixthDesc}
-                        </td>
-                    </tr>
-                    <tr className='sevday'>
-                        <td> {n+' '+sevDay} </td>
-                        <td>
-                            {props.sevMax}
-                        </td>
-                        <td>
-                            {props.sevMin}
-                        </td>
-                        <td>
-                            {props.sevHum}{`%`}
-                        </td>
-                        <td>
-                            {props.sevDesc}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
+        <ThemeContextConsumer>
+            {context => (
+            <div className='weeklyDisp'>
+                {/* format props: make table to display * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table */}
+                <table>
+                    <thead>
+                            <th> </th>
+                            <th> Max º </th>
+                            <th> Min º </th>
+                            <th> Humidity </th>
+                            <th> Forecast </th>
+                    </thead>
+                    <tbody>
+                        <tr className='firstday'>
+                            <td>{n+' '+date}</td>
+                            <td>
+                                {props.firstMax}
+                            </td>
+                            <td>
+                                {props.firstMin}
+                            </td>
+                            <td>
+                                {props.firstHum}{`%`}
+                            </td>
+                            <td>
+                                {props.firstDesc}
+                            </td>
+                        </tr>
+                        <tr className='secday'>
+                        <td>{n+' '+tmrw}</td>
+                            <td>
+                                {props.secMax}
+                            </td>
+                            <td>
+                                {props.secMin}
+                            </td>
+                            <td>
+                                {props.secHum}{`%`}
+                            </td>
+                            <td>
+                                {props.secDesc}
+                            </td>
+                        </tr>
+                        <tr className='thirdday'>
+                            <td> {n+' '+thirdDay} </td>
+                            <td>
+                                {props.thirdMax}
+                            </td>
+                            <td>
+                                {props.thirdMin}
+                            </td>
+                            <td>
+                                {props.thirdHum}{`%`}
+                            </td>
+                            <td>
+                                {props.thirdDesc}
+                            </td>
+                        </tr>
+                        <tr className='fourthday'>
+                            <td> {n+' '+fourthDay} </td>
+                            <td>
+                                {props.fourthMax}
+                            </td>
+                            <td>
+                                {props.fourthMin}
+                            </td>
+                            <td>
+                                {props.fourthHum}{`%`}
+                            </td>
+                            <td>
+                                {props.fourthDesc}
+                            </td> 
+                        </tr>
+                        <tr className='fifthday'>
+                            <td> {n+' '+fifthDay} </td>
+                            <td>
+                                {props.fifthMax}
+                            </td>
+                            <td>
+                                {props.fifthMin}
+                            </td>
+                            <td>
+                                {props.fifthHum}{`%`}
+                            </td>
+                            <td>
+                                {props.fifthDesc}
+                            </td>
+                        </tr>
+                        <tr className='sixthday'>
+                            <td> {n+' '+sixthDay} </td>
+                            <td>
+                                {props.sixthMax}
+                            </td>
+                            <td>
+                                {props.sixthMin}
+                            </td>
+                            <td>
+                                {props.sixthHum}{`%`}
+                            </td>
+                            <td>
+                                {props.sixthDesc}
+                            </td>
+                        </tr>
+                        <tr className='sevday'>
+                            <td> {n+' '+sevDay} </td>
+                            <td>
+                                {props.sevMax}
+                            </td>
+                            <td>
+                                {props.sevMin}
+                            </td>
+                            <td>
+                                {props.sevHum}{`%`}
+                            </td>
+                            <td>
+                                {props.sevDesc}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            )}
+        </ThemeContextConsumer>
     )
 }
 

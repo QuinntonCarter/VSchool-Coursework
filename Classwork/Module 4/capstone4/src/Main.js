@@ -44,20 +44,21 @@ class Main extends Component {
         const temp = this.state.daily?.main?.temp;
 
         return(
-            <div className='main'>
-                <ThemeContextConsumer>
+            <ThemeContextConsumer>
                     {context =>(
-                        <div>
-                            <h1 style={{padding: '15px'}}> {day} {n} </h1>
-                            <h2> {this.state.daily.name} </h2>
-                            <h1> {temp}{`º`} </h1>
-                            {/* ?. checks  */}
-                            <h3> {this.state.daily?.weather?.[0]?.description} </h3>
-                            <h4>{`humidity`} {this.state.daily?.main?.humidity}{`%`} </h4> 
-                        </div>
+                    <div className='main'>
+                            {/* for debugging */}
+                            {console.log(context.theme)}
+                            {/*  */}
+                                <h1 style={{padding: '15px'}}> {day} {n} </h1>
+                                <h2 className='place'> {this.state.daily.name} </h2>
+                                <h1 className='temp'> {temp}{`º`} </h1>
+                                {/* ?. checks  */}
+                                <h3> {this.state.daily?.weather?.[0]?.description} </h3>
+                                <h4>{`humidity`} {this.state.daily?.main?.humidity}{`%`} </h4>
+                    </div>
                     )}
-                </ThemeContextConsumer>
-            </div>
+    </ThemeContextConsumer>
         )
     }
 }
