@@ -27,6 +27,7 @@ class Main extends Component {
         daily: {}
     }
 
+    // ORIGINAL
     // api GET for weather//
     componentDidMount(){
         fetch("https://api.openweathermap.org/data/2.5/weather?id=5780993&units=imperial&appid=5ae7b3c76c2e696e51c9f8585a68c324")
@@ -40,6 +41,28 @@ class Main extends Component {
         })
     }
 
+    // ** BETA **
+    // componentDidMount(){
+    //     // send FORM data here to fill address portion of fetch for return
+    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address`${form_data_placeholder}`=&key=AIzaSyD7DFW5jTwvLp_GDarjWKlyO1T1vDkER-Y`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // fetch("https://api.openweathermap.org/data/2.5/weather?id=5780993&units=imperial&appid=5ae7b3c76c2e696e51c9f8585a68c324")
+    //         // beta **
+    //         //  use backtics and insert long lat into fetch for user location
+    //         // fetch("api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API}")
+    //         // .then(response => response.json())
+    //         // .then(data => {
+    //         // this.setState({
+    //         //     theme: data?.weather?.[0]?.description
+    //         // })})
+    //         this.setState({
+    //         theme: data
+    //         })
+    //         console.log(this.state.theme)
+    //     })
+    // }
+
     render(){
         const temp = this.state.daily?.main?.temp;
 
@@ -47,6 +70,13 @@ class Main extends Component {
             <ThemeContextConsumer>
                     {context =>(
                     <div className='main'>
+                        <form>
+                            <input 
+                            type='text' 
+                            style={{margin: '10px'}}
+                            />
+                            <button > Forecast </button>
+                        </form>
                             {/* for debugging */}
                             {console.log(context.theme)}
                             {/*  */}
