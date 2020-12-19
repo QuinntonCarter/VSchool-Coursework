@@ -29,7 +29,7 @@ function WeeklyDisplay(props){
     return(
         <ThemeContextConsumer>
             {context => (
-            <div className='weeklyDisp'>
+            <div className='week'>
                 {/* format props: make table to display * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table */}
                 <table>
                     <thead>

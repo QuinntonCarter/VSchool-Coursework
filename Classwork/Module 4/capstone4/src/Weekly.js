@@ -22,7 +22,7 @@ class Weekly extends Component{
     render(){
         return(
             // return 7 day forecast and style here
-            <div>
+            <div  className='weeklyDisp'>
                 <WeeklyDisplay 
                 key={this.state.weekly?.current?.dt}
 

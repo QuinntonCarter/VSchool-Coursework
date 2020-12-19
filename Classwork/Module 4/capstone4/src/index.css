@@ -20,6 +20,7 @@
         color: rgba(181, 250, 255, 0.781);
     }
 
+
     /* links */
     .link {
         text-decoration: none;
@@ -32,19 +33,10 @@
         color: white;
     }
 
+
     /* components */
     div.app {
         padding: 35px;
-        display: grid;
-    }
-
-    .navbar {
-
-    }
-
-    .weekly {
-        border: solid black 2px;
-        height: 600px;
         display: grid;
     }
 
@@ -55,6 +47,8 @@
         margin-top: 50px;
         background-color: rgba(85, 85, 85, 0.384);
         border: solid rgba(129, 129, 129, 0.247) 2px; 
+        border-radius: 1%;
+        padding: 10px;
     }
 
     .footer {
@@ -62,43 +56,37 @@
         background-color: rgba(85, 85, 85, 0.384);
     }
 
+
     /* component views */
     .main {
         background-color: rgba(85, 85, 85, 0.384);
         border: solid rgba(129, 129, 129, 0.247) 2px; 
-        /* border-left: transparent; */
-        /* border-right: transparent;  */
+        border-radius: 1%;
         height: 600px;
         margin-top: 50px;
-        /* margin-left: -27px; */
         font-size: 13px;
         text-align: center;
         text-justify: center;
-        /* background-color: rgba(0, 0, 0, 0.356); */
         color: white;
     }
 
     .weeklyDisp {
         color: white;
         border: solid rgba(129, 129, 129, 0.247) 2px; 
+        border-radius: 1%;
         background-color: rgba(85, 85, 85, 0.384);
-        /* border: solid black 2px; */
-        /* border-left: transparent;
-        border-right: transparent; */
         height: 600px;
         margin-top: 50px;
-        margin-left: -27px;
+        margin-left: -35px;
         font-size: 13px;
         text-align: center;
         text-justify: center;
+        padding: 5px;
 
     }
+
 
     /* table views */
-    thead {
-
-    }
-
     td {
         height: 30px;
         border-spacing: 20px;
@@ -111,9 +99,6 @@
         font-size: larger;
     }
 
-    .secday{
-
-    }
 
     /* backgrounds for weather conditions */
     div.cloud {
@@ -149,3 +134,136 @@
         height: 600px;
     }
 }
+
+    /*  tablets */
+    @media only screen and (min-width: 600px){
+        /* icons */
+        .sun {
+            color: rgba(250, 192, 0, 0.651);
+        }
+
+        .cloud {
+            color: rgba(161, 173, 194, 0.671);
+        }
+
+        .snow {
+            color: rgba(181, 250, 255, 0.781);
+        }
+
+
+        /* links */
+        .link {
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px;
+            color: white;
+        }
+
+        .link:visited {
+            color: white;
+        }
+
+
+        /* components */
+        div.app {
+            padding: 35px;
+            display: grid;
+        }
+
+ 
+
+        .footer {
+            color:white;
+            background-color: rgba(85, 85, 85, 0.384);
+        }
+
+
+        /* component views */
+        .main {
+            background-color: rgba(85, 85, 85, 0.384);
+            border: solid rgba(129, 129, 129, 0.247) 2px; 
+            border-radius: 1%;
+            height: 600px;
+            margin-top: 50px;
+            font-size: 13px;
+            text-align: center;
+            text-justify: center;
+            color: white;
+        }
+
+        .weeklyDisp {
+            color: white;
+            border: solid rgba(129, 129, 129, 0.247) 2px; 
+            border-radius: 1%;
+            background-color: rgba(85, 85, 85, 0.384);
+            height: 600px;
+            margin-top: 50px;
+            margin-left: -5px;
+            font-size: 13px;
+            text-align: center;
+            text-justify: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .about {
+            color: white;
+            font-weight: 450px;
+            height: 600px;
+            margin-top: 50px;
+            background-color: rgba(85, 85, 85, 0.384);
+            border: solid rgba(129, 129, 129, 0.247) 2px; 
+            border-radius: 1%;
+            padding: 10px;
+        }
+
+
+        /* table views */
+        td {
+            height: 30px;
+            border-spacing: 20px;
+            border: solid transparent 12px;
+        }
+
+        th {
+            text-align: center;
+            text-justify: center;
+            font-size: larger;
+        }
+
+
+        /* backgrounds for weather conditions */
+        div.cloud {
+            background-image: url(https://bloximages.chicago2.vip.townnews.com/tucson.com/content/tncms/assets/v3/editorial/d/f8/df8e368c-4521-11e9-8b2b-9fcb141d7381/5c884633ceb74.image.jpg?resize=1200%2C648);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 600px;
+
+        }
+
+        div.broken {
+            background-image: url(https://s7d2.scene7.com/is/image/TWCNews/clouds_jpg_jpg-2);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 600px;
+        }
+
+        div.broken {
+            background-color: rgb(104, 104, 104);
+        }
+
+        div.snow {
+            background-image: url(https://www.brilliant-creation.org/fileadmin/naturephotos/3/mountains/snow_clouds.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 600px;
+        }
+
+        div.rain {
+            background-image: url(https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/salt-lake-city-in-the-rain-ii-marilyn-hunt.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 600px;
+            }
+        }
