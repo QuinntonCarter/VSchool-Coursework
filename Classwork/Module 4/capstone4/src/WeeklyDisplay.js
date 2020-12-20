@@ -36,7 +36,7 @@ function WeeklyDisplay(props){
                             <th> </th>
                             <th> Max º </th>
                             <th> Min º </th>
-                            <th> Humidity </th>
+                            <th> Humidity %</th>
                             <th> Forecast </th>
                     </thead>
                     <tbody>

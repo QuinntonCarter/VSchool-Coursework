@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import MainLocationDetails from './MainLocationDetails'
+const { Provider, Consumer } = React.createContext()
 
 // for date retrieval and display
 var d = new Date()
@@ -20,14 +20,16 @@ month[10] = "November";
 month[11] = "December";
 var n = month[d.getMonth()];
 
-// to replace spaces with +
-// var replaced = str.split(' ').join('+');
-
 class Main extends Component {
     state = {
-        location: ''
+        // for setting form back to blank
+        location: '',
+        // for retrieval of forecast
+        locationDetails: {},
+        // for viewing of forecast data
+        view: false
     }
-    
+
     handleChange = (e) => {
         const {name, value} = e.target
         this.setState({
@@ -38,36 +40,73 @@ class Main extends Component {
     // submits form data to state
     locationSubmit = (e) => {
         e.preventDefault()
-            this.setState(prevState => ({
-                location: prevState.location
+            this.setState({
+                // resets form to blank state for *~aesthetics~*
+                location: ''
             })
+        // translates location for receival by fetch below (changes spaces into +)
+        var location = this.state.location.split(' ').join('+');
+        // fetches location information w location variable
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyA2PuW8IVNsVkIO3dZwgw82zkc5BRXsCPA`)
+        .then(response => response.json())
+        .then(data => 
+            // uses location data from previous fetch data to find location's current forecast
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data.results?.[0]?.geometry?.location?.lat}&lon=${data?.results?.[0]?.geometry?.location?.lng}&units=imperial&exclude=minutely&appid=5ae7b3c76c2e696e51c9f8585a68c324`)
+            .then(response => response.json())
+            .then(data =>
+                this.setState({
+                    // sets location forecast information to state.locationDetails
+                    locationDetails: data,
+                    // sets view to true from ternary statement
+                    view: true
+                }))
         )
     }
 
     render(){
-        const location = this.state.location.split(' ').join('+')
+        // turns temp into var and string for slice manipulation
+        var temp = this.state.locationDetails?.main?.temp+'º'
+        var humidity = this.state.locationDetails?.main?.humidity+'%'
+        var city = this.state.locationDetails.name
+        var description = this.state.locationDetails?.weather?.[0]?.description
+
         return(
             <div className='main'>
-                <form onSubmit={this.locationSubmit}>
-                    <input 
-                    placeholder='Type Location Here'
-                    name='location'
-                    value={this.state.location}
-                    type='text' 
-                    style={{margin: '10px'}}
-                    onChange={this.handleChange}
-                    />
-                    <button> Submit </button>
-                </form>
-                <MainLocationDetails
-                location = {location}
-                />
+                    <form onSubmit={this.locationSubmit}>
+                        <input
+                            placeholder='Type Location Here'
+                            name='location'
+                            value={this.state.location}
+                            type='text' 
+                            style={{margin: '10px'}}
+                            onChange={this.handleChange}
+                        />
+                        <center>
+                            <button> Submit </button>
+                        </center>
+                    </form>
+                    <h1 style={{fontSize: '29px'}}> {day} {n} </h1>
+                    {/* sets this.state.view to true which displays contained JSX once condition is met */}
+                        {this.state.view === true ? 
+                            <div>
+                                <h1 style={{fontSize: '59px', margin: '0px'}}> {city} </h1>
+                                {/* slices temp and readds º for cleaner display */}
+                                <h1 style={{fontSize: '129px', margin: '40px'}}> {temp.slice(0,2)+'º'} </h1>
+                                <h2 style={{fontSize: '19px'}}> {description} </h2>
+                                <h2 style={{fontSize: '19px'}}> Humidity: {humidity} </h2>
+                            </div> : ''
+                        }
+                {console.log(this.state.locationDetails)}
+                {/* sends context information for WeeklyDisplay */}
+                    <Main value={{}}>
+                        {this.props.children}
+                    </Main>
             </div>
         )
     }
 }
 
-export default Main
+export { Main, Consumer as MainContextConsumer }
 
 
 // scraps from first setup

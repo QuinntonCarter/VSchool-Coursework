@@ -10,7 +10,7 @@ import { FaSnowflake } from "react-icons/fa";
 import { WiDayCloudy } from "react-icons/wi";
 
 
-import Main from './Main'
+import { Main }  from './Main'
 import Weekly from './Weekly'
 import About from './About'
 
