@@ -26,7 +26,6 @@ class NameEntry extends Component {
             name: ''
             })
     )
-
 }
 
     render(){
