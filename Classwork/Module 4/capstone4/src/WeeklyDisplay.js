@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { ThemeContextConsumer } from './ThemeContext'
 
 const d = new Date()
 const date = d.getDate()
@@ -25,12 +24,12 @@ month[10] = "November";
 month[11] = "December";
 var n = month[d.getMonth()];
 
+
 function WeeklyDisplay(props){
+
     return(
-        <ThemeContextConsumer>
-            {context => (
             <div className='week'>
-                {/* format props: make table to display * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table */}
+                {/* format props: tables * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table */}
                 <table>
                     <thead>
                             <th> </th>
@@ -148,8 +147,6 @@ function WeeklyDisplay(props){
                     </tbody>
                 </table>
             </div>
-            )}
-        </ThemeContextConsumer>
     )
 }
 

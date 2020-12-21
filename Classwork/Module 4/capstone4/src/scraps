@@ -1,0 +1,52 @@
+MAIN
+    *** ver 2 state and methods ***
+   state = {
+        // for setting form back to blank
+        location: '',
+        // for retrieval of forecast
+        locationDetails: {},
+        // for viewing of forecast data
+        view: false
+    }
+
+    handleChange = (e) => {
+        const {name, value} = e.target
+        this.setState({
+            [name]: value
+        })
+    }
+
+    // submits form data to state
+    locationSubmit = (e) => {
+        e.preventDefault()
+            this.setState({
+                // resets form to blank state for *~aesthetics~*
+                location: ''
+            })
+        // translates location for receival by fetch below (changes spaces into +)
+        var location = this.state.location.split(' ').join('+');
+        // fetches location information w location variable
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=AIzaSyA2PuW8IVNsVkIO3dZwgw82zkc5BRXsCPA`)
+        .then(response => response.json())
+        .then(data => 
+            // uses location data from previous fetch data to find location's current forecast
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data.results?.[0]?.geometry?.location?.lat}&lon=${data?.results?.[0]?.geometry?.location?.lng}&units=imperial&exclude=minutely&appid=5ae7b3c76c2e696e51c9f8585a68c324`)
+            .then(response => response.json())
+            .then(data =>
+                this.setState({
+                    // sets location forecast information to state.locationDetails
+                    locationDetails: data,
+                    // sets view to true from ternary statement
+                    view: true
+                }
+            ))
+        )
+        // saves lat and lon to localStorage for later use
+        localStorage.latitude = JSON.stringify(this.state.locationDetails?.coord?.lat)
+        localStorage.longitude = JSON.stringify(this.state.locationDetails?.coord?.lon)
+    }
+
+        var temp = this.state.locationDetails?.main?.temp+'º'
+        var humidity = this.state.locationDetails?.main?.humidity+'%'
+        var city = this.state.locationDetails.name
+        var description = this.state.locationDetails?.weather?.[0]?.description

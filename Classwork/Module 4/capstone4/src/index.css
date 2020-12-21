@@ -5,6 +5,11 @@
     
 }
 
+body { 
+    background-image: url(https://wildlandsnetwork.org/wp-content/uploads/2019/11/AdobeStock_262109313-2000x1121.jpeg);
+    }
+
+/* consider adding transitions to forecast rendering and component rendering*/
 
 @media only screen and (min-width: 375px) {
     /* icons */
@@ -36,8 +41,37 @@
 
     /* components */
     div.app {
-        padding: 35px;
-        display: grid;
+    }
+
+
+    /* component views */
+
+
+    .main {
+        background-color: rgba(85, 85, 85, 0.384);
+        border: solid rgba(129, 129, 129, 0.247) 2px; 
+        border-radius: 1%;
+        height: 600px;
+        margin-top: 50px;
+        font-size: 13px;
+        text-align: center;
+        text-justify: center;
+        color:rgba(255, 255, 255, 0.897);
+    }
+
+
+    .weeklyDisp {
+        color: white;
+        border: solid rgba(129, 129, 129, 0.247) 2px; 
+        border-radius: 1%;
+        background-color: rgba(85, 85, 85, 0.384);
+        height: 600px;
+        margin-top: 50px;
+        margin-left: -35px;
+        font-size: 13px;
+        text-align: center;
+        text-justify: center;
+        padding: 5px;
     }
 
     .about {
@@ -54,35 +88,7 @@
     .footer {
         color:white;
         background-color: rgba(85, 85, 85, 0.384);
-    }
-
-
-    /* component views */
-    .main {
-        background-color: rgba(85, 85, 85, 0.384);
-        border: solid rgba(129, 129, 129, 0.247) 2px; 
-        border-radius: 1%;
-        height: 600px;
-        margin-top: 50px;
-        font-size: 13px;
-        text-align: center;
-        text-justify: center;
-        color: white;
-    }
-
-    .weeklyDisp {
-        color: white;
-        border: solid rgba(129, 129, 129, 0.247) 2px; 
-        border-radius: 1%;
-        background-color: rgba(85, 85, 85, 0.384);
-        height: 600px;
-        margin-top: 50px;
-        margin-left: -35px;
-        font-size: 13px;
-        text-align: center;
-        text-justify: center;
-        padding: 5px;
-
+        padding: 20px;
     }
 
 
@@ -170,7 +176,7 @@
             display: grid;
         }
 
- 
+
 
         .footer {
             color:white;
