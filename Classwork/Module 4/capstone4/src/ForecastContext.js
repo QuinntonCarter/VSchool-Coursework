@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
 
-// imports for prop passing
-import Main from './Main'
-// import Weekly from './Weekly'
-// import WeeklyDisplay from './WeeklyDisplay'
-
 // for context
 const { Provider, Consumer } = React.createContext()
 
@@ -27,6 +22,7 @@ class ForecastContextProvider extends Component {
         weeklyDetails: {},
     // for viewing data when set to true in ternary
         view: false,
+    // for data pulling in this component
         pullWeekly: false,
         pullImg: false
     }
@@ -67,7 +63,7 @@ class ForecastContextProvider extends Component {
 
         componentDidUpdate(){
             if (this.state.pullWeekly === true){
-                fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.currentDetails?.coord?.lat}&lon=${this.state.currentDetails?.coord?.lon}&exclude=minutely&appid=5ae7b3c76c2e696e51c9f8585a68c324`)
+                fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.currentDetails?.coord?.lat}&lon=${this.state.currentDetails?.coord?.lon}&units=imperial&exclude=minutely&appid=5ae7b3c76c2e696e51c9f8585a68c324`)
                 .then(response => response.json())
                 .then(data => 
                     this.setState({
@@ -82,24 +78,26 @@ class ForecastContextProvider extends Component {
                 }
             }
 
-        // ** CLARIFY props will cause issues with rerendering if used to pass w class, correct? **
+        // ** CLARIFY props will cause issues with rerendering if used to pass w CLASS, correct? 
+        // i don't think i'm understanding them correctly **
     render(){
         return(
-        <div>
-            {/* // displays another main */}
-            <Provider value={{
-                // methods
-                locationSubmit: this.locationSubmit,
-                handleChange: this.handleChange,
-                // state information
-                location: this.state.location,
-                currentDetails: this.state.currentDetails,
-                weeklyDetails: this.state.weeklyDetails,
-                view: this.state.view
-                }}>
-                    {this.props.children}
-            </Provider>
-        </div>
+            <div>
+                {console.log(this.state.weeklyDetails)}
+                {/* // displays another main */}
+                <Provider value={{
+                    // methods
+                    locationSubmit: this.locationSubmit,
+                    handleChange: this.handleChange,
+                    // state information
+                    location: this.state.location,
+                    currentDetails: this.state.currentDetails,
+                    weeklyDetails: this.state.weeklyDetails,
+                    view: this.state.view
+                    }}>
+                        {this.props.children}
+                </Provider>
+            </div>
         )
     }
 }

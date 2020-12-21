@@ -45,7 +45,9 @@ body {
 
 
     /* component views */
-
+    .navbar {
+        margin: 20px;
+    }
 
     .main {
         background-color: rgba(85, 85, 85, 0.384);
@@ -59,7 +61,6 @@ body {
         color:rgba(255, 255, 255, 0.897);
     }
 
-
     .weeklyDisp {
         color: white;
         border: solid rgba(129, 129, 129, 0.247) 2px; 
@@ -67,11 +68,10 @@ body {
         background-color: rgba(85, 85, 85, 0.384);
         height: 600px;
         margin-top: 50px;
-        margin-left: -35px;
         font-size: 13px;
         text-align: center;
         text-justify: center;
-        padding: 5px;
+        padding-top: 10px;
     }
 
     .about {
@@ -89,14 +89,17 @@ body {
         color:white;
         background-color: rgba(85, 85, 85, 0.384);
         padding: 20px;
+        width: 300px;
     }
 
 
     /* table views */
     td {
         height: 30px;
-        border-spacing: 20px;
-        border: solid transparent 12px;
+        border-spacing: 0px;
+        border: solid transparent 5px;
+        padding: 4px;
+        font-weight: bold;
     }
 
     th {
