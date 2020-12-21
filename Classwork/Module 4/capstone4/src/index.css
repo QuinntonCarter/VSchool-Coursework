@@ -38,12 +38,6 @@ body {
         color: white;
     }
 
-
-    /* components */
-    div.app {
-    }
-
-
     /* component views */
     .navbar {
         margin: 20px;
@@ -72,6 +66,8 @@ body {
         text-align: center;
         text-justify: center;
         padding-top: 10px;
+        width: 100%;
+        transition: 3s;
     }
 
     .about {
@@ -92,6 +88,14 @@ body {
         width: 300px;
     }
 
+    .locationForecast {
+        animation: fadeIn ease 3s;
+    }
+    /* causes fade in on forecast load */
+    @keyframes fadeIn{
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
 
     /* table views */
     td {

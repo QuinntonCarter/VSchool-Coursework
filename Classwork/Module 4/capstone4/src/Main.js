@@ -48,7 +48,7 @@ function Main(){
                     
                         {/* sets this.state.view to true which displays contained JSX once condition is met */}
                             {context.view === true ? 
-                                <div>
+                                <div className='locationForecast'>
                                     <h1 style={{fontSize: '59px'}}> {context.currentDetails?.name} </h1>
                                     {/* slices temp and reapplies º for cleaner display */}
                                     <h1 style={{fontSize: '99px', margin: '40px'}}> {context.currentDetails?.main?.temp+'º'} </h1>

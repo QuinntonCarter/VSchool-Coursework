@@ -73,8 +73,8 @@ class ForecastContextProvider extends Component {
                 })
                 )
             // implement logic to pull images local to selected region from teleport api 
-            //     } if (this.state.pullImg === true){
-            //         fetch(``)
+                } if (this.state.pullImg === true){
+                    fetch(``)
                 }
             }
 
@@ -83,7 +83,6 @@ class ForecastContextProvider extends Component {
     render(){
         return(
             <div>
-                {console.log(this.state.weeklyDetails)}
                 {/* // displays another main */}
                 <Provider value={{
                     // methods

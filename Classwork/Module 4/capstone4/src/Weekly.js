@@ -59,91 +59,91 @@ function Weekly(){
                         <tr className='secday'>
                         <td>{n+' '+tmrw}</td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.max+'º'}
+                                {context.weeklyDetails?.daily?.[1]?.temp?.max+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.min+'º'}
+                                {context.weeklyDetails?.daily?.[1]?.temp?.min+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.humidity}{`%`}
+                                {context.weeklyDetails?.daily?.[1]?.humidity}{`%`}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.weather?.[0]?.description}
+                                {context.weeklyDetails?.daily?.[1]?.weather?.[0]?.description}
                             </td>
                         </tr>
                         <tr className='thirdday'>
                             <td> {n+' '+thirdDay} </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.max+'º'}
+                                {context.weeklyDetails?.daily?.[2]?.temp?.max+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.min+'º'}
+                                {context.weeklyDetails?.daily?.[2]?.temp?.min+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.humidity}{`%`}
+                                {context.weeklyDetails?.daily?.[2]?.humidity}{`%`}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.weather?.[0]?.description}
+                                {context.weeklyDetails?.daily?.[2]?.weather?.[0]?.description}
                             </td>
                         </tr>
                         <tr className='fourthday'>
                             <td> {n+' '+fourthDay} </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.max+'º'}
+                                {context.weeklyDetails?.daily?.[3]?.temp?.max+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.min+'º'}
+                                {context.weeklyDetails?.daily?.[3]?.temp?.min+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.humidity}{`%`}
+                                {context.weeklyDetails?.daily?.[3]?.humidity}{`%`}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.weather?.[0]?.description}
+                                {context.weeklyDetails?.daily?.[3]?.weather?.[0]?.description}
                             </td> 
                         </tr>
                         <tr className='fifthday'>
                             <td> {n+' '+fifthDay} </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.max+'º'}
+                                {context.weeklyDetails?.daily?.[4]?.temp?.max+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.min+'º'}
+                                {context.weeklyDetails?.daily?.[4]?.temp?.min+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.humidity}{`%`}
+                                {context.weeklyDetails?.daily?.[4]?.humidity}{`%`}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.weather?.[0]?.description}
+                                {context.weeklyDetails?.daily?.[4]?.weather?.[0]?.description}
                             </td>
                         </tr>
                         <tr className='sixthday'>
                             <td> {n+' '+sixthDay} </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.max+'º'}
+                                {context.weeklyDetails?.daily?.[5]?.temp?.max+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.min+'º'}
+                                {context.weeklyDetails?.daily?.[5]?.temp?.min+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.humidity}{`%`}
+                                {context.weeklyDetails?.daily?.[5]?.humidity}{`%`}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.weather?.[0]?.description}
+                                {context.weeklyDetails?.daily?.[5]?.weather?.[0]?.description}
                             </td>
                         </tr>
                         <tr className='sevday'>
                             <td> {n+' '+sevDay} </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.max+'º'}
+                                {context.weeklyDetails?.daily?.[6]?.temp?.max+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.temp?.min+'º'}
+                                {context.weeklyDetails?.daily?.[6]?.temp?.min+'º'}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.humidity}{`%`}
+                                {context.weeklyDetails?.daily?.[6]?.humidity}{`%`}
                             </td>
                             <td>
-                                {context.weeklyDetails?.daily?.[0]?.weather?.[0]?.description}
+                                {context.weeklyDetails?.daily?.[6]?.weather?.[0]?.description}
                             </td>
                         </tr>
                     </tbody>
