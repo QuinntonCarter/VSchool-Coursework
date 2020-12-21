@@ -73,10 +73,15 @@ class ForecastContextProvider extends Component {
                 })
                 )
             // implement logic to pull images local to selected region from teleport api 
-                } if (this.state.pullImg === true){
-                    fetch(``)
-                }
+                // } if (this.state.pullImg === true){
+                // var location = this.state.location.split(' ').join('-');
+                //     fetch(`https://api.teleport.org/api/urban_areas/slug:${location}/images/`)
+                //     .then(response => response.json())
+                //     .then(data =>
+                //         console.log(data))
+                // }
             }
+        }
 
         // ** CLARIFY props will cause issues with rerendering if used to pass w CLASS, correct? 
         // i don't think i'm understanding them correctly **

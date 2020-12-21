@@ -73,7 +73,7 @@ body {
     .about {
         color: white;
         font-weight: 450px;
-        height: 600px;
+        height: 100%;
         margin-top: 50px;
         background-color: rgba(85, 85, 85, 0.384);
         border: solid rgba(129, 129, 129, 0.247) 2px; 
@@ -89,7 +89,7 @@ body {
     }
 
     .locationForecast {
-        animation: fadeIn ease 3s;
+        animation: fadeIn ease 3.3s;
     }
     /* causes fade in on forecast load */
     @keyframes fadeIn{
