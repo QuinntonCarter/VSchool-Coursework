@@ -1,34 +1,44 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 // for context
 const { Provider, Consumer } = React.createContext()
+// for emoji/theme npm emojis
+const emojis = require('emojis-list')
 
 
 // *
 // **
 // ***
 // ****
-// BETA : methods (handlechange + handlesubmit) held here but allowed to be used by form, allow data from form to be exchanged
-// ?? ** use context for theme change depending on current weather
-// ––consider pushing lat, lon, temp etc to individual arrays n retrieving by index of [0] to avoid fetch retrieving only initial values
-// ––also provides contextconsumer for weekly/weeklydisplay
-class ForecastContextProvider extends Component {
-    // *** BETA ***
+// convert to functional component <----
+// convert state to use hooks
+function ForecastContextProvider() {
     state = {
-    // for sending fetch for current
         location: '',
-    // for fetching current weather
         currentDetails: {},
         weeklyDetails: {},
-    // for viewing data when set to true in ternary
         view: false,
     // for data pulling in this component
         pullWeekly: false,
         pullImg: false
     }
 
+    // *** BETA ***
+    // for sending fetch for current
+    // const {location, setLocation} = useState('')
+    // // for fetched current weather data
+    // const {currentLocation, setCurrentLocation} = useState({})
+    // // for fetched weekly weather data
+    // const {weeklyDetails, setWeeklyDetails} = useState({})
+    // // for viewing data when set to true in ternary
+    // const {view, setView} = useState(false)
+    // // for triggering weekly data pull from API
+    // const {pullWeekly, setPullWeekly} = useState(false)
+    // // for pulling location specific image for background
+    // const {pullImg, setPullImg} = useState(false)
+
     // *** BETA setup handleChange for passing to Main form
-    handleChange = (e) => {
+    function handleChange(e){
         const {name, value} = e.target
             this.setState({
                 [name]: value
@@ -37,6 +47,7 @@ class ForecastContextProvider extends Component {
 
     // ** BETA ** move JSON saving, methods, and state information to this component for prop passing and context passing throughout doc **
     // google geolocate key AIzaSyD7DFW5jTwvLp_GDarjWKlyO1T1vDkER-Y, geocoding AIzaSyA2PuW8IVNsVkIO3dZwgw82zkc5BRXsCPA)
+    // ***** convert w hook syntax
         locationSubmit = (e) => {
             e.preventDefault()
             this.setState({
@@ -85,25 +96,23 @@ class ForecastContextProvider extends Component {
 
         // ** CLARIFY props will cause issues with rerendering if used to pass w CLASS, correct? 
         // i don't think i'm understanding them correctly **
-    render(){
-        return(
-            <div>
-                {/* // displays another main */}
-                <Provider value={{
-                    // methods
-                    locationSubmit: this.locationSubmit,
-                    handleChange: this.handleChange,
-                    // state information
-                    location: this.state.location,
-                    currentDetails: this.state.currentDetails,
-                    weeklyDetails: this.state.weeklyDetails,
-                    view: this.state.view
-                    }}>
-                        {this.props.children}
-                </Provider>
-            </div>
-        )
-    }
+    return(
+        <div>
+            {/* // displays another main */}
+            <Provider value={{
+                // methods
+                locationSubmit: this.locationSubmit,
+                handleChange: this.handleChange,
+                // state information
+                location: this.state.location,
+                currentDetails: this.state.currentDetails,
+                weeklyDetails: this.state.weeklyDetails,
+                view: this.state.view
+                }}>
+                    {this.props.children}
+            </Provider>
+        </div>
+    )
 }
 
 export { ForecastContextProvider, Consumer as ForecastContextConsumer }

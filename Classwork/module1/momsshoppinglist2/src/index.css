@@ -1,0 +1,64 @@
+.title {
+  text-align: center;
+}
+
+.main {
+  border: 1px solid black;
+  width: 50%;
+  margin: auto;
+  background-color: rgb(255, 248, 236);
+}
+
+#add-item {
+  border: 1px solid black;
+}
+
+#input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.label {
+  margin: 10px;
+}
+
+#list {
+  flex-direction: column;
+  display: flex;
+  padding: 10px;
+  list-style-type: none;
+}
+
+.list-item {
+  text-align: center;
+  font-style: italic;
+  border-radius: 5px;
+  background-color: rgb(255, 248, 236);
+  margin: 10px;
+}
+
+.erase-style {
+  height: 25px;
+  background-color: rgb(196, 196, 196);
+  margin: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.edit-style {
+  height: 25px;
+  background-color: rgb(196, 196, 196);
+  border-radius: 15%;
+  background-color: white;
+}
+
+.save-style{
+  height: 25px;
+  margin: 8px;
+  background-color: rgb(242, 242, 242);
+}

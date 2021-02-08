@@ -16,10 +16,10 @@ let string = [
 
 
 // 1) Sort an array from smallest number to largest
-    // arr.sort(function(a,b){
-    //     return a - b
-    // })
-    // console.log(arr)
+    arr.sort(function(a,b){
+        return a - b
+    })
+    console.log(arr)
 
 // 2) Sort an array from largest number to smallest
     // arr.sort(function(b,a){

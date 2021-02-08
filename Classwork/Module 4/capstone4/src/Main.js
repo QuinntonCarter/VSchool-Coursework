@@ -21,7 +21,7 @@ month[11] = "December";
 var n = month[d.getMonth()];
 
 
-
+// add local state to this form // 
 function Main(){
     return(
         <ForecastContextConsumer>
@@ -51,7 +51,7 @@ function Main(){
                                 <div className='locationForecast'>
                                     <h1 style={{fontSize: '59px'}}> {context.currentDetails?.name} </h1>
                                     {/* slices temp and reapplies º for cleaner display */}
-                                    <h1 style={{fontSize: '99px', margin: '40px'}}> {context.currentDetails?.main?.temp+'º'} </h1>
+                                    <h1 style={{fontSize: '99px', margin: '40px'}}> {Math.floor(context.currentDetails?.main?.temp)+'º'} </h1>
                                     <h2 style={{fontSize: '29px'}}> {context.currentDetails?.weather?.[0]?.description} </h2>
                                     <h2 style={{fontSize: '19px'}}> Humidity: {context.currentDetails?.main?.humidity+'%'} </h2>
                                 </div> : ''

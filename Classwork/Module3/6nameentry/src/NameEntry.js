@@ -24,9 +24,8 @@ class NameEntry extends Component {
         this.setState(prevState => ({
             names: [...prevState.names, prevState.name],
             name: ''
-            })
-    )
-}
+            }))
+        }
 
     render(){
         const allNames = this.state.names.map((name) => {

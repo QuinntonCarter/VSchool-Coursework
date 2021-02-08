@@ -1,0 +1,35 @@
+* {
+    background-color: black;
+}
+
+#navCircle {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: goldenrod;
+    float: right;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+    display: grid;
+}
+
+nav.nav {
+    font-size: 20px;
+    padding: 10px;
+    /* color: rgba(97, 97, 97, 0.493); */
+    /* color: rgba(221, 160, 221, 0.719); */
+    color: rgba(0, 139, 139, 0.781);
+}
+
+#about {
+    background-color: transparent;
+    width: 350px;
+    margin-top: 50%;
+}
+
+#contact {
+    background-color: transparent;
+    width: 350px;
+    margin-top: -50%;
+}
