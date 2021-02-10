@@ -1,6 +1,8 @@
 * {
     background-color: black;
+    overflow-y:hidden;
 }
+
 
 #navCircle {
     height: 30px;
@@ -22,10 +24,22 @@ nav.nav {
     color: rgba(0, 139, 139, 0.781);
 }
 
+#aboutTitle {
+    background-color: transparent;
+    font-size: 250%;
+    float: left;
+}
+
 #about {
     background-color: transparent;
     width: 350px;
     margin-top: 50%;
+}
+
+#contactTitle {
+    background-color: transparent;
+    font-size: 250%;
+    float: left;
 }
 
 #contact {
