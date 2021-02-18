@@ -1,32 +1,33 @@
 $(document).ready(()=> {
 
-    $('aboutTitle').hide()
+    $('#aboutTitle').hide()
     $('#about').hide()
 
     $('#contactTitle').hide()
     $('#contact').hide()
 
-    $('#navCircle').on('click', () => {
+    $('#navCircle').on('mouseenter', () => {
         $('#navCircle').animate({
-            width: '1000px',
-            height: '1000px'
+            width: '49em',
+            height: '49em'
         }, 1500);
-        $('aboutTitle').fadeToggle(2200);
-        $('#about').fadeToggle(2200);
-        $('#contactTitle').fadeToggle(2200)
-        $('#contact').fadeToggle(2200)
+
+        $('#aboutTitle').fadeIn(2200);
+        $('#about').fadeIn(2200);
+        $('#contactTitle').fadeIn(2200)
+        $('#contact').fadeIn(2200)
     })
 
-    $('#docBody').on('dblclick', () => {
+    $('#navCircle' && '#docBody').on('click', () => {
         $('#navCircle').animate({
-            height: '30px',
-            width: '30px'
+            height: '2.5em',
+            width: '2.5em'
         }, 1500);
-        $('#aboutTitle').fadeToggle(1700)
-        $('#about').fadeToggle(1700)
+        $('#aboutTitle').fadeOut(1700)
+        $('#about').fadeOut(1700)
 
-        $('#contactTitle').fadeToggle(1700)
-        $('#contact').fadeToggle(1700)
+        $('#contactTitle').fadeOut(1700)
+        $('#contact').fadeOut(1700)
     })
 
 })

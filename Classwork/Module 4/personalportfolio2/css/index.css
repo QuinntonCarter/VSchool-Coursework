@@ -3,10 +3,13 @@
     overflow-y:hidden;
 }
 
+.name {
+    font-size: 40px;
+}
 
 #navCircle {
-    height: 30px;
-    width: 30px;
+    height: 2.5em;
+    width: 2.5em;
     border-radius: 50%;
     background-color: goldenrod;
     float: right;
@@ -14,36 +17,42 @@
     margin: auto;
     text-align: center;
     display: grid;
+    overflow: hidden
 }
+
 
 nav.nav {
     font-size: 20px;
-    padding: 10px;
+    padding: 40px;
     /* color: rgba(97, 97, 97, 0.493); */
     /* color: rgba(221, 160, 221, 0.719); */
-    color: rgba(0, 139, 139, 0.781);
+    color: white;
 }
 
 #aboutTitle {
     background-color: transparent;
     font-size: 250%;
     float: left;
+    color: rgba(0, 139, 139, 0.781);
 }
 
 #about {
     background-color: transparent;
     width: 350px;
     margin-top: 50%;
+    color: rgba(0, 139, 139, 0.781);
 }
 
 #contactTitle {
     background-color: transparent;
     font-size: 250%;
     float: left;
+    color: rgba(0, 139, 139, 0.781);
 }
 
 #contact {
     background-color: transparent;
     width: 350px;
     margin-top: -50%;
+    color: rgba(0, 139, 139, 0.781);
 }

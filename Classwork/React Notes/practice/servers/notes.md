@@ -83,6 +83,7 @@
 
     # What is it?
         * app.use()
+        ((arguments))
         1. (optional) - Mount Path ( endpoint )
         2. Callback function - receives the request, response objects, also the "next" function
 
