@@ -12,9 +12,13 @@ Todos should have a data format similar to:
 
 Create endpoints that:
 
-allows new todo items to be posted to the array,
+#   allows new todo items to be posted to the array,
 When posting a new todo, you must generate a unique id for that todo (consider using the uuid npm package),
-returns the entire list of todos,
-allows the user to update a todo by its _id,
-allows the user to delete a todo by its _id, and
-allows the user retrieve a single todo by its _id.
+
+#   returns the entire list of todos,
+
+#   allows the user to update a todo by its _id,
+
+#   allows the user to delete a todo by its _id, and
+
+#   allows the user retrieve a single todo by its _id.

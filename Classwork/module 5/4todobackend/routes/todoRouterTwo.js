@@ -17,40 +17,37 @@ completed: true,
 _id: '347f00dn00b'
 }
 ]
-
-    // get single todo item
+    // get item by ID
 todoRouter.get('/:todoId', (req, res) => {
     const todoId = req.params.todoId
-    const foundItem = todos.find(todo => todo._id === todoId)
-    res.send(foundItem)
+    const foundTodo = todos.find(todo => todo._id === todoId)
+    res.send(foundTodo)
 })
-// delete single item
-    .delete('/:todoId', (req,res) => {
+    // delete by ID
+todoRouter.delete('/:todoId', (req, res) => {
     const todoId = req.params.todoId
-    const itemIndex = todos.findIndex(todo => todo._id === todoId)
-    todos.splice(itemIndex, 1)
-    res.send('Sucessfully removed item from the list!')
-    })
-// update single item
-    .put('/:todoId', (req, res) => {
-        const todoId = req.params.todoId
-        const itemIndex = todos.findIndex(item => item._id === todoId)
-        const updatedTodo = Object.Assign(todos[itemIndex], req.body)
-        res.send(`Successfully updated ${updatedTodo.name}!`)
-    })
-
+    const todoIndex = todos.findIndex(todo => todo._id === todoId)
+    todos.splice(todoIndex, 1)
+    res.send('Successfully removed item')
+})
+    // update item by ID
+todoRouter.put('/:todoId', (req, res) => {
+    const todoId = req.params.todoId
+    const todoIndex = todos.findIndex(todo => todo._id === todoId)
+    const updatedTodo = Object.assign(todos[todoIndex], req.body)
+    res.send(`Successfully updated item, ${updatedTodo.name}!`)
+})
 
 todoRouter.route('/')
-// get all todos
     .get((req, res) => {
         res.send(todos)
     })
-// add new todo item
     .post((req, res) => {
         const newTodo = req.body
         newTodo._id = uuidv4()
         todos.push(newTodo)
-        res.send(`Successfully added ${newTodo.name} to the list!!`)
+        res.send(`Successfully added ${newTodo.name} to the list!`)
     })
+
 
 module.exports = todoRouter
