@@ -89,3 +89,13 @@
 
     # The "next" function
         * Moves on to the next middleware in line on our server
+
+# Console Errors in Express
+
+    # Use a Logger
+     * npm install morgan
+
+# Connecting the Front-End to the Back-end
+
+    # Folder Structure
+    # Proxy

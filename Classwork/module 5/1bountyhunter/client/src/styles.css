@@ -1,0 +1,41 @@
+* {
+    justify-content: center;
+}
+
+input {
+    padding: 7px;
+    margin: 15px;
+    border-radius: 3px;
+}
+
+form.formDisplay {
+    border: solid black 1px;
+    background-color: rgb(74, 107, 71);
+}
+
+h1 {
+    color: navy;
+}
+
+h2 {
+    color: darkred;
+}
+
+.deleteTarget {
+    background-color: rgb(206, 87, 71);
+    color: white;
+    border-radius: 8px;
+    margin: 8px;
+    padding: 8px;
+}
+
+.editTarget {
+    border-radius: 8px;
+    padding: 8px;
+    margin: 5px;
+}
+
+div.targetDisplay {
+    padding: 10px;
+    margin: 10px;
+}

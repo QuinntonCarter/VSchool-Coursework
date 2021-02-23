@@ -3,10 +3,10 @@ const targetRouter = express.Router()
 const { v4: uuidv4 } = require('uuid')
 
 const targets = [
-    {firstName: 'Obi-Wan', lastName: 'Kenobi', living: 'Yes', affiliation: 'Jedi', _id: uuidv4()},
-    {firstName: 'Darth', lastName: 'Vader', living: 'Yes', affiliation: 'Sith', _id: uuidv4()},
-    {firstName: 'Mace', lastName: 'Windu', living: 'Yes', affiliation: 'Jedi', _id: uuidv4()},
-    {firstName: 'Minch', lastName: 'Yoda', living: 'Yes', affiliation: 'Jedi', _id: uuidv4()}
+    {firstName: 'Obi-Wan', lastName: 'Kenobi', status: 'Alive', affiliation: 'Jedi', _id: uuidv4()},
+    {firstName: 'Darth', lastName: 'Vader', status: 'Alive', affiliation: 'Sith', _id: uuidv4()},
+    {firstName: 'Mace', lastName: 'Windu', status: 'Alive', affiliation: 'Jedi', _id: uuidv4()},
+    {firstName: 'Minch', lastName: 'Yoda', status: 'Alive', affiliation: 'Jedi', _id: uuidv4()}
 ]
 
 // get all bounties
@@ -18,8 +18,9 @@ targetRouter.route('/')
     .post((req, res) => {
         const newTarget = req.body
         newTarget._id = uuidv4()
+        newTarget.status = 'Alive'
         targets.push(newTarget)
-        res.send(`Successfully added ${newTarget.firstName+' '+newTarget.lastName} to the hit list!`)
+        res.send(newTarget)
     })
     
     // PART 2
