@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { BrowserRouter as Router } from 'react-router-dom'
-import { ForecastContextProvider } from './ForecastContext'
+import { ForecastContext } from './forecastContext.js'
 
 
 import App from './App';
 
 ReactDOM.render(
-    <ForecastContextProvider>
+    <ForecastContext>
         <Router>
             <App />
         </Router>
-    </ForecastContextProvider>, 
+    </ForecastContext>,
     document.getElementById('root')
 );

@@ -20,6 +20,11 @@ h1 {
 h2 {
     color: darkred;
 }
+.addTarget {
+    border-radius: 8px;
+    padding: 8px;
+    margin: 5px;
+}
 
 .deleteTarget {
     background-color: rgb(206, 87, 71);

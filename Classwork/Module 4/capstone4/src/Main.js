@@ -1,5 +1,5 @@
-import React from 'react'
-import { ForecastContextConsumer } from './ForecastContext';
+import React, { useContext } from 'react'
+import { ForecastContext } from './forecastContext.js';
 
 
 // for date retrieval and display
@@ -23,13 +23,12 @@ var n = month[d.getMonth()];
 
 // add local state to this form // 
 function Main(){
+    const context = useContext(ForecastContext)
     return(
-        <ForecastContextConsumer>
-                {/* // turns temp into var and string for slice manipulation */}
-                {context => (
             <div className='main'>
                     {/* try to render if false but hide if true */}
                     { context.view === true ? '' :
+                        <>
                             <form onSubmit={context.locationSubmit}>
                                 <input required
                                     placeholder='Type Location Here'
@@ -43,10 +42,12 @@ function Main(){
                                     <button> Submit </button>
                                 </center>
                             </form>
+                        </>
                         }
                             <h1 style={{margin: '40px',padding: '2px', fontSize: '35px'}}> {day} {n} </h1>
                     
                         {/* sets this.state.view to true which displays contained JSX once condition is met */}
+                        <>
                             {context.view === true ? 
                                 <div className='locationForecast'>
                                     <h1 style={{fontSize: '59px'}}> {context.currentDetails?.name} </h1>
@@ -56,9 +57,8 @@ function Main(){
                                     <h2 style={{fontSize: '19px'}}> Humidity: {context.currentDetails?.main?.humidity+'%'} </h2>
                                 </div> : ''
                             }
+                        </>
             </div>
-            )}
-            </ForecastContextConsumer>
         )
     }
 
