@@ -11,7 +11,7 @@ export default function BountyForm(props){
 
     function handleSubmit(e){
         e.preventDefault()
-        props.submitAdd(inputs, props._id)
+        props.submit(inputs, props._id)
         setInputs(initInputs)
     }
 
@@ -24,7 +24,7 @@ export default function BountyForm(props){
             placeholder='First Name'
             value={inputs.firstName}
             onChange={handleChange}
-            ></input>
+            />
 
             <input 
             type='text'
@@ -32,7 +32,7 @@ export default function BountyForm(props){
             placeholder='Last Name'
             value={inputs.lastName}
             onChange={handleChange}
-            ></input>
+            />
             
             <input
             type='text'
@@ -40,7 +40,7 @@ export default function BountyForm(props){
             placeholder='Affiliation'
             value={inputs.affiliation}
             onChange={handleChange}
-            ></input>
+            />
 
             <button onClick={props.submit} className='addTarget'> Add Target </button>
 

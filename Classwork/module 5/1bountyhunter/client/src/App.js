@@ -31,7 +31,7 @@ export default function App(){
     function editTarget(updates, targetId){
         axios.put(`/targets/${targetId}`, updates)
             .then(res => {
-                setTargets(prevTargets => prevTargets.map(target => target._id === targetId ? target : res.data))
+                setTargets(prevTargets => prevTargets.map(target => target._id !== targetId ? target : res.data))
             })
             .catch(err => console.log(err))
     }
@@ -51,7 +51,7 @@ export default function App(){
             {...target}
             editTarget={editTarget}
             delete={deleteTarget}
-            key={target.lastName}
+            key={target._id}
             />
         )}
         </div>
