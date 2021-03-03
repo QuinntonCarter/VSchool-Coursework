@@ -2,6 +2,7 @@
     background-color: black;
     overflow-y: hidden;
 }
+
 body {
     position: relative;
 }
@@ -22,6 +23,7 @@ body {
     text-align: left;
     display: grid;
     overflow: hidden;
+    z-index: 9;
 }
 
 
@@ -91,7 +93,7 @@ div.appDisp > div {
     margin: 40px;
     padding: 15px;
     height: 400px;
-    width: 90%;
+    width: 89%;
     z-index: 0;
     color: white;
     border: solid red 5px;
@@ -106,7 +108,7 @@ div.appDisp > i.fas {
     transition: color 150ms;
     position: fixed;
     border: orange solid;
-    z-index: 9;
+    z-index: 8;
     font-size: 124px;
     margin-left: 87vw;
     margin-top: 320px;
@@ -115,10 +117,14 @@ div.appDisp > i.fas {
 
 div.appDisp > i.fas:hover {
     transition: color 450ms;
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.952);
 }
 
 /* project */
 div.project {
     color: pink;
+}
+
+.project > h1, p, i{
+    background-color: transparent;
 }

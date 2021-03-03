@@ -1,11 +1,9 @@
 import React from 'react'
-import ProjectsComponent from './projectsComponent.js'
+import ProjectsComponent from './components/projectsComponent.js'
 
 function App(){
     return(
-        <>
-            <ProjectsComponent/>
-        </>
+        <ProjectsComponent/>
     )
 }
 
