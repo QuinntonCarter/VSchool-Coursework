@@ -85,7 +85,7 @@ div.appDisp {
     display: flex;
     flex-wrap: nowrap; 
     overflow: auto;
-    border: solid 3px rgb(0, 148, 148);
+    /* border: solid 3px rgb(0, 148, 148); */
 }
 
 div.appDisp > div {
@@ -96,7 +96,7 @@ div.appDisp > div {
     width: 89%;
     z-index: 0;
     color: white;
-    border: solid red 5px;
+    /* border: solid red 5px; */
     }
 
     /* add ability to tab to next (try nav-index) individual project onClick of i */

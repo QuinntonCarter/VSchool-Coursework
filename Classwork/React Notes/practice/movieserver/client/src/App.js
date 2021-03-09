@@ -6,8 +6,8 @@ import AddMovieForm from './components/AddMovieForm.js'
 
 export default function App(){
     const [movies, setMovies] = useState([])
-    // BETA for setting up alert message about error
     // const [error, setErr] = useState()
+    // BETA for setting up alert message about error
 
     // pulls movie array from database and returns it as res.data
     function getMovies(){
@@ -26,13 +26,14 @@ export default function App(){
                 setMovies(prevMovies => [...prevMovies, res.data])
             })
             .catch(err => console.log(err))
+        }
             // BETA for setting alert about POST error
-            //     setErr({errMsg: err})
+            //     .catch(err => {
+            //         setErr({errMsg: err})
             //     if(error){
             //         console.log(error.errMsg)
             //     }
-            // })
-    }
+            // })}
 
         // receives arg as movieId from Movie component
     function deleteMovie(movieId){
@@ -42,7 +43,7 @@ export default function App(){
                 // filters out movie marked for deletion from list of movies and sets in state w setMovies
                 setMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId))
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response.data.errMsg))
         }
 
         // receives two arguments, updates and movieId
@@ -51,7 +52,17 @@ export default function App(){
             .then(res => {
                 setMovies(prevMovies => prevMovies.map(movie => movie._id !== movieId ? movie : res.data))
             })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+
+    function handleFilter(e){
+        if(e.target.value === 'reset'){
+            getMovies()
+        } else {
+        axios.get(`/movies/search/genre?genre=${e.target.value}`)
+            .then(res => setMovies(res.data))
             .catch(err => console.log(err))
+        }
     }
 
     useEffect(() => {
@@ -66,6 +77,18 @@ export default function App(){
                 submit={addMovie}
                 btnText='Add Movie'
                 />
+
+                <h4 className='filter-form'> Filter By Genre </h4>
+                <select className='filter-form' onChange={handleFilter}>
+                    <option value='reset'> - All Movies - </option>
+                    <option value='action'> Action </option>
+                    <option value='animation'> Animation </option>
+                    <option value='drama'> Drama </option>
+                    <option value='fantasy'> Fantasy </option>
+                    <option value='horror'> Horror </option>
+                    <option value='romance'> Romance </option>
+                </select>
+
                 { movies.map(movie => 
                     <Movie 
                     {...movie} 

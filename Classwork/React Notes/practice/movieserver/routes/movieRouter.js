@@ -1,14 +1,6 @@
 const express = require('express')
 const movieRouter = express.Router()
-const { v4: uuidv4 } = require('uuid')
-
-
-const movies = [
-    {title: "Kill Bill Vol. 1", genre: "action", _id: uuidv4()},
-    {title: "Kill Bill Vol. 2", genre: "action", _id: uuidv4()},
-    {title: "Your Name", genre: "romance", _id: uuidv4()},
-    {title: "Ghost World", genre: "comedy", _id: uuidv4()}
-]
+const Movie = require('../models/movie.js')
 
 // movieRouter.get("/", (req,res) => { 
 //     res.send(movies)
@@ -21,64 +13,81 @@ const movies = [
 //     res.send(`Successfully added ${newMovie.title} to the database!`)
 // })
 
-// * alt syntax : method chaining wih .route()  * //
+// *** alt syntax : method chaining wih .route()  *** //
 
     // Get one movie
-movieRouter.get('/:movieId', (req, res, next) => {
-    const movieId = req.params.movieId
-    const foundMovie = movies.find(movie => movie._id === movieId)
-    if(!foundMovie){
-        // * async syntax
-        const error = new Error(`The movie with id ${movieId} was not found`)
-        res.status(500)
-        return next(error)
-        // ** synchronous syntax
-        // ** throw new Error(`No movie with matching id of ${movieId} was found.`)
+// movieRouter.get('/:movieId', (req, res, next) => {
+//     const movieId = req.params.movieId
+//     const foundMovie = movies.find(movie => movie._id === movieId)
+//     if(!foundMovie){
+//         // * async syntax
+//         const error = new Error(`The movie with id ${movieId} was not found`)
+//         res.status(500)
+//         return next(error)
+//         // ** synchronous syntax
+//         // ** throw new Error(`No movie with matching id of ${movieId} was found.`)
         
-    }
-    res.status(200).send(foundMovie)
-})
+//     }
+//     res.status(200).send(foundMovie)
+// })
 // Delete one movie
-    .delete('/:movieId', (req,res) => {
-        const movieId = req.params.movieId
-        const movieIndex = movies.findIndex(movie => movie._id === movieId)
-        movies.splice(movieIndex, 1)
-        res.send('Successfully deleted movie!')
+    movieRouter.delete('/:movieId', (req,res, next) => {
+        Movie.findOneAndDelete({_id: req.params.movieId}, (err, deletedItem) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(`Successfully deleted ${deletedItem.title} from the database!`)
+        })
     })
 // Update One movie
-    .put('/:movieId', (req, res) => {
-        const movieId = req.params.movieId
-        const movieIndex = movies.findIndex(movie => movie._id === movieId)
-        const updatedMovie = Object.assign(movies[movieIndex], req.body)
-        res.status(201).send(updatedMovie)
+    movieRouter.put('/:movieId', (req, res, next) => {
+        Movie.findOneAndUpdate(
+            {_id: req.params.movieId}, // find this one to update
+            req.body, // update the object with this data
+            {new: true}, // send back the updated version of object
+            (err, updatedItem) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            res.status(201).send(updatedItem)
+            }
+        )
     })
 
-    // Get by genre
-movieRouter.get('/search/genre', (req,res, next) => {
-    const genre = req.query.genre
-    const foundMovies = movies.filter(movie => movie.genre === genre)
-    if(!genre){
-        // * async syntax
-        const error = new Error('Must provide a genre!')
-        res.status(500)
-        return next(error)
-        // ** synchronous syntax
-        // ** throw new Error('Must provide a genre!')
-    }
-    res.status(200).res.send(foundMovies)
-})
+// Get by genre
+    movieRouter.get('/search/genre', (req,res, next) => {
+        Movie.find({ genre: req.query.genre}, (err, movies) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(movies)
+        })
+    })
 
 movieRouter.route('/')
 // Get all movies
-    .get((req,res) => {
-        res.status(200).send(movies)
+    .get((req, res, next) => {
+        Movie.find((err, movies) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(movies)
+        })
     })
 // Post one movie
-    .post((req,res) => {
-        const newMovie = req.body
-        newMovie._id = uuidv4()
-        movies.push(newMovie)
-        res.status(201).send(newMovie)
+    .post((req,res, next) => {
+        const newMovie = new Movie(req.body)
+        newMovie.save((err, savedMovie) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201).send(newMovie)
+        })
     })
 
 module.exports = movieRouter

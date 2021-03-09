@@ -53,3 +53,8 @@ input {
     padding: 10px;
     margin: 5px;
 }
+
+.filter-form {
+    width: 200px;
+    margin: 0 5px;
+}
