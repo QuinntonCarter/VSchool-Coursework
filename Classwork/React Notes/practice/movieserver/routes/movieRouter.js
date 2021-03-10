@@ -86,7 +86,7 @@ movieRouter.route('/')
                 res.status(500)
                 return next(err)
             }
-            return res.status(201).send(newMovie)
+            return res.status(201).send(savedMovie)
         })
     })
 
