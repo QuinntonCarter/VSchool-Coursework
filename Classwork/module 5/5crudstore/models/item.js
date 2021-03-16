@@ -9,6 +9,10 @@ const itemSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    dept: {
+        type: String,
+        required: true
     }
 })
 

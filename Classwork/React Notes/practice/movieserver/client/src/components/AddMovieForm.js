@@ -11,8 +11,6 @@ export default function AddMovieForm(props){
 
     function handleSubmit(e){
         e.preventDefault()
-        // adds movie w addMovie to database via props.submit functionality sent from app.js
-        // sends inputs and props._id to editMovie function in App.js
         props.submit(inputs, props._id)
         setInputs(initInputs)
     }
@@ -35,7 +33,7 @@ export default function AddMovieForm(props){
             onChange={handleChange} 
             placeholder="Genre" required>
             </input>
-    {/* edits movie w props.submit from movie.js (this submit is props.editMovie sent from app.js to movie.js and finally landing here to be used) */}
+
             <button onClick={props.submit}> {props.btnText} </button>
 
         </form>

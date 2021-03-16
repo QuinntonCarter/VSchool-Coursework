@@ -5,7 +5,7 @@ const Item = require('../models/item.js')
 
 // GET by price
     inventoryRouter.get('/search/price', (req, res, next) => {
-        Item.find({price: req.query.genre}, (err, items) => {
+        Item.find({price: req.query.price}, (err, items) => {
             if (err){
                 res.status(500)
                 return next(err)
@@ -14,8 +14,19 @@ const Item = require('../models/item.js')
         })
     })
 
+// GET by type
+inventoryRouter.get('/search/dept', (req, res, next) => {
+    Item.find({dept: req.query.dept}, (err, items) => {
+        if (err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(items)
+    })
+})
+
 // PUT(update) an item
-    inventoryRouter.put(':/itemId', (req, res, next) => {
+    inventoryRouter.put('/:itemId', (req, res, next) => {
         Item.findOneAndUpdate(
             {_id: req.params.ItemId},
             req.body,
@@ -31,7 +42,7 @@ const Item = require('../models/item.js')
     })
 
 // DELETE movie
-    inventoryRouter.delete(':/itemId', (req, res, next) => {
+    inventoryRouter.delete('/:itemId', (req, res, next) => {
         Item.findOneAndDelete({_id: req.params.itemId}, (err, deletedItem) => {
             if(err){
                 res.status(500)

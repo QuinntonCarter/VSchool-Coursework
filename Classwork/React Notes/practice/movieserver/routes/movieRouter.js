@@ -40,6 +40,7 @@ const Movie = require('../models/movie.js')
             return res.status(200).send(`Successfully deleted ${deletedItem.title} from the database!`)
         })
     })
+
 // Update One movie
     movieRouter.put('/:movieId', (req, res, next) => {
         Movie.findOneAndUpdate(
@@ -47,11 +48,11 @@ const Movie = require('../models/movie.js')
             req.body, // update the object with this data
             {new: true}, // send back the updated version of object
             (err, updatedItem) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            res.status(201).send(updatedItem)
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                res.status(201).send(updatedItem)
             }
         )
     })

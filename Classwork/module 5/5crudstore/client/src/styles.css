@@ -3,7 +3,7 @@
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: rgb(0, 0, 0);
 }
 
 input {
@@ -14,13 +14,60 @@ input {
     padding: 15px;
 }
 
+select {
+    padding: 4px;
+    margin: 10px;
+}
+
 form {
-    border: solid 1px #333;
     margin: 5px;
 }
 
 button {
     padding: 7px;
-    background-color: rgb(228, 255, 187);
+    margin: 6px;
+    background-color: rgb(255, 225, 91);
     border-radius: 8px;
+    font-weight: 600;
+}
+
+.menuDisp {
+    border: solid 1px #333;
+    margin: 5px;
+}
+
+
+.filterDisp {
+    margin: 5px;
+    border: solid 1px rgb(0, 0, 0);
+}
+
+.itemID {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 135px;
+}
+
+.itemID:hover {
+    color: rgb(252, 65, 65);
+    overflow: visible;
+}
+
+.item {
+    padding: 7px;
+}
+
+.itemTitle {
+    padding: 7px;
+}
+
+.editItem {
+    background-color: grey;
+    color: white;
+    margin: 7px;
+}
+
+.delItem {
+    background-color: rgb(255, 109, 109);
 }

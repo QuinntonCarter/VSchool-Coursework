@@ -27,15 +27,8 @@ export default function App(){
             })
             .catch(err => console.log(err))
         }
-            // BETA for setting alert about POST error
-            //     .catch(err => {
-            //         setErr({errMsg: err})
-            //     if(error){
-            //         console.log(error.errMsg)
-            //     }
-            // })}
 
-        // receives arg as movieId from Movie component
+    // receives arg as movieId from Movie component
     function deleteMovie(movieId){
         // finds movie with matching ids route
         axios.delete(`/movies/:${movieId}`)
@@ -74,7 +67,7 @@ export default function App(){
             <div className='movie-container'>
                 <AddMovieForm
                 // sent add movie function via 'submit' prop
-                submit={addMovie}
+                addMovie={addMovie}
                 btnText='Add Movie'
                 />
 
@@ -94,7 +87,7 @@ export default function App(){
                     {...movie} 
                     deleteMovie={deleteMovie}
                     editMovie={editMovie}
-                    key={movie.title}/>
+                    key={movie._id}/>
                 )}
             </div>
         </>
