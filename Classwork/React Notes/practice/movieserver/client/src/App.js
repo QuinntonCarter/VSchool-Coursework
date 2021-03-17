@@ -67,7 +67,7 @@ export default function App(){
             <div className='movie-container'>
                 <AddMovieForm
                 // sent add movie function via 'submit' prop
-                addMovie={addMovie}
+                submit={addMovie}
                 btnText='Add Movie'
                 />
 
