@@ -34,7 +34,7 @@ export default function App(){
 
 // FILTER GET by type
     function filterTypeSelection(e){
-        if(e.target.value === ''){
+        if(e.target.value === 'reset'){
             getInventory()
         } else {
             axios.get(`/inventory/search/dept?dept=${e.target.value}`)
@@ -42,6 +42,16 @@ export default function App(){
                 .catch(err => alert(err))
         }
     }
+
+// DELETE item
+    function deleteItem(itemId){
+        axios.delete(`/inventory/:${itemId}`)
+            .then(res => {
+                setItems(prevItems => prevItems.filter(item => item._id !== itemId))
+            })
+            .catch(err => console.log(err))
+    }
+
 // BETA * FILTER GET by price
     // function filterPriceSelection(e){
     //     if(e.target.value === ''){
@@ -59,6 +69,7 @@ export default function App(){
     return(
         <div className='inventoryContainer'>
             <div className='filterDisp'>
+                
                 <ItemForm
                 submit={addItem}
                 btnText='Add Item'
@@ -72,26 +83,28 @@ export default function App(){
                     <option value='Household'> Household </option>
                 </select>
                 <hr style={{backgroundColor: 'black'}}/>
-                {/* 
+
+                </div>
+                {/*
                 <select>
-                    <option value=''> - Price - </option>
-                    <option value='< $10'> less than $10 </option>
-                    <option value='< $50'> less than $50 </option>
-                    <option value='< $100'> less than $100 </option>
-                    <option value='< $200'> less than $200 </option>
-                    <option value='< $500'> less than $500 </option>
-                    <option value='< $1000'> less than $1000</option>
-                </select> */}
+                <option value=''> - Price - </option>
+                <option value='< $10'> less than $10 </option>
+                <option value='< $50'> less than $50 </option>
+                <option value='< $100'> less than $100 </option>
+                <option value='< $200'> less than $200 </option>
+                <option value='< $500'> less than $500 </option>
+                <option value='< $1000'> less than $1000</option>
+            </select> */}
 
             
                     {items.map(item =>
                         <ItemCom
                         {...item}
-                        submit={editItem}
+                        editItem={editItem}
+                        deleteItem={deleteItem}
                         key={item._id}
                         />
                         )}
-                </div>
         </div>
     )
 }

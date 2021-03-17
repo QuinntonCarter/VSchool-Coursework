@@ -25,6 +25,6 @@ app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 })
 
-app.listen(5000, () => {
-    console.log('The server is running on port 5000!!')
+app.listen(9000, () => {
+    console.log('The server is running on port 9000!!')
 })

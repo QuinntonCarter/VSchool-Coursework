@@ -68,6 +68,7 @@ button {
     margin: 7px;
 }
 
-.delItem {
+.deleteItem {
     background-color: rgb(255, 109, 109);
+    margin: 7px;
 }
