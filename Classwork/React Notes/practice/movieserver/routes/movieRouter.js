@@ -26,7 +26,6 @@ const Movie = require('../models/movie.js')
 //         return next(error)
 //         // ** synchronous syntax
 //         // ** throw new Error(`No movie with matching id of ${movieId} was found.`)
-        
 //     }
 //     res.status(200).send(foundMovie)
 // })
@@ -52,7 +51,7 @@ const Movie = require('../models/movie.js')
                     res.status(500)
                     return next(err)
                 }
-                res.status(201).send(updatedItem)
+                return res.status(201).send(updatedItem)
             }
         )
     })
@@ -80,7 +79,7 @@ movieRouter.route('/')
         })
     })
 // Post one movie
-    .post((req,res, next) => {
+    .post((req, res, next) => {
         const newMovie = new Movie(req.body)
         newMovie.save((err, savedMovie) => {
             if (err){

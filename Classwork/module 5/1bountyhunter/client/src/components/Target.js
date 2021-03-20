@@ -5,6 +5,7 @@ export default function Target(props){
     const [editToggle, setEditToggle] = useState(false)
     const {firstName, lastName, affiliation, status, _id} = props
 
+
     return(
         <div className='targetDisplay'>
         { !editToggle ?
@@ -13,11 +14,10 @@ export default function Target(props){
                 <h1> First Name: {firstName}
                 <br/> Last Name: {lastName} </h1>
                 <h2> Affiliation: {affiliation} </h2>
-                <h2> Status: {status} </h2>
                 <button 
                     className='deleteTarget'
                     onClick={() => props.delete(_id)}
-                > Delete </button>
+                > Eliminated </button>
                 <button 
                     className='editTarget'
                     onClick={() => setEditToggle(prevToggle => !prevToggle)}
@@ -29,9 +29,10 @@ export default function Target(props){
                     firstName={firstName}
                     lastName={lastName}
                     affiliation={affiliation}
-                    status={status}
                     _id={_id}
                     submit={props.editTarget}
+                    btnText={'Save Edit'}
+                    setToggle={setEditToggle}
                 />
                 <button 
                     onClick={() => setEditToggle(prevToggle => !prevToggle)}

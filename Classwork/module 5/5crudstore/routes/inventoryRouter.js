@@ -28,7 +28,7 @@ inventoryRouter.get('/search/dept', (req, res, next) => {
 // PUT(update) an item
     inventoryRouter.put('/:itemId', (req, res, next) => {
         Item.findOneAndUpdate(
-            {_id: req.params.ItemId},
+            {_id: req.params.itemId},
             req.body,
             {new: true},
             (err, updatedItem) => {
@@ -36,7 +36,7 @@ inventoryRouter.get('/search/dept', (req, res, next) => {
                     res.status(500)
                     return next(err)
                 }
-                res.status(201).send(updatedItem)
+                return res.status(201).send(updatedItem)
             }
         )
     })

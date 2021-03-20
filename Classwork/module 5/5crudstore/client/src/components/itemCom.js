@@ -29,6 +29,7 @@ export default function Item(props){
                 btnText='Save Edit'
                 // changes the function of 'submit' to props.submitEdit when toggle = true
                 submit={props.editItem}
+                setToggle={setToggle}
             />
             <button className='editItem' onClick={() => setToggle(prevState => !prevState)}> Close </button>
             <hr/>

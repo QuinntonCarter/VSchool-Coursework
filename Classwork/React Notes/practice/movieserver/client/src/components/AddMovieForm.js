@@ -13,6 +13,11 @@ export default function AddMovieForm(props){
         e.preventDefault()
         props.submit(inputs, props._id)
         setInputs(initInputs)
+        if(props._id){
+            props.setToggle(prevState => {
+                return !prevState
+            })
+        }
     }
     
     return (

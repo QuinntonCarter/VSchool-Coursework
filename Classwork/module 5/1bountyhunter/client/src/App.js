@@ -3,6 +3,8 @@ import axios from 'axios'
 import BountyForm from './components/bountyForm.js'
 import Target from './components/target.js'
 
+// fix edit and delete //
+
 export default function App(){
     const [targets, setTargets] = useState([])
     
@@ -21,7 +23,7 @@ export default function App(){
     }
 
     function deleteTarget(targetId){
-        axios.delete(`/targets/:${targetId}`)
+        axios.delete(`/targets/${targetId}`)
             .then(res => {
                 setTargets(prevTargets => prevTargets.filter(target => target._id !== targetId))
             })
@@ -44,6 +46,7 @@ export default function App(){
         <div>
             <BountyForm
             submit={addTarget}
+            btnText={'Add Target'}
             />
 
         {targets.map(target => 

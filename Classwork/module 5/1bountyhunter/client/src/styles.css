@@ -8,6 +8,11 @@ input {
     border-radius: 3px;
 }
 
+select {
+    padding: 5px;
+    margin: 15px;
+}
+
 form.formDisplay {
     border: solid black 1px;
     background-color: rgb(74, 107, 71);
@@ -27,7 +32,7 @@ h2 {
 }
 
 .deleteTarget {
-    background-color: rgb(206, 87, 71);
+    background-color: rgb(168, 53, 0);
     color: white;
     border-radius: 8px;
     margin: 8px;

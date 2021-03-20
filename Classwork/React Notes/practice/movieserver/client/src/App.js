@@ -3,6 +3,8 @@ import axios from 'axios'
 import Movie from './components/Movie.js'
 import AddMovieForm from './components/AddMovieForm.js'
 
+// this is broken somewhere so use CRUDstore as ref for proper formatting of like projects
+// fix if bored
 
 export default function App(){
     const [movies, setMovies] = useState([])
@@ -31,7 +33,7 @@ export default function App(){
     // receives arg as movieId from Movie component
     function deleteMovie(movieId){
         // finds movie with matching ids route
-        axios.delete(`/movies/:${movieId}`)
+        axios.delete(`/movies/${movieId}`)
             .then(res => {
                 // filters out movie marked for deletion from list of movies and sets in state w setMovies
                 setMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId))

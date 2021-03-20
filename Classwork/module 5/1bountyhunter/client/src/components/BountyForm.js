@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 export default function BountyForm(props){
     const initInputs = { firstName: props.firstName || '', lastName: props.lastName || '', affiliation: props.affiliation || '' }
     const [inputs, setInputs] = useState(initInputs)
+    
 
     function handleChange(e){
         const {name, value} = e.target
@@ -13,6 +14,11 @@ export default function BountyForm(props){
         e.preventDefault()
         props.submit(inputs, props._id)
         setInputs(initInputs)
+        if(props._id){
+            props.setToggle(prevState => {
+                return !prevState
+            })
+        }
     }
 
     return(
@@ -24,6 +30,7 @@ export default function BountyForm(props){
             placeholder='First Name'
             value={inputs.firstName}
             onChange={handleChange}
+            required
             />
 
             <input 
@@ -32,17 +39,16 @@ export default function BountyForm(props){
             placeholder='Last Name'
             value={inputs.lastName}
             onChange={handleChange}
-            />
-            
-            <input
-            type='text'
-            name='affiliation'
-            placeholder='Affiliation'
-            value={inputs.affiliation}
-            onChange={handleChange}
+            required
             />
 
-            <button onClick={props.submit} className='addTarget'> Add Target </button>
+            <select name='affiliation' value={inputs.affiliation} onChange={handleChange} required>
+                <option name='affiliation' value=''> - Affiliation - </option>
+                <option name='affiliation' value='Jedi'> Jedi </option>
+                <option name='affiliation' value='Sith'> Sith </option>
+            </select>
+
+            <button onClick={props.submit} className='addTarget'> {props.btnText} </button>
 
         </form>
     )

@@ -11,9 +11,13 @@ export default function ItemForm(props){
 
     function handleSubmit(e){
         e.preventDefault()
-
         props.submit(inputs, props._id)
         setInputs(initInputs)
+        if(props._id){
+        props.setToggle(prevState => {
+            return !prevState
+        })
+        }
     }
 
 
@@ -24,11 +28,11 @@ export default function ItemForm(props){
                     >
                 Add Item</h4>
                 <input 
+                    type='text'
                     name='name' 
                     value={inputs.name}
                     onChange={handleChange} 
                     placeholder='Item Name' 
-                    type='text' 
                     required></input>
                 <input 
                     type='text' 
@@ -37,14 +41,14 @@ export default function ItemForm(props){
                     onChange={handleChange} 
                     placeholder='Input Price' 
                     required></input>
-                <input 
+                {/* <input 
                     type='text' 
                     name='dept' 
                     value={inputs.dept} 
                     onChange={handleChange} 
                     placeholder='Input Food or Household' 
-                    required></input>
-                {/* <select
+                    required></input> */}
+                <select
                     type='text'
                     name='dept'
                     value={inputs.dept}
@@ -53,7 +57,7 @@ export default function ItemForm(props){
                     <option value=''> - Department - </option>
                     <option value='Food'> Food </option>
                     <option value='Household'> Household </option>
-                </select> */}
+                </select>
                 {/* submit is from itemCom when toggle condition in itemCom.js is met, otherwise is from app.js */}
                 <button style={{cursor: 'pointer'}} onClick={props.submit}> {props.btnText} </button>
             </form>

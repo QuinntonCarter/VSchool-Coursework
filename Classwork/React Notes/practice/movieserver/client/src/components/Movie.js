@@ -35,6 +35,7 @@ export default function Movie(props){
                         btnText='Submit Edit'
                     // adds edit functionality to button w/ props.editMovie sent from app.js
                         submit={props.editMovie}
+                        setEditToggle={setEditToggle}
                     />
                     <button
                     // toggles state to opposite of whatever edit toggle was set to

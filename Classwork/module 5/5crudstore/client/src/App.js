@@ -40,7 +40,6 @@ export default function App(){
                 setItems(prevItems => prevItems.map(item => item._id !== itemId ? item : res.data))
             )
             .catch(err=> console.log(err))
-            console.log(1)
         }
 
 // FILTER GET by type

@@ -10,11 +10,6 @@ const targetSchema = new Schema({
         type: String,
         required: true
     },
-    status: {
-        type: String,
-        enum: ['Dead', 'Alive', 'Missing'],
-        required: true
-    },
     affiliation: {
         type: String,
         enum: ['Sith', 'Jedi'],
