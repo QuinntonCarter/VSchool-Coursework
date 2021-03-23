@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function BountyForm(props){
-    const initInputs = {firstName: props.firstName || '', lastName: props.lastName || '', affilitaion: props.affiliation || ''}
+    const initInputs = {firstName: props.firstName || '', lastName: props.lastName || '', affilitaion: props.affiliation || '', status: props.status || ''}
     const [inputs, setInputs] = useState(initInputs)
 
     function handleChange(e){
@@ -12,11 +12,11 @@ export default function BountyForm(props){
     function handleSubmit(e){
         e.preventDefault()
         props.submit(inputs, props._id)
-        // if(props._id){
-        //     props.setToggle(prevState => {
-        //         return !prevState
-        //     })
-        // }
+        if(props._id){
+            props.setToggle(prevState => {
+                return !prevState
+            })
+        }
     }
 
     return(
@@ -49,6 +49,16 @@ export default function BountyForm(props){
                     <option value=''> - Affiliation - </option>
                     <option value='Jedi'> Jedi </option>
                     <option value='Sith'> Sith </option>
+                </select>
+                
+                <select
+                    type='text'
+                    name='status'
+                    value={inputs.status}
+                    onChange={handleChange}>
+                    <option value=''> - Status - </option>
+                    <option value='Alive'> Alive </option>
+                    <option value='Dead'> Dead </option>
                 </select>
 
                 <button style={{cursor: 'pointer'}} onClick={props.submit}> {props.btnText} </button>

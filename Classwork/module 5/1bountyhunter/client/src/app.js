@@ -51,6 +51,23 @@ export default function App(){
         }
     }
 
+    function filterStatusSelection(e){
+        if(e.target.value === ''){
+            getTargets()
+        } else {
+        axios.get(`/targets/search/status?status=${e.target.value}`)
+            .then(res => setTargets(res.data))
+            .catch(err => console.log(err))
+        }
+    }
+
+    function markEliminated(targetId){
+        axios.put(`/targets/${targetId}`)
+            .then(res => {setTargets(prevTargets => prevTargets.map(target => target._id === targetId ? target.status: 'Dead'))
+        })
+            .catch(err => console.log(err))
+    }
+
     useEffect(() => {
         getTargets()
     }, [])
@@ -69,6 +86,11 @@ export default function App(){
                 <option value='Jedi'> Jedi </option>
                 <option value='Sith'> Sith </option>
             </select>
+            <select onChange={filterStatusSelection}>
+                <option value=''> - Status - </option>
+                <option value='Alive'> Alive </option>
+                <option value='Dead'> Dead </option>
+            </select>
             <hr style={{backgroundColor: 'black'}}/>
 
             {targets.map(target =>
@@ -76,6 +98,7 @@ export default function App(){
                 {...target}
                 editTarget={editTarget}
                 deleteTarget={deleteTarget}
+                markEliminated={markEliminated}
                 key={target._id}
                 />
                 )}

@@ -14,6 +14,10 @@ const targetSchema = new Schema({
     affiliation: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        default: 'Alive'
     }
 })
 

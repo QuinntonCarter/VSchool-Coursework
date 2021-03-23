@@ -3,17 +3,20 @@ import BountyForm from './bountyForm.js';
 
 export default function Target(props){
     const [toggle, setToggle] = useState(false)
-    const {firstName, lastName, affiliation, _id} = props
+    const {firstName, lastName, affiliation, status, _id} = props
+    
 
     return(
         <div className='target'>
             {!toggle ? 
                 <>
-                    <h1 className='targetName'> First Name: {`${firstName}`}</h1> 
-                    <h1 className='targetName'> Last Name: {`${lastName}`} </h1>
-                    <h2 className='affiliation'> Affiliation: {`${affiliation}`} </h2>
+                    <h1 className='targetName'> First Name: {firstName}</h1> 
+                    <h1 className='targetName'> Last Name: {lastName} </h1>
+                    <h2 className='affiliation'> Affiliation: {affiliation} </h2>
+                    <h2 style={{padding: '7px'}}> Status: {status} </h2>
                     <button className='editTarget' onClick={() => setToggle(prevState => !prevState)}> Edit Target </button>
                     <button className='deleteTarget' onClick={() => props.deleteTarget(_id)}> Delete </button>
+                    <button style={{backgroundColor: 'navy', cursor: 'pointer'}} onClick={() => props.markEliminated(_id)}> Mark Eliminated </button>
                     <hr/>
                 </>
         :

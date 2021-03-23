@@ -13,10 +13,21 @@ targetRouter.get('/search/affiliation', (req, res, next) => {
     })
 })
 
+// GET by status
+targetRouter.get('/search/status', (req, res, next) => {
+    Target.find({status: req.query.status}, (err, targets) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        res.status(200).send(targets)
+    })
+})
+
 // PUT(update) a target
 targetRouter.put('/:targetId', (req, res, next) => {
     Target.findOneAndUpdate(
-        {id: req.params.targetId},
+        {_id: req.params.targetId},
         req.body,
         {new: true},
         (err, updatedTarget) => {
@@ -32,7 +43,7 @@ targetRouter.put('/:targetId', (req, res, next) => {
 // DELETE target
 targetRouter.delete('/:targetId', (req, res, next) => {
     Target.findOneAndDelete(
-        {id: req.params.targetId}, (err) => {
+        {_id: req.params.targetId}, (err) => {
             if(err){
                 res.status(500)
                 return next(err)
