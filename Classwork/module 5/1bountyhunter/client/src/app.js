@@ -17,7 +17,7 @@ export default function App(){
 // POST new target
     function addTarget(newTarget){
         axios.post('/targets', newTarget)
-            .than(res => {
+            .then(res => {
                 setTargets(prevTargets => [...prevTargets, res.data])
             })
             .catch(err => console.log(err))

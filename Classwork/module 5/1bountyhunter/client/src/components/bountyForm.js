@@ -46,7 +46,7 @@ export default function BountyForm(props){
                     <option value='Jedi'> Jedi </option>
                     <option value='Sith'> Sith </option>
                 </select>
-                {/* submit is from itemCom when toggle condition in itemCom.js is met, otherwise is from app.js */}
+
                 <button style={{cursor: 'pointer'}} onClick={props.submit}> {props.btnText} </button>
         </form>
     )

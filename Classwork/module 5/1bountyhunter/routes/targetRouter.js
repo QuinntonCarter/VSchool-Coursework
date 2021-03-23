@@ -41,6 +41,7 @@ targetRouter.delete('/:targetId', (req, res, next) => {
         }
     )
 })
+
 targetRouter.route('/')
     .get((req, res, next) => {
         Target.find((err, targets) => {

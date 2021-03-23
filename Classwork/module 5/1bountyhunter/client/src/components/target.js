@@ -11,8 +11,8 @@ export default function Target(props){
                 <>
                     <h1 className='targetName'> {`${firstName} ${lastName}`} </h1>
                     <h2 className='affiliation'> {`${affiliation}`} </h2>
-                    <button className='editItem' onClick={() => setToggle(prevState => !prevState)}> Edit Item </button>
-                    <button className='deleteItem' onClick={() => props.deleteItem(_id)}> Delete </button>
+                    <button className='editTarget' onClick={() => setToggle(prevState => !prevState)}> Edit Target </button>
+                    <button className='deleteTarget' onClick={() => props.deleteTarget(_id)}> Delete </button>
                     <hr/>
                 </>
         :
@@ -25,10 +25,10 @@ export default function Target(props){
                         // changes the value of btnText to 'Save Edit' when toggle = true
                         btnText='Save Edit'
                         // changes the function of 'submit' to props.submitEdit when toggle = true
-                        submit={props.editItem}
+                        submit={props.editTarget}
                         setToggle={setToggle}
                     />
-                    <button className='editItem' onClick={() => setToggle(prevState => !prevState)}> Close </button>
+                    <button className='editTarget' onClick={() => setToggle(prevState => !prevState)}> Close </button>
                     <hr/>
                 </>
             }
