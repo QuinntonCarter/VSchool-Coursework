@@ -44,15 +44,16 @@ button {
     border: solid 1px rgb(0, 0, 0);
 }
 
-.affiliation {
-    width: 135px;
-}
 
 .target {
     padding: 7px;
 }
 
 .targetName {
+    padding: 7px;
+}
+
+.affiliation {
     padding: 7px;
 }
 
@@ -64,7 +65,7 @@ button {
 }
 
 .deleteTarget {
-    background-color: rgb(255, 109, 109);
+    background-color: rgb(158, 8, 8);
     margin: 7px;
     cursor: pointer;
 }

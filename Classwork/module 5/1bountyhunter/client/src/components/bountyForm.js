@@ -12,7 +12,11 @@ export default function BountyForm(props){
     function handleSubmit(e){
         e.preventDefault()
         props.submit(inputs, props._id)
-
+        // if(props._id){
+        //     props.setToggle(prevState => {
+        //         return !prevState
+        //     })
+        // }
     }
 
     return(

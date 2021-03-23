@@ -13,7 +13,6 @@ const targetSchema = new Schema({
     },
     affiliation: {
         type: String,
-        enum: ['Jedi', 'Sith'],
         required: true
     }
 })

@@ -9,8 +9,9 @@ export default function Target(props){
         <div className='target'>
             {!toggle ? 
                 <>
-                    <h1 className='targetName'> {`${firstName} ${lastName}`} </h1>
-                    <h2 className='affiliation'> {`${affiliation}`} </h2>
+                    <h1 className='targetName'> First Name: {`${firstName}`}</h1> 
+                    <h1 className='targetName'> Last Name: {`${lastName}`} </h1>
+                    <h2 className='affiliation'> Affiliation: {`${affiliation}`} </h2>
                     <button className='editTarget' onClick={() => setToggle(prevState => !prevState)}> Edit Target </button>
                     <button className='deleteTarget' onClick={() => props.deleteTarget(_id)}> Delete </button>
                     <hr/>

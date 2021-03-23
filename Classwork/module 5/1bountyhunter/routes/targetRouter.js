@@ -19,12 +19,12 @@ targetRouter.put('/:targetId', (req, res, next) => {
         {id: req.params.targetId},
         req.body,
         {new: true},
-        (err, updatedItem) => {
+        (err, updatedTarget) => {
             if(err){
                 res.status(500)
                 return next(err)
             }
-            return res.status(201).send(updatedItem)
+            return res.status(201).send(updatedTarget)
         }
     )
 })
@@ -32,12 +32,12 @@ targetRouter.put('/:targetId', (req, res, next) => {
 // DELETE target
 targetRouter.delete('/:targetId', (req, res, next) => {
     Target.findOneAndDelete(
-        {id: req.params.targetId}, (err, deletedItem) => {
+        {id: req.params.targetId}, (err) => {
             if(err){
                 res.status(500)
                 return next(err)
             }
-            return res.status(200).send(`Successfully deleted ${deletedItem.firstName} ${deletedItem.lastName} from the database.`)
+            return res.status(200).send(`Successfully deleted target from the database.`)
         }
     )
 })

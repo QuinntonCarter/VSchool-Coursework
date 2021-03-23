@@ -10,7 +10,7 @@ export default function App(){
     function getTargets(){
         axios.get('/targets')
             // .then(res => setTargets(res.data))
-            .then(res => console.log(res))
+            .then(res => setTargets(res.data))
             .catch(err => console.log(err))
     }
 
@@ -35,9 +35,9 @@ export default function App(){
 // PUT/update target
     function editTarget(updates, targetId){
         axios.put(`/targets/${targetId}`, updates)
-            .then(res => 
+            .then(res => {
                 setTargets(prevTargets => prevTargets.map(target => target._id !== targetId ? target : res.data))
-                )
+            })
             .catch(err => console.log(err))
     }
 
@@ -47,7 +47,7 @@ export default function App(){
         } else {
             axios.get(`/targets/search/affiliation?affiliation=${e.target.value}`)
                 .then(res => setTargets(res.data))
-                .catch(err => alert(err))
+                .catch(err => console.log(err))
         }
     }
 
