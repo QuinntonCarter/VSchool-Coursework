@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: rgb(0, 0, 0);
+}
+
+input {
+    border-radius: 8px;
+    border: 1px solid #333;
+    height: 30px;
+    margin: 10px;
+    padding: 15px;
+}
+
+select {
+    padding: 4px;
+    margin: 10px;
+}
+
+form {
+    margin: 5px;
+}
+
+button {
+    color: white;
+    padding: 9px;
+    margin: 6px;
+    background-color: rgb(0, 99, 69);
+    border-radius: 8px;
+    font-weight: 600;
+    border: transparent;
+}
+
+.menuDisp {
+    border: solid 1px #333;
+    margin: 5px;
+}
+
+
+.filterDisp {
+    margin: 5px;
+    border: solid 1px rgb(0, 0, 0);
+}
+
+.affiliation {
+    width: 135px;
+}
+
+.target {
+    padding: 7px;
+}
+
+.targetName {
+    padding: 7px;
+}
+
+.editTarget {
+    background-color: grey;
+    color: white;
+    margin: 7px;
+    cursor: pointer;
+}
+
+.deleteTarget {
+    background-color: rgb(255, 109, 109);
+    margin: 7px;
+    cursor: pointer;
+}
+
+h4 {
+    color: rgb(59, 59, 59);
+}

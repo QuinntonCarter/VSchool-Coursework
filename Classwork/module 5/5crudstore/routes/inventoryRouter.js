@@ -41,7 +41,7 @@ inventoryRouter.get('/search/dept', (req, res, next) => {
         )
     })
 
-// DELETE movie
+// DELETE item
     inventoryRouter.delete('/:itemId', (req, res, next) => {
         Item.findOneAndDelete({_id: req.params.itemId}, (err, deletedItem) => {
             if(err){
