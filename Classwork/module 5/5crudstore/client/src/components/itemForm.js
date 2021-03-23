@@ -41,13 +41,7 @@ export default function ItemForm(props){
                     onChange={handleChange} 
                     placeholder='Input Price' 
                     required></input>
-                {/* <input 
-                    type='text' 
-                    name='dept' 
-                    value={inputs.dept} 
-                    onChange={handleChange} 
-                    placeholder='Input Food or Household' 
-                    required></input> */}
+
                 <select
                     type='text'
                     name='dept'
