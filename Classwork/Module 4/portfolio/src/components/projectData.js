@@ -1,7 +1,7 @@
 export const projectData = [
     {
         title: 'COOL project 1',
-        description: 'soooo cool check it out the ladies love it',
+        description: 'soooo cool check it out I love it',
         link: 'https://www.webhamster.com/',
         imgSrc: 'https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme.jpg'
     },

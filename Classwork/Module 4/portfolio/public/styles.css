@@ -1,6 +1,6 @@
 * {
     background-color: black;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 body {
@@ -29,7 +29,7 @@ body {
 
 nav.nav {
     font-size: 20px;
-    padding: 33px;
+    padding: 17px;
     color: white;
 }
 
@@ -66,13 +66,13 @@ footer {
     display: block;
     justify-content: center;
     text-align: center;
-    padding: 33px;
+    /* padding: 1px; */
     color: white;
 }
 
 footer > i {
     cursor: pointer;
-    font-size: 70px;
+    font-size: 40px;
     padding-left: 30px;
     padding-right: 30px;
     color: white;
@@ -84,47 +84,129 @@ footer > i {
 div.appDisp {
     display: flex;
     flex-wrap: nowrap; 
-    overflow: auto;
+    overflow-x: scroll;
+    position: relative;
     /* border: solid 3px rgb(0, 148, 148); */
 }
 
 div.appDisp > div {
     flex: 0 0 auto;
-    margin: 40px;
+    margin: 30px;
     padding: 15px;
-    height: 400px;
+    height: 485px;
     width: 89%;
     z-index: 0;
     color: white;
-    /* border: solid red 5px; */
     }
+    
 
-    /* add ability to tab to next (try nav-index) individual project onClick of i */
-    /* add css hover affect? maybe: more opaque to less on hover */
-div.appDisp > i.fas {
+    /* project navigation */
+button > i.fa-chevron-left {
     cursor: pointer;
     background-color: transparent;
+    color: rgba(255, 255, 255, 0.377);
+    border: none;
     will-change: color;
     transition: color 150ms;
-    position: fixed;
-    border: orange solid;
-    z-index: 8;
-    font-size: 124px;
-    margin-left: 87vw;
-    margin-top: 320px;
-    color: rgba(255, 255, 255, 0.377);
+    /* position: fixed; */
+    /* border: orange solid; */
+    /* z-index: 8; */
+    font-size: 34px;
+    /* margin-left: 38.5vw;
+    margin-top: 490px; */
 }
 
-div.appDisp > i.fas:hover {
+button > i.fa-chevron-right {
+    cursor: pointer;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.377);
+    border: none;
+    will-change: color;
+    transition: color 150ms;
+    /* position: fixed; */
+    /* border: orange solid; */
+    /* z-index: 8; */
+    font-size: 34px;
+    /* margin-left: 58.7vw;
+    margin-top: 490px; */
+}
+
+button {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+button:focus {
+    outline: none;
+}
+
+div.navDisp > i.fas:hover {
     transition: color 450ms;
     color: rgba(255, 255, 255, 0.952);
 }
 
+.material-icons {
+    background-color: transparent;
+    /* position: fixed; */
+    /* debugging */
+    /* border: orange solid; */
+    /* z-index: 8; */
+    color: rgba(255, 255, 255, 0.377);
+    margin-top: 5px;
+    cursor: default;
+}
+
+div.navDisp {
+    z-index: 8;
+    margin: auto;
+    background-color: transparent;
+    position: absolute;
+    margin-left: 40vw;
+    margin-top: -90px;
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15% 15% 15%;
+    width: 300px;
+}
+
+/* hardcode positioning */
+/* div.appDisp > #displayProject-One {
+    margin-left: 42.6vw;
+}
+
+div.appDisp > #displayProject-Two {
+    margin-left: 46.6vw;
+}
+
+div.appDisp > #displayProject-Three {
+    margin-left: 50.6vw;
+}
+
+div.appDisp > #displayProject-Four {
+    margin-left: 54.6vw;
+} */
+
 /* project */
 div.project {
-    color: pink;
+    
 }
 
 .project > h1, p, i{
     background-color: transparent;
 }
+
+img {
+    width: 25vw;
+    height: 25vw;
+    margin-left: 30vw;
+    z-index: 0;
+    opacity: 80%;
+    border: solid 2px orange;
+}
+
+p.desc {
+    z-index: 3;
+}
+
+/*  add break points that switch the nav arrows to the middle and
+on either side of project display div for tablet. 
+consider design for phone display. */

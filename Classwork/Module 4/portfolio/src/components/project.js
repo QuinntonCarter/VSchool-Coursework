@@ -1,5 +1,6 @@
 import React from 'react'
 
+// each project's display blueprint
 export default function Project(props){
     const { title, desc, link, img } = props
     
@@ -8,8 +9,9 @@ export default function Project(props){
     <div className='project'>
         <h1> {title} </h1>
         <hr/>
-        <p> {desc} </p>
-        <i href={link} class="fas fa-asterisk"> {link} </i>
+        <img src={img}></img>
+        <p className='desc'> {desc} </p>
+        <i href={link} className="fas fa-asterisk"> {link} </i>
     </div>
     )
 }
