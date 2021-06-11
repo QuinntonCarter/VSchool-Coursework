@@ -9,7 +9,6 @@ export default function App(){
 // GET targets from DB
     function getTargets(){
         axios.get('/targets')
-            // .then(res => setTargets(res.data))
             .then(res => setTargets(res.data))
             .catch(err => console.log(err))
     }

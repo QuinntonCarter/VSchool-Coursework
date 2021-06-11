@@ -1,13 +1,16 @@
 * {
     background-color: black;
-    /* overflow-y: hidden; */
+}
+
+html {
+    overflow-y: scroll;
 }
 
 body {
     position: relative;
 }
-/* Nav */
 
+/* Nav */
 .name {
     font-size: 40px;
 }
@@ -66,7 +69,6 @@ footer {
     display: block;
     justify-content: center;
     text-align: center;
-    /* padding: 1px; */
     color: white;
 }
 
@@ -80,25 +82,29 @@ footer > i {
 
 
 /* React */
-
-div.appDisp {
+div.slideContainer {
     display: flex;
-    flex-wrap: nowrap; 
     overflow-x: scroll;
+    scroll-snap-type: x mandatory;
     position: relative;
-    /* border: solid 3px rgb(0, 148, 148); */
 }
 
-div.appDisp > div {
-    flex: 0 0 auto;
-    margin: 30px;
+.slide {
+    scroll-snap-align: start;
+    margin: 10px;
     padding: 15px;
     height: 485px;
-    width: 89%;
+    width: 100%;
     z-index: 0;
     color: white;
+    display: flex;
+    border:red solid;
+    float: left
     }
-    
+
+    .slideDesc {
+        margin: 20px;
+    }
 
     /* project navigation */
 button > i.fa-chevron-left {
@@ -108,12 +114,7 @@ button > i.fa-chevron-left {
     border: none;
     will-change: color;
     transition: color 150ms;
-    /* position: fixed; */
-    /* border: orange solid; */
-    /* z-index: 8; */
     font-size: 34px;
-    /* margin-left: 38.5vw;
-    margin-top: 490px; */
 }
 
 button > i.fa-chevron-right {
@@ -123,12 +124,7 @@ button > i.fa-chevron-right {
     border: none;
     will-change: color;
     transition: color 150ms;
-    /* position: fixed; */
-    /* border: orange solid; */
-    /* z-index: 8; */
     font-size: 34px;
-    /* margin-left: 58.7vw;
-    margin-top: 490px; */
 }
 
 button {
@@ -147,12 +143,8 @@ div.navDisp > i.fas:hover {
 
 .material-icons {
     background-color: transparent;
-    /* position: fixed; */
-    /* debugging */
-    /* border: orange solid; */
-    /* z-index: 8; */
     color: rgba(255, 255, 255, 0.377);
-    margin-top: 5px;
+    margin-top: 8px;
     cursor: default;
 }
 
@@ -167,23 +159,6 @@ div.navDisp {
     grid-template-columns: 15% 15% 15% 15% 15% 15%;
     width: 300px;
 }
-
-/* hardcode positioning */
-/* div.appDisp > #displayProject-One {
-    margin-left: 42.6vw;
-}
-
-div.appDisp > #displayProject-Two {
-    margin-left: 46.6vw;
-}
-
-div.appDisp > #displayProject-Three {
-    margin-left: 50.6vw;
-}
-
-div.appDisp > #displayProject-Four {
-    margin-left: 54.6vw;
-} */
 
 /* project */
 div.project {

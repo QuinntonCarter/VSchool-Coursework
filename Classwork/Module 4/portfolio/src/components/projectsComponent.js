@@ -6,14 +6,10 @@ import { projectData } from './projectData.js'
 
 export default function ProjectsComponent(){
 
-    function scroll(n){
-        console.log(n)
-    }
 
     return(
         <>
-            <div className='appDisp'>
-
+            <div className='slideContainer'>
                 {projectData.map(data => 
                     <Project
                         title={data.title}
@@ -23,20 +19,17 @@ export default function ProjectsComponent(){
                         key={data.link}
                     />
                 )}
-
-            {/* project navigation */}
-
             </div>
 
             <div className="navDisp">
-                <button onClick={scroll(-1)}> 
+                <button> 
                     <i className="fas fa-chevron-left"> </i> 
                 </button>
                 <i id="1" className="material-icons">fiber_manual_record</i>
                 <i id="2" className="material-icons">fiber_manual_record</i>
                 <i id="3" className="material-icons">fiber_manual_record</i>
                 <i id="4" className="material-icons">fiber_manual_record</i>
-                <button onClick={scroll(1)}> 
+                <button> 
                     <i className="fas fa-chevron-right"> </i> 
                 </button>
             </div>

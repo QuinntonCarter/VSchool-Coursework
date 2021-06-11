@@ -29,7 +29,7 @@ export default function BountyForm(props){
                     type='text'
                     name='firstName' 
                     value={inputs.firstName}
-                    onChange={handleChange} 
+                    onChange={handleChange}
                     placeholder='First Name' 
                     required></input>
                 <input 
