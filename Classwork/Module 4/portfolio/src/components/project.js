@@ -7,10 +7,8 @@ export default function Project(props){
     <div className='slide'>
         <img src={img} alt='project preview'/>
         <div className='slideDesc'>
-            <h1> {title} </h1>
-            <hr/>
+            <a href={link} className='title'> {title} </a>
             <p className='desc'> {desc} </p>
-            <a href={link}> <i className="fas fa-asterisk"> {link}</i> </a>
         </div>
     </div>
     )

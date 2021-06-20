@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:wght@300&display=swap');
+
 * {
     background-color: black;
+    border-radius: 8px;
 }
 
 html {
@@ -13,9 +16,11 @@ body {
 /* Nav */
 .name {
     font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
 }
 
-/* change to rectangle/square that grows in height to reveal links */
+
 #navCircle {
     height: 2.5em;
     width: 2.5em;
@@ -29,7 +34,6 @@ body {
     z-index: 9;
 }
 
-
 nav.nav {
     font-size: 20px;
     padding: 17px;
@@ -41,6 +45,7 @@ nav.nav {
     font-size: 250%;
     float: left;
     color: rgba(0, 139, 139, 0.781);
+    font-family: 'Roboto', sans-serif;
 }
 
 #about {
@@ -48,6 +53,7 @@ nav.nav {
     width: 550px;
     margin-top: 50%;
     color: rgba(0, 139, 139, 0.781);
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 #contactTitle {
@@ -80,72 +86,68 @@ footer > i {
     color: white;
 }
 
-
 /* React */
 div.slideContainer {
     display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    position: relative;
+    flex-direction: column;
+    background-color: transparent;
 }
+
+/* project */
 
 .slide {
     scroll-snap-align: start;
     margin: 10px;
     padding: 15px;
-    height: 485px;
-    width: 100%;
     z-index: 0;
     color: white;
     display: flex;
-    border:red solid;
-    float: left
-    }
+    float: left;
+    background-color: rgba(255, 255, 255, 0.329);
+}
 
-    .slideDesc {
-        margin: 20px;
-    }
+:root {
+    --mainColor: rgba(0, 139, 139, 0.781);
+}
 
-    /* project navigation */
-button > i.fa-chevron-left {
-    cursor: pointer;
+a.title {
+    border-radius: 0;
+        background:
+        linear-gradient(
+        to bottom, var(--mainColor) 0%,
+        var(--mainColor) 100%
+        );
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    background-size: 4px 4px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    transition: background-size .2s;
+}
+
+a:hover {
+    background-size: 4px 50px;
+}
+
+.title {
+    font-size: xx-large;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.slideDesc {
+    margin: 20px;
     background-color: transparent;
-    color: rgba(255, 255, 255, 0.377);
-    border: none;
-    will-change: color;
-    transition: color 150ms;
-    font-size: 34px;
+    font-size: large;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-button > i.fa-chevron-right {
-    cursor: pointer;
-    background-color: transparent;
-    color: rgba(255, 255, 255, 0.377);
-    border: none;
-    will-change: color;
-    transition: color 150ms;
-    font-size: 34px;
-}
-
-button {
-    border-color: transparent;
+div.slideDesc > a {
     background-color: transparent;
 }
 
-button:focus {
-    outline: none;
-}
-
-div.navDisp > i.fas:hover {
-    transition: color 450ms;
-    color: rgba(255, 255, 255, 0.952);
-}
-
-.material-icons {
+div.slideDesc > h1 {
     background-color: transparent;
-    color: rgba(255, 255, 255, 0.377);
-    margin-top: 8px;
-    cursor: default;
 }
 
 div.navDisp {
@@ -160,28 +162,18 @@ div.navDisp {
     width: 300px;
 }
 
-/* project */
-div.project {
-    
-}
-
 .project > h1, p, i{
     background-color: transparent;
 }
 
 img {
-    width: 25vw;
-    height: 25vw;
-    margin-left: 30vw;
+    width: 50%;
+    height: 50%;
     z-index: 0;
     opacity: 80%;
-    border: solid 2px orange;
+    border: solid 2px transparent;
 }
 
 p.desc {
     z-index: 3;
 }
-
-/*  add break points that switch the nav arrows to the middle and
-on either side of project display div for tablet. 
-consider design for phone display. */
