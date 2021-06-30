@@ -10,6 +10,8 @@ export default function Posts(props){
                 color: 'rgb(255, 155, 155)',
             }}
             > view img</h6> </a>
+            {/* fix styling of this h6 */}
+            <h6> view full </h6>
         </div>
     )
 }

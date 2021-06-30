@@ -39,7 +39,7 @@ export default function Auth(){
                         inputs={inputs}
                         btnText='sign up'
                     />
-                    <p style={{cursor: 'pointer'}} onClick={()=> setToggle(prev => !prev)}> current member? </p>
+                    <p style={{cursor: 'pointer', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', width: '150px'}} onClick={()=> setToggle(prev => !prev)}> current member? </p>
                 </>
                 :
                 <>

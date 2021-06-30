@@ -21,7 +21,7 @@ function App() {
           />
           <Route
           path ='/profile'
-          render={ () => <Profile/> }
+          render={ () => !token ? <Redirect to='/'/> : <Profile/> }
           />
           <Route
           path='/posts'
