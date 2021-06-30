@@ -1,0 +1,138 @@
+* {
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    background-color: rgb(255, 228, 232)
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans&display=swap');
+
+/* general elements */
+input {
+    padding: 5px;
+    margin: 7px;
+}
+
+button {
+    padding: 5px;
+    margin: 7px;
+}
+
+.header{
+    font-family: 'Dela Gothic One', cursive;
+}
+
+/* navbar */
+.navbar {
+    border: solid black 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    text-transform: none;
+    background-color: whitesmoke;
+}
+
+.navbar > .link {
+    margin: 20px;
+    text-decoration: none; 
+    color: navy;
+    font-weight: 900;
+    background-color: transparent;
+}
+
+
+/* auth */
+.app {
+    text-align: center;
+    border: 2px black solid;
+    padding: 15px;
+}
+
+/* post form */
+.postForm {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.postForm > input {
+    align-self: center;
+    width: 300px;
+    background-color: whitesmoke;
+}
+
+.postForm > textarea {
+    align-self: center;
+    width: 30%;
+    flex-basis: 135px;
+    flex-grow: 150px;
+    padding: 8px;
+    background-color: whitesmoke;
+}
+
+.postForm > button {
+    align-self: center;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border: black solid 1px;
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+
+/* post list */
+.postList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.postList > h3 {
+    align-self: center;
+}
+
+.postList > h5 {
+    align-self: center;
+    cursor: pointer;
+    padding: 6px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+}
+
+/* posts */
+.postStyle {
+    padding: 15px;
+    border: solid rgb(255, 155, 155) 2px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    width: 500px;
+    height: 275px;
+    overflow: scroll;
+}
+
+.postStyle > img {
+    grid-column: 1/3;
+    grid-row: 1/3;
+    width: 50%;
+    z-index: 0;
+}
+
+.postStyle > h1 {
+    grid-column: 2/3;
+    grid-row: 1;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.postStyle > p {
+    text-align: right;
+    text-justify: right;
+    grid-column: 1/3;
+    grid-row: 2/4;
+    background-color: transparent;
+    z-index: 1;
+    color: gray;
+}

@@ -16,6 +16,7 @@
     "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.13",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "react-file-base64": "^1.0.3"
   }
 }

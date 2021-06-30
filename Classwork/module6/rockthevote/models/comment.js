@@ -1,27 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
-    title: {
+const commentSchema = new Schema({
+    content: {
         type: String,
         required: true
-    },
-    content: {
-        type: String
     },
     votes: {
         type: Number,
         default: 0
     },
-    imgSrc: {
-        type: String,
-        required: true
-    },
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    post: {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+        required: true
     }
 })
 
-module.exports = mongoose.model("Post", postSchema)
+module.exports = mongoose.model("Comment", commentSchema)
