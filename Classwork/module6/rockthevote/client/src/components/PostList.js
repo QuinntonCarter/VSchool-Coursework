@@ -3,7 +3,7 @@ import Posts from './Posts.js';
 export default function PostList(props){
     const {posts, toggle, setToggle} = props
     
-    const btnTxt = !toggle ? 'all' : 'your'
+    const btnTxt = !toggle ? 'your' : 'all'
 
     return(
         <div className='postList'>
@@ -17,7 +17,7 @@ export default function PostList(props){
                 </>
                 :
                 <>
-                    <p> placeholder for user posts </p>
+                    <p> placeholder for all posts </p>
                 </>
             }
         </div>

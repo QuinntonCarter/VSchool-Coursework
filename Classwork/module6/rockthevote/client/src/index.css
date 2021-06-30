@@ -92,9 +92,10 @@ button {
 /* post list */
 .postList {
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
+    flex-flow: column wrap;
+    /* border: solid green 3px; */
+    align-content: center;
+    justify-content: space-around;
 }
 
 .postList > h3 {
@@ -115,9 +116,9 @@ button {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto auto;
-    width: 500px;
-    height: 275px;
-    overflow: scroll;
+    height: 375px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .postStyle > img {
@@ -142,4 +143,8 @@ button {
     background-color: transparent;
     z-index: 1;
     color: gray;
+}
+
+.postStyle > p > h6 {
+    background-color: transparent;
 }

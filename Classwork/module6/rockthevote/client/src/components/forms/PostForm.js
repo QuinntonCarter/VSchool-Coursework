@@ -22,11 +22,11 @@ export default function PostForm(props){
         e.preventDefault()
         addPost(inputs)
         setInputs(initInputs)
-        validateFile(inputs.imgSrc)
     }
 // add ability to validate file information: type and size
-    function validateFile(file){
-        console.log(file)
+    function getTimeStamp(){
+        var timestamp = new Date().getTime();
+        return timestamp
     }
 
     const { title, content, imgSrc } = inputs
