@@ -8,7 +8,7 @@ export default function Auth(){
     const [inputs, setInputs] = useState(initInputs)
     const [toggle, setToggle] = useState(false)
 
-    const {signup, login} = useContext(UserContext)
+    const {signup, login, errMsg, resetAuthError} = useContext(UserContext)
 
     function handleChange(e){
         const {name, value} = e.target
@@ -28,6 +28,12 @@ export default function Auth(){
         login(inputs)
     }
 
+    function toggleForm(){
+        setToggle(prev => !prev)
+        resetAuthError()
+        setInputs(initInputs)
+    }
+
     return(
         <div className='authContainer'>
             <h1 className='header'> chat app </h1>
@@ -38,8 +44,9 @@ export default function Auth(){
                         handleSubmit={handleSignup}
                         inputs={inputs}
                         btnText='sign up'
+                        errMsg={errMsg}
                     />
-                    <p style={{cursor: 'pointer', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', width: '150px'}} onClick={()=> setToggle(prev => !prev)}> current member? </p>
+                    <p style={{cursor: 'pointer'}} onClick={toggleForm}> current member? </p>
                 </>
                 :
                 <>
@@ -48,8 +55,9 @@ export default function Auth(){
                         handleSubmit={handleLogin}
                         inputs={inputs}
                         btnText='login'
+                        errMsg={errMsg}
                     />
-                    <p style={{cursor: 'pointer'}} onClick={()=> setToggle(prev => !prev)}> not a member? </p>
+                    <p style={{cursor: 'pointer'}} onClick={toggleForm}> not a local? </p>
                 </>
             }
         </div>

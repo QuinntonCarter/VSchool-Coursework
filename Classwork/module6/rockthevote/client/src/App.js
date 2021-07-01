@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.js';
 import Auth from './components/Auth.js';
 import Profile from './components/Profile.js';
 import PostList from './components/PostList.js';
+import ProtectedRoute from './components/ProtectedRoute.js';
 
 import {UserContext} from './context/UserProvider.js';
 
@@ -12,20 +13,26 @@ function App() {
   const { token, logout } = useContext(UserContext)
   return (
     <>
-      <Navbar logout={logout}/>
+      {token && <Navbar logout={logout} token={token}/>}
       <div className="app container">
         <Switch>
           <Route
           exact path='/'
           render={()=> token ? <Redirect to='/profile'/>  : <Auth/> }
           />
-          <Route
+
+          <ProtectedRoute
           path ='/profile'
-          render={ () => !token ? <Redirect to='/'/> : <Profile/> }
+          component={Profile}
+          redirectTo='/'
+          token={token}
           />
-          <Route
+          
+          <ProtectedRoute
           path='/posts'
-          render={()=> <PostList/>}
+          component={PostList}
+          redirectTo='/'
+          token={token}
           />
         </Switch>
       </div>

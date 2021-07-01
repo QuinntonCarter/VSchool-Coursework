@@ -3,22 +3,24 @@ import { useContext } from 'react';
 import {UserContext} from '../context/UserProvider.js'
 
 export default function Navbar(){
-    const { logout } = useContext(UserContext)
+    const { logout, token } = useContext(UserContext)
     return(
         <div className='navbar'>
-            <Link className='link' to='/posts'
-            > Posts </Link>
-            <Link className='link' 
+            {token && <Link className='link' to='/posts'
+            > Posts </Link>}
+            { token && <Link className='link' 
                 to='/profile'
-                > Profile </Link>
-            <Link className='link logout'
+                > Profile </Link>}
+            <button className='link logout'
                 onClick={logout}
                 style={{cursor: 'pointer',
                 color: 'red',
                 fontWeight: '900',
-                backgroundColor: 'whitesmoke'
+                backgroundColor: 'whitesmoke',
+                border: 'none',
+                boxShadow: 'none'
             }} to='/'
-            > Logout </Link>
+            > Logout </button>
         </div>
     )
 }

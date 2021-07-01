@@ -55,8 +55,12 @@ button {
 
 /* fix centering of current member button */
 .authContainer {
+    display: flex;
+    flex-flow: column wrap;
     align-content: center;
-    justify-content: center;
+    justify-self: center;
+    margin: 0;
+
 }
 
 /* post form */
