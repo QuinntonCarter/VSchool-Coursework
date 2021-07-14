@@ -13,7 +13,7 @@ export default function PostList(props){
             > switch view </h5>
             { !toggle ?
                 <>
-                    {posts.map(post => <Posts {...post} key={post._id}/>)}
+                    {posts.map(post => <Posts {...post} id={post._id} key={post._id}/>)}
                 </>
                 :
                 <>

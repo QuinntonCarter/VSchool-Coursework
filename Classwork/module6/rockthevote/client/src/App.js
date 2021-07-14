@@ -3,9 +3,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Navbar from './components/Navbar.js';
 import Auth from './components/Auth.js';
-import Profile from './components/Profile.js';
+import Main from './components/Main.js';
 import PostList from './components/PostList.js';
 import ProtectedRoute from './components/ProtectedRoute.js';
+import PostDetails from './components/PostDetails.js';
 
 import {UserContext} from './context/UserProvider.js';
 
@@ -18,21 +19,28 @@ function App() {
         <Switch>
           <Route
           exact path='/'
-          render={()=> token ? <Redirect to='/profile'/>  : <Auth/> }
+          render={()=> token ? <Redirect to='/main'/>  : <Auth/> }
           />
 
           <ProtectedRoute
-          path ='/profile'
-          component={Profile}
+          path ='/main'
+          component={Main}
           redirectTo='/'
           token={token}
           />
           
           <ProtectedRoute
-          path='/posts'
+          exact path='/posts'
           component={PostList}
           redirectTo='/'
           token={token}
+          />
+
+          <ProtectedRoute
+            path='/posts/:postid'
+            component={PostDetails}
+            redirectTo='/'
+            token={token}
           />
         </Switch>
       </div>
