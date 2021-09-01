@@ -7,10 +7,10 @@ const commentSchema = new Schema({
         required: true
     },
     votes: {
-        type: Number,
-        default: 0
+        type: [Schema.Types.ObjectId],
+        ref: "Votes"
     },
-    user: {
+    author: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true

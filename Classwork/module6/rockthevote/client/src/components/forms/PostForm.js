@@ -49,7 +49,8 @@ export default function PostForm(props){
                 value={title}
                 onChange={handleChange}
                 placeholder='enter post title'
-                maxLength='20'
+                maxLength='35
+                '
                 required
             />
             <br/>

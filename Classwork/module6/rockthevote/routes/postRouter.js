@@ -34,19 +34,20 @@ postRouter.post("/", (req, res, next) => {
         return next(err)
         }
         return res.status(201).send(savedPost)
+
     })
 })
 
 // Delete post
 postRouter.delete("/:postId", (req, res, next) => {
     Post.findOneAndDelete(
-        { _id: req.params.postId },
+        { _id: req.params.postId, user: req.user._id },
         (err, deletedPost) => {
         if(err){
             res.status(500)
             return next(err)
         }
-        return res.status(200).send(`Successfully delete todo: ${deletedPost.title}`)
+        return res.status(200).send(`Successfully delete post: ${deletedPost.title}`)
         }
     )
 })
@@ -54,7 +55,7 @@ postRouter.delete("/:postId", (req, res, next) => {
 // Update post
 postRouter.put("/:postId", (req, res, next) => {
     Post.findOneAndUpdate(
-        { _id: req.params.postId },
+        { _id: req.params.postId, user: req.user._id },
         req.body,
         { new: true },
         (err, updatedPost) => {

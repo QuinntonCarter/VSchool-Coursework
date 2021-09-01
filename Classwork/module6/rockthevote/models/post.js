@@ -7,11 +7,12 @@ const postSchema = new Schema({
         required: true
     },
     content: {
-        type: String
+        type: String,
+        required: true
     },
     votes: {
-        type: Number,
-        default: 0
+        type: [Schema.Types.ObjectId],
+        ref: "Votes"
     },
     imgSrc: {
         type: String,
@@ -21,6 +22,14 @@ const postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    comment: {
+        type: [Schema.Types.ObjectId],
+        ref: "Comment"
+    },
+    posted: {
+        type: Date,
+        default: Date.now
     }
 })
 

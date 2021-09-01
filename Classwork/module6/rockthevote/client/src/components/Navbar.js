@@ -9,12 +9,12 @@ export default function Navbar(){
             { token && 
                 <Link 
                     className='link'
-                    to='/posts'
-                > Posts </Link>
+                    to='/profile'
+                > Profile </Link>
             }
             { token && <Link className='link' 
-                to='/profile'
-                > User </Link>}
+                to='/main'
+                > Posts </Link> }
             <button className='link logout'
                 onClick={logout}
                 style={{cursor: 'pointer',

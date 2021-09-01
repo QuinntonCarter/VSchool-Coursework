@@ -1,23 +1,23 @@
 import Posts from './Posts.js';
 
 export default function PostList(props){
-    const {posts, toggle, setToggle} = props
-    
-    const btnTxt = !toggle ? 'your' : 'all'
+    const { allPosts, posts, toggle, setToggle } = props
+    const viewText = toggle === false ? 'all' : 'your'
+    const titleTxt = toggle === false ? 'your' : 'all'
 
     return(
         <div className='postList'>
-            <h3> { btnTxt } posts </h3>
-            <h5
-                onClick={() => setToggle(prev => !prev)}
-            > switch view </h5>
-            { !toggle ?
+            {/* style button width */}
+            <button title={`switch to ${titleTxt} posts`} onClick={() => setToggle(prevState => !prevState)}> 
+                {viewText} posts 
+            </button>
+            {    toggle ? 
                 <>
-                    {posts.map(post => <Posts {...post} id={post._id} key={post._id}/>)}
+                    { posts.map(posts => <Posts toggledState={toggle} {...posts} id={posts._id} key={posts._id} />  )}
                 </>
                 :
                 <>
-                    <p> placeholder for all posts </p>
+                    { allPosts.map(posts => <Posts {...posts} id={posts._id} key={posts._id} /> )}
                 </>
             }
         </div>

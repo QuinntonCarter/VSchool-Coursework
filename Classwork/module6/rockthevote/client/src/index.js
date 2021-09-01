@@ -10,7 +10,9 @@ import './index.css';
 ReactDOM.render(
   <BrowserRouter>
     <UserProvider>
+      { 
       <App />
+      }
     </UserProvider>
   </BrowserRouter>,
   document.getElementById('root')
