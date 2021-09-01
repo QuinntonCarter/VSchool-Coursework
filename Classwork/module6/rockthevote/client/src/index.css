@@ -103,7 +103,6 @@ button {
     width: 90px;
     height: 30px;
     justify-self: center;
-    margin-bottom: -50px;
 }
 
 .postList > h3 {
@@ -122,9 +121,7 @@ button {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto auto;
-    /* padding: 15px; */
-    border: solid rgb(255, 155, 155) 2px;
-    /* height: 425px; */
+    border: solid rgb(233, 110, 110) 2px;
     max-height: auto;
     width: 93%;
     text-overflow: ellipsis;
@@ -134,28 +131,23 @@ button {
 .postStyle > a > img{
     width: 275px;
     z-index: 0;
+    border-radius: 0;
 }
 
 .postStyle > a > img:hover {
     width: 475px;
+    border-radius: 0;
 }
 
 .postDesc {
     margin-left: 10px;
-    /* background-color: rgba(255, 155, 155, 0.473); */
-
 }
 
-.postDesc > button.deleteBtn {
+button.deleteBtn {
     border: solid rgb(255, 155, 155) 2px;
     cursor: pointer;
-    grid-column: 2;
-    grid-row: 1;
     width: 35px;
     height: 35px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    z-index: 1;
 }
 
 div.postDesc > h2 {
@@ -227,13 +219,11 @@ div.postDesc > p {
 /* latest post */
 /*  */
 
-
 /* interaction bar */
 .interactionStyle {
     background-color: rgba(255, 155, 155, 0.473);
     grid-column: 2/4;
     grid-row: 4;
-    /* background-color: rgba(255, 155, 155, 0.473); */
     /*  */
     justify-self: right;
     display: grid;
@@ -241,16 +231,22 @@ div.postDesc > p {
     grid-template-rows: 1fr;
     /*  */
     width: 90%;
-    max-height: auto;
+    height: auto;
 }
 /* set grid layout of elements in interaction bar */
 .interactionStyle > h6.comments {
     grid-column: 2;
+    background-color: transparent;
+}
+
+.interactionStyle > h6 {
+    height: 15px;
+    color: rgb(233, 110, 110)
 }
 
 .interactionStyle > div.commentAreaStyle {
     width: 70%;
-    max-height: 100px;
+    max-height: auto;
     grid-column: 4;
     grid-row: 1;
     display: grid;
@@ -265,11 +261,15 @@ div.postDesc > p {
     border: solid rgb(255, 155, 155) 1px;
     width: auto;
     height: 50px;
+    color: rgb(233, 110, 110);
 }
 
 .interactionStyle > div.commentAreaStyle > textarea {
     width: 300px;
     height: 80px;
     margin: 10px;
-}
+    resize: none;
+    border: rgb(233, 110, 110) solid 2px;
 
+    margin-bottom: -100px;
+}

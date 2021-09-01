@@ -40,6 +40,7 @@ export default function Posts(props){
                         </h2>
                         <p> { content } </p>
                         {/* consider moving */}
+                    </div>
                         {   toggledState ? 
                             <button
                                 title='Delete post'
@@ -49,7 +50,6 @@ export default function Posts(props){
                             :
                             ''
                         }
-                    </div>
                     {/* import Comments component and insert here */}
                 <PostInteractionForm
                     comment={comment}
