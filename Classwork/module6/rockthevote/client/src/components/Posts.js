@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PostInteractionBar from './forms/PostInteractionBar.js';
 
 export default function Posts(props){
-    const { 
-        user,
+    const {
+        userId,
         userString,
         votedUsers,
         title, 
@@ -13,8 +12,7 @@ export default function Posts(props){
         comment,
         posted,
         votes,
-        id,
-        toggledState
+        _id
     } = props
 
     return(
@@ -24,7 +22,7 @@ export default function Posts(props){
                     <img src={ imgSrc } alt={ imgSrc }/>
                 </a>
                     <div className='postDesc'>
-                        <Link to={`/posts/${id}`}
+                        <Link to={`/posts/${_id}`}
                             style={{color: 'rgb(233, 110, 110)', fontSize: '12px'}}>
                             <h3> { title } <br/>
                                 <span className='date'> {`>>${userString}`} on { posted.slice(0,10) } </span> 
@@ -34,12 +32,11 @@ export default function Posts(props){
                         <p> { content } </p>
                     </div>
                 <PostInteractionBar
-                    toggledState={toggledState}
-                    userPost={user}
                     votes={votes}
                     voted={votedUsers}
                     comment={comment}
-                    id={id}
+                    _id={_id}
+                    _userId={userId}
                     userString={userString}
                 />
             </div>

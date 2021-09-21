@@ -4,21 +4,22 @@ REVIEW:
 - CSS/layout    
 
 GOALS:
-    - comment component
-        - how to delete comments? = .put and .delete?
-    - button component for postlist to toggle post views (and user/all view possibly)
-    - implement backend security features
+- button component for postlist to toggle post views (and user/all view possibly)
+- implement backend security features
 
 IMPLEMENT:
-- comment component
-    + comment reply view: @s or sub threads?
-- deleteComment function
 - nightmode/alt views
-- button toolbar for post view sorting
+- viewSortComponent for post view sorting
     + a new component that houses all buttons in postlist view
     + toggle sort view hook
     + .sort() can be appended onto posts.map()
-- timestamps, maybe on frontend or another way not in schema but X
+- comment component
+    + comment reply view: @s or sub threads?
+    + style grid
+X deleteComment function
+X restrict comment deletion only if user._id === comment._authId can it be deleted
+X add obj keys where missing
+X timestamps, maybe on frontend or another way not in schema but
 
 FUTURE DEV:
 - user mentions in thread headers link to user profiles

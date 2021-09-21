@@ -4,35 +4,50 @@ import { UserContext } from '../context/UserProvider.js';
 export default function CommentComp(props){
     const { comments, postId } = props
     const [toggle, setToggle] = useState(false)
+    const commTitle = comments.length > 0 ? `click to view ${comments.length} comments` : ''
 
-    const { deleteComment } = useContext(UserContext)
+    const { deleteComment, user } = useContext(UserContext)
 
-    const commentsMapped = comments.content ?
-        <>
-            <h6 onClick={() => setToggle(prevState => !prevState)}> no comments yet </h6>
-        </>
-        :
-        comments.map(comment => 
+    function validateDeletion(postId, commId, userId, authId){
+        userId !== authId ?
+        console.log(`Error: cannot delete, this isn't your comment`)
+    :
+        deleteComment(postId, commId)
+    }
+
+    const commentsMapped = comments.map(comment => 
             <div className='commentStyle'>
                 <h6> @{comment.comAuth} posted {comment.date.slice(0,10)} around {comment.date.slice(11,16)} </h6>
                 {console.log(comment)}
                 <p style={{backgroundColor: 'transparent', color: 'rgb(59, 59, 59)'}}> {comment.content} </p>
+                {comment._authId !== user._id ?
+                    ''
+                :
                 <button
-                    onClick={() => deleteComment(comment._id)}
+                    onClick={() => validateDeletion(postId, comment._id)}
                     className='deleteBtn'
-                > x </button>
+                > x </button>}
             </div>)
 
     return(
-        <div title={`click to view ${comments.length} comments`} className='commentContainer'>
+        <div title={commTitle} className='commentContainer'>
             {toggle ?
                 <div className='commentStyle'>
                     {commentsMapped}
-                    <button onClick={() => setToggle(prevState => !prevState)}> close </button>
+                    { comments[0] ?
+                        <button onClick={() => setToggle(prevState => !prevState)}> close </button>
+                    :
+                        ''
+                    }
                 </div>
                 :
                 <div className='commentStyle'>
-                    <h6 onClick={() => setToggle(prevState => !prevState)} style={{backgroundColor: 'transparent'}}> show comments </h6>
+                    { comments.length > 0 ?
+                        <h6 onClick={() => setToggle(prevState => !prevState)}
+                        style={{backgroundColor: 'transparent'}}> show comments </h6>
+                        :
+                        <h6 style={{backgroundColor: 'transparent'}}> no comments </h6>
+                    }
                 </div>
             }
         </div>

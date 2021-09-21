@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export const UserContext = React.createContext();
 
-// * = error
 
 const userAxios = axios.create()
 userAxios.interceptors.request.use(config => {
@@ -119,7 +118,6 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     };
 
-    // consider make this conditional, if id contains comment information or boolean, run delete comment put, else run delete post put
 // delete post
     function deletePost(postId){
         userAxios.delete(`/api/posts/${postId}`)
@@ -137,7 +135,7 @@ export default function UserProvider(props){
         :
         userAxios.put(`/api/posts/${postId}/${vote}`)
         .then(res => {
-            console.log(res.data)
+            console.log(res.data, userId, postId)
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
@@ -151,16 +149,14 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     }
 
-    // ******************************
 // delete comment * * * *
-    function deleteComment(comId){
-        userAxios.delete(`/api/posts/${comId}`)
+    function deleteComment(postId, comId){
+        userAxios.put(`/api/posts/${postId}/${comId}`)
         .then(res => {
             console.log(res.data)
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
-    // ******************************
 
 // keep posts on page
     useEffect(() => {

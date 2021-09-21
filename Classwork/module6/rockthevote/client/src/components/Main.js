@@ -19,11 +19,9 @@ export default function Profile(props){
             <h1 className='header'> hello, @{ username } </h1>
             <h3> create a post </h3>
             <PostForm addPost={ addPost }/>
+            {/* insert view toggle component here */}
             <PostList
-                toggle={ toggle }
-                setToggle={ setToggle }
                 allPosts={ allPosts }
-                posts={ posts }
             />
         </>
     )

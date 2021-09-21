@@ -1,17 +1,13 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../../context/UserProvider.js';
 import CommentComp from '../CommentComp.js';
 
 export default function PostInteractionForm(props){
-// use user Id for restricted voting, implement userVotes param in post.js, w type: [string]
-
     const {
         comment,
         votes,
-        id,
-        toggledState,
-// userId obj from post model
-        userPost,
+        _id,
+        _userId,
         voted
     } = props
     
@@ -31,7 +27,6 @@ export default function PostInteractionForm(props){
 
     const [inputs, setInputs] = useState(initInputs)
     const [toggleReply, setToggleReply] = useState(false)
-    const [toggleComments, setToggleComments] = useState(false)
 
     function handleDelete(id){
         deletePost(id)
@@ -64,9 +59,9 @@ export default function PostInteractionForm(props){
     return(
         <div className='interactionStyle'>
             <h4 title='# of votes'>
-                <i onClick={() => voteValidation('upvote', userPost, id, user.username)} title='upvote' className='fas fa-thumbs-up'/>
+                <i onClick={() => voteValidation('upvote', _userId, _id, user.username)} title='upvote' className='fas fa-thumbs-up'/>
                 {votes}
-                <i onClick={() => voteValidation('downvote', userPost, id, user.username)} title='downvote' className='fas fa-thumbs-down'/>
+                <i onClick={() => voteValidation('downvote', _userId, _id, user.username)} title='downvote' className='fas fa-thumbs-down'/>
             </h4>
             <h6 className='comments'> { comment.length } comments </h6>
             { !toggleReply ?
@@ -77,7 +72,7 @@ export default function PostInteractionForm(props){
                     style={{
                         cursor: 'pointer',
                         textDecoration: 'underline'
-                    }}> reply </h6>
+                }}> reply </h6>
                 :
                 <div className='commentAreaStyle'>
                     <form>
@@ -89,7 +84,7 @@ export default function PostInteractionForm(props){
                             value={inputs.content}
                         />
                         <button
-                            onClick={(e) => submitComment(e, id, inputs)}
+                            onClick={(e) => submitComment(e, _id, inputs)}
                             style={{color: 'rgb(233, 110, 110)'}}
                         > reply </button>
                         <button
@@ -100,16 +95,16 @@ export default function PostInteractionForm(props){
                     </form>
                 </div>
             }
-            {toggledState ?
+            { props.userId === user._id ?
                 <button
-                    onClick={() => handleDelete(id)}
+                    onClick={() => handleDelete(_id)}
                     className='deleteBtn'
-                > x </button>
-                :      
+                > delete </button>
+                :
                 ''
             }
             <CommentComp
-                postId={id}
+                postId={_id}
                 comments={comment}
             />
         </div>
