@@ -23,7 +23,7 @@ export default function PostList(props){
                 onClick={() => setToggle(prevState => !prevState)}>
                 {viewText} posts 
             </button>
-            {    toggle ?
+            {toggle ?
                 <>
                     { posts.map(posts => <Posts toggledState={toggle} {...posts} id={posts._id} key={posts._id} />).reverse() }
                 </>

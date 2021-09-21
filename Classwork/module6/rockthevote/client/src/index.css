@@ -179,7 +179,7 @@ div.postDesc > p {
     padding: 5px;
     width: 80px;
     z-index: 1;
-    color: gray;
+    color: rgb(59, 59, 59);
 }
 
 .postDesc > h6 {
@@ -223,7 +223,7 @@ div.postDesc > p {
     justify-self: right;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr auto;
     /*  */
     width: auto;
     height: auto;
@@ -311,6 +311,7 @@ div.interactionStyle > button.deleteBtn {
 }
 
 div.commentStyle {
+    grid-row: 2;
     background-color: transparent;
 }
 

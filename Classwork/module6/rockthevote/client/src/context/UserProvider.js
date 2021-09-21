@@ -153,8 +153,8 @@ export default function UserProvider(props){
 
     // ******************************
 // delete comment * * * *
-    function deleteComment(id){
-        userAxios.delete(`/api/posts/${id}`)
+    function deleteComment(comId){
+        userAxios.delete(`/api/posts/${comId}`)
         .then(res => {
             console.log(res.data)
         })

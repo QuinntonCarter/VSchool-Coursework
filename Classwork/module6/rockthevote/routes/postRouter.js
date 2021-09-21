@@ -59,22 +59,23 @@ postRouter.put(`/:postId`, (req, res, next) => {
 })
 
 // DELETE BETA comment * * * * * * * * * *
-postRouter.delete(`/:postId`, (req, res, next) => {
+postRouter.delete(`/:comId`, (req, res, next) => {
     Post.findOneAndDelete(
-        { _id: req.params.postId, user: req.user._id },
-        (err, deletedPost) => {
+        { comment: { _id: req.params.comId, _authId: req.user._id } },
+        (err, deletedComment) => {
             if(err){
                 res.status(500)
                 return next(err)
             }
-            return res.status(200).send(`Successfully delete comment on ${deletedPost}`)
+            console.log(req.params.comId)
+            return res.status(200).send(`Successfully delete comment`)
         }
     )
 })
 // * ******** * ******** * ******** * ******** *
 
 // DELETE post
-postRouter.delete("/:postId", (req, res, next) => {
+postRouter.delete(`/:postId`, (req, res, next) => {
     Post.findOneAndDelete(
         { _id: req.params.postId, user: req.user._id },
         (err, deletedPost) => {

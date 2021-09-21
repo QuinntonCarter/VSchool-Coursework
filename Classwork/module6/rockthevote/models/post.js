@@ -26,6 +26,7 @@ const postSchema = new Schema({
     comment: [{
         content: String,
         comAuth: String,
+        _authId: String,
         date: String,
         comVotes: {
             type: Number,

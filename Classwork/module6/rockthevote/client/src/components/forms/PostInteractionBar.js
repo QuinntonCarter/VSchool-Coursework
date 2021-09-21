@@ -10,7 +10,6 @@ export default function PostInteractionForm(props){
         votes,
         id,
         toggledState,
-        userString,
 // userId obj from post model
         userPost,
         voted
@@ -20,15 +19,13 @@ export default function PostInteractionForm(props){
         deletePost,
         submitVote,
         postComment,
-        // deleteComment,
-        // posts,
-        // allPosts,
         user
     } = useContext(UserContext)
     
     const initInputs = {
         content: '',
         comAuth: `${user.username}`,
+        _authId: `${user._id}`,
         date: new Date()
     }
 
@@ -67,12 +64,10 @@ export default function PostInteractionForm(props){
     return(
         <div className='interactionStyle'>
             <h4 title='# of votes'>
-                {/* send user (_id) through here for vote restricting */}
                 <i onClick={() => voteValidation('upvote', userPost, id, user.username)} title='upvote' className='fas fa-thumbs-up'/>
                 {votes}
                 <i onClick={() => voteValidation('downvote', userPost, id, user.username)} title='downvote' className='fas fa-thumbs-down'/>
             </h4>
-            {/* consider making this a link to render commentviewer component */}
             <h6 className='comments'> { comment.length } comments </h6>
             { !toggleReply ?
                 <h6
@@ -86,7 +81,6 @@ export default function PostInteractionForm(props){
                 :
                 <div className='commentAreaStyle'>
                     <form>
-                        {/* check this */}
                         <textarea
                             onChange={handleChange}
                             placeholder={`what's good?`}
@@ -94,7 +88,6 @@ export default function PostInteractionForm(props){
                             name='content'
                             value={inputs.content}
                         />
-                        {/* check this */}
                         <button
                             onClick={(e) => submitComment(e, id, inputs)}
                             style={{color: 'rgb(233, 110, 110)'}}
@@ -107,7 +100,7 @@ export default function PostInteractionForm(props){
                     </form>
                 </div>
             }
-            { toggledState ?
+            {toggledState ?
                 <button
                     onClick={() => handleDelete(id)}
                     className='deleteBtn'
@@ -115,7 +108,8 @@ export default function PostInteractionForm(props){
                 :      
                 ''
             }
-            <CommentComp 
+            <CommentComp
+                postId={id}
                 comments={comment}
             />
         </div>

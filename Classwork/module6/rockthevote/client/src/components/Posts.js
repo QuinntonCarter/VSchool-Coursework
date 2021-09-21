@@ -31,7 +31,6 @@ export default function Posts(props){
                                 <span className='date'> @ { posted.slice(11,16) } </span> 
                             </h3>
                         </Link>
-                        {/* fix so p content doesn't overflow off the page */}
                         <p> { content } </p>
                     </div>
                 <PostInteractionBar
@@ -43,7 +42,6 @@ export default function Posts(props){
                     id={id}
                     userString={userString}
                 />
-                {/* import Comments component and insert here */}
             </div>
         </>
     )
