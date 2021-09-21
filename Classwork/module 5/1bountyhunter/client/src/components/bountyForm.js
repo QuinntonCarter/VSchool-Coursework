@@ -5,7 +5,7 @@ export default function BountyForm(props){
     const [inputs, setInputs] = useState(initInputs)
 
     function handleChange(e){
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInputs(prevInputs => ({...prevInputs, [name]: value}))
     }
 

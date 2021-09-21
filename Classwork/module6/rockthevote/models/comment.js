@@ -7,17 +7,12 @@ const commentSchema = new Schema({
         required: true
     },
     votes: {
-        type: [Schema.Types.ObjectId],
-        ref: "Votes"
+        type: Number,
+        default: 0
     },
-    author: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: true
-    },
-    post: {
-        type: Schema.Types.ObjectId,
-        ref: "Post",
         required: true
     }
 })

@@ -41,12 +41,21 @@ function App() {
               />
 
               <ProtectedRoute
-                path='/posts/:postId'
+              // OR statement is beta, may need to set ternary on PostDetails component
+                path={'/posts/:postId'||'/posts/:postId/comments'}
                 component={PostDetails}
                 redirectTo='/'
                 token={token}
                 loading={loading}
               />
+
+              {/* <ProtectedRoute
+                path='/posts/:postId/comments/:commentId'
+                component={}
+                redirectTo='/'
+                token={token}
+                loading={loading}
+              /> */}
           </Switch>
       </div>
   </>

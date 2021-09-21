@@ -3,6 +3,8 @@ import axios from 'axios';
 
 export const UserContext = React.createContext();
 
+// * = error
+
 const userAxios = axios.create()
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
@@ -20,7 +22,7 @@ export default function UserProvider(props){
     };
 
     const [userState, setUserState] = useState(initState)
-    // for auth
+// for auth
     function signup(credentials){
         axios.post('/auth/signup', credentials)
         .then(res => {
@@ -65,7 +67,7 @@ export default function UserProvider(props){
         })
     };
 
-    //err
+//err
     function handleAuthError(errMsg){
         setUserState(prevState => ({
             ...prevState,
@@ -81,7 +83,7 @@ export default function UserProvider(props){
     };
 
     // CRUD
-    // get logged in user's posts
+// get logged in user's posts
     function getUserPosts(){
         userAxios.get('/api/posts/user')
         .then(res => {
@@ -93,7 +95,7 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     };
 
-    // get all posts in DB
+// get all posts in DB
     function getAllPosts(){
         userAxios.get('/api/posts')
         .then(res => {
@@ -105,7 +107,7 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     };
 
-    // new post
+// new post
     function addPost(newPost){
         userAxios.post('/api/posts', newPost)
         .then(res => {
@@ -117,26 +119,50 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     };
 
-    // delete post
+    // consider make this conditional, if id contains comment information or boolean, run delete comment put, else run delete post put
+// delete post
     function deletePost(postId){
         userAxios.delete(`/api/posts/${postId}`)
         .then(res => {
-            setUserState(prevState => prevState.filter(post => post._id !== postId))
+            setUserState(prevState => 
+                prevState.filter(post => post._id !== postId))
         })
         .catch(err => console.log(err))
     }
 
-    // voting functionality
-    function submitVote(vote, postId){
-        userAxios.put(`/api/posts/${postId}`, vote)
+// voting functionality
+    function submitVote(vote, userId, postId){
+        userId === userState.user._id ?
+        console.log('Error: this is your own vote or comment')
+        :
+        userAxios.put(`/api/posts/${postId}/${vote}`)
         .then(res => {
-            // setUserState(prevState => prevState.map(post => post._id !== postId ? post : res.data))
             console.log(res.data)
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
 
-    // keep post on page
+// comments CRUD
+    function postComment(postId, newComment){
+        userAxios.put(`/api/posts/${postId}`, newComment)
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => console.log(err.response.data.errMsg))
+    }
+
+    // ******************************
+// delete comment * * * *
+    function deleteComment(id){
+        userAxios.delete(`/api/posts/${id}`)
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => console.log(err.response.data.errMsg))
+    }
+    // ******************************
+
+// keep posts on page
     useEffect(() => {
         getUserPosts()
         getAllPosts()
@@ -154,6 +180,8 @@ export default function UserProvider(props){
             getUserPosts,
             getAllPosts,
             submitVote,
+            postComment,
+            deleteComment,
             resetAuthError
         }}>
             {props.children}

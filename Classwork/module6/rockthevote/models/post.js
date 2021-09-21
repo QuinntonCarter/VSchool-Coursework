@@ -6,15 +6,11 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    content: {
+    imgSrc: {
         type: String,
         required: true
     },
-    votes: {
-        type: [Schema.Types.ObjectId],
-        ref: "Votes"
-    },
-    imgSrc: {
+    content: { 
         type: String,
         required: true
     },
@@ -23,14 +19,33 @@ const postSchema = new Schema({
         ref: "User",
         required: true
     },
-    comment: {
-        type: [Schema.Types.ObjectId],
-        ref: "Comment"
+    userString: {
+        type: String,
+        required: true
     },
+    comment: [{
+        content: String,
+        comAuth: String,
+        date: String,
+        comVotes: {
+            type: Number,
+            default: 0
+        },
+        comVotedUsers: [{
+            type: String
+        }]
+    }],
     posted: {
         type: Date,
         default: Date.now
-    }
+    },
+    votes: {
+        type: Number,
+        default: 0
+    },
+    votedUsers: [{
+        type: String
+    }]
 })
 
 module.exports = mongoose.model("Post", postSchema)

@@ -6,8 +6,8 @@ const Post = require("../models/post.js");
 postRouter.get("/", (req, res, next) => {
     Post.find((err, posts) => {
         if(err){
-        res.status(500)
-        return next(err)
+            res.status(500)
+            return next(err)
         }
         return res.status(200).send(posts)
     })
@@ -27,43 +27,98 @@ postRouter.get("/user", (req, res, next) => {
 // POST new post
 postRouter.post("/", (req, res, next) => {
     req.body.user = req.user._id
+    req.body.userString = req.user.username
     const newPost = new Post(req.body)
     newPost.save((err, savedPost) => {
         if(err){
-        res.status(500)
-        return next(err)
-        }
+            res.status(500)
+            return next(err)
+            }
         return res.status(201).send(savedPost)
-
     })
 })
 
-// Delete post
-postRouter.delete("/:postId", (req, res, next) => {
-    Post.findOneAndDelete(
-        { _id: req.params.postId, user: req.user._id },
-        (err, deletedPost) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(`Successfully delete post: ${deletedPost.title}`)
+// ******** Comments CRUD
+// post comment
+postRouter.put(`/:postId`, (req, res, next) => {
+    Post.findByIdAndUpdate(
+        { _id: req.params.postId },
+        { $push:
+            { comment: req.body }
+        },
+        { new: true },
+        (err, postWComment) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            console.log(postWComment)
+            return res.status(201).send(postWComment)
         }
     )
 })
 
-// Update post
-postRouter.put("/:postId", (req, res, next) => {
-    Post.findOneAndUpdate(
+// DELETE BETA comment * * * * * * * * * *
+postRouter.delete(`/:postId`, (req, res, next) => {
+    Post.findOneAndDelete(
         { _id: req.params.postId, user: req.user._id },
-        req.body,
+        (err, deletedPost) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(`Successfully delete comment on ${deletedPost}`)
+        }
+    )
+})
+// * ******** * ******** * ******** * ******** *
+
+// DELETE post
+postRouter.delete("/:postId", (req, res, next) => {
+    Post.findOneAndDelete(
+        { _id: req.params.postId, user: req.user._id },
+        (err, deletedPost) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(`Successfully delete post: ${deletedPost.title}`)
+        }
+    )
+})
+
+// increment vote
+postRouter.put("/:postId/upvote", (req, res, next) => {
+    Post.findOneAndUpdate({ _id: req.params.postId },
+        { $inc: { votes: 1 }, 
+        $push: { votedUsers: 
+            { $each: [req.user.username]}
+        }},
         { new: true },
         (err, updatedPost) => {
-        if(err){
-            res.status(500)
-            return next(err)
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201).send(updatedPost)
         }
-        return res.status(201).send(updatedPost)
+    )
+})
+
+// decrement vote
+postRouter.put("/:postId/downvote", (req, res, next) => {
+    Post.findOneAndUpdate({ _id: req.params.postId },
+        { $inc: { votes: -1 }, 
+        $push: { votedUsers: 
+            { $each: [req.user.username] } 
+        }},
+        { new: true },
+        (err, updatedPost) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201).send(updatedPost)
         }
     )
 })

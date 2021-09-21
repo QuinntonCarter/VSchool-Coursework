@@ -20,7 +20,6 @@ export default function ItemForm(props){
         }
     }
 
-
     return(
             <form onSubmit={handleSubmit}>
                 <h4 

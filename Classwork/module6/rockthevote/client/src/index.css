@@ -81,6 +81,7 @@ button {
     flex-grow: 150px;
     padding: 8px;
     background-color: whitesmoke;
+    resize: none;
 }
 
 .postForm > button {
@@ -120,7 +121,7 @@ button {
     justify-self: center;
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
     border: solid rgb(233, 110, 110) 2px;
     max-height: auto;
     width: 93%;
@@ -140,25 +141,19 @@ button {
 }
 
 .postDesc {
+    grid-column: 2/4;
     margin-left: 10px;
 }
 
-button.deleteBtn {
-    border: solid rgb(255, 155, 155) 2px;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-}
-
-div.postDesc > h2 {
+div.postDesc > Link > h3 {
     grid-column: 1/4;
     grid-row: 1;
     height: 90px;
     max-width: 50%;
 }
 
-.postDesc > h2 > span.date {
-    font-size: 12px;
+.postDesc > Link > h3 > span.date {
+    font-size: 120px;
     background-color: transparent;
 }
 
@@ -204,7 +199,7 @@ div.postDesc > p {
     font-size: 18px;
     padding: 8px;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 0
 }
 
 .postDesc > h4 {
@@ -213,7 +208,7 @@ div.postDesc > p {
     max-width: 106px;
     height: 35px;
     padding: 12px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
 }
 
 /* latest post */
@@ -222,18 +217,23 @@ div.postDesc > p {
 /* interaction bar */
 .interactionStyle {
     background-color: rgba(255, 155, 155, 0.473);
-    grid-column: 2/4;
+    grid-column: 1/4;
     grid-row: 4;
     /*  */
     justify-self: right;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto auto auto;
     grid-template-rows: 1fr;
     /*  */
-    width: 90%;
+    width: auto;
     height: auto;
 }
+
 /* set grid layout of elements in interaction bar */
+.interactionStyle > h4 {
+    color: rgb(233, 110, 110)
+}
+
 .interactionStyle > h6.comments {
     grid-column: 2;
     background-color: transparent;
@@ -244,24 +244,50 @@ div.postDesc > p {
     color: rgb(233, 110, 110)
 }
 
+.interactionStyle > h6.viewFullBtn {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.interactionStyle > h6.replyBtn {
+    grid-column: 5;
+    grid-row: 1;
+}
+
 .interactionStyle > div.commentAreaStyle {
     width: 70%;
     max-height: auto;
-    grid-column: 4;
+    grid-column: 3/4;
     grid-row: 1;
     display: grid;
-
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto auto auto;
     grid-template-rows: 1fr 1fr;
     background-color: transparent;
 }
 
+div.interactionStyle > button.deleteBtn {
+    align-self: center;
+    justify-self: center;
+    border: solid oldlace 2px;
+    color: oldlace;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    grid-column: 5;
+    border-radius: 50%;
+    background-color: rgb(233, 110, 110);
+    box-shadow: none;
+    grid-column: 6;
+}
+
+/* reply */
 /* commentArea elements */
 .interactionStyle > div.commentAreaStyle > button {
     border: solid rgb(255, 155, 155) 1px;
     width: auto;
     height: 50px;
     color: rgb(233, 110, 110);
+    grid-column: 5;
 }
 
 .interactionStyle > div.commentAreaStyle > textarea {
@@ -270,6 +296,28 @@ div.postDesc > p {
     margin: 10px;
     resize: none;
     border: rgb(233, 110, 110) solid 2px;
-
     margin-bottom: -100px;
+    grid-column: 4;
+}
+
+/***** comments section *****/
+/* comments style */
+.commentContainer {
+    grid-column: auto;
+    background-color: peachpuff;
+    height: auto;
+    width: auto;
+    border-radius: 0;
+}
+
+div.commentStyle {
+    background-color: transparent;
+}
+
+div.commentStyle > h6 {
+    text-align: right;
+    text-justify: right;
+    background-color: transparent;
+    height: auto;
+    width: auto;
 }

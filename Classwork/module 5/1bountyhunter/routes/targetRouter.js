@@ -29,7 +29,7 @@ targetRouter.put('/:targetId', (req, res, next) => {
     Target.findOneAndUpdate(
         {_id: req.params.targetId},
         req.body,
-        {new: true},
+        { new: true },
         (err, updatedTarget) => {
             if(err){
                 res.status(500)

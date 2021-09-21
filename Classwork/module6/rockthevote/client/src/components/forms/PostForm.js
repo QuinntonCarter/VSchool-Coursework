@@ -22,11 +22,7 @@ export default function PostForm(props){
         e.preventDefault()
         addPost(inputs)
         setInputs(initInputs)
-    }
-// add ability to validate file information: type and size
-    function getTimeStamp(){
-        var timestamp = new Date().getTime();
-        return timestamp
+        window.location.reload()
     }
 
     const { title, content, imgSrc } = inputs
@@ -59,7 +55,7 @@ export default function PostForm(props){
                 value={content}
                 onChange={handleChange}
                 placeholder='enter post content'
-                maxLength='800'
+                maxLength='2000'
                 required
             />
             <button> create new post </button>
