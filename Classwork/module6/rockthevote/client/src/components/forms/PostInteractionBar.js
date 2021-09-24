@@ -41,13 +41,12 @@ export default function PostInteractionForm(props){
         }))
     }
     
-    function voteValidation(vote, userId, Id, username){
+    function voteValidation(vote, userId, id, username){
         const hasVoted = voted.includes(username)
         hasVoted ?
         console.log(`Error: you've already voted here`)
         :
-        console.log('hit 1')
-        submitVote(vote, userId, Id)
+        submitVote(vote, userId, id)
     }
 
     function submitComment(e, postId, textInput){
