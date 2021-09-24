@@ -85,14 +85,14 @@ postRouter.delete(`/:postId`, (req, res, next) => {
                 res.status(500)
                 return next(err)
             }
-            return res.status(200).send(`Successfully delete post: ${deletedPost.title}`)
+            return res.status(200).send(`Successfully deleted post: ${deletedPost.title}`)
         }
     )
 })
 
 // increment vote
 postRouter.put("/:postId/upvote", (req, res, next) => {
-    Post.findByIdAndUpdate({ _id: req.params.postId },
+    Post.findOneAndUpdate({ _id: req.params.postId },
         { $inc: { votes: 1 }, 
         $push: { votedUsers: 
             { $each: [req.user.username]}
@@ -110,7 +110,7 @@ postRouter.put("/:postId/upvote", (req, res, next) => {
 
 // decrement vote
 postRouter.put("/:postId/downvote", (req, res, next) => {
-    Post.findByIdAndUpdate({ _id: req.params.postId },
+    Post.findOneAndUpdate({ _id: req.params.postId },
         { $inc: { votes: -1 }, 
         $push: { votedUsers: 
             { $each: [req.user.username] } 
