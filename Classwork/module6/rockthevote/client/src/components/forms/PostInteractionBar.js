@@ -46,6 +46,7 @@ export default function PostInteractionForm(props){
         hasVoted ?
         console.log(`Error: you've already voted here`)
         :
+        console.log('hit 1')
         submitVote(vote, userId, Id)
     }
 

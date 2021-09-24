@@ -135,7 +135,7 @@ export default function UserProvider(props){
         :
         userAxios.put(`/api/posts/${postId}/${vote}`)
         .then(res => {
-            console.log(res.data, userId, postId)
+            console.log(res.data)
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
