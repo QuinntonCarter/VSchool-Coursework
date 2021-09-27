@@ -39,7 +39,7 @@ postRouter.post("/", (req, res, next) => {
 })
 
 // ******** Comments CRUD
-// post comment
+// put comment
 postRouter.put(`/:postId`, (req, res, next) => {
     Post.findByIdAndUpdate(
         { _id: req.params.postId },
@@ -92,7 +92,7 @@ postRouter.delete(`/:postId`, (req, res, next) => {
 
 // increment vote
 postRouter.put("/:postId/upvote", (req, res, next) => {
-    Post.findOneAndUpdate({ _id: req.params.postId },
+    Post.findByIdAndUpdate({ _id: req.params.postId },
         { $inc: { votes: 1 }, 
         $push: { votedUsers: 
             { $each: [req.user.username]}
@@ -110,7 +110,7 @@ postRouter.put("/:postId/upvote", (req, res, next) => {
 
 // decrement vote
 postRouter.put("/:postId/downvote", (req, res, next) => {
-    Post.findOneAndUpdate({ _id: req.params.postId },
+    Post.findByIdAndUpdate({ _id: req.params.postId },
         { $inc: { votes: -1 }, 
         $push: { votedUsers: 
             { $each: [req.user.username] } 

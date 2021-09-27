@@ -129,11 +129,11 @@ export default function UserProvider(props){
     }
 
 // voting functionality
-    function submitVote(vote, userId, postId){
+    function submitVote(vote, userId, postVotes){
         userId === userState.user._id ?
-        console.log('Error: this is your own vote or comment')
+        console.log('Error: this is your own post or comment')
         :
-        userAxios.put(`/api/posts/${postId}/${vote}`)
+        userAxios.put(`/api/posts/${postId}`)
         .then(res => {
             console.log(res.data)
         })

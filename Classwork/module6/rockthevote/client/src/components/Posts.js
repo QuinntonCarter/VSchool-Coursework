@@ -17,6 +17,7 @@ export default function Posts(props){
 
     return(
         <>
+        {console.log("user", typeof userId+" "+userId, "post", typeof _id+" "+_id)}
             <div className='postStyle'>
                 <a title='View full size image' href={ imgSrc } rel='noreferrer' target='_blank'> 
                     <img src={ imgSrc } alt={ imgSrc }/>

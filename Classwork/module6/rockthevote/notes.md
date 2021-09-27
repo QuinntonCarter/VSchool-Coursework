@@ -1,6 +1,7 @@
 *** STOP messing with CSS, pleb. implement functionality first ***
 
 REVIEW:
+- Voting not working, path and _id error?? ***
 - CSS/layout    
 
 GOALS:

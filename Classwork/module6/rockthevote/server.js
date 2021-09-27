@@ -22,7 +22,9 @@ mongoose.connect(
 )
 
 app.use('/auth', require('./routes/authRouter.js'));
+
 app.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['sha1', 'RS256', 'HS256'] }));
+
 app.use('/api/posts', require('./routes/postRouter.js'));
 
 app.use((err, req, res, next) => {
