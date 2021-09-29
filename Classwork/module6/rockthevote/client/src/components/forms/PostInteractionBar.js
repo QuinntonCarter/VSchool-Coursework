@@ -8,6 +8,7 @@ export default function PostInteractionForm(props){
         votes,
         _id,
         _userId,
+        userString,
         voted
     } = props
     
@@ -59,9 +60,13 @@ export default function PostInteractionForm(props){
     return(
         <div className='interactionStyle'>
             <h4 title='# of votes'>
-                <i onClick={() => voteValidation('upvote', _userId, _id, user.username)} title='upvote' className='fas fa-thumbs-up'/>
+                <i
+                    onClick={() => voteValidation("upvote", _userId, _id, user.username)}
+                    title={ userString === user.username ? 'cannot vote on your own content' : 'upvote' || voted.includes(user.username) ? `you've already voted` : `upvote` } className='fas fa-thumbs-up'/>
                 {votes}
-                <i onClick={() => voteValidation('downvote', _userId, _id, user.username)} title='downvote' className='fas fa-thumbs-down'/>
+                <i
+                    onClick={() => voteValidation("downvote", _userId, _id, user.username)}
+                    title={ userString === user.username ? 'cannot vote on your own content' : 'downvote' || voted.includes(user.username) ? `you've already voted` : `downvote` } className='fas fa-thumbs-down'/>
             </h4>
             <h6 className='comments'> { comment.length } comments </h6>
             { !toggleReply ?

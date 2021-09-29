@@ -2,6 +2,8 @@ const express = require("express");
 const postRouter = express.Router();
 const Post = require("../models/post.js");
 
+
+// ******** GETs for post retrieval
 // GET All posts
 postRouter.get("/", (req, res, next) => {
     Post.find((err, posts) => {
@@ -13,9 +15,21 @@ postRouter.get("/", (req, res, next) => {
     })
 })
 
-// GET post by user Id
+// GET post by current user's Id
 postRouter.get("/user", (req, res, next) => {
     Post.find({ user: req.user._id }, (err, posts) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(posts)
+    })
+})
+
+// ******** Posts CRUD
+// GET posts by a user's Id
+postRouter.get("/user/:userId", (req, res, next) => {
+    Post.find({ user: req.params.userId }, (err, posts) => {
         if(err){
             res.status(500)
             return next(err)
@@ -39,7 +53,7 @@ postRouter.post("/", (req, res, next) => {
 })
 
 // ******** Comments CRUD
-// put comment
+// PUT comment
 postRouter.put(`/:postId`, (req, res, next) => {
     Post.findByIdAndUpdate(
         { _id: req.params.postId },
@@ -57,25 +71,6 @@ postRouter.put(`/:postId`, (req, res, next) => {
     )
 })
 
-// DELETE comment
-postRouter.put(`/:postId/:comId`, (req, res, next) => {
-    const delCom = req.params.comId
-    Post.findOneAndUpdate(
-        { _id: req.params.postId},
-        { $pull: 
-            { comment: { _id: delCom } }
-        },
-        (err, postNoComment) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(200).send(postNoComment)
-        }
-    )
-})
-
-
 // DELETE post
 postRouter.delete(`/:postId`, (req, res, next) => {
     Post.findOneAndDelete(
@@ -91,8 +86,9 @@ postRouter.delete(`/:postId`, (req, res, next) => {
 })
 
 // increment vote
-postRouter.put("/:postId/upvote", (req, res, next) => {
-    Post.findByIdAndUpdate({ _id: req.params.postId },
+postRouter.put("/upvote/:postId", (req, res, next) => {
+    console.log(req.params.postId)
+    Post.findOneAndUpdate({ _id: req.params.postId },
         { $inc: { votes: 1 }, 
         $push: { votedUsers: 
             { $each: [req.user.username]}
@@ -109,8 +105,8 @@ postRouter.put("/:postId/upvote", (req, res, next) => {
 })
 
 // decrement vote
-postRouter.put("/:postId/downvote", (req, res, next) => {
-    Post.findByIdAndUpdate({ _id: req.params.postId },
+postRouter.put("/downvote/:postId", (req, res, next) => {
+    Post.findOneAndUpdate({ _id: req.params.postId },
         { $inc: { votes: -1 }, 
         $push: { votedUsers: 
             { $each: [req.user.username] } 
@@ -122,6 +118,24 @@ postRouter.put("/:postId/downvote", (req, res, next) => {
                 return next(err)
             }
             return res.status(201).send(updatedPost)
+        }
+        )
+    })
+    
+// DELETE comment
+postRouter.put(`/:postId/:comId`, (req, res, next) => {
+    const delCom = req.params.comId
+    Post.findOneAndUpdate(
+        { _id: req.params.postId},
+        { $pull: 
+            { comment: { _id: delCom } }
+        },
+        (err, postNoComment) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(200).send(postNoComment)
         }
     )
 })

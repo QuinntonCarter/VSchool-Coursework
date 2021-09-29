@@ -21,6 +21,8 @@ export default function UserProvider(props){
     };
 
     const [userState, setUserState] = useState(initState)
+    const allPostsArr = initState.allPosts
+
 // for auth
     function signup(credentials){
         axios.post('/auth/signup', credentials)
@@ -106,7 +108,7 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     };
 
-// new post
+// new post POST
     function addPost(newPost){
         userAxios.post('/api/posts', newPost)
         .then(res => {
@@ -118,7 +120,7 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     };
 
-// delete post
+// DELETE post
     function deletePost(postId){
         userAxios.delete(`/api/posts/${postId}`)
         .then(res => {
@@ -129,11 +131,11 @@ export default function UserProvider(props){
     }
 
 // voting functionality
-    function submitVote(vote, userId, postVotes){
+    function submitVote(vote, userId, postId){
         userId === userState.user._id ?
         console.log('Error: this is your own post or comment')
         :
-        userAxios.put(`/api/posts/${postId}`)
+        userAxios.put(`/api/posts/${vote}/${postId}`)
         .then(res => {
             console.log(res.data)
         })
@@ -141,6 +143,7 @@ export default function UserProvider(props){
     }
 
 // comments CRUD
+// POST comment
     function postComment(postId, newComment){
         userAxios.put(`/api/posts/${postId}`, newComment)
         .then(res => {
@@ -149,7 +152,7 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
     }
 
-// delete comment * * * *
+// DELETE comment
     function deleteComment(postId, comId){
         userAxios.put(`/api/posts/${postId}/${comId}`)
         .then(res => {

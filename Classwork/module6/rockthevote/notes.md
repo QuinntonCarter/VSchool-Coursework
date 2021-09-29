@@ -1,7 +1,6 @@
 *** STOP messing with CSS, pleb. implement functionality first ***
 
 REVIEW:
-- Voting not working, path and _id error?? ***
 - CSS/layout    
 
 GOALS:
@@ -9,21 +8,23 @@ GOALS:
 - implement backend security features
 
 IMPLEMENT:
+- comment component
+    + comment reply view: @s or sub threads?
+    + style component
+- finish profileComponent
+- finish postDetails component
 - nightmode/alt views
 - viewSortComponent for post view sorting
     + a new component that houses all buttons in postlist view
     + toggle sort view hook
     + .sort() can be appended onto posts.map()
-- comment component
-    + comment reply view: @s or sub threads?
-    + style grid
 X deleteComment function
 X restrict comment deletion only if user._id === comment._authId can it be deleted
 X add obj keys where missing
 X timestamps, maybe on frontend or another way not in schema but
 
 FUTURE DEV:
-- user mentions in thread headers link to user profiles
+- usernames in thread headers link to user profiles
 - replies are sub threads in threads like reddit
 - checkbox delete functionality in userPosts view
     + maybe send ids into array and delete that array on function call
