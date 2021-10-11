@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider.js';
 
 export default function CommentComp(props){
@@ -9,16 +9,15 @@ export default function CommentComp(props){
     const { deleteComment, user } = useContext(UserContext)
 
     function validateDeletion(postId, commId, userId, authId){
-        userId !== authId ?
-        console.log(`Error: cannot delete, this isn't your comment`)
-    :
-        deleteComment(postId, commId)
+        return userId !== authId ?
+            new Error(`Error: cannot delete, this isn't your comment`)
+        :
+            deleteComment(postId, commId)
     }
 
     const commentsMapped = comments.map(comment => 
             <div className='commentStyle'>
                 <h6> @{comment.comAuth} posted {comment.date.slice(0,10)} around {comment.date.slice(11,16)} </h6>
-                {console.log(comment)}
                 <p style={{backgroundColor: 'transparent', color: 'rgb(59, 59, 59)'}}> {comment.content} </p>
                 {comment._authId !== user._id ?
                     ''

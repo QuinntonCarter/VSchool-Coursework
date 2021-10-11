@@ -92,6 +92,24 @@ button {
     margin: 30px;
 }
 
+/* post view bar style */
+.sortViewBar{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 3%;
+    width: auto;
+    height: auto;
+}
+
+.sortViewBar > button {
+    background-color: rgb(247, 183, 183);
+    padding: 8px;
+    color: whitesmoke;
+    border: none;
+    cursor: pointer;
+}
+
 /* post list */
 .postList {
     display: grid;
@@ -211,8 +229,12 @@ div.postDesc > p {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
 }
 
-/* latest post */
-/*  */
+/* profile posts */
+div.profilePosts {
+    margin-bottom: 80px;
+}
+
+
 
 /* interaction bar */
 .interactionStyle {

@@ -8,12 +8,13 @@ GOALS:
 - implement backend security features
 
 IMPLEMENT:
+- possible to implement none infinite loop of post retrieval with async?
+- post view sorting toolbar = include by votes
 - comment component
-    + comment reply view: @s or sub threads?
     + style component
 - finish profileComponent
+    + add user posts to this page
 - finish postDetails component
-- nightmode/alt views
 - viewSortComponent for post view sorting
     + a new component that houses all buttons in postlist view
     + toggle sort view hook
@@ -28,3 +29,10 @@ FUTURE DEV:
 - replies are sub threads in threads like reddit
 - checkbox delete functionality in userPosts view
     + maybe send ids into array and delete that array on function call
+- nightmode/alt views
+
+useEffect(()=> {
+    async function checkPosts(){
+        if(userState.allPosts.length)
+    }
+}, [userState.allPosts])

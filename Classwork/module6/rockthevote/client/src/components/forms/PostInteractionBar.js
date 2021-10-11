@@ -1,9 +1,10 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../../context/UserProvider.js';
 import CommentComp from '../CommentComp.js';
 
-export default function PostInteractionForm(props){
+export default React.memo(function PostInteractionBar(props){
     const {
+        commLength,
         comment,
         votes,
         _id,
@@ -16,7 +17,8 @@ export default function PostInteractionForm(props){
         deletePost,
         submitVote,
         postComment,
-        user
+        user,
+        getAllPosts
     } = useContext(UserContext)
     
     const initInputs = {
@@ -31,7 +33,6 @@ export default function PostInteractionForm(props){
 
     function handleDelete(id){
         deletePost(id)
-        document.location.reload()
     }
 
     function handleChange(e){
@@ -114,4 +115,4 @@ export default function PostInteractionForm(props){
             />
         </div>
     )
-}
+})

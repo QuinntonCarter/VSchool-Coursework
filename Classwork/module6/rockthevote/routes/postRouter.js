@@ -15,28 +15,27 @@ postRouter.get("/", (req, res, next) => {
     })
 })
 
-// GET post by current user's Id
-postRouter.get("/user", (req, res, next) => {
-    Post.find({ user: req.user._id }, (err, posts) => {
+// GET posts by a user's Id
+postRouter.get("/user/:userId", (req, res, next) => {
+    Post.find({ user: req.params.userId }, (err, posts) => {
         if(err){
             res.status(500)
-            return next(err)
+            return console.log(err)
         }
         return res.status(200).send(posts)
     })
 })
 
 // ******** Posts CRUD
-// GET posts by a user's Id
-postRouter.get("/user/:userId", (req, res, next) => {
-    Post.find({ user: req.params.userId }, (err, posts) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(posts)
-    })
-})
+// postRouter.get("/user?profile=:userId", (req, res, next) => {
+//     Post.find({ user: req.params.userId }, (err, posts) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(200).send(posts)
+//     })
+// })
 
 // POST new post
 postRouter.post("/", (req, res, next) => {
@@ -52,7 +51,8 @@ postRouter.post("/", (req, res, next) => {
     })
 })
 
-// ******** Comments CRUD
+// ******** Comments CRUD ** 
+// operations work top down, remember when debugging to consider this + the way you choose to order functions ********
 // PUT comment
 postRouter.put(`/:postId`, (req, res, next) => {
     Post.findByIdAndUpdate(
@@ -87,7 +87,6 @@ postRouter.delete(`/:postId`, (req, res, next) => {
 
 // increment vote
 postRouter.put("/upvote/:postId", (req, res, next) => {
-    console.log(req.params.postId)
     Post.findOneAndUpdate({ _id: req.params.postId },
         { $inc: { votes: 1 }, 
         $push: { votedUsers: 

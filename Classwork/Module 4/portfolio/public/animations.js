@@ -1,5 +1,5 @@
 
-$(document).ready(()=> {
+$(document).ready(() => {
 
     $('#aboutTitle').hide()
     $('#about').hide()

@@ -1,5 +1,8 @@
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostInteractionBar from './forms/PostInteractionBar.js';
+import { UserContext } from '../context/UserProvider.js';
+
 
 export default function Posts(props){
     const {
@@ -15,7 +18,7 @@ export default function Posts(props){
         _id
     } = props
 
-    // const uploaded = 
+    const { user, deletePost } = useContext(UserContext)
 
     return(
         <>
@@ -33,7 +36,17 @@ export default function Posts(props){
                         </Link>
                         <p> { content } </p>
                     </div>
+                    { 
+                        userId !== user._id ?
+                        ''
+                    :
+                    <button
+                        onClick={() => deletePost(_id)}
+                        className='deleteBtn'
+                    > x </button>
+                }
                 <PostInteractionBar
+                    commLength={comment.length}
                     votes={votes}
                     voted={votedUsers}
                     comment={comment}

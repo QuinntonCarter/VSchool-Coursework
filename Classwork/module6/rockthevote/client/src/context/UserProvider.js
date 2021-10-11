@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export const UserContext = React.createContext();
 
-
 const userAxios = axios.create()
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
@@ -21,7 +20,6 @@ export default function UserProvider(props){
     };
 
     const [userState, setUserState] = useState(initState)
-    const allPostsArr = initState.allPosts
 
 // for auth
     function signup(credentials){
@@ -30,6 +28,7 @@ export default function UserProvider(props){
             const {user, token} = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
+            getAllPosts()
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
@@ -45,14 +44,13 @@ export default function UserProvider(props){
             const { user, token } = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
-            getUserPosts()
             getAllPosts()
+            getUserPosts()
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
                 token
             }))
-            console.log(res.data)
         })
         .catch(err => handleAuthError(err.response.data.errMsg))
     };
@@ -84,25 +82,26 @@ export default function UserProvider(props){
     };
 
     // CRUD
-// get logged in user's posts
-    function getUserPosts(){
-        userAxios.get('/api/posts/user')
+// get all posts in DB
+    function getAllPosts(){
+        userAxios.get('/api/posts')
+        .then(res =>{
+                setUserState(prevState => ({
+                    ...prevState,
+                    allPosts: res.data
+                }))
+            }
+        )
+        .catch(err => console.log(err.response.data.errMsg))
+    };
+
+// get logged in user's posts * fix/work on backend
+    function getUserPosts(userId){
+        userAxios.get(`/api/posts/user/${userId}`)
         .then(res => {
             setUserState(prevState => ({
                 ...prevState,
                 posts: res.data
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
-    };
-
-// get all posts in DB
-    function getAllPosts(){
-        userAxios.get('/api/posts')
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                allPosts: res.data
             }))
         })
         .catch(err => console.log(err.response.data.errMsg))
@@ -114,7 +113,7 @@ export default function UserProvider(props){
         .then(res => {
             setUserState(prevState => ({
                 ...prevState,
-                posts: [...prevState.posts, res.data]
+                allPosts: [...prevState.allPosts, res.data]
             }))
         })
         .catch(err => console.log(err.response.data.errMsg))
@@ -123,11 +122,9 @@ export default function UserProvider(props){
 // DELETE post
     function deletePost(postId){
         userAxios.delete(`/api/posts/${postId}`)
-        .then(res => {
-            setUserState(prevState => 
-                prevState.filter(post => post._id !== postId))
-        })
+        .then(res => console.log(res.data))
         .catch(err => console.log(err))
+        .finally(getAllPosts())
     }
 
 // voting functionality
@@ -136,37 +133,37 @@ export default function UserProvider(props){
         console.log('Error: this is your own post or comment')
         :
         userAxios.put(`/api/posts/${vote}/${postId}`)
-        .then(res => {
-            console.log(res.data)
-        })
+        .then(res => console.log(res.data))
         .catch(err => console.log(err.response.data.errMsg))
+        .finally(getAllPosts())
     }
 
 // comments CRUD
 // POST comment
     function postComment(postId, newComment){
         userAxios.put(`/api/posts/${postId}`, newComment)
-        .then(res => {
-            console.log(res.data)
-        })
+        .then(res => console.log(res.data))
         .catch(err => console.log(err.response.data.errMsg))
+        .finally(getAllPosts())
     }
 
 // DELETE comment
     function deleteComment(postId, comId){
         userAxios.put(`/api/posts/${postId}/${comId}`)
         .then(res => {
-            console.log(res.data)
+            setUserState(prevState => ({
+                ...prevState,
+                allPosts: [...prevState.allPosts, res.data]
+            }))
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
 
-// keep posts on page
     useEffect(() => {
-        getUserPosts()
+        getUserPosts(userState.user._id)
         getAllPosts()
     }, []);
-
+    
     return(
         <UserContext.Provider
         value={{

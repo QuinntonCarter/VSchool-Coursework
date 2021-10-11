@@ -22,7 +22,6 @@ export default function PostForm(props){
         e.preventDefault()
         addPost(inputs)
         setInputs(initInputs)
-        window.location.reload()
     }
 
     const { title, content, imgSrc } = inputs

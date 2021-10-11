@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../context/UserProvider.js';
 
 import PostForm from './forms/PostForm.js';
@@ -8,7 +8,6 @@ export default function Profile(props){
     const {
         user: { username },
         addPost,
-        posts,
         allPosts
     } = useContext(UserContext)
 
