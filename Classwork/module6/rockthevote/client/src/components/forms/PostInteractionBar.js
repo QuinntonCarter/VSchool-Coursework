@@ -4,7 +4,6 @@ import CommentComp from '../CommentComp.js';
 
 export default React.memo(function PostInteractionBar(props){
     const {
-        commLength,
         comment,
         votes,
         _id,
@@ -24,7 +23,7 @@ export default React.memo(function PostInteractionBar(props){
     const initInputs = {
         content: '',
         comAuth: `${user.username}`,
-        _authId: `${user._id}`,
+        _authId: ``,
         date: new Date()
     }
 

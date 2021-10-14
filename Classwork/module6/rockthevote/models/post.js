@@ -1,6 +1,31 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const commentSchema = new Schema({
+    content: String,
+    comAuth: String,
+    _authId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+    date: String,
+    comVotes: {
+        type: Number,
+        default: 0
+    },
+    comVotedUsers: [{
+        type: String
+    }],
+    _authId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+    post: {
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    }
+})
+
 const postSchema = new Schema({
     title: {
         type: String,
@@ -26,15 +51,22 @@ const postSchema = new Schema({
     comment: [{
         content: String,
         comAuth: String,
-        _authId: String,
         date: String,
+        comVotedUsers: [{
+            type: String
+        }],
+        _authId: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
         comVotes: {
             type: Number,
             default: 0
         },
-        comVotedUsers: [{
-            type: String
-        }]
+        post: {
+            type: Schema.Types.ObjectId,
+            ref: "Post"
+        }
     }],
     posted: {
         type: Date,

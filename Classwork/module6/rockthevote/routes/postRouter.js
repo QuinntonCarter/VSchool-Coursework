@@ -2,7 +2,7 @@ const express = require("express");
 const postRouter = express.Router();
 const Post = require("../models/post.js");
 
-
+// operations work top down, remember when debugging to consider this + the way you choose to order functions ********
 // ******** GETs for post retrieval
 // GET All posts
 postRouter.get("/", (req, res, next) => {
@@ -20,22 +20,11 @@ postRouter.get("/user/:userId", (req, res, next) => {
     Post.find({ user: req.params.userId }, (err, posts) => {
         if(err){
             res.status(500)
-            return console.log(err)
+            return console.log('wat'+err)
         }
         return res.status(200).send(posts)
     })
 })
-
-// ******** Posts CRUD
-// postRouter.get("/user?profile=:userId", (req, res, next) => {
-//     Post.find({ user: req.params.userId }, (err, posts) => {
-//         if(err){
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(200).send(posts)
-//     })
-// })
 
 // POST new post
 postRouter.post("/", (req, res, next) => {
@@ -49,26 +38,6 @@ postRouter.post("/", (req, res, next) => {
             }
         return res.status(201).send(savedPost)
     })
-})
-
-// ******** Comments CRUD ** 
-// operations work top down, remember when debugging to consider this + the way you choose to order functions ********
-// PUT comment
-postRouter.put(`/:postId`, (req, res, next) => {
-    Post.findByIdAndUpdate(
-        { _id: req.params.postId },
-        { $push:
-            { comment: req.body }
-        },
-        { new: true },
-        (err, postWComment) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(201).send(postWComment)
-        }
-    )
 })
 
 // DELETE post
@@ -120,23 +89,5 @@ postRouter.put("/downvote/:postId", (req, res, next) => {
         }
         )
     })
-    
-// DELETE comment
-postRouter.put(`/:postId/:comId`, (req, res, next) => {
-    const delCom = req.params.comId
-    Post.findOneAndUpdate(
-        { _id: req.params.postId},
-        { $pull: 
-            { comment: { _id: delCom } }
-        },
-        (err, postNoComment) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(200).send(postNoComment)
-        }
-    )
-})
 
 module.exports = postRouter

@@ -14,6 +14,7 @@ export default function UserProvider(props){
     const initState = {
         user: JSON.parse(localStorage.getItem('user')) || {},
         token: localStorage.getItem('token') || '',
+        comments: [],
         posts: [],
         allPosts: [],
         errMsg: ''
@@ -46,6 +47,7 @@ export default function UserProvider(props){
             localStorage.setItem('user', JSON.stringify(user))
             getAllPosts()
             getUserPosts()
+            getUserComm()
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
@@ -139,17 +141,29 @@ export default function UserProvider(props){
     }
 
 // comments CRUD
+// GET all comments by user
+    function getUserComm(userId){
+        userAxios.get(`/api/comment/user/${userId}`)
+        .then(res => {
+            setUserState(prevState => ({
+                ...prevState,
+                comments: res.data
+            }))
+        })
+        .catch(err => console.log(err.response.data.errMsg))
+    };
+
 // POST comment
     function postComment(postId, newComment){
-        userAxios.put(`/api/posts/${postId}`, newComment)
+        userAxios.put(`/api/comment/${postId}`, newComment)
         .then(res => console.log(res.data))
         .catch(err => console.log(err.response.data.errMsg))
         .finally(getAllPosts())
     }
 
-// DELETE comment
+// DELETE comment ** check **
     function deleteComment(postId, comId){
-        userAxios.put(`/api/posts/${postId}/${comId}`)
+        userAxios.put(`/api/${postId}/${comId}`)
         .then(res => {
             setUserState(prevState => ({
                 ...prevState,
@@ -157,11 +171,13 @@ export default function UserProvider(props){
             }))
         })
         .catch(err => console.log(err.response.data.errMsg))
+        .finally(getAllPosts())
     }
 
     useEffect(() => {
         getUserPosts(userState.user._id)
         getAllPosts()
+        getUserComm(userState.user._id)
     }, []);
     
     return(
