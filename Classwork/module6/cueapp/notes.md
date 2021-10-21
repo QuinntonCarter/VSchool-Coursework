@@ -1,6 +1,6 @@
 todo next
     functionality:
-        -   finish implementing user context so token passes and authorization uri/route can be tested (token pass needs to occur to app.js)
+        -   finish implementing user context so login works –– currently broken
         -   implement routing between pages at certain endpoints
         -   implement Spotify user info into appContext
         -   implement GET functions into appContext
