@@ -31,6 +31,8 @@ FUTURE DEV:
     + maybe send ids into array and delete that array on function call
 - nightmode/alt views
 
+
+notes:
 useEffect(()=> {
     async function checkPosts(){
         if(userState.allPosts.length)
