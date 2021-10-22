@@ -49,7 +49,7 @@ function App() {
             component={Auth}
             loading={false}
           />
-
+        {/* review route */}
           <ProtectedRoute
             exact path='/login'
             component={Login}
