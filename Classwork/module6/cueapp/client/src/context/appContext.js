@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+// refactor for use with spotify API (not for user information)
 const AppContext = React.createContext();
 
 // data.search => is an array of results

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import { AppContext } from '../context/appContext.js';
 import ResultComp from '../components/resultComp.js';
@@ -35,6 +36,5 @@ export default function Main(){
         </div>
     )
 }
-
-// need to be refactored: Header/banner at top,then route
-// between profile and search view, but affixed to bottom isfooter/navbar
+// create switch and route between profile and search view
+// logout can be passed down from context to remove user information

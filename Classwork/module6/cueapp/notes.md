@@ -1,8 +1,8 @@
 todo next
     functionality:
         -   finish implementing user context so login works –– currently broken
+            +   pass the token from CUE context to app so it stops rerouting
         -   implement routing between pages at certain endpoints
-        -   implement Spotify user info into appContext
         -   implement GET functions into appContext
         -   edit AuthForm and associated so there's no username error in props pass
     

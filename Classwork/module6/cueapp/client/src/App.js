@@ -6,33 +6,26 @@ import 'react-spotify-auth/dist/index.css';
 import Cookies from 'js-cookie';
 
 import { SpotifyAuth } from 'react-spotify-auth';
-// import ResultDetails from './components/resultDetails.js';
+
 import ProtectedRoute from './components/protectedRoute.js';
 import Banner from './components/banner.js';
 import Auth from './components/Auth.js';
 import Main from './views/main.js';
 import Profile from './views/profile.js';
+import Navbar from './components/navbar.js';
 
 function App() {
   const [spotifyToken, setToken] = useState(Cookies.get("spotifyAuthToken"))
-  const { token } = useContext(UserContext)
+  const { cueToken } = useContext(UserContext)
 
   return (
     <div className='mainContainer'>
     <Banner/>
         <Switch>
-          {/* try commented code below if protectedRoute doesn't work */}
-          {/* { spotifyToken && token ? 
-                <Redirect to='/main'/>
-
-              : */}
                 <Route 
                   exact path='/'
                   render={() => spotifyToken ?
-                    <Auth
-                      loading={false}
-                      spotifyToken={spotifyToken}
-                    />
+                    <Auth/>
 
                   :
                     <SpotifyAuth
@@ -51,34 +44,30 @@ function App() {
                     />
                   }
                 />
-            {/* } */}
-
-          <ProtectedRoute
+          {/* <Route
             exact path='/auth'
             component={Auth}
-            redirectTo={() => spotifyToken && token ? '/main' : '/'}
-            spotifyToken={spotifyToken}
-            token={token}
             loading={false}
-          />
+          /> */}
 
           <ProtectedRoute
             exact path='/main'
             component={Main}
+            //*** */ may cause problem ***
             redirectTo='/'
-            spotifyToken={spotifyToken}
+            token={cueToken}
             loading={false}
           />
 
           <ProtectedRoute
-            exact path='/profile'
-            component={Profile}
+            exact path='/main/:view'
             redirectTo='/'
-            spotifyToken={spotifyToken}
+            token={cueToken}
             loading={false}
           />
 
         </Switch>
+        { cueToken && spotifyToken ? <Navbar /> : null }
     </div>
   );
 }

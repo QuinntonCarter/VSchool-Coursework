@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// will need to refactor this to work with new DB
+// will need to refactor this to work with new cueappDB
 
 export const UserContext = React.createContext();
 
@@ -16,9 +16,8 @@ export default function UserProvider(props){
     const initState = {
         user: JSON.parse(localStorage.getItem('user')) || {},
         token: localStorage.getItem('token') || '',
-        comments: [],
-        posts: [],
-        allPosts: [],
+        // will be array of obj
+        lists: [],
         errMsg: ''
     };
 
@@ -28,10 +27,9 @@ export default function UserProvider(props){
     function signup(credentials){
         axios.post('/auth/signup', credentials)
         .then(res => {
-            const {user, token} = res.data
+            const { user, token } = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
-            getAllPosts()
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
@@ -47,13 +45,11 @@ export default function UserProvider(props){
             const { user, token } = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
-            getAllPosts()
-            getUserPosts()
-            getUserComm()
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
-                token
+                token,
+                lists: []
             }))
         })
         .catch(err => handleAuthError(err.response.data.errMsg))
@@ -65,8 +61,6 @@ export default function UserProvider(props){
         setUserState({
             user: {},
             token: '',
-            posts: [],
-            allPosts: []
         })
     };
 
@@ -87,99 +81,97 @@ export default function UserProvider(props){
 
     // CRUD
 // get all posts in DB
-    function getAllPosts(){
-        userAxios.get('/api/posts')
-        .then(res =>{
-                setUserState(prevState => ({
-                    ...prevState,
-                    allPosts: res.data
-                }))
-            }
-        )
-        .catch(err => console.log(err.response.data.errMsg))
-    };
+    // function getAllPosts(){
+        // userAxios.get('/api/posts')
+        // .then(res =>{
+        //         setUserState(prevState => ({
+        //             ...prevState,
+        //             allPosts: res.data
+        //         }))
+        //     }
+        // )
+        // .catch(err => console.log(err.response.data.errMsg))
+    // };
 
 // get logged in user's posts * fix/work on backend
-    function getUserPosts(userId){
-        userAxios.get(`/api/posts/user/${userId}`)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                posts: res.data
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
-    };
+    // function getUserPosts(userId){
+        // userAxios.get(`/api/posts/user/${userId}`)
+        // .then(res => {
+        //     setUserState(prevState => ({
+        //         ...prevState,
+        //         posts: res.data
+        //     }))
+        // })
+        // .catch(err => console.log(err.response.data.errMsg))
+    // };
 
 // new post POST
-    function addPost(newPost){
-        userAxios.post('/api/posts', newPost)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                allPosts: [...prevState.allPosts, res.data]
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
-    };
+    // function addPost(newPost){
+        // userAxios.post('/api/posts', newPost)
+        // .then(res => {
+        //     setUserState(prevState => ({
+        //         ...prevState,
+        //         allPosts: [...prevState.allPosts, res.data]
+        //     }))
+        // })
+        // .catch(err => console.log(err.response.data.errMsg))
+    // };
 
 // DELETE post
-    function deletePost(postId){
-        userAxios.delete(`/api/posts/${postId}`)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
-        .finally(getAllPosts())
-    }
+    // function deletePost(postId){
+    //     userAxios.delete(`/api/posts/${postId}`)
+    //     .then(res => console.log(res.data))
+    //     .catch(err => console.log(err))
+    //     .finally(getAllPosts())
+    // }
 
 // voting functionality
-    function submitVote(vote, userId, postId){
-        userId === userState.user._id ?
-        console.log('Error: this is your own post or comment')
-        :
-        userAxios.put(`/api/posts/${vote}/${postId}`)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.response.data.errMsg))
-        .finally(getAllPosts())
-    }
+    // function submitVote(vote, userId, postId){
+    //     userId === userState.user._id ?
+    //     console.log('Error: this is your own post or comment')
+    //     :
+    //     userAxios.put(`/api/posts/${vote}/${postId}`)
+    //     .then(res => console.log(res.data))
+    //     .catch(err => console.log(err.response.data.errMsg))
+    //     .finally(getAllPosts())
+    // }
 
 // comments CRUD
 // GET all comments by user
-    function getUserComm(userId){
-        userAxios.get(`/api/comment/user/${userId}`)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                comments: res.data
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
-    };
+    // function getUserComm(userId){
+    //     userAxios.get(`/api/comment/user/${userId}`)
+    //     .then(res => {
+    //         setUserState(prevState => ({
+    //             ...prevState,
+    //             comments: res.data
+    //         }))
+    //     })
+    //     .catch(err => console.log(err.response.data.errMsg))
+    // };
 
 // POST comment
-    function postComment(postId, newComment){
-        userAxios.put(`/api/comment/${postId}`, newComment)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err.response.data.errMsg))
-        .finally(getAllPosts())
-    }
+    // function postComment(postId, newComment){
+    //     userAxios.put(`/api/comment/${postId}`, newComment)
+    //     .then(res => console.log(res.data))
+    //     .catch(err => console.log(err.response.data.errMsg))
+    //     .finally(getAllPosts())
+    // }
 
 // DELETE comment ** check **
-    function deleteComment(postId, comId){
-        userAxios.put(`/api/${postId}/${comId}`)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                allPosts: [...prevState.allPosts, res.data]
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
-        .finally(getAllPosts())
-    }
+    // function deleteComment(postId, comId){
+        // userAxios.put(`/api/${postId}/${comId}`)
+        // .then(res => {
+        //     setUserState(prevState => ({
+        //         ...prevState,
+        //         allPosts: [...prevState.allPosts, res.data]
+        //     }))
+        // })
+        // .catch(err => console.log(err.response.data.errMsg))
+        // .finally(getAllPosts())
+    // }
 
     useEffect(() => {
-        getUserPosts(userState.user._id)
-        getAllPosts()
-        getUserComm(userState.user._id)
+
     }, []);
     
     return(
@@ -189,13 +181,13 @@ export default function UserProvider(props){
             signup,
             login,
             logout,
-            addPost,
-            deletePost,
-            getUserPosts,
-            getAllPosts,
-            submitVote,
-            postComment,
-            deleteComment,
+            // addPost,
+            // deletePost,
+            // getUserPosts,
+            // getAllPosts,
+            // submitVote,
+            // postComment,
+            // deleteComment,
             resetAuthError
         }}>
             {props.children}

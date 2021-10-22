@@ -16,10 +16,6 @@ const commentSchema = new Schema({
         type: Number,
         default: 0
     },
-    _authId: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    },
     post: {
         type: Schema.Types.ObjectId,
         ref: "Post"

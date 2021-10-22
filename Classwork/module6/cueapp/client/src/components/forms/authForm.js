@@ -1,3 +1,5 @@
+import { Link, useRouteMatch, useParams } from 'react-router-dom';
+
 export default function AuthForm(props){
     const {
         handleChange,
@@ -9,6 +11,7 @@ export default function AuthForm(props){
             password
         }
     } = props
+
 
     return(
         <form onSubmit={handleSubmit}>
@@ -25,7 +28,9 @@ export default function AuthForm(props){
                 onChange={handleChange}
                 placeholder='password'
             />
-            <button> {btnText} </button>
+            <Link to='/main'> 
+                <button> {btnText} </button>
+            </Link>
             <p style={{color: 'red'}}> {errMsg} </p>
         </form>
     )
