@@ -49,9 +49,9 @@ export default function PostList(props) {
                 <button onClick={() => changeClass('newest')}> newest </button>
                 <button onClick={() => changeClass('unpopular')}> unpopular </button>
             </div>
-            { view.reverse ? initView : ''}
-            { view.popular ? popularView : ''}
-            { view.unpopular === true ? unpopularView : ''}
+            { view.reverse ? initView : null }
+            { view.popular ? popularView : null }
+            { view.unpopular === true ? unpopularView : null }
         </div>
     )
 }

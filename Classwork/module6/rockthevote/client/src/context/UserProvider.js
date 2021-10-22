@@ -45,9 +45,8 @@ export default function UserProvider(props){
             const { user, token } = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
-            getAllPosts()
-            getUserPosts()
-            getUserComm()
+            getUserPosts(user._id)
+            getUserComm(user._id)
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user,
@@ -175,9 +174,7 @@ export default function UserProvider(props){
     }
 
     useEffect(() => {
-        getUserPosts(userState.user._id)
         getAllPosts()
-        getUserComm(userState.user._id)
     }, []);
     
     return(

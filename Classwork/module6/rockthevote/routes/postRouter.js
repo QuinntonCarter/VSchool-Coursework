@@ -2,8 +2,7 @@ const express = require("express");
 const postRouter = express.Router();
 const Post = require("../models/post.js");
 
-// operations work top down, remember when debugging to consider this + the way you choose to order functions ********
-// ******** GETs for post retrieval
+
 // GET All posts
 postRouter.get("/", (req, res, next) => {
     Post.find((err, posts) => {

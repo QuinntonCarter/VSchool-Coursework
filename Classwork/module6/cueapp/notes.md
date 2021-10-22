@@ -12,6 +12,7 @@ todo next
 
 Notes to self:
     +   when you move files or otherwise restructor the module, check import syntax across files
+    +   check dependency installs and versions if running into unexpected problems
 
 * future implementations * :
     -   ability to get top played music information based on user account

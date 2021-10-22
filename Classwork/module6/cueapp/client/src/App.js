@@ -45,9 +45,17 @@ function App() {
                   }
                 />
           <Route
-            exact path='/auth'
+            exact path='/auth/cue'
             component={Auth}
             loading={false}
+          />
+
+          <ProtectedRoute
+            exact path='/login'
+            component={Login}
+            loading={false}
+            token={token}
+            spotifyToken={spotifyToken}
           />
 
           <ProtectedRoute

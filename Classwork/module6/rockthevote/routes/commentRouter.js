@@ -23,23 +23,23 @@ commentRouter.put(`/:postId`, (req, res, next) => {
     req.body.post = req.params.postId
     const newComment = new Comment(req.body)
     newComment.save((err, newComm) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            Post.findOneAndUpdate(
-                {_id: req.params.postId},
-                { $push: 
-                    { comment: newComm }
-                },
-                { new: true },
-                (err, postWComm) => {
-                    if(err){
-                        res.status(500)
-                        return next(err)
-                    }
-                    return res.status(200).send(postWComm)
-                })
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        Post.findOneAndUpdate(
+            {_id: req.params.postId},
+            { $push: 
+                { comment: newComm }
+            },
+            { new: true },
+            (err, postWComm) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(postWComm)
+            })
         }
     )
 })
