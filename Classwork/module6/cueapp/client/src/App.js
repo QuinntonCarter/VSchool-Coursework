@@ -44,11 +44,11 @@ function App() {
                     />
                   }
                 />
-          {/* <Route
+          <Route
             exact path='/auth'
             component={Auth}
             loading={false}
-          /> */}
+          />
 
           <ProtectedRoute
             exact path='/main'
