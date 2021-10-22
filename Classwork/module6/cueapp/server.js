@@ -22,7 +22,8 @@ mongoose.connect(
 )
 
 app.use('/auth', require('./routes/authRouter.js'));
-app.use('/app', expressJwt({ secret: process.env.SECRET, algorithms: ['sha1', 'RS256', 'HS256'] }));
+// used for calls to mongo from frontend to back
+app.use('/db', expressJwt({ secret: process.env.SECRET, algorithms: ['sha1', 'RS256', 'HS256'] }));
 // app.use('/app/lists', require('./routes/listsRouter.js'));
 // app.use('/app/albums', require('./routes/albumsRouter.js'));
 

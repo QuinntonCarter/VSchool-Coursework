@@ -1,19 +1,18 @@
 // navbar:
 // adheres to bottom of screen/app
 // 3 buttons, profile, search, and logout
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../context/userProvider';
 
 export default function NavBar(props){
-    const { setView } = props
-
-    function toggle(view){
-
-    }
+    const { logout } = useContext(UserContext)
 
     return(
         <div className='navbarContainer'>
-            <span onClick={toggle('lists')}> Lists </span>
-            <a> Search </a>
-            <a> Logout </a>
+            <Link to='/main/profile'> Lists </Link>
+            <Link to='/main/search'> Search </Link>
+            <button onClick={logout}> Logout </button>
         </div>
     )
 }

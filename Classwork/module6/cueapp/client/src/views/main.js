@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
 
 import { AppContext } from '../context/appContext.js';
 import ResultComp from '../components/resultComp.js';
@@ -32,9 +31,7 @@ export default function Main(){
 
     return(
         <div className='resultCompWrapper' >
-            {mappedResults}
+            <h1 style={{color: 'gray'}}> main view placeholder </h1>
         </div>
     )
 }
-// create switch and route between profile and search view
-// logout can be passed down from context to remove user information
