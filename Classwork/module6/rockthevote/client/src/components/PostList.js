@@ -1,4 +1,4 @@
-import React, {  useContext, useState } from 'react';
+import React, {  useContext, useState, useEffect } from 'react';
 import { UserContext } from '../context/UserProvider.js';
 import Posts from './Posts.js';
 
@@ -40,6 +40,10 @@ export default function PostList(props) {
             })
         }
     }
+
+    useEffect(() => {
+        getAllPosts()
+    }, [])
 
     
     return(

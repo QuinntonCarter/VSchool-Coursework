@@ -41,7 +41,7 @@ export default function UserProvider(props){
 
     function login(credentials){
         axios.post('/auth/login', credentials)
-        .then(res => {
+            .then(res => {
             const { user, token } = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
@@ -172,10 +172,6 @@ export default function UserProvider(props){
         .catch(err => console.log(err.response.data.errMsg))
         .finally(getAllPosts())
     }
-
-    useEffect(() => {
-        getAllPosts()
-    }, []);
     
     return(
         <UserContext.Provider
