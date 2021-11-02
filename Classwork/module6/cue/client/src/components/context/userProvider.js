@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { LOCALSTORAGE_KEYS } from '../spotify.js'
 
 // will need to refactor this to work with new cueappDB
 
@@ -55,6 +56,9 @@ export default function UserProvider(props){
     };
 
     function logout(){
+        for (const property in LOCALSTORAGE_KEYS) {
+            localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
+        }
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         setUserState({

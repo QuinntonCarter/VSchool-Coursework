@@ -1,7 +1,8 @@
 import axios from 'axios';
+const spotifyAPI = axios;
 
 // declare localStorage keys
-const LOCALSTORAGE_KEYS = {
+export const LOCALSTORAGE_KEYS = {
     accessToken: 'spotify_access_token',
     refreshToken: 'spotify_refresh_token',
     expireTime: 'spotify_token_expire_time',
@@ -9,7 +10,7 @@ const LOCALSTORAGE_KEYS = {
 }
 
 // retrieve localStorage values
-const LOCALSTORAGE_VALUES = {
+export const LOCALSTORAGE_VALUES = {
     accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
     refreshToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.refreshToken),
     expireTime: window.localStorage.getItem(LOCALSTORAGE_KEYS.expireTime),
@@ -109,8 +110,8 @@ const getAccessToken = () => {
 export const accessToken = getAccessToken();
 
 // setting global defaults for axios
-axios.defaults.baseURL = 'https://api.spotify.com/v1';
-axios.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-axios.defaults.headers['Content-Type'] = 'application/json';
+spotifyAPI.defaults.baseURL = 'https://api.spotify.com/v1';
+spotifyAPI.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+spotifyAPI.defaults.headers['Content-Type'] = 'application/json';
 
-export const getCurrentUserProfile = () => axios.get('/me'); 
+export const getCurrentUserProfile = () => spotifyAPI.get('/me');

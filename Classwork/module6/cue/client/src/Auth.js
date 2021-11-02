@@ -1,16 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AuthForm from './components/forms/authForm.js';
 import { UserContext } from './components/context/userProvider.js';
+import { accessToken, getCurrentUserProfile } from './components/spotify.js';
 
-export default function Auth(props){
+
+export default function Auth(){
     const initInputs = {
         username: '',
         password: ''
     }
     const [inputs, setInputs] = useState(initInputs)
     const [toggle, setToggle] = useState(false)
-
-    const { spotifyToken } = props
+    // from Spotify
+    const [spotifyToken, setSpotifyToken] = useState(null);
+    const [profile, setProfile] = useState(null);
 
     const { signup, login, errMsg, resetAuthError } = useContext(UserContext)
 
@@ -38,10 +41,31 @@ export default function Auth(props){
         setInputs(initInputs)
     }
 
-    return spotifyToken ? 
+    useEffect(()=> {
+        if(accessToken){
+            setSpotifyToken(accessToken);
+    
+            const fetchData = async () => {
+            try {
+                const {data} = await getCurrentUserProfile();
+                setProfile(data);
+            } catch(e) {
+                console.error(e);
+    
+            }
+            }
+            fetchData();
+        } else if (!accessToken) {
+        return;
+        }
+    }, [spotifyToken])
+
+    return accessToken ? 
         <div className='authContainer'>
                 { !toggle ?
                     <>
+            {console.log(profile)}
+
                         <h1 className='header'> Create Account </h1>
                             <AuthForm
                                 handleChange={handleChange}
@@ -66,7 +90,6 @@ export default function Auth(props){
                     </>
                 }
         </div>
-        : 
-        // <Redirect to='/spotify'/>
+        :
         <a href="http://localhost:8888/login"> Login with Spotify </a>
 }

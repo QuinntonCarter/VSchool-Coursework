@@ -46,7 +46,7 @@ app.get('/login', (req, res, next) => {
     const stateKey = 'spotify_auth_state';
 
     res.cookie(stateKey, state, { expires: new Date(Date.now() + 3600), httpOnly: true, secure: true });
-    const queryParams = new URLSearchParams(`client_id=${clientID}&response_type=code&redirect_uri=${redirectURI}&state=${state}&scope=${scopes}&show_dialog=true`)
+    const queryParams = new URLSearchParams(`client_id=${clientID}&response_type=code&redirect_uri=${redirectURI}&state=${state}&scope=${scopes}`)
     // for testing *
     console.log(queryParams)
     // *

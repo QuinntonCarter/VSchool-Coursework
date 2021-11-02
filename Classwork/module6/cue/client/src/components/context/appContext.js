@@ -9,6 +9,8 @@ function AppContextProvider(props){
     const [searchQuery, setSearchQuery] = useState([])
     const [songDetails, setSongDetails] = useState([])
 
+    // const cueDB = axios.create({})
+
     function search(query){
         // var songSplit = query.song.split(' ').join('%20');
         var artistSplit = query.artist.split(' ').join('%20');
