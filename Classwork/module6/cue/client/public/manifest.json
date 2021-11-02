@@ -1,0 +1,12 @@
+{
+  "short_name": "Cue",
+  "name": "Cue",
+  "icons": [
+    {
+      "src": "",
+      "sizes": "",
+      "type": ""
+    }
+  ],
+  "start_url": "."
+}
