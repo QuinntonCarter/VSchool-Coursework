@@ -64,8 +64,7 @@ export default function Auth(){
         <div className='authContainer'>
                 { !toggle ?
                     <>
-            {console.log(profile)}
-
+                    {console.log(profile)}
                         <h1 className='header'> Create Account </h1>
                             <AuthForm
                                 handleChange={handleChange}

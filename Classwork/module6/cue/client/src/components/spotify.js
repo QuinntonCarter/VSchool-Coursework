@@ -1,5 +1,5 @@
 import axios from 'axios';
-const spotifyAPI = axios;
+const spotifyUserAPI = axios.create();
 
 // declare localStorage keys
 export const LOCALSTORAGE_KEYS = {
@@ -109,9 +109,10 @@ const getAccessToken = () => {
 
 export const accessToken = getAccessToken();
 
-// setting global defaults for axios
-spotifyAPI.defaults.baseURL = 'https://api.spotify.com/v1';
-spotifyAPI.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-spotifyAPI.defaults.headers['Content-Type'] = 'application/json';
+spotifyUserAPI.interceptors.request.use(config => {
+  config.headers.Authorization = `Bearer ${accessToken}`
+  config.baseURL = 'https://api.spotify.com/v1'
+  return config
+});
 
-export const getCurrentUserProfile = () => spotifyAPI.get('/me');
+export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');

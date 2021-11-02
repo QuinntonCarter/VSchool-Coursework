@@ -1,8 +1,3 @@
-// import { Link, useRouteMatch, useParams } from 'react-router-dom';
-import { useContext } from 'react';
-import { Redirect } from 'react-router-dom';
-import { UserContext } from '../context/userProvider';
-
 export default function AuthForm(props){
     const {
         handleChange,
@@ -14,12 +9,8 @@ export default function AuthForm(props){
             password
         }
     } = props
-    
-    const { token } = useContext(UserContext)
 
-    return token ?
-    <Redirect to='/main' />
-    :
+    return(
     <form onSubmit={handleSubmit}>
         <input
             value={username}
@@ -37,5 +28,6 @@ export default function AuthForm(props){
         <button onClick={handleSubmit}> {btnText} </button>
         <p style={{color: 'red'}}> {errMsg} </p>
     </form>
+    )
     
 }

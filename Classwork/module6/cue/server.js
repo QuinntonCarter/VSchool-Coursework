@@ -4,6 +4,8 @@ const app = express();
 const axios = require('axios');
 require('dotenv').config();
 const { URLSearchParams } = require('url');
+const expressJwt = require('express-jwt');
+const mongoose = require('mongoose');
 
 const clientID = process.env.client_ID;
 const redirectURI = process.env.redirect_URI;
@@ -37,21 +39,37 @@ const scopes = [
     'user-follow-read'
 ];
 
+mongoose.connect(
+    'mongodb://localhost:27017/cueAppDB',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    },
+    () => console.log('Connected to the DB')
+)
+
 app.get('/', (req, res) => {
     res.send('hello world')
 })
+
+app.use('/auth', require('./routes/authRouter.js'));
+app.use('/app', expressJwt({ secret: process.env.SECRET, algorithms: ['sha1', 'RS256', 'HS256'] }));
+
+// app.get('/app/')
 
 app.get('/login', (req, res, next) => { 
     const state = generateRandomString(16)
     const stateKey = 'spotify_auth_state';
 
-    res.cookie(stateKey, state, { expires: new Date(Date.now() + 3600), httpOnly: true, secure: true });
+    res.cookie(stateKey, state, { expires: new Date(Date.now() + 3600), httpOnly: true, secure: true })
     const queryParams = new URLSearchParams(`client_id=${clientID}&response_type=code&redirect_uri=${redirectURI}&state=${state}&scope=${scopes}`)
     // for testing *
     console.log(queryParams)
     // *
     res.redirect(`${authEndpoint}?${queryParams}`)
-})
+});
 
 // ** review this: will need to change URLSearchParams instead of stringify method **
 app.get('/callback', (req, res, next) => {
@@ -83,7 +101,7 @@ app.get('/callback', (req, res, next) => {
     .catch(error => {
         res.send(error);
     });
-})
+});
 
 app.get('/refresh_token', (req, res) => {
     const { refresh_token } = req.query;
@@ -105,10 +123,10 @@ app.get('/refresh_token', (req, res) => {
         .catch(error => {
             res.send(error);
         });
-})
+});
 
 // ** create logout enpoint that removes cookies and sends user back to login page
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost/ port:${port}`)
-})
+    console.log(`Example app listening at http://localhost:${port}`)
+});

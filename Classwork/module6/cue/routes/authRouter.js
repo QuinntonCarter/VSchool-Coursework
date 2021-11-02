@@ -1,7 +1,7 @@
-const express = require('express')
-const authRouter = express.Router()
-const User = require('../models/user.js')
-const jwt = require('jsonwebtoken')
+const express = require('express');
+const authRouter = express.Router();
+const User = require('../models/user.js');
+const jwt = require('jsonwebtoken');
 
 // Signup
 authRouter.post("/signup", (req, res, next) => {
@@ -25,7 +25,7 @@ authRouter.post("/signup", (req, res, next) => {
         return res.status(201).send({ token, user: savedUser.withoutPassword() })
         })
     })
-})
+});
 
 // Login
 authRouter.post("/login", (req, res, next) => {
@@ -51,6 +51,6 @@ authRouter.post("/login", (req, res, next) => {
         return res.status(200).send({ token, user: user.withoutPassword() })
         })
     })
-})
+});
 
 module.exports = authRouter

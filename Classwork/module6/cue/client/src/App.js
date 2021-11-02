@@ -12,30 +12,10 @@ import Navbar from './components/navbar.js';
 
 function App() {
   const { token } = useContext(UserContext)
-  // const [spotifyToken, setSpotifyToken] = useState(null);
-  // const [profile, setProfile] = useState(null);
-
-  // useEffect(()=> {
-  //   if(accessToken){
-  //     setSpotifyToken(accessToken);
-
-  //     const fetchData = async () => {
-  //       try {
-  //         const { data } = await getCurrentUserProfile();
-  //         setProfile(data);
-  //       } catch(e) {
-  //         console.error(e);
-
-  //       }
-  //     }
-  //     fetchData();
-  // } else if (!accessToken) {
-  //   return;
-  // }
-  // }, [spotifyToken])
 
   return (
     <div className='mainContainer'>
+      {console.log(token)}
     <Banner/>
       <Switch>
         <ProtectedRoute
