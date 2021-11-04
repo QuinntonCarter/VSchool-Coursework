@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LOCALSTORAGE_KEYS } from '../spotify.js'
+import { LOCALSTORAGE_KEYS, accessToken } from '../spotify.js';
+
 
 // will need to refactor this to work with new cueappDB
 
@@ -172,10 +173,6 @@ export default function UserProvider(props){
         // .catch(err => console.log(err.response.data.errMsg))
         // .finally(getAllPosts())
     // }
-
-    useEffect(() => {
-
-    }, []);
     
     return(
         <UserContext.Provider

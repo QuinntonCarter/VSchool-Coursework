@@ -9,13 +9,7 @@ export default function Banner() {
     // view results etc
     return(
         <div className='bannerWrapper'>
-            {/* {token ? 
-                <header>
-                    <h1> Cue </h1>
-                </header>
-            :
-                <img style={{height: '9em'}} className='spotify-logo' src='https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png' alt='spotify logo'/>
-            } */}
+            <h1> Cue </h1>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import { AppContext } from '../context/appContext.js';
+import SearchView from '../../views/search.js';
 
 export default function SearchBar(){
     const [ inputs, setInputs ] = useState({ artist: '' })
@@ -27,6 +28,7 @@ export default function SearchBar(){
                 
                 <button style={{cursor: 'pointer'}} className='searchBtn'> search </button>
             </form>
+            <SearchView/>
         </div>
     )
 }

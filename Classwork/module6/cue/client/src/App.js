@@ -20,6 +20,11 @@ function App() {
     <div className='mainContainer'>
     <Banner/>
       <Switch>
+        <Route
+          path='/logout'
+          render={Auth}
+        />
+
         <ProtectedRoute
           path='/main/lists'
           redirectTo='/'
@@ -39,14 +44,14 @@ function App() {
 
         <Route
           exact path='/'
-          render={() => token && accessToken ?
+          render={() => accessToken && token ?
             <Main/> 
           :
             <Auth/>
           }
         />
       </Switch>
-      {  token && accessToken ? <Navbar /> : null }
+      {  accessToken && token ? <Navbar /> : null }
     </div>
   );
 }

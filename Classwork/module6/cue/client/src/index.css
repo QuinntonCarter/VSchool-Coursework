@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* this will be for phone  */
+body {
+  margin: 9%;
+  grid-template-columns: 80%;
+}
+
+div.bannerWrapper > h1 {
+  font-size: 7vh;
+}
+
+.navbarContainer > Link > i {
+  color: black;
+  font-style: none;
+}
+
+/* profile view */
+div.listprofileview-Container {
+  margin: auto;
+  height: 80%;
+  grid-template-columns: auto auto;
+  grid-template-rows: 3vh auto;
+  border: red solid 3px;
+}
+
+div.listprofileview-Container > i {
+  font-size: 30px;
+}

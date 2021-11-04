@@ -4,12 +4,16 @@ how:
 
 todo next
     functionality:
-        - routing between views
-        - create consts gets for search in spotify.js
-          + by artist and song; by artist and return albums and songs
-        - fix searchbar and import to main view
-        - implement routing between pages at certain endpoints
-            +   link to= syntax for lists and search buttons in navbar
+        - create account needs to save spotify id to user model to block creation of multiple accounts by users
+          + also save spotify username to user model
+        - results view
+          + before and after searching
+        - DnD for lists
+          + send position information to backend to save oraganization
+        X create consts gets for search in spotify.js
+        X implement routing between pages at certain endpoints
+        X fix searchbar and import to main view
+        X routing between views
         X implement GET functions into appContext
         X edit AuthForm and associated so there's no username error in props pass
         X   create const axios.create => mongoDB
@@ -23,6 +27,9 @@ Notes to self:
     + check dependency installs and versions if running into unexpected problems
     + *** populate: https://mongoosejs.com/docs/populate.html#:~:text=All%20_id%20s%20we%20store,good%20reason%20for%20doing%20so.
       ++  for adding album, artist etc to models more easily ***
+
+** REVIEW ** :
+    - logout and auto logout if tokens are missing
 
 * future implementations * :
     - able to utilize multiple streaming services by signing into accounts

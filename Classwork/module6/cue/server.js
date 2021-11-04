@@ -67,7 +67,7 @@ app.get('/login', (req, res, next) => {
     res.cookie(stateKey, state, { expires: new Date(Date.now() + 3600), httpOnly: true, secure: true })
     const queryParams = new URLSearchParams(`client_id=${clientID}&response_type=code&redirect_uri=${redirectURI}&state=${state}&scope=${scopes}`)
     // for testing *
-    console.log(queryParams)
+    // console.log(queryParams)
     // *
     res.redirect(`${authEndpoint}?${queryParams}`)
 });
