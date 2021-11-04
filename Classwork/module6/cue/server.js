@@ -1,6 +1,6 @@
 const express = require('express');
-const morgan = require('morgan');
 const app = express();
+const morgan = require('morgan');
 const axios = require('axios');
 require('dotenv').config();
 const { URLSearchParams } = require('url');
@@ -48,16 +48,17 @@ mongoose.connect(
         useFindAndModify: false
     },
     () => console.log('Connected to the DB')
-)
+);
 
 app.get('/', (req, res) => {
     res.send('hello world')
-})
+});
 
 app.use('/auth', require('./routes/authRouter.js'));
 app.use('/app', expressJwt({ secret: process.env.SECRET, algorithms: ['sha1', 'RS256', 'HS256'] }));
-
-// app.get('/app/')
+app.use('/app/tracks', require('./routes/trackRouter.js'));
+app.use('/app/albums', require('./routes/albumsRouter.js'));
+app.use('/app/lists', require('./routes/listsRouter.js'));
 
 app.get('/login', (req, res, next) => { 
     const state = generateRandomString(16)

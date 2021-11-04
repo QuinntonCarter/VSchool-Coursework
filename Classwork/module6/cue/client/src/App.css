@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+
+.navbarContainer > Link > i {
+  color: black;
+  font-style: none;
+}

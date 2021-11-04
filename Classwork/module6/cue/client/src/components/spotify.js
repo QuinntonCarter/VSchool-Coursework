@@ -4,7 +4,7 @@ const spotifyUserAPI = axios.create();
 // declare localStorage keys
 export const LOCALSTORAGE_KEYS = {
     accessToken: 'spotify_access_token',
-    refreshToken: 'spotify_refresh_token',
+    // refreshToken: 'spotify_refresh_token',
     expireTime: 'spotify_token_expire_time',
     timestamp: 'spotify_token_timestamp',
 }
@@ -12,7 +12,7 @@ export const LOCALSTORAGE_KEYS = {
 // retrieve localStorage values
 export const LOCALSTORAGE_VALUES = {
     accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
-    refreshToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.refreshToken),
+    // refreshToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.refreshToken),
     expireTime: window.localStorage.getItem(LOCALSTORAGE_KEYS.expireTime),
     timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
 };
@@ -77,14 +77,16 @@ const getAccessToken = () => {
     const urlParams = new URLSearchParams(queryString);
     const queryParams = {
         [LOCALSTORAGE_KEYS.accessToken]: urlParams.get('access_token'),
-        [LOCALSTORAGE_KEYS.refreshToken]: urlParams.get('refresh_token'),
+        // [LOCALSTORAGE_KEYS.refreshToken]: urlParams.get('refresh_token'),
         [LOCALSTORAGE_KEYS.expireTime]: urlParams.get('expires_in'),
     };
     const hasError = urlParams.get('error');
 
     // If there's an error OR the token in localStorage has expired, refresh the token
     if (hasError || hasTokenExpired() || LOCALSTORAGE_VALUES.accessToken === 'undefined') {
-        refreshToken();
+        // refreshToken();
+        // *** TEST LOGOUT INSTEAD OF REFRESH ***
+        logout();
     }
 
     // If there is a valid access token in localStorage, use that

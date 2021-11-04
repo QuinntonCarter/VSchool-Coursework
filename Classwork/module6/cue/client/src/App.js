@@ -1,28 +1,31 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+// from components
 import { accessToken } from './components/spotify.js';
 import { UserContext } from './components/context/userProvider.js';
+// components
 import ProtectedRoute from './components/protectedRoute.js';
 import Banner from './components/banner.js';
 import Auth from './Auth.js';
-import Main from './views/main.js';
-
 import Navbar from './components/navbar.js';
+// views
+import Main from './views/main.js';
+import Profile from './views/profile.js';
+
 
 function App() {
   const { token } = useContext(UserContext)
 
   return (
     <div className='mainContainer'>
-      {console.log(token)}
     <Banner/>
       <Switch>
         <ProtectedRoute
-          path='/main/:view'
+          path='/main/lists'
           redirectTo='/'
           token={token}
           spotifyToken={accessToken}
+          component={Profile}
           loading={false}
         />
 
@@ -36,14 +39,14 @@ function App() {
 
         <Route
           exact path='/'
-          render={() => token & accessToken ?
+          render={() => token && accessToken ?
             <Main/> 
           :
             <Auth/>
           }
         />
       </Switch>
-      {  token & accessToken ? <Navbar /> : null }
+      {  token && accessToken ? <Navbar /> : null }
     </div>
   );
 }
