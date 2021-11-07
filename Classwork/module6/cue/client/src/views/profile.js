@@ -4,20 +4,24 @@ import { useContext } from 'react';
 // includes user information from userContext
 import { UserContext } from '../components/context/userProvider.js';
 
+
 export default function Profile(){
-    const { user, spotifyProfile } = useContext(UserContext)
+    const {
+        user,
+        spotifyUser
+    } = useContext(UserContext)
     // /pull from mongodb
     const mappedLists = 'first option ternary; if lists? first here if not no lists yet'
 
     return(
         <div className="listprofileview-Container">
-            {console.log(spotifyProfile)}
+            {console.log(spotifyUser)}
             <select>
                 {/* const mappedLists here */}
                 <option> - no lists yet - </option>
             </select>
             <br/>
-            <i style={{fontSize: '27px'}} className="fab fa-spotify"/> <h3> Spotify: { spotifyProfile ? spotifyProfile.display_name : null} </h3>
+            <i style={{fontSize: '27px'}} className="fab fa-spotify"/> <h3> Spotify: { spotifyUser ? spotifyUser.display_name : null} </h3>
             <h3> Username: @{user.username} </h3>
             <div>
                 <h1 style={{color: 'gray'}}> profile/list view placeholder </h1>

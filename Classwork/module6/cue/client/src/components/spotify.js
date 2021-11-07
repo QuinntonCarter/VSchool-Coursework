@@ -20,13 +20,13 @@ export const LOCALSTORAGE_VALUES = {
 /**
  * Clear out all localStorage items we've set and reload the page
  */
-export const logout = () => {
+export const spotifyLogout = () => {
     // Clear all localStorage items
     for (const property in LOCALSTORAGE_KEYS) {
         window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
     }
     // Navigate to homepage
-    window.location = window.location.origin;
+    // window.location = window.location.origin;
 };
 
 /**
@@ -54,7 +54,7 @@ const refreshToken = async () => {
         (Date.now() - Number(LOCALSTORAGE_VALUES.timestamp) / 1000) < 1000
         ) {
         console.error('No refresh token available');
-        logout();
+        spotifyLogout();
         }
 
       // Use `/refresh_token` endpoint from our Node app
@@ -85,8 +85,6 @@ const getAccessToken = () => {
     // If there's an error OR the token in localStorage has expired, refresh the token
     if (hasError || hasTokenExpired() || LOCALSTORAGE_VALUES.accessToken === 'undefined') {
         refreshToken();
-        // *** TEST LOGOUT INSTEAD OF REFRESH ***
-        // logout();
     }
 
     // If there is a valid access token in localStorage, use that
@@ -120,7 +118,8 @@ spotifyUserAPI.interceptors.request.use(config => {
 export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');
 // ** either by selection => album/ep etc name or song name
 export const getSearchBy = (artist, selection) => spotifyUserAPI.get(`/search?q=name:${artist}type=${selection}`);
-export const getArtistTracks = (artistID) => spotifyUserAPI.get(`/artist/`) 
+// ****
+export const getArtistTracks = (artistID) => spotifyUserAPI.get(`/artist/`);
 export const getArtistAlbum = (artistID) => spotifyUserAPI.get(`/artists/${artistID}/albums`);
 // use this w map to map through albumIDs and return tracks
 export const getAlbumTracks = (albumID) => spotifyUserAPI.get(`/artists/${albumID}/tracks`);

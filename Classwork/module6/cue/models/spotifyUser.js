@@ -14,9 +14,6 @@ const spotifyUser = new Schema({
     country: {
         type: String
     },
-    accountType: {
-        type: String
-    },
     cueAcc: {
         type: Schema.Types.ObjectId,
         ref: "User"

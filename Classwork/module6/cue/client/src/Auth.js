@@ -1,75 +1,82 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from 'react';
 import AuthForm from './components/forms/authForm.js';
 import { UserContext } from './components/context/userProvider.js';
-import { accessToken } from './components/spotify.js';
+import { accessToken, getCurrentUserProfile } from './components/spotify.js';
 
 
 export default function Auth(){
     const initInputs = {
         username: '',
         password: ''
-    }
-    const [inputs, setInputs] = useState(initInputs)
-    const [toggle, setToggle] = useState(false)
+    };
+
+    const [ inputs, setInputs ] = useState(initInputs);
+    const [ toggle, setToggle ] = useState(false);
 
     const {
+        token,
         signup,
         login,
         errMsg,
-        resetAuthError
-    } = useContext(UserContext)
-
-    // const {
-    //     spotifyToken,
-    //     setSpotifyToken
-    // } = useContext(SpotifyContext)
+        resetAuthError,
+        spotifyUserState,
+        setSpotifyUserState
+    } = useContext(UserContext);
 
     function handleChange(e){
         const {name, value} = e.target
         setInputs(prevInputs => ({
             ...prevInputs,
             [name]: value
-        }))
-    }
+        }));
+    };
 
     function handleSignup(e){
         e.preventDefault()
         signup(inputs)
-    }
+    };
 
     function handleLogin(e){
         e.preventDefault()
         login(inputs)
-    }
+    };
 
     function toggleForm(){
         setToggle(prev => !prev)
         resetAuthError()
         setInputs(initInputs)
-    }
+    };
 
-    // useEffect(()=> {
-    //     if(accessToken){
-    //         setSpotifyToken(accessToken);
-    
-    //         const fetchData = async () => {
-    //         try {
-    //             const {data} = await getCurrentUserProfile();
-    //             setSpotifyProfile(data);
-    //         } catch(e) {
-    //             console.error(e);
-    
-    //         }
-    //         }
-    //         fetchData();
-    //     } else if (!accessToken & spotifyToken) {
-    //         return;
-    //     } else if (!accessToken & !spotifyToken){
-    //         logout();
-    //     }
-    // }, [spotifyToken, setSpotifyProfile, logout])
+    useEffect(()=> {
+        if(accessToken){
+        // ** BETA get token from userState
+            localStorage.setItem('spotify_access_token', accessToken)
+            setSpotifyUserState(prevState => ({
+                ...prevState,
+                spotifyToken: accessToken
+            }))
+        // setSpotifyToken(accessToken);
+            const fetchData = async () => {
+            try {
+                const { data } = await getCurrentUserProfile();
+                localStorage.setItem('spotifyUser', JSON.stringify(data))
+                setSpotifyUserState(prevState => ({
+                    ...prevState,
+                    spotifyUser: data
+                }))
+                // where user information should be sent to back for use in model
+                // will need to reapply email each time on login
+                // just post to signup model route for new users
+                // setSpotifyProfile(data);
+            } catch(err) {
+                // ** send error to auth handler
+                console.error(err);
+            }}
+            fetchData();
+        }
+    }, [setSpotifyUserState, token]);
 
-    return accessToken ? 
+    return spotifyUserState === undefined ? 
         <div className='authContainer'>
                 { !toggle ?
                     <>
@@ -102,4 +109,4 @@ export default function Auth(){
             <img src="https://developer.spotify.com/assets/branding-guidelines/logo.png" alt="spotify-logo"/>
             <a href="http://localhost:8888/login"> Login with Spotify </a>
         </div>
-}
+};

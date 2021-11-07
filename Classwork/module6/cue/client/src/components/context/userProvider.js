@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { LOCALSTORAGE_KEYS, accessToken } from '../spotify.js';
-
+import { spotifyLogout } from '../spotify.js';
 
 // will need to refactor this to work with new cueappDB
 
 export const UserContext = React.createContext();
 
-const userAxios = axios.create()
+const userAxios = axios.create();
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem('token')
     config.headers.Authorization = `Bearer ${token}`
@@ -22,7 +21,15 @@ export default function UserProvider(props){
         errMsg: ''
     };
 
-    const [userState, setUserState] = useState(initState)
+    const initSpotifyState = {
+        spotifyUser: JSON.parse(localStorage.getItem('spotifyUser')) || {},
+        spotifyToken: localStorage.getItem('spotify_access_token') || '',
+        errMsg: ''
+    };
+
+    const [ spotifyUserState, setSpotifyUserState ] = useState(initSpotifyState);
+    
+    const [ userState, setUserState ] = useState(initState)
 
 // for auth
     function signup(credentials){
@@ -57,15 +64,13 @@ export default function UserProvider(props){
     };
 
     function logout(){
-        for (const property in LOCALSTORAGE_KEYS) {
-            localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
-        }
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         setUserState({
             user: {},
             token: '',
-        })
+        });   
+        spotifyLogout();     
     };
 
 //err
@@ -178,6 +183,8 @@ export default function UserProvider(props){
         <UserContext.Provider
         value={{
             ...userState,
+            ...spotifyUserState,
+            setSpotifyUserState,
             signup,
             login,
             logout,

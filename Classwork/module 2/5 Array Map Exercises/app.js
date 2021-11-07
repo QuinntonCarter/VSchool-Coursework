@@ -22,9 +22,8 @@ let people = [{
 }]
 
 // 1) Make an array of numbers that are doubles of the first array
-// let dbl = arr.map(num => num * 2)
-
-// console.log(dbl)
+let dbl = arr.map(num => num * 2)
+console.log(dbl)
 
 
 // 2) Take an array of numbers and make them strings
