@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserMemes from './UserMemes.js';
+import axios from 'axios';
+
 
 function MemeGenerator(){
     const [ memes, setMemes ] = useState([{
@@ -49,16 +51,23 @@ function MemeGenerator(){
             const { memes } = response.data
             const randomMeme = memes[Math.floor(Math.random() * 10)]
             setAllMemes(memes)
-            setRandomMeme(randomMeme)
+            // setRandomMeme(randomMeme)
+            getCaptionable(randomMeme.id)
         })
         .catch(err => console.log(err))
     };
+
+    function getCaptionable(memeId){
+        axios.post(`https://api.imgflip.com/caption_image/template_id=${memeId}`, 
+        { params: { username: 'QuinntonCarter', password: 'm3m3t1m3' }})
+        .then(res => console.log(res))
+    }
 
     function getRandom(e){
         e.preventDefault()
         const randomMeme = allMemes[Math.floor(Math.random() * 10)]
         setRandomMeme(randomMeme)
-    }
+    };
         
     const mappedMemes = memes.map(meme => 
         <UserMemes
@@ -66,10 +75,10 @@ function MemeGenerator(){
             imgSrc={meme.imgSrc}
             bottomText={meme.bottomText}
         />
-    )
+    );
 
     useEffect(() => {
-        getMemes()
+        getMemes();
     },[]);
 
         return(
