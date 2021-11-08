@@ -120,6 +120,7 @@ export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');
 export const getSearchBy = (artist, selection) => spotifyUserAPI.get(`/search?q=name:${artist}type=${selection}`);
 // ****
 export const getArtistTracks = (artistID) => spotifyUserAPI.get(`/artist/`);
+// ****
 export const getArtistAlbum = (artistID) => spotifyUserAPI.get(`/artists/${artistID}/albums`);
 // use this w map to map through albumIDs and return tracks
 export const getAlbumTracks = (albumID) => spotifyUserAPI.get(`/artists/${albumID}/tracks`);

@@ -75,8 +75,8 @@ export default function Auth(){
             fetchData();
         }
     }, [setSpotifyUserState, token]);
-
-    return spotifyUserState === undefined ? 
+    
+    return spotifyUserState === !undefined ? 
         <div className='authContainer'>
                 { !toggle ?
                     <>

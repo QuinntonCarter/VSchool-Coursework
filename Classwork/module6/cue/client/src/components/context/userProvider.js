@@ -28,8 +28,8 @@ export default function UserProvider(props){
     };
 
     const [ spotifyUserState, setSpotifyUserState ] = useState(initSpotifyState);
-    
-    const [ userState, setUserState ] = useState(initState)
+
+    const [ userState, setUserState ] = useState(initState);
 
 // for auth
     function signup(credentials){
@@ -178,7 +178,8 @@ export default function UserProvider(props){
         // .catch(err => console.log(err.response.data.errMsg))
         // .finally(getAllPosts())
     // }
-    
+    console.log(spotifyUserState)
+
     return(
         <UserContext.Provider
         value={{

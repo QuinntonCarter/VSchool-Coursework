@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import UserMemes from './UserMemes.js';
-import axios from 'axios';
 
 
 function MemeGenerator(){
     const [ memes, setMemes ] = useState([{
-        topText: '',
-        bottomText: '',
-        imgSrc: ''
+        url: ''
     }]);
 
     const [ allMemes, setAllMemes ] = useState([]);
@@ -25,18 +22,31 @@ function MemeGenerator(){
             [name]: value
         }));
     };
-    
+    console.log(memes)
     function handleSubmit(e){
         e.preventDefault()
+        const captionData = new FormData();
+        captionData.append('username', 'vschoolproject')
+        captionData.append('password', 'testing!2021')
+        captionData.append('template_id', randomMeme.id)
+        captionData.append('text0', inputs.topText)
+        captionData.append('text1', inputs.bottomText)
+        fetch(`https://api.imgflip.com/caption_image`,{
+            method: 'POST',
+            body: captionData,
+        })
+        .then(res => res.json())
+        // .then(res => console.log(res))
+        .then((res) => 
+            setMemes(prevState => ([
+                // add new object with input values to array at named state keys
+                ...prevState,{
+                    url: res.data
+                }
+            ]))
+        )
+        .catch(err => console.log(err))
         // gather prevState into array
-        setMemes(prevState => ([
-            // add new object with input values to array at named state keys
-            ...prevState,{
-            topText: inputs.topText,
-            bottomText: inputs.bottomText,
-            imgSrc: randomMeme.url
-        }
-        ]))
         setInputs({
             topText: '',
             bottomText: '',
@@ -51,17 +61,10 @@ function MemeGenerator(){
             const { memes } = response.data
             const randomMeme = memes[Math.floor(Math.random() * 10)]
             setAllMemes(memes)
-            // setRandomMeme(randomMeme)
-            getCaptionable(randomMeme.id)
+            setRandomMeme(randomMeme)
         })
         .catch(err => console.log(err))
     };
-
-    function getCaptionable(memeId){
-        axios.post(`https://api.imgflip.com/caption_image/template_id=${memeId}`, 
-        { params: { username: 'QuinntonCarter', password: 'm3m3t1m3' }})
-        .then(res => console.log(res))
-    }
 
     function getRandom(e){
         e.preventDefault()
@@ -71,9 +74,7 @@ function MemeGenerator(){
         
     const mappedMemes = memes.map(meme => 
         <UserMemes
-            topText={meme.topText}
-            imgSrc={meme.imgSrc}
-            bottomText={meme.bottomText}
+            imgSrc={meme.url.url}
         />
     );
 
@@ -85,8 +86,8 @@ function MemeGenerator(){
             <div className='appDisplay'>
                 <form className='meme-form'>
                     <div>
-                        <input name='topText' placeholder='Text for box one' value={inputs.topText} onChange={handleChange}/>
-                        <input name='bottomText' placeholder='Text for box two' value={inputs.bottomText} onChange={handleChange}/>
+                        <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChange}/>
+                        <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChange}/>
                     </div>
                     <button onClick={handleSubmit}> Generate </button>
                     <button onClick={getRandom}> Randomize </button>

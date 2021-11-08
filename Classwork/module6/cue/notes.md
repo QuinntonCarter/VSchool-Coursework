@@ -1,5 +1,4 @@
 how:
-- to implement list ordering functionality? & DnD?
   + pull track index and set it to model property? track[i] = listNum
 
 todo next

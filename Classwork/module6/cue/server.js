@@ -64,13 +64,12 @@ app.get('/login', (req, res, next) => {
     const state = generateRandomString(16)
     const stateKey = 'spotify_auth_state';
 
-    res.cookie(stateKey, state, { expires: new Date(Date.now() + 3600), httpOnly: true, secure: true })
+    res.cookie(stateKey, state, { expires: new Date(Date.now() + 3600)})
     const queryParams = new URLSearchParams(`client_id=${clientID}&response_type=code&redirect_uri=${redirectURI}&state=${state}&scope=${scopes}`)
 
     res.redirect(`${authEndpoint}?${queryParams}`)
 });
 
-// ** review this: will need to change URLSearchParams instead of stringify method **
 app.get('/callback', (req, res, next) => {
     const code = req.query.code || null;
     const grant = 'authorization_code'
