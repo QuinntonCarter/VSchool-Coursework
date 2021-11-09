@@ -21,11 +21,12 @@ export default function Profile(){
                 <option> - no lists yet - </option>
             </select>
             <br/>
-            <i style={{fontSize: '27px'}} className="fab fa-spotify"/> <h3> Spotify: { spotifyUser ? spotifyUser.display_name : null} </h3>
+            <i style={{fontSize: '27px'}} className="fab fa-spotify"/> <h3> Spotify: { spotifyUser ? spotifyUser.display_name : 'error'} </h3>
             <h3> Username: @{user.username} </h3>
+            <img src={spotifyUser.images[0].url} alt='spotify-user-img' />
             <div>
                 <h1 style={{color: 'gray'}}> profile/list view placeholder </h1>
-                dnd table will go here and lists
+                table will go here and lists
             </div>
         </div>
     )

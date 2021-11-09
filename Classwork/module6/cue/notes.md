@@ -22,6 +22,7 @@ todo next
             +   consider setting to grid display a la rockTheVote
 
 Notes to self:
+    + go back and change localStorage saving to cookie saving before prod deploy
     + when you move files or otherwise restructor the module, check import syntax across files
     + check dependency installs and versions if running into unexpected problems
     + *** populate: https://mongoosejs.com/docs/populate.html#:~:text=All%20_id%20s%20we%20store,good%20reason%20for%20doing%20so.

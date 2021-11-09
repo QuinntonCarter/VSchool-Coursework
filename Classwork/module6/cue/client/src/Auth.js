@@ -19,7 +19,7 @@ export default function Auth(){
         login,
         errMsg,
         resetAuthError,
-        spotifyUserState,
+        spotifyUser,
         setSpotifyUserState
     } = useContext(UserContext);
 
@@ -49,7 +49,7 @@ export default function Auth(){
 
     useEffect(()=> {
         if(accessToken){
-        // ** BETA get token from userState
+        // ** get token from userState : change setitems to set cookies for better security; cookie.js
             localStorage.setItem('spotify_access_token', accessToken)
             setSpotifyUserState(prevState => ({
                 ...prevState,
@@ -59,6 +59,7 @@ export default function Auth(){
             const fetchData = async () => {
             try {
                 const { data } = await getCurrentUserProfile();
+                console.log(data)
                 localStorage.setItem('spotifyUser', JSON.stringify(data))
                 setSpotifyUserState(prevState => ({
                     ...prevState,
@@ -76,7 +77,7 @@ export default function Auth(){
         }
     }, [setSpotifyUserState, token]);
     
-    return spotifyUserState === !undefined ? 
+    return spotifyUser ? 
         <div className='authContainer'>
                 { !toggle ?
                     <>
