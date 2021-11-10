@@ -6,23 +6,38 @@ function MemeGenerator(){
     const [ memes, setMemes ] = useState([{
         url: ''
     }]);
-
-    const [ allMemes, setAllMemes ] = useState([]);
-    const [ randomMeme, setRandomMeme ] = useState(null);
-
+    console.log(memes)
     const [ inputs, setInputs ] = useState({
         topText: '',
         bottomText: ''
     });
 
+    const [ randomMeme, setRandomMeme ] = useState({
+        name: '',
+        previewTop: '',
+        url: '',
+        previewBottom: '',
+        boxes: 0,
+        id: ''
+    });
+
+    const [ allMemes, setAllMemes ] = useState([]);
+
     function handleChange(e){
         const { name, value } = e.target
         setInputs(prevInputs => ({
             ...prevInputs,
-            [name]: value
+            [name]: value,
+        }));
+        setRandomMeme(prevInputs => ({
+            ...prevInputs,
+            previewTop: inputs.topText,
+            previewBottom: inputs.bottomText
         }));
     };
-    console.log(memes)
+
+    console.log(randomMeme);
+
     function handleSubmit(e){
         e.preventDefault()
         const captionData = new FormData();
@@ -36,7 +51,6 @@ function MemeGenerator(){
             body: captionData,
         })
         .then(res => res.json())
-        // .then(res => console.log(res))
         .then((res) => 
             setMemes(prevState => ([
                 // add new object with input values to array at named state keys
@@ -61,7 +75,14 @@ function MemeGenerator(){
             const { memes } = response.data
             const randomMeme = memes[Math.floor(Math.random() * 10)]
             setAllMemes(memes)
-            setRandomMeme(randomMeme)
+            console.log(randomMeme)
+            setRandomMeme({
+                name: randomMeme.name,
+                url: randomMeme.url,
+                id: randomMeme.id,
+                boxes: randomMeme.box_count
+            })
+
         })
         .catch(err => console.log(err))
     };
@@ -69,14 +90,17 @@ function MemeGenerator(){
     function getRandom(e){
         e.preventDefault()
         const randomMeme = allMemes[Math.floor(Math.random() * 10)]
-        setRandomMeme(randomMeme)
+        setRandomMeme({
+            url: randomMeme.url
+        })
     };
-        
+    
+
     const mappedMemes = memes.map(meme => 
         <UserMemes
             imgSrc={meme.url.url}
         />
-    );
+        );
 
     useEffect(() => {
         getMemes();
@@ -86,6 +110,7 @@ function MemeGenerator(){
             <div className='appDisplay'>
                 <form className='meme-form'>
                     <div>
+
                         <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChange}/>
                         <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChange}/>
                     </div>
@@ -101,7 +126,6 @@ function MemeGenerator(){
                     :
                         <h3> Loading... </h3>
                     }
-                    <h2> Generated memes will display below! </h2>
                     {mappedMemes}
             </div>
         )
