@@ -12,14 +12,25 @@ code {
     monospace;
 }
 
-/* this will be for phone  */
+/* this will be for phone but is also dev view  */
 body {
-  margin: 9%;
-  grid-template-columns: 80%;
+  margin: 2vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: auto;
+}
+
+div.bannerWrapper {
+  margin: 0;
 }
 
 div.bannerWrapper > h1 {
   font-size: 7vh;
+}
+
+div.bannerWrapper > img {
+  height: 40vh;
 }
 
 .navbarContainer > Link > i {

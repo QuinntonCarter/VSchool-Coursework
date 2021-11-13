@@ -15,14 +15,14 @@ userAxios.interceptors.request.use(config => {
 
 export default function UserProvider(props){
     const initState = {
-        user: JSON.parse(localStorage.getItem('user')) || {},
+        user: JSON.parse(localStorage.getItem('user')) || null,
         token: localStorage.getItem('token') || '',
         lists: [],
         errMsg: ''
     };
 
     const initSpotifyState = {
-        spotifyUser: JSON.parse(localStorage.getItem('spotifyUser')) || {},
+        spotifyUser: JSON.parse(localStorage.getItem('spotifyUser')) || null,
         spotifyToken: localStorage.getItem('spotify_access_token') || '',
         errMsg: ''
     };
@@ -178,7 +178,6 @@ export default function UserProvider(props){
         // .catch(err => console.log(err.response.data.errMsg))
         // .finally(getAllPosts())
     // }
-    console.log(spotifyUserState)
 
     return(
         <UserContext.Provider

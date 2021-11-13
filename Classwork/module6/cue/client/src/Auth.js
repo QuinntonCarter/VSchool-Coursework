@@ -3,7 +3,6 @@ import AuthForm from './components/forms/authForm.js';
 import { UserContext } from './components/context/userProvider.js';
 import { accessToken, getCurrentUserProfile } from './components/spotify.js';
 
-
 export default function Auth(){
     const initInputs = {
         username: '',
@@ -49,13 +48,12 @@ export default function Auth(){
 
     useEffect(()=> {
         if(accessToken){
-        // ** get token from userState : change setitems to set cookies for better security; cookie.js
+        // ** get token from userState
             localStorage.setItem('spotify_access_token', accessToken)
             setSpotifyUserState(prevState => ({
                 ...prevState,
                 spotifyToken: accessToken
             }))
-        // setSpotifyToken(accessToken);
             const fetchData = async () => {
             try {
                 const { data } = await getCurrentUserProfile();
@@ -74,6 +72,8 @@ export default function Auth(){
                 console.error(err);
             }}
             fetchData();
+        }if(!accessToken){
+
         }
     }, [setSpotifyUserState, token]);
     
@@ -107,7 +107,6 @@ export default function Auth(){
         </div>
         :
         <div>
-            <img src="https://developer.spotify.com/assets/branding-guidelines/logo.png" alt="spotify-logo"/>
             <a href="http://localhost:8888/login"> Login with Spotify </a>
         </div>
 };

@@ -11,10 +11,10 @@ export const LOCALSTORAGE_KEYS = {
 
 // retrieve localStorage values
 export const LOCALSTORAGE_VALUES = {
-    accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
-    refreshToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.refreshToken),
-    expireTime: window.localStorage.getItem(LOCALSTORAGE_KEYS.expireTime),
-    timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
+    accessToken: localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
+    refreshToken: localStorage.getItem(LOCALSTORAGE_KEYS.refreshToken),
+    expireTime: localStorage.getItem(LOCALSTORAGE_KEYS.expireTime),
+    timestamp: localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
 };
 
 /**
@@ -22,11 +22,10 @@ export const LOCALSTORAGE_VALUES = {
  */
 export const spotifyLogout = () => {
     // Clear all localStorage items
-    for (const property in LOCALSTORAGE_KEYS) {
-        window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
-    }
-    // Navigate to homepage
-    // window.location = window.location.origin;
+    localStorage.removeItem('spotify_access_token')
+    localStorage.removeItem('spotify_refresh_token')
+    localStorage.removeItem('spotify_token_expire_time')
+    localStorage.removeItem('spotify_token_timestamp')
 };
 
 /**
@@ -61,8 +60,8 @@ const refreshToken = async () => {
         const { data } = await axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`);
 
       // Update localStorage values
-        window.localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token);
-        window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+        localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token);
+        localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
 
       // Reload the page for localStorage updates to be reflected
         window.location.reload();
@@ -87,7 +86,7 @@ const getAccessToken = () => {
         refreshToken();
     }
 
-    // If there is a valid access token in localStorage, use that
+    // // If there is a valid access token in localStorage, use that
     if (LOCALSTORAGE_VALUES.accessToken && LOCALSTORAGE_VALUES.accessToken !== 'undefined') {
         return LOCALSTORAGE_VALUES.accessToken;
     }
@@ -114,14 +113,14 @@ spotifyUserAPI.interceptors.request.use(config => {
     config.baseURL = 'https://api.spotify.com/v1'
     return config
 });
-
+export const spotifyUser = spotifyUserAPI
 export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');
-// ** either by selection => album/ep etc name or song name
-export const getSearchBy = (artist, selection) => spotifyUserAPI.get(`/search?q=name:${artist}type=${selection}`);
-// ****
-export const getArtistTracks = (artistID) => spotifyUserAPI.get(`/artist/`);
-// ****
-export const getArtistAlbum = (artistID) => spotifyUserAPI.get(`/artists/${artistID}/albums`);
-// use this w map to map through albumIDs and return tracks
-export const getAlbumTracks = (albumID) => spotifyUserAPI.get(`/artists/${albumID}/tracks`);
-export const getUserTopTracks = () => spotifyUserAPI.get(`/me/top/tracks?limit=3&time_range=short_term`);
+// // ** either by selection => album/ep etc name or song name
+// export const getSearchBy = (artist, selection) => spotifyUserAPI.get(`/search?q=artist:${artist}&track=${selection}`);
+// // ****
+// export const getArtistTracks = (artistID) => spotifyUserAPI.get(`/artist/`);
+// // ****
+// export const getArtistAlbum = (artistID) => spotifyUserAPI.get(`/artists/${artistID}/albums`);
+// // use this w map to map through albumIDs and return tracks
+// export const getAlbumTracks = (albumID) => spotifyUserAPI.get(`/artists/${albumID}/tracks`);
+// export const getUserTopTracks = () => spotifyUserAPI.get(`/me/top/tracks?limit=3&time_range=short_term`);
