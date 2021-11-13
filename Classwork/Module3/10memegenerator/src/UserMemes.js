@@ -14,13 +14,14 @@ export default function UserMemes(props){
         topText: '',
         bottomText: ''
     });
-    
+    // *** error: stop rendering if nothing to render after deletion
     const deleteMeme = (id) => {
         setMemes(prevMemes => {
             prevMemes.filter(memes => memes.userID !== id)
         })
     }
     
+    // *** finish implementing this. review what is here already
     const editPrev = () => {
         const prevImg = new FormData();
         prevImg.append('username', 'vschoolproject')
@@ -66,14 +67,12 @@ export default function UserMemes(props){
         .then(res => res.json())
         .then((res) => 
             setMemes(prevState => ([
-                // add new object with input values to array at named state keys
                 ...prevState,{
                     url: res.data
                 }
             ]))
         )
         .catch(err => console.log(err))
-        // gather prevState into array
         setInputs({
             topText: '',
             bottomText: '',
