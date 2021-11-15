@@ -75,7 +75,10 @@ function MemeGenerator(){
                     userID: res.data.page_url.slice(22),
                     id: randomMeme.id,
                 }
-            ]))
+            ])),
+            setRandomMeme({
+                url: randomMeme.initialURL
+            })
         )
         .catch(err => console.log(err))
         setInputs({
@@ -110,7 +113,7 @@ function MemeGenerator(){
         setRandomMeme({
             name: randomMeme.name,
             url: randomMeme.url,
-            initialURL: randomMeme.initialURL,
+            initialURL: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
         })
@@ -127,33 +130,15 @@ function MemeGenerator(){
             userID={meme.userID}
             id={meme.id}
             setMemes={setMemes}
-            imgSrc={meme.url.url}
+            imgSrc={meme.url}
             initialURL={meme.initialURL}
-            key={meme.url.page_url}
+            // key={meme.url.page_url}
         />
         ) 
         :
         null
 
     useEffect(() => {
-        // const getMemes = () => {
-        //     fetch('https://api.imgflip.com/get_memes')
-        //     .then((response) => response.json())
-        //     .then((response) => {
-        //         const { memes } = response.data
-        //         const memesFit = memes.filter(memes => memes.box_count <= 2)
-        //         const randomMeme = memesFit[Math.floor(Math.random() * 10)]
-        //         setAllMemes(memesFit)
-        //         setRandomMeme({
-        //             name: randomMeme.name,
-        //             url: randomMeme.url,
-        //             id: randomMeme.id,
-        //             boxes: randomMeme.box_count
-        //         })
-    
-        //     })
-        //     .catch(err => console.log(err))
-        // };
         getMemes();
     },[]);
 
@@ -171,7 +156,7 @@ function MemeGenerator(){
                     <>
                         <h1>{randomMeme.name}</h1>
                         <br/>
-                        <img className='randomMeme' src={randomMeme.url} alt={randomMeme.url.page_url} />
+                        <img className='randomMeme' src={randomMeme.url} alt='initial-meme' />
                     </>
                     :
                         <h3> Loading... </h3>

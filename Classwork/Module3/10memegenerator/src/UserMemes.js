@@ -15,7 +15,10 @@ export default function UserMemes(props){
         bottomText: ''
     });
     const [ imgEditable, setImgEditable ] = useState({
-        url: initialURL
+        url: initialURL,
+        userID: userID,
+        id: id,
+        initialURL: initialURL
     })
     // *** error: stop rendering if nothing to render after deletion; on delete at 0 index prevState not iterable error
     const deleteMeme = (id) => {
@@ -39,7 +42,7 @@ export default function UserMemes(props){
         .then((res) => 
             setImgEditable(prevInputs => ({
                 ...prevInputs, 
-                url: res.data ? res.data.url : imgEditable.url
+                url: res.data ? res.data.url : imgEditable.url,
             }))
         )
         .catch(err => console.log(err))
@@ -67,13 +70,17 @@ export default function UserMemes(props){
             body: captionData,
         })
         .then(res => res.json())
-        .then((res) => 
+        .then((res) => {
             setMemes(prevState => ([
-                ...prevState,{
-                    url: res.data
-                }
-            ]))
+                prevState.filter(memes => memes.userID === userID), {
+                url: res.data,
+                initialURL: initialURL,
+                userID: res.data.page_url.slice(22),
+                id: id
+            }])
+            )}
         )
+        .then()
         .finally(
             setToggleEdit(prevState => !prevState),
             // *** on delete at 0 index prevState not iterable error
@@ -91,7 +98,7 @@ export default function UserMemes(props){
         <div className='meme'>
             { toggleEdit === false ?
             <form>
-                <img src={imgSrc} alt={key}/>
+                <img src={imgSrc.url} alt={key}/>
                 <button onClick={()=> setToggleEdit(prevState => !prevState)}> edit </button>
                 <button onClick={() => deleteMeme(userID)}> delete </button>
             </form>

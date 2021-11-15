@@ -4,7 +4,4 @@ https://api.imgflip.com/caption_image/template_id=${randomMeme.id}
 initialID for passing to edit function, render initial image in img src={initial} and editPrev id={initialID}
 
 todo:
-    -   fix delete error when delete @ 0 index; prevState sets to undefined, causes iteration error
-
-for final:
--   implement chakraUI styling
+-   implement styling
