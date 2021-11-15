@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 
 export default function UserMemes(props){
-    // refactor to work as edit function
     const { 
         imgSrc,
         key,
         setMemes,
         userID,
-        id
+        id,
+        initialURL
     } = props
     const [ toggleEdit, setToggleEdit ] = useState(false)
     const [ inputs, setInputs ] = useState({
         topText: '',
         bottomText: ''
     });
-    // *** error: stop rendering if nothing to render after deletion
+    const [ imgEditable, setImgEditable ] = useState({
+        url: initialURL
+    })
+    // *** error: stop rendering if nothing to render after deletion; on delete at 0 index prevState not iterable error
     const deleteMeme = (id) => {
         setMemes(prevMemes => {
             prevMemes.filter(memes => memes.userID !== id)
         })
     }
     
-    // *** finish implementing this. review what is here already
     const editPrev = () => {
         const prevImg = new FormData();
         prevImg.append('username', 'vschoolproject')
@@ -35,9 +37,9 @@ export default function UserMemes(props){
         })
         .then(res => res.json())
         .then((res) => 
-            setMemes(prevInputs => ({
-                ...prevInputs,
-                url: res.data ? res.data.url : imgSrc
+            setImgEditable(prevInputs => ({
+                ...prevInputs, 
+                url: res.data ? res.data.url : imgEditable.url
             }))
         )
         .catch(err => console.log(err))
@@ -51,7 +53,7 @@ export default function UserMemes(props){
         }), editPrev()
         );
     };
-    // refactor to work as edit function
+    
     const handleEdit = (e) => {
         e.preventDefault()
         const captionData = new FormData();
@@ -60,7 +62,7 @@ export default function UserMemes(props){
         captionData.append('template_id', id)
         captionData.append('text0', inputs.topText)
         captionData.append('text1', inputs.bottomText)
-        fetch(`https://api.imgflip.com/caption_image`,{
+        fetch(`https://api.imgflip.com/caption_image`, {
             method: 'POST',
             body: captionData,
         })
@@ -72,6 +74,11 @@ export default function UserMemes(props){
                 }
             ]))
         )
+        .finally(
+            setToggleEdit(prevState => !prevState),
+            // *** on delete at 0 index prevState not iterable error
+            // deleteMeme(userID)
+            )
         .catch(err => console.log(err))
         setInputs({
             topText: '',
@@ -83,21 +90,19 @@ export default function UserMemes(props){
     return imgSrc ?
         <div className='meme'>
             { toggleEdit === false ?
-            <>
+            <form>
                 <img src={imgSrc} alt={key}/>
                 <button onClick={()=> setToggleEdit(prevState => !prevState)}> edit </button>
                 <button onClick={() => deleteMeme(userID)}> delete </button>
-            </>
+            </form>
             :
-            <>
-                <h1 style={{color: 'gray'}}> edit view placeholder </h1>
-                <div>
-                    <img src={imgSrc} alt='editableImage'/>
-                        <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChangeEdit}/>
-                        <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChangeEdit}/>
-                </div>
-                <button onClick={handleEdit}> Generate </button>
-            </>
+            <form>
+                <img src={imgEditable.url} alt='editableImage'/>
+                    <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChangeEdit}/>
+                    <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChangeEdit}/>
+                <button onClick={()=> setToggleEdit(prevState => !prevState)}> cancel edit </button>
+                <button onClick={handleEdit}> submit edit </button>
+            </form>
             }
         </div>
         :

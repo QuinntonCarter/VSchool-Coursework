@@ -5,7 +5,8 @@ function MemeGenerator(){
     const [ memes, setMemes ] = useState([{
         url: '',
         userID: '',
-        id: ''
+        id: '',
+        initialURL: ''
     }]);
 
     const [ inputs, setInputs ] = useState({
@@ -16,6 +17,7 @@ function MemeGenerator(){
     const [ randomMeme, setRandomMeme ] = useState({
         name: '',
         url: '',
+        initialURL: '',
         id: ''
     });
 
@@ -45,7 +47,8 @@ function MemeGenerator(){
         .then((res) => 
             setRandomMeme(prevInputs => ({
                 ...prevInputs,
-                url: res.data ? res.data.url : randomMeme.url
+                url: res.data ? res.data.url : randomMeme.url,
+                initialURL: randomMeme.initialURL
             }))
         )
         .catch(err => console.log(err))
@@ -68,8 +71,9 @@ function MemeGenerator(){
             setMemes(prevState => ([
                 ...prevState, {
                     url: res.data,
+                    initialURL: randomMeme.initialURL,
                     userID: res.data.page_url.slice(22),
-                    id: randomMeme.id
+                    id: randomMeme.id,
                 }
             ]))
         )
@@ -91,6 +95,7 @@ function MemeGenerator(){
             setRandomMeme({
                 name: randomMeme.name,
                 url: randomMeme.url,
+                initialURL: randomMeme.url,
                 id: randomMeme.id,
                 boxes: randomMeme.box_count
             })
@@ -105,13 +110,14 @@ function MemeGenerator(){
         setRandomMeme({
             name: randomMeme.name,
             url: randomMeme.url,
+            initialURL: randomMeme.initialURL,
             id: randomMeme.id,
             boxes: randomMeme.box_count
         })
     };
     
 
-    const mappedMemes = memes.map(meme => 
+    const mappedMemes = memes ? memes.map(meme => 
         <UserMemes
             {...randomMeme}
             inputs={inputs}
@@ -122,11 +128,32 @@ function MemeGenerator(){
             id={meme.id}
             setMemes={setMemes}
             imgSrc={meme.url.url}
+            initialURL={meme.initialURL}
             key={meme.url.page_url}
         />
-        )
+        ) 
+        :
+        null
 
     useEffect(() => {
+        // const getMemes = () => {
+        //     fetch('https://api.imgflip.com/get_memes')
+        //     .then((response) => response.json())
+        //     .then((response) => {
+        //         const { memes } = response.data
+        //         const memesFit = memes.filter(memes => memes.box_count <= 2)
+        //         const randomMeme = memesFit[Math.floor(Math.random() * 10)]
+        //         setAllMemes(memesFit)
+        //         setRandomMeme({
+        //             name: randomMeme.name,
+        //             url: randomMeme.url,
+        //             id: randomMeme.id,
+        //             boxes: randomMeme.box_count
+        //         })
+    
+        //     })
+        //     .catch(err => console.log(err))
+        // };
         getMemes();
     },[]);
 
