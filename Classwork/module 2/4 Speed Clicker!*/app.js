@@ -1,24 +1,25 @@
-const counter = document["counthere"]
-const newdiv = document.createElement("div")
-const timerDisplay = document.createElement("div")
-let startButton = document["start"]
+const counter = document["counthere"];
+const newdiv = document.createElement("div");
+const timerDisplay = document.createElement("div");
+let startButton = document["start"];
 
-timerDisplay.style.fontSize="54px"
+timerDisplay.style.fontSize="54px";
 
 var count= 0
 let timer = 30
 
+document.body.addEventListener("click", onClick)
 
-document.body.addEventListener("click", function(e){
-    e.preventDefault()
-    // increments var count by one and returns result //
-    let counted = count++
-    // assigns count var to new div element //
-    newdiv.textContent = counted
-    // appends new div w/ count value to 'counthere' div //
-    counter.append(newdiv)
-
-})
+function onClick(){
+    if(timer <= 0){
+        document.body.removeEventListener("click", onClick)
+        console.log(timer)
+    } else {
+        let counted = count++
+        newdiv.textContent = counted
+        counter.append(newdiv)
+    }
+};
 
 function decrementTime(){
         // decrements timer over 30 seconds //
@@ -27,13 +28,12 @@ function decrementTime(){
         timerDisplay.textContent = timed
         // prepends timerDisplay on BODY //
         document.body.prepend(timerDisplay)
-}
+};
 
 function stopTimer(){
-    clearInterval(timerID),
-    alert("Great job! Reload the page to restart!");
-}
+    clearInterval(timerID)
+};
 
 var timerID = setInterval(decrementTime, 1000);
 
-setTimeout(stopTimer, 31000)
+setTimeout(stopTimer, 31000);
