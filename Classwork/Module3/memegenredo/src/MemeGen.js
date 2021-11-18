@@ -143,8 +143,8 @@ function MemeGenerator(){
     },[]);
 
         return(
-            <div className='appDisplay'>
-                <form className='meme-form'>
+            <div className='grid-cols-2 border-4 border-solid border-t-0 border-navy rounded-b-lg p-4'>
+                <form className='col-start-2 col-end-2'>
                     <div>
                         <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChange}/>
                         <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChange}/>
@@ -153,11 +153,11 @@ function MemeGenerator(){
                     <button onClick={getRandom}> Randomize </button>
                 </form>
                     {randomMeme ?
-                    <>
+                    <div className='col-start-1 col-end-1'>
                         <h1>{randomMeme.name}</h1>
                         <br/>
-                        <img className='randomMeme' src={randomMeme.url} alt='initial-meme' />
-                    </>
+                        <img className='mx-auto border-4' src={randomMeme.url} alt='initial-meme' />
+                    </div>
                     :
                         <h3> Loading... </h3>
                     }

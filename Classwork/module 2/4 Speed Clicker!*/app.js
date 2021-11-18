@@ -13,7 +13,6 @@ document.body.addEventListener("click", onClick)
 function onClick(){
     if(timer <= 0){
         document.body.removeEventListener("click", onClick)
-        console.log(timer)
     } else {
         let counted = count++
         newdiv.textContent = counted
