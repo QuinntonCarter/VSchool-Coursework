@@ -93,7 +93,7 @@ function MemeGenerator(){
         .then((response) => {
             const { memes } = response.data
             const memesFit = memes.filter(memes => memes.box_count <= 2)
-            const randomMeme = memesFit[Math.floor(Math.random() * 10)]
+            const randomMeme = memesFit[Math.floor(Math.random() * 73)]
             setAllMemes(memesFit)
             setRandomMeme({
                 name: randomMeme.name,
@@ -109,7 +109,7 @@ function MemeGenerator(){
 
     const getRandom = (e) => {
         e.preventDefault()
-        const randomMeme = allMemes[Math.floor(Math.random() * 10)]
+        const randomMeme = allMemes[Math.floor(Math.random() * 73)]
         setRandomMeme({
             name: randomMeme.name,
             url: randomMeme.url,
@@ -132,7 +132,6 @@ function MemeGenerator(){
             setMemes={setMemes}
             imgSrc={meme.url}
             initialURL={meme.initialURL}
-            // key={meme.url.page_url}
         />
         ) 
         :
@@ -143,25 +142,33 @@ function MemeGenerator(){
     },[]);
 
         return(
-            <div className='grid-cols-2 border-4 border-solid border-t-0 border-navy rounded-b-lg p-4'>
-                <form className='col-start-2 col-end-2'>
-                    <div>
-                        <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChange}/>
-                        <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChange}/>
+            <div className='grid-cols-1 bg-blue-200 pt-4 p-3'>
+                <form className='grid grid-cols-1 col-start-1 col-end-2'>
+                    <div className='grid grid-cols-2'>
+                        <input name='topText' placeholder='First text' value={inputs.topText} onChange={handleChange} required/>
+                        <input name='bottomText' placeholder='Second text' value={inputs.bottomText} onChange={handleChange} required/>
                     </div>
-                    <button onClick={handleSubmit}> Generate </button>
-                    <button onClick={getRandom}> Randomize </button>
+                    <button className='m-1 p-1 rounded bg-cream' onClick={handleSubmit}> Generate </button>
+                    <button className='m-1 p-1 rounded bg-babyBlue' onClick={getRandom}> Randomize </button>
                 </form>
                     {randomMeme ?
-                    <div className='col-start-1 col-end-1'>
-                        <h1>{randomMeme.name}</h1>
+                    <div className='rounded p-3'>
+                        <h1 className='text-2xl text-center text-blue-400'>{randomMeme.name}</h1>
                         <br/>
-                        <img className='mx-auto border-4' src={randomMeme.url} alt='initial-meme' />
+                        <img className='mx-auto rounded border-4' src={randomMeme.url} alt='initial-meme' />
                     </div>
                     :
                         <h3> Loading... </h3>
                     }
-                    {mappedMemes}
+                    {mappedMemes ?
+                        <>
+                            <h1 className='text-blue-400 text-3xl bg-cream p-4'> Your Memes </h1>
+                            {mappedMemes}
+                        </>
+                        :
+                        null
+                    
+                    }
             </div>
         )
 }

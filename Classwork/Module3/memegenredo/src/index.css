@@ -13,6 +13,15 @@
   margin: 0
 }
 
+@layer base {
+  input {
+    @apply bg-gray-200 rounded m-1 p-1
+  }
+  /* button {
+    @apply m-1 p-1 rounded bg-babyBlue
+  } */
+}
+
 /* @layer base {
   h1 {
     @apply text-5xl;

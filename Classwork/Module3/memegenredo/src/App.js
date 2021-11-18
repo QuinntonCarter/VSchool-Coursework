@@ -4,9 +4,11 @@ import MemeGenerator from './MemeGen.js'
 
 function App() {
   return (
-    <div className="">
-        <Header/>
-        <MemeGenerator/>
+    <div className=''>
+      <Header/>
+        <div className="h-auto border-4 border-solid border-t-0 border-blue-400">
+            <MemeGenerator/>
+        </div>
     </div>
   );
 }

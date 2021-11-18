@@ -246,7 +246,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        '"Helvetica Neue"'
+        'Helvetica Neue'
       ],
       serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: [
