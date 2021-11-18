@@ -142,18 +142,18 @@ function MemeGenerator(){
     },[]);
 
         return(
-            <div className='grid-cols-1 bg-blue-200 pt-4 p-3'>
+            <div className='w-screen bg-blue-200 grid-cols-1 pt-4 p-3'>
                 <form className='grid grid-cols-1 col-start-1 col-end-2'>
                     <div className='grid grid-cols-2'>
                         <input name='topText' placeholder='First text' value={inputs.topText} onChange={handleChange} required/>
                         <input name='bottomText' placeholder='Second text' value={inputs.bottomText} onChange={handleChange} required/>
                     </div>
-                    <button className='m-1 p-1 rounded bg-cream' onClick={handleSubmit}> Generate </button>
-                    <button className='m-1 p-1 rounded bg-babyBlue' onClick={getRandom}> Randomize </button>
+                    <button className='m-1 p-1 rounded-full bg-cream' onClick={handleSubmit}> Generate </button>
+                    <button className='m-1 p-1 rounded-full bg-babyBlue' onClick={getRandom}> Randomize </button>
                 </form>
                     {randomMeme ?
                     <div className='rounded p-3'>
-                        <h1 className='text-2xl text-center text-blue-400'>{randomMeme.name}</h1>
+                        <h1 className='p-4 text-2xl text-center bg-white rounded text-navy'>{randomMeme.name}</h1>
                         <br/>
                         <img className='mx-auto rounded border-4' src={randomMeme.url} alt='initial-meme' />
                     </div>
@@ -162,7 +162,7 @@ function MemeGenerator(){
                     }
                     {mappedMemes ?
                         <>
-                            <h1 className='text-blue-400 text-3xl bg-cream p-4'> Your Memes </h1>
+                            <h1 className='text-navy text-1xl bg-cream p-4 rounded-md text-center'> Your Memes </h1>
                             {mappedMemes}
                         </>
                         :

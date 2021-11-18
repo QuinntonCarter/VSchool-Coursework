@@ -4,9 +4,9 @@ import MemeGenerator from './MemeGen.js'
 
 function App() {
   return (
-    <div className=''>
+    <div className='bg-blue-200 h-screen'>
       <Header/>
-        <div className="h-auto border-4 border-solid border-t-0 border-blue-400">
+        <div className="max-h-auto">
             <MemeGenerator/>
         </div>
     </div>
