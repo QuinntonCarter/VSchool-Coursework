@@ -115,3 +115,7 @@ export default function UserMemes(props){
         :
         null
 }
+
+UserMemes.defaultProps = {
+
+}

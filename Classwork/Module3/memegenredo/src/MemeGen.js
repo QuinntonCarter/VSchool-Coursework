@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import UserMemes from './UserMemes.js';
+import MemeForm from './forms/MemeForm.js';
+
+const initInputs = { topText: '', bottomText: '' }
 
 function MemeGenerator(){
     const [ memes, setMemes ] = useState([{
         url: '',
-        initialURL: '',
         userID: '',
+        initialURL: '',
         id: ''
     }]);
 
-    const [ inputs, setInputs ] = useState({
-        topText: '',
-        bottomText: ''
-    });
+    const [ inputs, setInputs ] = useState(initInputs);
 
     const [ randomMeme, setRandomMeme ] = useState({
         name: '',
@@ -81,10 +81,7 @@ function MemeGenerator(){
             })
         )
         .catch(err => console.log(err))
-        setInputs({
-            topText: '',
-            bottomText: ''
-        })
+        setInputs(initInputs)
     };
 
     const getMemes = () => {
@@ -120,7 +117,7 @@ function MemeGenerator(){
     };
     
 
-    const mappedMemes = memes ? memes.map(meme => 
+    const mappedMemes = memes.map(meme => 
         <UserMemes
             {...randomMeme}
             inputs={inputs}
@@ -133,9 +130,7 @@ function MemeGenerator(){
             imgSrc={meme.url}
             initialURL={meme.initialURL}
         />
-        ) 
-        :
-        null
+    )
 
     useEffect(() => {
         getMemes();
@@ -143,32 +138,20 @@ function MemeGenerator(){
 
         return(
             <div className='w-screen bg-blue-200 grid-cols-1 pt-4 p-3'>
-                <form className='grid grid-cols-1 col-start-1 col-end-2'>
-                    <div className='grid grid-cols-2'>
-                        <input name='topText' placeholder='First text' value={inputs.topText} onChange={handleChange} required/>
-                        <input name='bottomText' placeholder='Second text' value={inputs.bottomText} onChange={handleChange} required/>
-                    </div>
-                    <button className='m-1 p-1 rounded-full bg-cream' onClick={handleSubmit}> Generate </button>
-                    <button className='m-1 p-1 rounded-full bg-babyBlue' onClick={getRandom}> Randomize </button>
-                </form>
+                <MemeForm
+                    inputs={inputs}
+                    
+                />
                     {randomMeme ?
                     <div className='rounded p-3'>
-                        <h1 className='p-4 text-2xl text-center bg-white rounded text-navy'>{randomMeme.name}</h1>
+                        <h1 className='p-4 text-2xl text-center bg-white rounded font-semibold text-navy'>{randomMeme.name}</h1>
                         <br/>
                         <img className='mx-auto rounded border-4' src={randomMeme.url} alt='initial-meme' />
                     </div>
                     :
                         <h3> Loading... </h3>
                     }
-                    {mappedMemes ?
-                        <>
-                            <h1 className='text-navy text-1xl bg-cream p-4 rounded-md text-center'> Your Memes </h1>
-                            {mappedMemes}
-                        </>
-                        :
-                        null
-                    
-                    }
+                    {mappedMemes.reverse()}
             </div>
         )
 }

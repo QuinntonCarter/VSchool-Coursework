@@ -52,12 +52,4 @@ form.addEventListener("submit", function(e){
     
     h1.textContent = total
     form.append("Your total before tax: $"+h1.textContent)
-
 })
-
-// console.log debugging area //
-
-
-
-
-
