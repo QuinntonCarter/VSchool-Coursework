@@ -15,33 +15,30 @@ startBtn.addEventListener("click", (e) => {
     let goTime = 30
     let readyID = setInterval(decrementGo, 1000)
 
+    lap.addEventListener("click", onClick)
 
     function decrementGo(){
         timerDisplay.textContent = 'Get Ready!!'
         // prepends timerDisplay on BODY //
         document.body.prepend(timerDisplay)
         setTimeout(() => {
+            document.getElementById("image").src = 'https://c.tenor.com/h9v3AZTRckYAAAAC/speed-racer.gif'
             // decrements timer over 30 seconds //
             let timed = goTime--
             // sets the display to the decrementing time //
             timerDisplay.textContent = timed
             // prepends timerDisplay on BODY //
             document.body.prepend(timerDisplay)
-            let status = new Promise((res, rej)=> {
-                if(timed == 0){
-                    clearInterval(readyID)
-                }
-            })
-            return status
         }, 3000)
     };
 
     function onClick(){
-        if(timer === 0 || getSet !== 0){
+        if(timer === 0){
             lap.removeEventListener("click", onClick)
-        } else {
+        } else if(timer !== 0) {
             let counted = count++
             newdiv.textContent = counted
+            newdiv.style.color = 'white'
             counter.append(newdiv)
             if(newdiv.textContent%100===0 && !1){
                 console.log('wow!')
