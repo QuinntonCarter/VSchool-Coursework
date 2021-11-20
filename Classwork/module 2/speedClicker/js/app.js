@@ -12,30 +12,37 @@ timerDisplay.style.color = "white";
 startBtn.addEventListener("click", (e) => {
     e.preventDefault()
     let count= 0
-    let goTime = 30
+    let goTime = 33
     let readyID = setInterval(decrementGo, 1000)
 
-    lap.addEventListener("click", onClick)
-
     function decrementGo(){
-        timerDisplay.textContent = 'Get Ready!!'
         // prepends timerDisplay on BODY //
         document.body.prepend(timerDisplay)
         setTimeout(() => {
-            document.getElementById("image").src = 'https://c.tenor.com/h9v3AZTRckYAAAAC/speed-racer.gif'
             // decrements timer over 30 seconds //
             let timed = goTime--
             // sets the display to the decrementing time //
             timerDisplay.textContent = timed
             // prepends timerDisplay on BODY //
             document.body.prepend(timerDisplay)
-        }, 3000)
+            if(timed <= 0){
+                clearInterval(readyID)
+                timerDisplay.textContent = "FINISH"
+            } if(timed == 30){
+                timerDisplay.textContent = "GO!!"
+            } if(timed > 30){
+                timerDisplay.textContent = "GET READY!"
+            } else {
+                document.getElementById("image").src = 'https://c.tenor.com/h9v3AZTRckYAAAAC/speed-racer.gif'
+                lap.addEventListener("click", onClick)
+            }
+        })
     };
 
     function onClick(){
-        if(timer === 0){
+        if(timer === 0 || getSet !== 0){
             lap.removeEventListener("click", onClick)
-        } else if(timer !== 0) {
+        } else {
             let counted = count++
             newdiv.textContent = counted
             newdiv.style.color = 'white'
