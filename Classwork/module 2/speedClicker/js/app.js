@@ -27,6 +27,7 @@ startBtn.addEventListener("click", (e) => {
             document.body.prepend(timerDisplay)
             if(timed <= 0){
                 clearInterval(readyID)
+                document.getElementById("image").src='https://c.tenor.com/h9v3AZTRckYAAAAC/speed-racer.gif'
                 timerDisplay.textContent = "FINISH"
             } if(timed == 30){
                 timerDisplay.textContent = "GO!!"
