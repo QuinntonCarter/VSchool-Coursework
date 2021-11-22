@@ -2,7 +2,6 @@ const express = require("express");
 const postRouter = express.Router();
 const Post = require("../models/post.js");
 
-
 // GET All posts
 postRouter.get("/", (req, res, next) => {
     Post.find((err, posts) => {
