@@ -12,19 +12,12 @@ export default function MemeGenerator(props){
     const {
         memes,
         setMemes,
+        randomMeme,
+        setRandomMeme,
         createMeme
     } = props
 
     const [ inputs, setInputs ] = useState(initInputs);
-
-    const [ randomMeme, setRandomMeme ] = useState({
-        name: '',
-        url: '',
-        initialURL: '',
-        id: ''
-    });
-
-    // const [ allMemes, setAllMemes ] = useState([]);
 
     function handleChange(e){
         const { name, value } = e.target
@@ -78,46 +71,27 @@ export default function MemeGenerator(props){
                 initialURL: randomMeme.initialURL,
                 _api_id: randomMeme.id
             }),
-            // setMemes(prevState => ([
-            //     ...prevState, {
-            //         url: res.data,
-            //         initialURL: randomMeme.initialURL,
-            //         userID: res.data.page_url.slice(22),
-            //         id: randomMeme.id,
-            //     }
-            // ])),
             setRandomMeme({
                 name: randomMeme.name,
                 url: randomMeme.initialURL,
                 initialURL: randomMeme.initialURL,
                 id: randomMeme.id
-            }),
-            console.log(randomMeme)
+            })
         )
+        .then((res) =>
+            setMemes(prevState => ({
+                ...prevState, 
+                    userMemes: [{
+                        url: res.data,
+                        initialURL: randomMeme.initialURL,
+                        userID: res.data.page_url.slice(22),
+                        id: randomMeme.id
+                    }]
+                
+            })),
+            )
         .catch(err => console.log(err))
         setInputs(initInputs)
-    };
-
-    const getMemes = () => {
-        fetch('https://api.imgflip.com/get_memes')
-        .then((response) => response.json())
-        .then((response) => {
-            const { memes } = response.data
-            const memesFit = memes.filter(memes => memes.box_count <= 2)
-            const randomMeme = memesFit[Math.floor(Math.random() * 73)]
-            setMemes({
-                allMemes: memesFit
-            })
-            setRandomMeme({
-                name: randomMeme.name,
-                url: randomMeme.url,
-                initialURL: randomMeme.url,
-                id: randomMeme.id,
-                boxes: randomMeme.box_count
-            })
-
-        })
-        .catch(err => console.log(err))
     };
 
     const getRandom = (e) => {
@@ -131,9 +105,8 @@ export default function MemeGenerator(props){
             boxes: randomMeme.box_count
         })
     };
-    
     // refactor **
-    // const mappedMemes = memes.createdMemes.map(meme => 
+    // const mappedMemes = memes.userMemes.createdMemes.map(meme => 
     //     <UserMemes
     //         {...randomMeme}
     //         inputs={inputs}
@@ -149,9 +122,9 @@ export default function MemeGenerator(props){
     //     />
     // )
 
-    useEffect(() => {
-        getMemes();
-    },[]);
+    // useEffect(() => {
+    //     getMemes();
+    // },[]);
 
         return(
             <div className='bg-blue-200 w-screen grid-cols-1 pt-3 p-3'>

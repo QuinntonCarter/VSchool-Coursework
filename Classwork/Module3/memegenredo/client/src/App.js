@@ -9,11 +9,20 @@ import axios from 'axios';
 function App() {
   const [ memes, setMemes ] = useState({
     createdMemes: [],
-    allMemes: []
-    // url: '',
-    // userID: '',
-    // initialURL: '',
-    // id: ''
+    allMemes: [],
+    userMemes: [{
+      url: '',
+      initialURL: '',
+      userID: '',
+      id: ''
+    }]
+  });
+  
+  const [ randomMeme, setRandomMeme ] = useState({
+    name: '',
+    url: '',
+    initialURL: '',
+    id: ''
   });
 
   function createMeme(newmeme){
@@ -31,14 +40,37 @@ function App() {
     axios.get(`/db`)
     .then(res => 
         setMemes({
-            createdMemes: [res.data]
+            createdMemes: res.data
         })
     )
     .catch(err => console.log(err))
   };
 
+  const getMemes = () => {
+    fetch('https://api.imgflip.com/get_memes')
+    .then((response) => response.json())
+    .then((response) => {
+        const { memes } = response.data
+        const memesFit = memes.filter(memes => memes.box_count <= 2)
+        const randomMeme = memesFit[Math.floor(Math.random() * 73)]
+        setMemes({
+            allMemes: memesFit
+        })
+        setRandomMeme({
+            name: randomMeme.name,
+            url: randomMeme.url,
+            initialURL: randomMeme.url,
+            id: randomMeme.id,
+            boxes: randomMeme.box_count
+        })
+
+    })
+    .catch(err => console.log(err))
+};
+
   useEffect(() => {
-    getCreatedMemes()
+      getCreatedMemes()
+      getMemes()
   },[])
 
   return (
@@ -48,6 +80,8 @@ function App() {
         <Route
           path="/" element={
             <MemeGenerator
+              randomMeme={randomMeme}
+              setRandomMeme={setRandomMeme}
               createMeme={createMeme}
               setMemes={setMemes}
               memes={memes}/>
@@ -55,7 +89,9 @@ function App() {
         <Route
           path="/memes" element={
           <MemesView
-          memes={memes}/>
+            // getCreatedMemes={getCreatedMemes}
+            memes={memes.createdMemes}
+            setMemes={setMemes}/>
         }/>
       </Routes>
       <Navbar/>
