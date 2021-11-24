@@ -2,6 +2,7 @@
   "name": "memegenredo",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9000",
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "@tailwindcss/typography": "^0.4.1",

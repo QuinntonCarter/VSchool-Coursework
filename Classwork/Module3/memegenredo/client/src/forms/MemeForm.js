@@ -9,7 +9,6 @@ export default function MemeForm(props){
         getRandom
     } = props
 
-
     return(
         <form className='max-h-auto grid grid-cols-1 col-start-1 col-end-2'>
             <div className='grid grid-cols-4'>

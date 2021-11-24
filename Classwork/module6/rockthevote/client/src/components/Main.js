@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserProvider.js';
 import PostForm from './forms/PostForm.js';
 import PostList from './PostList.js';
 
-export default function Profile(props){
+export default function Profile(){
     const {
         user: { username },
         addPost,

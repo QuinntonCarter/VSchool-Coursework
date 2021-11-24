@@ -18,7 +18,7 @@ postRouter.get("/user/:userId", (req, res, next) => {
     Post.find({ user: req.params.userId }, (err, posts) => {
         if(err){
             res.status(500)
-            return console.log('wat'+err)
+            return next(err)
         }
         return res.status(200).send(posts)
     })
