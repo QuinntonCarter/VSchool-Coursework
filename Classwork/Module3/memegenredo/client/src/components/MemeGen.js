@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
-import axios from 'axios';
+
 require('dotenv').config();
 
 const initInputs = { topText: '', bottomText: '' }
 
-// ** move some functions to context to pass information between memegen and memeview
-// ** memes state, createMeme, getCreatedMemes **
+// ** move some functions to app to pass information between memegen and memeview **
 
-export default function MemeGenerator(){
-    const [ memes, setMemes ] = useState({
-        createdMemes: [{}],
-        allMemes: [{}]
-        // url: '',
-        // userID: '',
-        // initialURL: '',
-        // id: ''
-    });
+export default function MemeGenerator(props){
+    const {
+        memes,
+        setMemes,
+        createMeme
+    } = props
 
     const [ inputs, setInputs ] = useState(initInputs);
 
@@ -28,7 +24,7 @@ export default function MemeGenerator(){
         id: ''
     });
 
-    const [ allMemes, setAllMemes ] = useState([]);
+    // const [ allMemes, setAllMemes ] = useState([]);
 
     function handleChange(e){
         const { name, value } = e.target
@@ -54,8 +50,10 @@ export default function MemeGenerator(){
         .then((res) => 
             setRandomMeme(prevInputs => ({
                 ...prevInputs,
+                name: randomMeme.name,
                 url: res.data ? res.data.url : randomMeme.url,
-                initialURL: randomMeme.initialURL
+                initialURL: randomMeme.initialURL,
+                id: randomMeme.id
             }))
         )
         .catch(err => console.log(err))
@@ -77,7 +75,7 @@ export default function MemeGenerator(){
         .then((res) => 
             createMeme({
                 imgSrc: res.data.url,
-                initialUrl: randomMeme.initialURL,
+                initialURL: randomMeme.initialURL,
                 _api_id: randomMeme.id
             }),
             // setMemes(prevState => ([
@@ -89,22 +87,15 @@ export default function MemeGenerator(){
             //     }
             // ])),
             setRandomMeme({
-                url: randomMeme.initialURL
-            })
+                name: randomMeme.name,
+                url: randomMeme.initialURL,
+                initialURL: randomMeme.initialURL,
+                id: randomMeme.id
+            }),
+            console.log(randomMeme)
         )
         .catch(err => console.log(err))
         setInputs(initInputs)
-    };
-
-    function createMeme(newmeme){
-        axios.post(`/db`, newmeme)
-        .then(res => 
-            setMemes(prevState => ([
-                ...prevState, {
-                    createdMemes: res.data
-                }
-        ])))
-        .catch(err => console.log(err))
     };
 
     const getMemes = () => {
@@ -126,16 +117,6 @@ export default function MemeGenerator(){
             })
 
         })
-        .catch(err => console.log(err))
-    };
-
-    function getCreatedMemes(){
-        axios.get(`/db`)
-        .then(res => 
-            setMemes({
-                createdMemes: res.data
-            })
-        )
         .catch(err => console.log(err))
     };
 
@@ -181,11 +162,11 @@ export default function MemeGenerator(){
                     getRandom={getRandom}
                 />
                     {randomMeme ?
-                    <div className='rounded pt-7 p-3'>
-                        <h1 className='border-solid border-2 border-navy p-4 text-xl text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
-                        <br/>
-                        <img className='mx-auto w-full h-auto rounded border-white border-4' src={randomMeme.url} alt='initial-meme' />
-                    </div>
+                        <div className='rounded pt-7 p-3'>
+                            <h1 className='border-solid border-2 border-navy p-4 text-xl text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
+                            <br/>
+                            <img className='mx-auto w-full h-auto rounded border-white border-4' src={randomMeme.url} alt='initial-meme' />
+                        </div>
                     :
                         <h3> Loading... </h3>
                     }
