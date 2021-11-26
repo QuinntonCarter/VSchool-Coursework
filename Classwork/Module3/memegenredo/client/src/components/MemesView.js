@@ -1,17 +1,16 @@
-import { useEffect } from 'react';
-import axios from 'axios';
-
 export default function MemesView(props){
     const {
-        memes
+        getCreatedMemes,
+        createdMemes
     } = props
 
-    const mappedMemes = memes.map(meme => 
-        <div>
+    
+    const mappedMemes = createdMemes ? createdMemes.map(meme => 
+        <div key={meme._id}>
             <h4> {meme.created} </h4>
             <img src={meme.imgSrc} alt={`user meme: ${meme._id}`} />
         </div>
-        )
+        ).reverse() : getCreatedMemes()
 
-    return mappedMemes.length > 0 ? mappedMemes : <h1> User created memes will display here </h1>
+    return mappedMemes ? mappedMemes : <h4> Memes will display here </h4>
 }

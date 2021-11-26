@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-
+// import AppProvider from './context/AppProvider.js';
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
-    </BrowserRouter>, document.getElementById('root'));
+        {/* <AppProvider> */}
+            <App />
+        {/* </AppProvider> */}
+    </BrowserRouter>,
+    document.getElementById('root'));

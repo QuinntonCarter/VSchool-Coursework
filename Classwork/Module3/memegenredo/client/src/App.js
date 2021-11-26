@@ -6,47 +6,55 @@ import Navbar from './components/Navbar.js';
 import MemesView from './components/MemesView.js';
 import axios from 'axios';
 
-function App() {
+export default function App() {
   const [ memes, setMemes ] = useState({
     createdMemes: [],
     allMemes: [],
-    userMemes: [{
-      url: '',
-      initialURL: '',
-      userID: '',
-      id: ''
-    }]
+    userMemes: []
   });
   
   const [ randomMeme, setRandomMeme ] = useState({
     name: '',
     url: '',
-    initialURL: '',
+    initialUrl: '',
     id: ''
   });
 
   function createMeme(newmeme){
+    setMemes(prevState => ({
+        ...prevState, 
+          userMemes: [{
+                url: newmeme.imgSrc,
+                initialUrl: newmeme.initialUrl,
+                userID: newmeme.userID,
+                id: newmeme.api_id
+            }]
+        }))
     axios.post(`/db`, newmeme)
     .then(res => 
         setMemes(prevState => ({
             ...prevState, 
-                createdMemes: [res.data]
-          }))
+                allMemes: res.data
+        }))
     )
     .catch(err => console.log(err))
+    .finally(getCreatedMemes())
   };
 
   function getCreatedMemes(){
     axios.get(`/db`)
-    .then(res => 
-        setMemes({
+    .then(res => {
+        setMemes(prevState => ({
+          ...prevState,
             createdMemes: res.data
         })
+        )
+      }
     )
     .catch(err => console.log(err))
-  };
+  }
 
-  const getMemes = () => {
+  function getMemes(){
     fetch('https://api.imgflip.com/get_memes')
     .then((response) => response.json())
     .then((response) => {
@@ -59,18 +67,17 @@ function App() {
         setRandomMeme({
             name: randomMeme.name,
             url: randomMeme.url,
-            initialURL: randomMeme.url,
+            initialUrl: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
         })
-
     })
     .catch(err => console.log(err))
 };
 
   useEffect(() => {
-      getCreatedMemes()
       getMemes()
+      getCreatedMemes()
   },[])
 
   return (
@@ -84,19 +91,18 @@ function App() {
               setRandomMeme={setRandomMeme}
               createMeme={createMeme}
               setMemes={setMemes}
-              memes={memes}/>
+              memes={memes.userMemes}/>
           }/>
         <Route
           path="/memes" element={
-          <MemesView
-            // getCreatedMemes={getCreatedMemes}
-            memes={memes.createdMemes}
-            setMemes={setMemes}/>
+            <MemesView
+              getCreatedMemes={getCreatedMemes}
+              setMemes={setMemes}
+              createdMemes={memes.createdMemes}
+              />
         }/>
       </Routes>
       <Navbar/>
     </div>
   );
 }
-
-export default App;

@@ -15,6 +15,7 @@ memeRouter.get("/", (req, res, next) => {
 
 // POST new Meme
 memeRouter.post("/", (req, res, next) => {
+    // maybe add username to req here
     const newMeme = new Meme(req.body)
     newMeme.save((err, savedMeme) => {
         if(err){

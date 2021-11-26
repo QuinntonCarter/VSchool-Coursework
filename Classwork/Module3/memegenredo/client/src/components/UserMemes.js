@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+// ** finish error handling and display **
+// figure out why it isn't displaying fully on screen
 export default function UserMemes(props){
     const { 
         imgSrc,
@@ -7,7 +9,7 @@ export default function UserMemes(props){
         setMemes,
         userID,
         id,
-        initialURL
+        initialUrl
     } = props
 
     const [ toggleEdit, setToggleEdit ] = useState(false)
@@ -17,10 +19,10 @@ export default function UserMemes(props){
     });
 
     const [ imgEditable, setImgEditable ] = useState({
-        url: initialURL,
+        url: initialUrl,
+        initialUrl: initialUrl,
         userID: userID,
-        id: id,
-        initialURL: initialURL
+        id: id
     })
     
     // *** error: stop rendering if nothing to render after deletion; on delete at 0 index prevState not iterable error
@@ -77,27 +79,23 @@ export default function UserMemes(props){
             setMemes(prevState => ([
                 prevState.filter(memes => memes.userID === userID), {
                 url: res.data,
-                initialURL: initialURL,
+                initialUrl: initialUrl,
                 userID: res.data.page_url.slice(22),
                 id: id
             }])
             )}
         )
-        .then()
         .finally(
-            setToggleEdit(prevState => !prevState),
-            // *** on delete at 0 index prevState not iterable error
-            // deleteMeme(userID)
-            )
+            setToggleEdit(prevState => !prevState))
+            // ** finish error handling and display **
         .catch(err => console.log(err))
         setInputs({
             topText: '',
-            bottomText: '',
-            imgSrc: ''
+            bottomText: ''
         })
     }
 
-    return imgSrc ?
+    return(
         <div className='bg-cream p-3'>
             { toggleEdit === false ?
                 <form>
@@ -115,6 +113,5 @@ export default function UserMemes(props){
                 </form>
             }
         </div>
-        :
-        null
+        )
 }

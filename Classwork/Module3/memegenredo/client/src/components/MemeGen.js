@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 
-require('dotenv').config();
-
 const initInputs = { topText: '', bottomText: '' }
-
-// ** move some functions to app to pass information between memegen and memeview **
 
 export default function MemeGenerator(props){
     const {
@@ -14,7 +10,7 @@ export default function MemeGenerator(props){
         setMemes,
         randomMeme,
         setRandomMeme,
-        createMeme
+        createMeme,
     } = props
 
     const [ inputs, setInputs ] = useState(initInputs);
@@ -45,7 +41,7 @@ export default function MemeGenerator(props){
                 ...prevInputs,
                 name: randomMeme.name,
                 url: res.data ? res.data.url : randomMeme.url,
-                initialURL: randomMeme.initialURL,
+                initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
             }))
         )
@@ -65,31 +61,20 @@ export default function MemeGenerator(props){
             body: captionData,
         })
         .then(res => res.json())
-        .then((res) => 
+        .then(res => 
             createMeme({
                 imgSrc: res.data.url,
-                initialURL: randomMeme.initialURL,
-                _api_id: randomMeme.id
+                initialUrl: randomMeme.initialUrl,
+                _api_id: randomMeme.id,
+                userID: res.data.page_url.slice(22),
             }),
             setRandomMeme({
                 name: randomMeme.name,
-                url: randomMeme.initialURL,
-                initialURL: randomMeme.initialURL,
+                url: randomMeme.initialUrl,
+                initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
-            })
+            }),
         )
-        .then((res) =>
-            setMemes(prevState => ({
-                ...prevState, 
-                    userMemes: [{
-                        url: res.data,
-                        initialURL: randomMeme.initialURL,
-                        userID: res.data.page_url.slice(22),
-                        id: randomMeme.id
-                    }]
-                
-            })),
-            )
         .catch(err => console.log(err))
         setInputs(initInputs)
     };
@@ -100,31 +85,30 @@ export default function MemeGenerator(props){
         setRandomMeme({
             name: randomMeme.name,
             url: randomMeme.url,
-            initialURL: randomMeme.url,
+            initialUrl: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
         })
     };
-    // refactor **
-    // const mappedMemes = memes.userMemes.createdMemes.map(meme => 
-    //     <UserMemes
-    //         {...randomMeme}
-    //         inputs={inputs}
-    //         handleEdit={handleSubmit}
-    //         handleChange={handleChange}
-    //         memes={memes}
-    //         userID={meme.userID}
-    //         id={meme.id}
-    //         // will be createMeme
-    //         setMemes={setMemes}
-    //         imgSrc={meme.url}
-    //         initialURL={meme.initialURL}
-    //     />
-    // )
 
-    // useEffect(() => {
-    //     getMemes();
-    // },[]);
+    // refactor **
+    const mappedMemes = memes ? memes.map(meme => 
+        <UserMemes
+            {...randomMeme}
+            inputs={inputs}
+            handleEdit={handleSubmit}
+            handleChange={handleChange}
+            memes={memes}
+            userID={meme.userID}
+            id={meme.id}
+            // will be createMeme
+            setMemes={setMemes}
+            imgSrc={meme.url}
+            initialUrl={meme.initialUrl}
+        />
+    ).reverse()
+    :
+    null
 
         return(
             <div className='bg-blue-200 w-screen grid-cols-1 pt-3 p-3'>
@@ -143,8 +127,7 @@ export default function MemeGenerator(props){
                     :
                         <h3> Loading... </h3>
                     }
-                    {/* refactor w context move */}
-                    {/* {mappedMemes.reverse()} */}
+                    {mappedMemes}
             </div>
         )
 }
