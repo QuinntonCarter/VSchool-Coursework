@@ -1,10 +1,9 @@
 @import '/node_modules/tailwindcss/base.css';
 @import '/node_modules/tailwindcss/components.css';
 @import '/node_modules/tailwindcss/utilities.css';
-/* tailwind */
 .keyboardCat {
   background-image: url('https://media4.giphy.com/media/Hcw7rjsIsHcmk/giphy.gif');
-  height: 100px;
+  /* height: 100px; */
 }
 
 .keyboardCat > h1 {
@@ -12,13 +11,19 @@
   justify-self: center;
   margin: 0
 }
-
+/* 
 .app {
   display: grid;
   position: fixed;
   bottom: 0;
+} */
+
+body {
+  display: grid;
+  grid-template-columns: auto;
 }
 
+/* tailwind */
 @layer base {
   input {
     @apply bg-gray-200 rounded m-1 p-1

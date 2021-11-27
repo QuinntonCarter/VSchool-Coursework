@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header.js';
 import MemeGenerator from './components/MemeGen.js';
-import Navbar from './components/Navbar.js';
 import MemesView from './components/MemesView.js';
+import Header from './components/Header.js';
+import Navbar from './components/Navbar.js';
 import axios from 'axios';
 
 export default function App() {
@@ -27,18 +27,19 @@ export default function App() {
                 url: newmeme.imgSrc,
                 initialUrl: newmeme.initialUrl,
                 userID: newmeme.userID,
-                id: newmeme.api_id
+                id: newmeme._api_id
             }]
         }))
-    axios.post(`/db`, newmeme)
-    .then(res => 
-        setMemes(prevState => ({
-            ...prevState, 
-                allMemes: res.data
-        }))
-    )
-    .catch(err => console.log(err))
-    .finally(getCreatedMemes())
+        console.log(newmeme)
+    // axios.post(`/db`, newmeme)
+    // .then(res => 
+    //     setMemes(prevState => ({
+    //         ...prevState, 
+    //             createdMemes: res.data
+    //     }))
+    // )
+    // .catch(err => console.log(err))
+    // .finally(getCreatedMemes())
   };
 
   function getCreatedMemes(){
@@ -52,7 +53,7 @@ export default function App() {
       }
     )
     .catch(err => console.log(err))
-  }
+  };
 
   function getMemes(){
     fetch('https://api.imgflip.com/get_memes')
@@ -81,7 +82,7 @@ export default function App() {
   },[])
 
   return (
-    <div className='grid grid-cols-1 bg-blue-200'>
+    <div className='h-screen flex flex-col bg-blue-200'>
       <Header/>
       <Routes>
         <Route
@@ -91,7 +92,7 @@ export default function App() {
               setRandomMeme={setRandomMeme}
               createMeme={createMeme}
               setMemes={setMemes}
-              memes={memes.userMemes}/>
+              memes={memes}/>
           }/>
         <Route
           path="/memes" element={

@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 
+
+// change so created memes initially save to localstorage and can
+// be submitted to db if so desire. 
+// localstorage and edit from localstorage as well before submit
+// save id to local storage and able to delete via id from db being saved to localstorage temporarily
+
 const initInputs = { topText: '', bottomText: '' }
 
 export default function MemeGenerator(props){
@@ -46,7 +52,7 @@ export default function MemeGenerator(props){
             }))
         )
         .catch(err => console.log(err))
-    }
+    };
 
     function handleSubmit(e){
         e.preventDefault()
@@ -92,7 +98,7 @@ export default function MemeGenerator(props){
     };
 
     // refactor **
-    const mappedMemes = memes ? memes.map(meme => 
+    const mappedMemes = memes.userMemes ? memes.userMemes.map(meme => 
         <UserMemes
             {...randomMeme}
             inputs={inputs}
@@ -111,7 +117,8 @@ export default function MemeGenerator(props){
     null
 
         return(
-            <div className='bg-blue-200 w-screen grid-cols-1 pt-3 p-3'>
+            <div className='flex flex-col'>
+            <div className='flex flex-col pb-10 pt-16 bg-blue-200 overflow-auto w-screen p-3'>
                 <MemeForm
                     inputs={inputs}
                     handleChange={handleChange}
@@ -119,15 +126,16 @@ export default function MemeGenerator(props){
                     getRandom={getRandom}
                 />
                     {randomMeme ?
-                        <div className='rounded pt-7 p-3'>
-                            <h1 className='border-solid border-2 border-navy p-4 text-xl text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
+                        <div className='rounded pt-3 p-3'>
+                            <h1 className='border-solid border-2 border-navy p-2 text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
                             <br/>
-                            <img className='mx-auto w-full h-auto rounded border-white border-4' src={randomMeme.url} alt='initial-meme' />
+                            <img className='mx-auto rounded border-white border-4' src={randomMeme.url} alt='initial-meme' />
                         </div>
                     :
                         <h3> Loading... </h3>
                     }
                     {mappedMemes}
+            </div>
             </div>
         )
 }

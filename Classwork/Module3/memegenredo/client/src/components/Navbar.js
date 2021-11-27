@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return(
-        <nav className='mx-auto text-cream fixed bottom-0 p-3 w-screen grid grid-cols-2 grid-rows-1'>
-            <Link to='/' className='font-extrabold p-3 rounded hover:bg-blue-500 inline-flex items-center place-self-center'>
+        <nav className='mx-auto max-h-12 text-cream rounded-tl-lg rounded-tr-lg fixed bottom-0 p-1 w-screen flex flex-row justify-evenly'>
+            <Link to='/' className='text-sm w-full font-bold p-1 rounded hover:bg-blue-500 inline-flex items-center justify-center'>
                 <span> Create </span>
                 <PlusCircleIcon
                     className='w-5'
                 />
             </Link>
-            <Link to='/memes' className='font-extrabold p-3 rounded hover:bg-blue-500 inline-flex items-center place-self-center'>
+            <Link to='/memes' className='text-sm w-full font-bold p-1 rounded hover:bg-blue-500 inline-flex items-center justify-center'>
                 <span> View All </span>
                 <ViewListIcon
                     className='w-5'

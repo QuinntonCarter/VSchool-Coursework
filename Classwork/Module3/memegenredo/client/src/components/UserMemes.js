@@ -96,12 +96,12 @@ export default function UserMemes(props){
     }
 
     return(
-        <div className='bg-cream p-3'>
+        <div className='bg-cream'>
             { toggleEdit === false ?
-                <form>
+                <form className='m-auto p-0 h-auto w-auto'>
                     <img src={imgSrc.url} alt={key}/>
-                    <button className='m-2 p-1 rounded bg-soot text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> edit </button>
-                    <button className='m-2 mt-4 p-1 rounded bg-salmon' onClick={() => deleteMeme(userID)}> delete </button>
+                    <button className='m-1 mt-1 p-1 rounded bg-soot text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> edit </button>
+                    <button className='m-1 mt-1 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(userID)}> delete </button>
                 </form>
                 :
                 <form>
