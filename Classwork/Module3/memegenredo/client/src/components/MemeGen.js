@@ -12,11 +12,18 @@ const initInputs = { topText: '', bottomText: '' }
 
 export default function MemeGenerator(props){
     const {
+        // all memes from DB
         memes,
         setMemes,
+        // all memes from api
+        allMemes,
+        setAllMemes,
+        // all current user's memes
+        userMemes,
+        setUserMemes,
         randomMeme,
         setRandomMeme,
-        createMeme,
+        submitMeme,
     } = props
 
     const [ inputs, setInputs ] = useState(initInputs);
@@ -46,7 +53,7 @@ export default function MemeGenerator(props){
             setRandomMeme(prevInputs => ({
                 ...prevInputs,
                 name: randomMeme.name,
-                url: res.data ? res.data.url : randomMeme.url,
+                imgSrc: res.data ? res.data.url : randomMeme.imgSrc,
                 initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
             }))
@@ -68,15 +75,18 @@ export default function MemeGenerator(props){
         })
         .then(res => res.json())
         .then(res => 
-            createMeme({
-                imgSrc: res.data.url,
-                initialUrl: randomMeme.initialUrl,
-                _api_id: randomMeme.id,
-                userID: res.data.page_url.slice(22),
-            }),
+            // saves to userMemes array until it is submitted to db
+            setUserMemes(prevState => ([
+                ...prevState, {
+                    imgSrc: res.data.url,
+                    initialUrl: randomMeme.initialUrl,
+                    tempID: res.data.page_url.slice(22),
+                    _api_id: randomMeme.id
+                }
+            ])),
             setRandomMeme({
                 name: randomMeme.name,
-                url: randomMeme.initialUrl,
+                imgSrc: randomMeme.initialUrl,
                 initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
             }),
@@ -87,10 +97,10 @@ export default function MemeGenerator(props){
 
     const getRandom = (e) => {
         e.preventDefault()
-        const randomMeme = memes.allMemes[Math.floor(Math.random() * 73)]
+        const randomMeme = allMemes[Math.floor(Math.random() * 73)]
         setRandomMeme({
             name: randomMeme.name,
-            url: randomMeme.url,
+            imgSrc: randomMeme.url,
             initialUrl: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
@@ -105,11 +115,11 @@ export default function MemeGenerator(props){
             handleEdit={handleSubmit}
             handleChange={handleChange}
             memes={memes}
-            userID={meme.userID}
-            id={meme.id}
-            // will be createMeme
             setMemes={setMemes}
-            imgSrc={meme.url}
+            tempID={meme.tempID}
+            _api_id={meme._api_id}
+            // will be saveMeme..?
+            imgSrc={meme.imgSrc}
             initialUrl={meme.initialUrl}
         />
     ).reverse()
@@ -117,8 +127,7 @@ export default function MemeGenerator(props){
     null
 
         return(
-            <div className='flex flex-col'>
-            <div className='flex flex-col pb-10 pt-16 bg-blue-200 overflow-auto w-screen p-3'>
+            <div className='flex flex-col pb-10 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
                 <MemeForm
                     inputs={inputs}
                     handleChange={handleChange}
@@ -129,13 +138,12 @@ export default function MemeGenerator(props){
                         <div className='rounded pt-3 p-3'>
                             <h1 className='border-solid border-2 border-navy p-2 text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
                             <br/>
-                            <img className='mx-auto rounded border-white border-4' src={randomMeme.url} alt='initial-meme' />
+                            <img className='mx-auto rounded border-white border-4' src={randomMeme.imgSrc} alt='initial-meme' />
                         </div>
                     :
                         <h3> Loading... </h3>
                     }
                     {mappedMemes}
-            </div>
             </div>
         )
 }

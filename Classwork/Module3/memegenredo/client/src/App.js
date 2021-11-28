@@ -7,30 +7,33 @@ import Navbar from './components/Navbar.js';
 import axios from 'axios';
 
 export default function App() {
-  const [ memes, setMemes ] = useState({
-    createdMemes: [],
-    allMemes: [],
-    userMemes: []
-  });
+  // all memes from the app's DB
+  const [ memes, setMemes ] = useState([]);
+  // all api memes
+  const [ allMemes, setAllMemes ] = useState([]);
+  // all memes created by current user 
+  const [ userMemes, setUserMemes ] = useState([]);
   
   const [ randomMeme, setRandomMeme ] = useState({
     name: '',
-    url: '',
+    imgSrc: '',
     initialUrl: '',
     id: ''
   });
 
-  function createMeme(newmeme){
-    setMemes(prevState => ({
-        ...prevState, 
-          userMemes: [{
-                url: newmeme.imgSrc,
-                initialUrl: newmeme.initialUrl,
-                userID: newmeme.userID,
-                id: newmeme._api_id
-            }]
-        }))
-        console.log(newmeme)
+//refactor this into submit to db function:
+// submit with everything but the tempID 
+  function submitMeme(meme){
+    // setMemes(prevState => ({
+    //     ...prevState, 
+    //       userMemes: [{
+    //             imgSrc: newmeme.imgSrc,
+    //             initialUrl: newmeme.initialUrl,
+    //             tempID: newmeme.tempID,
+    //             _api_id: newmeme._api_id
+    //         }]
+    //     }))
+        console.log(meme)
     // axios.post(`/db`, newmeme)
     // .then(res => 
     //     setMemes(prevState => ({
@@ -45,11 +48,7 @@ export default function App() {
   function getCreatedMemes(){
     axios.get(`/db`)
     .then(res => {
-        setMemes(prevState => ({
-          ...prevState,
-            createdMemes: res.data
-        })
-        )
+        setMemes(res.data)
       }
     )
     .catch(err => console.log(err))
@@ -62,12 +61,10 @@ export default function App() {
         const { memes } = response.data
         const memesFit = memes.filter(memes => memes.box_count <= 2)
         const randomMeme = memesFit[Math.floor(Math.random() * 73)]
-        setMemes({
-            allMemes: memesFit
-        })
+        setAllMemes(memesFit)
         setRandomMeme({
             name: randomMeme.name,
-            url: randomMeme.url,
+            imgSrc: randomMeme.url,
             initialUrl: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
@@ -90,16 +87,26 @@ export default function App() {
             <MemeGenerator
               randomMeme={randomMeme}
               setRandomMeme={setRandomMeme}
-              createMeme={createMeme}
+              // submit meme to DB
+              submitMeme={submitMeme}
+              // all memes from DB
+              memes={memes}
               setMemes={setMemes}
-              memes={memes}/>
+              // all from api
+              allMemes={allMemes}
+              setAllMemes={setAllMemes}
+              // all current user's memes
+              userMemes={userMemes}
+              setUserMemes={setUserMemes}/>
           }/>
         <Route
           path="/memes" element={
             <MemesView
               getCreatedMemes={getCreatedMemes}
+              memes={memes}
               setMemes={setMemes}
-              createdMemes={memes.createdMemes}
+              userMemes={userMemes}
+              allMemes={allMemes}
               />
         }/>
       </Routes>

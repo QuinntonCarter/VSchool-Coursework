@@ -7,7 +7,7 @@ export default function UserMemes(props){
         imgSrc,
         key,
         setMemes,
-        userID,
+        tempID,
         id,
         initialUrl
     } = props
@@ -19,16 +19,16 @@ export default function UserMemes(props){
     });
 
     const [ imgEditable, setImgEditable ] = useState({
-        url: initialUrl,
+        imgSrc: initialUrl,
         initialUrl: initialUrl,
-        userID: userID,
+        tempID: tempID,
         id: id
     })
     
     // *** error: stop rendering if nothing to render after deletion; on delete at 0 index prevState not iterable error
     const deleteMeme = (id) => {
         setMemes(prevMemes => {
-            prevMemes.filter(memes => memes.userID !== id)
+            prevMemes.userMemes.filter(memes => memes.tempID !== id)
         })
     }
     
@@ -47,7 +47,7 @@ export default function UserMemes(props){
         .then((res) => 
             setImgEditable(prevInputs => ({
                 ...prevInputs, 
-                url: res.data ? res.data.url : imgEditable.url,
+                imgSrc: res.data ? res.data.url : imgEditable.imgSrc,
             }))
         )
         .catch(err => console.log(err))
@@ -61,7 +61,7 @@ export default function UserMemes(props){
         }), editPrev()
         );
     };
-    
+    // submits the edit
     const handleEdit = (e) => {
         e.preventDefault()
         const captionData = new FormData();
@@ -77,10 +77,10 @@ export default function UserMemes(props){
         .then(res => res.json())
         .then((res) => {
             setMemes(prevState => ([
-                prevState.filter(memes => memes.userID === userID), {
-                url: res.data,
+                prevState.filter(memes => memes.tempID === tempID), {
+                imgSrc: res.data,
                 initialUrl: initialUrl,
-                userID: res.data.page_url.slice(22),
+                tempID: res.data.page_url.slice(22),
                 id: id
             }])
             )}
@@ -96,16 +96,16 @@ export default function UserMemes(props){
     }
 
     return(
-        <div className='bg-cream'>
+        <div className='bg-cream p-4'>
             { toggleEdit === false ?
                 <form className='m-auto p-0 h-auto w-auto'>
-                    <img src={imgSrc.url} alt={key}/>
+                    <img src={imgSrc} alt={key}/>
                     <button className='m-1 mt-1 p-1 rounded bg-soot text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> edit </button>
-                    <button className='m-1 mt-1 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(userID)}> delete </button>
+                    <button className='m-1 mt-1 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
                 </form>
                 :
                 <form>
-                    <img src={imgEditable.url} alt='editableImage'/>
+                    <img src={imgEditable.imgSrc} alt='editableImage'/>
                         <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChangeEdit}/>
                         <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChangeEdit}/>
                     <button className='m-2 p-1 rounded bg-salmon' onClick={()=> setToggleEdit(prevState => !prevState)}> cancel edit </button>
