@@ -16,8 +16,7 @@ export default React.memo(function PostInteractionBar(props){
         deletePost,
         submitVote,
         postComment,
-        user,
-        getAllPosts
+        user
     } = useContext(UserContext)
     
     const initInputs = {

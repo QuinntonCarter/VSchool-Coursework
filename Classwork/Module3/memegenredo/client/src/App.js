@@ -11,7 +11,7 @@ export default function App() {
   const [ memes, setMemes ] = useState([]);
   // all api memes
   const [ allMemes, setAllMemes ] = useState([]);
-  // all memes created by current user 
+  // all memes created by current user
   const [ userMemes, setUserMemes ] = useState([]);
   
   const [ randomMeme, setRandomMeme ] = useState({
@@ -20,30 +20,6 @@ export default function App() {
     initialUrl: '',
     id: ''
   });
-
-//refactor this into submit to db function:
-// submit with everything but the tempID 
-  function submitMeme(meme){
-    // setMemes(prevState => ({
-    //     ...prevState, 
-    //       userMemes: [{
-    //             imgSrc: newmeme.imgSrc,
-    //             initialUrl: newmeme.initialUrl,
-    //             tempID: newmeme.tempID,
-    //             _api_id: newmeme._api_id
-    //         }]
-    //     }))
-        console.log(meme)
-    // axios.post(`/db`, newmeme)
-    // .then(res => 
-    //     setMemes(prevState => ({
-    //         ...prevState, 
-    //             createdMemes: res.data
-    //     }))
-    // )
-    // .catch(err => console.log(err))
-    // .finally(getCreatedMemes())
-  };
 
   function getCreatedMemes(){
     axios.get(`/db`)
@@ -73,6 +49,24 @@ export default function App() {
     .catch(err => console.log(err))
 };
 
+   //refactor this into submit to db function:
+// submit with everything but the tempID 
+function submitMeme(source, url, id){
+  const submittedMeme = {
+      imgSrc: source,
+      initialUrl: url,
+      _api_id: id
+  } 
+  console.log(submittedMeme)
+  // axios.post(`/db`, submittedMeme)
+  // .then(res => 
+  //     setMemes(prevState => ([...prevState, res.data]))
+  // )
+  // .catch(err => console.log(err))
+  // .finally(getCreatedMemes())
+};
+
+
   useEffect(() => {
       getMemes()
       getCreatedMemes()
@@ -87,7 +81,7 @@ export default function App() {
             <MemeGenerator
               randomMeme={randomMeme}
               setRandomMeme={setRandomMeme}
-              // submit meme to DB
+              // for submit meme to DB
               submitMeme={submitMeme}
               // all memes from DB
               memes={memes}

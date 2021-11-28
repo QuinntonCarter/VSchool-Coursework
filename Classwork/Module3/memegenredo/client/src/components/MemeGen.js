@@ -13,18 +13,19 @@ const initInputs = { topText: '', bottomText: '' }
 export default function MemeGenerator(props){
     const {
         // all memes from DB
-        memes,
         setMemes,
         // all memes from api
         allMemes,
-        setAllMemes,
         // all current user's memes
         userMemes,
         setUserMemes,
         randomMeme,
         setRandomMeme,
-        submitMeme,
+        // *** for final save of meme to DB ***
+        submitMeme
     } = props
+
+        console.log(userMemes.map(meme => meme.created))
 
     const [ inputs, setInputs ] = useState(initInputs);
 
@@ -63,6 +64,7 @@ export default function MemeGenerator(props){
 
     function handleSubmit(e){
         e.preventDefault()
+        const createdDate = JSON.stringify(new Date()).slice(0,11).replace('"', '')
         const captionData = new FormData();
         captionData.append('username', 'vschoolproject')
         captionData.append('password', 'testing!2021')
@@ -76,12 +78,14 @@ export default function MemeGenerator(props){
         .then(res => res.json())
         .then(res => 
             // saves to userMemes array until it is submitted to db
+            // by submitMeme function
             setUserMemes(prevState => ([
                 ...prevState, {
                     imgSrc: res.data.url,
                     initialUrl: randomMeme.initialUrl,
                     tempID: res.data.page_url.slice(22),
-                    _api_id: randomMeme.id
+                    _api_id: randomMeme.id,
+                    created: createdDate
                 }
             ])),
             setRandomMeme({
@@ -93,6 +97,7 @@ export default function MemeGenerator(props){
         )
         .catch(err => console.log(err))
         setInputs(initInputs)
+        // *** setUserMemes to localStorage ***
     };
 
     const getRandom = (e) => {
@@ -108,18 +113,19 @@ export default function MemeGenerator(props){
     };
 
     // refactor **
-    const mappedMemes = memes.userMemes ? memes.userMemes.map(meme => 
+    const mappedMemes = userMemes ? userMemes.map(meme => 
         <UserMemes
             {...randomMeme}
             inputs={inputs}
             handleEdit={handleSubmit}
             handleChange={handleChange}
-            memes={memes}
+            submitMeme={submitMeme}
+            setUserMemes={setUserMemes}
             setMemes={setMemes}
             tempID={meme.tempID}
             _api_id={meme._api_id}
-            // will be saveMeme..?
             imgSrc={meme.imgSrc}
+            created={meme.created}
             initialUrl={meme.initialUrl}
         />
     ).reverse()
