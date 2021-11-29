@@ -5,16 +5,17 @@ export default function UserMemes(props){
     const { 
         imgSrc,
         key,
-        setMemes,
+        userMemes,
         tempID,
         _api_id,
         created,
         initialUrl,
         submitMeme,
-        setUserMemes
+        setUserMemes,
     } = props
 
     const [ toggleEdit, setToggleEdit ] = useState(false)
+    const [ toggleSave, setToggleSave ] = useState(false)
     const [ inputs, setInputs ] = useState({
         topText: '',
         bottomText: ''
@@ -30,9 +31,8 @@ export default function UserMemes(props){
     
     // *** error: stop rendering if nothing to render after deletion; on delete at 0 index prevState not iterable error
     const deleteMeme = (id) => {
-        setMemes(prevMemes => {
-            prevMemes.userMemes.filter(memes => memes.tempID !== id)
-        })
+        const newMemes = userMemes.filter(memes => memes.tempID !== id)
+        return setUserMemes(newMemes)
     }
     
     const editPrev = () => {
@@ -68,7 +68,7 @@ export default function UserMemes(props){
     // submits the edit
     const handleEdit = (e, id) => {
         e.preventDefault()
-        const createdDate = JSON.stringify(new Date()).slice(0,11)
+        const createdDate = JSON.stringify(new Date()).slice(1,11)
         const captionData = new FormData();
         captionData.append('username', 'vschoolproject')
         captionData.append('password', 'testing!2021')
@@ -81,19 +81,15 @@ export default function UserMemes(props){
         })
         .then(res => res.json())
         .then((res) => {
-            // setMemes(prevState => ([
-            //     ...prevState.filter(memes => memes.tempID !== id), {
-            //     imgSrc: res.data.url,
-            //     initialUrl: initialUrl,
-            //     tempID: res.data.page_url.slice(22),
-            //     _api_id: _api_id,
-            //     created: createdDate
-            // }])
-            // )
+            deleteMeme(id)
             setUserMemes(prevState => ([
-                // filter or map prevState to find meme with matching prev tempID passed through
-                // set the id to the new tempID ^^logic in tempID for setMemes above^^ set new imgSrc too
-                ...prevState.filter(meme => meme.tempID !== id), res.data
+                ...prevState, {
+                    imgSrc: res.data.url,
+                    initialUrl: initialUrl,
+                    tempID: res.data.page_url.slice(22),
+                    _api_id: _api_id,
+                    created: createdDate
+                },
             ]))
         }
         )
@@ -107,25 +103,39 @@ export default function UserMemes(props){
         })
     }
 
-
     return(
         <div className='bg-cream p-4'>
             { !toggleEdit ?
-                <div className='m-auto p-0 h-auto w-auto'>
-                    <p className='text-xs'> tempID:'{tempID}' created: {created} </p>
+                <div className='grid m-auto p-0 h-auto w-auto'>
+                    <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
                     <img src={imgSrc} alt={key}/>
-                    <button className='text-sm m-1 mt-1 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
-                    <button className='text-sm m-1 mt-1 p-1 rounded bg-navy text-white' onClick={() => { submitMeme(imgSrc, initialUrl, _api_id) }}> submit </button>
-                    <button className='text-sm m-1 mt-1 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
+                    <span className='grid-cols-4 inline-grid'>
+                        { !toggleSave ? 
+                        <>
+                            <button className='col-span-1 text-sm m-1 mt-1 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
+                            <button className='col-span-1 text-sm m-1 mt-1 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
+                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-navy text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> submit </button>
+                        </>
+                        :
+                        <>
+                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-salmon text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> cancel </button>
+                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-babyBlue text-white' onClick={() => { submitMeme(imgSrc, initialUrl, _api_id) }}> submit </button>
+                            <input className='col-span-4 text-sm' type='text' placeholder='enter alias or name'/>
+                        </>
+                        }
+                    </span>
                 </div>
                 :
-                <div>
-                    <p className='text-xs'> tempID:'{tempID}' created: {created} </p>
+                <div className='m-auto p-0 h-auto w-auto'>
+                    <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
                     <img src={imgEditable.imgSrc} alt='editableImage'/>
-                        <input name='topText' placeholder='Box one text' value={inputs.topText} onChange={handleChangeEdit}/>
-                        <input name='bottomText' placeholder='Box two text' value={inputs.bottomText} onChange={handleChangeEdit}/>
-                    <button className='text-sm m-2 p-1 rounded bg-salmon' onClick={()=> setToggleEdit(prevState => !prevState)}> cancel </button>
-                    <button className='text-sm m-2 p-1 rounded bg-soot text-white' onClick={(e) => handleEdit(e,tempID)}> save </button>
+                    <span className='grid grid-cols-4'>
+                        <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> cancel </button>
+                        <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={(e) => handleEdit(e,tempID)}> save </button>
+                        <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
+                        <input className='col-span-4 text-sm' name='topText' placeholder='Replacement text one' value={inputs.topText} onChange={handleChangeEdit}/>
+                        <input className='col-span-4 text-sm' name='bottomText' placeholder='Replacement text two' value={inputs.bottomText} onChange={handleChangeEdit}/>
+                    </span>
                 </div>
             }
         </div>

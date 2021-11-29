@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 
 
 // change so created memes initially save to localstorage and can
 // be submitted to db if so desire. 
-// able to delete via id from db being saved to localstorage temporarily
+// localstorage and edit from localstorage as well before submit
+// save id to local storage and able to delete via id from db being saved to localstorage temporarily
+
+// only for state management
+const ACTIONS = {
+    SAVE_MEME: 'SAVE_MEME',
+    REMOVE_MEME: 'REMOVE_MEME',
+    EDIT_MEME: 'EDIT_MEME',
+
+}
 
 const initInputs = { topText: '', bottomText: '' }
 
@@ -24,7 +33,13 @@ export default function MemeGenerator(props){
         submitMeme
     } = props
 
+    const localMemes = [JSON.parse(localStorage.getItem('UserMemes'))]
+
+
     const [ inputs, setInputs ] = useState(initInputs);
+    const [ initLocal , setLocal ] = useState({
+        memes: JSON.parse(localStorage.getItem('UserMemes'))
+    })
 
     function handleChange(e){
         const { name, value } = e.target
@@ -61,7 +76,7 @@ export default function MemeGenerator(props){
 
     function handleSubmit(e){
         e.preventDefault()
-        const createdDate = JSON.stringify(new Date()).slice(1,11).replace('"', '')
+        const createdDate = JSON.stringify(new Date()).slice(0,11).replace('"', '')
         const captionData = new FormData();
         captionData.append('username', 'vschoolproject')
         captionData.append('password', 'testing!2021')
@@ -76,28 +91,37 @@ export default function MemeGenerator(props){
         .then(res => 
             // saves to userMemes array until it is submitted to db
             // by submitMeme function
+            dispatch({ type: add_meme, payload: { 
+                imgSrc: res.data.url.imgSrc,
+                
+            }})
             setUserMemes(prevState => ([
-                ...prevState,
-                {
+                ...prevState, {
                     imgSrc: res.data.url,
                     initialUrl: randomMeme.initialUrl,
                     tempID: res.data.page_url.slice(22),
                     _api_id: randomMeme.id,
                     created: createdDate
-                }
-                
-            ])
-            ),
+                },
+                // localStorage.setItem('UserMemes', JSON.stringify(prevState))
+                // console.log(res.data),
+                // console.log(prevState)
+
+            ])),
             setRandomMeme({
                 name: randomMeme.name,
                 imgSrc: randomMeme.initialUrl,
                 initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
-            })
-            )
+            }),
+        )
+        .then(localStorage.setItem('UserMemes', JSON.stringify(userMemes)))
         .catch(err => console.log(err))
         setInputs(initInputs)
+        // *** setUserMemes to localStorage ***
     }
+
+
 
     const getRandom = (e) => {
         e.preventDefault()
@@ -111,29 +135,33 @@ export default function MemeGenerator(props){
         })
     };
 
-    const mappedMemes = (memeObj) => 
-        memeObj ? memeObj.map(meme => 
-            <UserMemes
-                key={meme.tempID}
-                {...randomMeme}
-                userMemes={userMemes}
-                inputs={inputs}
-                handleEdit={handleSubmit}
-                handleChange={handleChange}
-                submitMeme={submitMeme}
-                setUserMemes={setUserMemes}
-                setMemes={setMemes}
-                tempID={meme.tempID}
-                _api_id={meme._api_id}
-                imgSrc={meme.imgSrc}
-                created={meme.created}
-                initialUrl={meme.initialUrl}
-            />
-        ).reverse() 
-        : 
-        null
+    // refactor **
+    const mappedMemes = (memes) =>  
+    memes.imgSrc ? memes.map(meme => 
+        <UserMemes
+            {...randomMeme}
+            inputs={inputs}
+            handleEdit={handleSubmit}
+            handleChange={handleChange}
+            submitMeme={submitMeme}
+            setUserMemes={setUserMemes}
+            setMemes={setMemes}
+            tempID={meme.tempID}
+            _api_id={meme._api_id}
+            imgSrc={meme.imgSrc}
+            created={meme.created}
+            initialUrl={meme.initialUrl}
+            mappedMemes={mappedMemes}
+        />
+    ).reverse()
+    :
+    null
 
-    console.log(userMemes)
+    useEffect(() => {
+        const test = () => {
+
+        }
+    },)
 
         return(
             <div className='flex flex-col pb-10 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
@@ -152,7 +180,7 @@ export default function MemeGenerator(props){
                     :
                         <h3> Loading... </h3>
                     }
-                    { userMemes ? mappedMemes(userMemes) : null }
+                    {mappedMemes(localMemes)}
             </div>
         )
 }
