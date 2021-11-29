@@ -16,7 +16,8 @@ export default function MemeGenerator(props){
         randomMeme,
         setRandomMeme,
         // *** for final save of meme to DB ***
-        submitMeme
+        submitMeme,
+        handleAuthError
     } = props
 
     const [ inputs, setInputs ] = useState(initInputs);
@@ -37,12 +38,14 @@ export default function MemeGenerator(props){
         prevImg.append('template_id', randomMeme.id)
         prevImg.append('text0', inputs.topText)
         prevImg.append('text1', inputs.bottomText)
+        // fetches preview image url
         fetch(`https://api.imgflip.com/caption_image`, {
             method: 'POST',
             body: prevImg,
         })
         .then(res => res.json())
         .then((res) => 
+        // sets preview img url to randomMeme imgSrc
             setRandomMeme(prevInputs => ({
                 ...prevInputs,
                 name: randomMeme.name,
@@ -51,7 +54,7 @@ export default function MemeGenerator(props){
                 id: randomMeme.id
             }))
         )
-        .catch(err => console.log(err))
+        .catch(err => handleAuthError(err.response.data.errMsg))
     };
 
     function handleSubmit(e){
@@ -83,6 +86,7 @@ export default function MemeGenerator(props){
                 
             ])
             ),
+            // sets randomMeme key values to match default image's
             setRandomMeme({
                 name: randomMeme.name,
                 imgSrc: randomMeme.initialUrl,
@@ -90,13 +94,16 @@ export default function MemeGenerator(props){
                 id: randomMeme.id
             })
         )
-        .catch(err => console.log(err))
+        .catch(err => handleAuthError(err.response.data.errMsg))
+        // reset inputs to init
         setInputs(initInputs)
     };
 
     const getRandom = (e) => {
         e.preventDefault()
-        const randomMeme = allMemes[Math.floor(Math.random() * 73)]
+        // variabl = finds random number and finds meme at index of that number
+        const randomMeme = allMemes[Math.floor(Math.random() * (72)+1)]
+        // sets that meme to randomMeme
         setRandomMeme({
             name: randomMeme.name,
             imgSrc: randomMeme.url,

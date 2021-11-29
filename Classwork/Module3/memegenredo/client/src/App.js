@@ -7,6 +7,7 @@ import Navbar from './components/Navbar.js';
 import axios from 'axios';
 
 export default function App() {
+  const [ err, setErr ] = useState('')
   // all memes from the app's DB
   const [ memes, setMemes ] = useState([]);
   // all api memes
@@ -20,6 +21,11 @@ export default function App() {
     initialUrl: '',
     id: ''
   });
+
+  function handleAuthError(err){
+    setErr({err})
+  };
+
 // GET memes from DB
   function getCreatedMemes(){
     axios.get(`/db`)
@@ -27,8 +33,9 @@ export default function App() {
         setMemes(res.data)
       }
     )
-    .catch(err => console.log(err))
+    .catch(err => handleAuthError(err.response.data.errMsg))
   };
+
   // FETCH/GET memes for editing
   function getMemes(){
     fetch('https://api.imgflip.com/get_memes')
@@ -46,11 +53,12 @@ export default function App() {
             boxes: randomMeme.box_count
         })
     })
-    .catch(err => console.log(err))
+    .catch(err => handleAuthError(err.response.data.errMsg))
 };
 
 // refactor this into submit to db function:
 function submitMeme(source, url, id, alias){
+  // generates object for send to backend
   const submittedMeme = {
       imgSrc: source,
       initialUrl: url,
@@ -59,12 +67,18 @@ function submitMeme(source, url, id, alias){
   }
   axios.post(`/db`, submittedMeme)
   .then(res => 
-      setMemes(prevState => ([...prevState, res.data]))
+    // adds to db and returns response from db, push res obj to array
+      setMemes(prevState => ([
+        ...prevState, 
+        res.data
+      ])
+      )
   )
-  .catch(err => console.log(err))
+  .catch(err => handleAuthError(err.response.data.errMsg))
   .finally(getCreatedMemes())
 };
 
+// gather initial data
   useEffect(() => {
       getMemes()
       getCreatedMemes()
@@ -77,6 +91,8 @@ function submitMeme(source, url, id, alias){
         <Route
           path="/" element={
             <MemeGenerator
+              err={err}
+              handleAuthError={handleAuthError}
               randomMeme={randomMeme}
               setRandomMeme={setRandomMeme}
               // for submit meme to DB

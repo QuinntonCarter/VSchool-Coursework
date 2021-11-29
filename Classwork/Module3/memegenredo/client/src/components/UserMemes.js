@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+// ** finish error handling and display **
+
 export default function UserMemes(props){
     const { 
         imgSrc,
@@ -17,10 +19,12 @@ export default function UserMemes(props){
     const [ toggleSave, setToggleSave ] = useState(false)
     const [ inputs, setInputs ] = useState({
         topText: '',
-        bottomText: ''
+        bottomText: '',
+        alias: ''
     });
-    const [ alias, setAlias ] = useState('Optional alias (press submit to skip)')
+    const [ alias, setAlias ] = useState('')
 
+    // create editable img obj
     const [ imgEditable, setImgEditable ] = useState({
         imgSrc: initialUrl,
         initialUrl: initialUrl,
@@ -29,20 +33,19 @@ export default function UserMemes(props){
         created: created
     });
     
+    // delete from frontend state
     const deleteMeme = (id) => {
         const newMemes = userMemes.filter(memes => memes.tempID !== id)
         return setUserMemes(newMemes)
     };
 
-    function saveMeme(src, initial, id){
-        setToggleSave(prevState => !prevState)
-        if(alias === 'Optional alias (press submit to skip)'){
-            submitMeme(src, initial, id, tempID)
-        } else {
-            submitMeme(src, initial, id, alias)
-        }
+    // save to DB
+    function saveMeme(src, initial, id, name){
+        deleteMeme(tempID)
+        submitMeme(src, initial, id, name)
     };
     
+    // creates edit preview
     const editPrev = () => {
         const prevImg = new FormData();
         prevImg.append('username', 'vschoolproject')
@@ -112,7 +115,7 @@ export default function UserMemes(props){
     };
 
     return(
-        <div className='bg-cream p-4'>
+        <div className='bg-cream my-3 p-4'>
             { !toggleEdit ?
                 <div className='grid m-auto p-0 h-auto w-auto'>
                     <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
@@ -120,15 +123,15 @@ export default function UserMemes(props){
                     <div className='grid-cols-4 inline-grid'>
                         { !toggleSave ? 
                         <>
-                            <button className='col-span-1 text-sm m-1 mt-1 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
-                            <button className='col-span-1 text-sm m-1 mt-1 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
-                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-navy text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> submit </button>
+                            <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
+                            <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
+                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-navy text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> submit </button>
                         </>
                         :
                         <>
-                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-salmon text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> cancel </button>
-                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-babyBlue text-white' onClick={() => { saveMeme(imgSrc, initialUrl, _api_id) }}> submit </button>
-                            <input className='col-span-4 text-sm' type='text' maxLength='18' pattern='[A-Za-z0-9]' onChange={e => setAlias(e.target.value)} title='Allowed: A-Z and 0-9' placeholder={`${alias}`}/>
+                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> cancel </button>
+                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-babyBlue text-white' onClick={() => { saveMeme(imgSrc, initialUrl, _api_id, alias) }}> submit </button>
+                            <input className='col-span-4 text-sm' type='text' maxLength='18' pattern='[A-Za-z0-9]' onChange={e => setAlias(e.target.value)} title='Allowed: A-Z and 0-9' placeholder={`${alias||`Optional alias (press submit to skip)`}`}/>
                         </>
                         }
                     </div>
