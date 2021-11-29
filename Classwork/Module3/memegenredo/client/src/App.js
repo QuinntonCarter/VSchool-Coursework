@@ -7,7 +7,7 @@ import Navbar from './components/Navbar.js';
 import axios from 'axios';
 
 export default function App() {
-  const [ err, setErr ] = useState('')
+  const [ errMsg, setErrMsg ] = useState('')
   // all memes from the app's DB
   const [ memes, setMemes ] = useState([]);
   // all api memes
@@ -22,8 +22,10 @@ export default function App() {
     id: ''
   });
 
-  function handleAuthError(err){
-    setErr({err})
+  function handleAuthError(errMsg){
+    setErrMsg(
+      errMsg
+    )
   };
 
 // GET memes from DB
@@ -53,7 +55,10 @@ export default function App() {
             boxes: randomMeme.box_count
         })
     })
-    .catch(err => handleAuthError(err.response.data.errMsg))
+    .catch(err => 
+      // handleAuthError(err.response.data.errMsg)
+      console.log(err)
+      )
 };
 
 // refactor this into submit to db function:
@@ -80,8 +85,8 @@ function submitMeme(source, url, id, alias){
 
 // gather initial data
   useEffect(() => {
-      getMemes()
-      getCreatedMemes()
+      // getMemes()
+      // getCreatedMemes()
   },[])
 
   return (
@@ -91,12 +96,13 @@ function submitMeme(source, url, id, alias){
         <Route
           path="/" element={
             <MemeGenerator
-              err={err}
+              err={errMsg}
               handleAuthError={handleAuthError}
               randomMeme={randomMeme}
               setRandomMeme={setRandomMeme}
               // for submit meme to DB
               submitMeme={submitMeme}
+              getMemes={getMemes}
               // all memes from DB
               memes={memes}
               setMemes={setMemes}

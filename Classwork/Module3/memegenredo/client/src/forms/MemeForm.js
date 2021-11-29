@@ -1,5 +1,6 @@
 import { BeakerIcon } from '@heroicons/react/outline';
 import { SwitchHorizontalIcon } from '@heroicons/react/outline';
+import LoadingComp from '../components/Loading';
 
 export default function MemeForm(props){
     const {
@@ -7,15 +8,17 @@ export default function MemeForm(props){
         handleChange,
         handleSubmit,
         randomMeme,
+        memes,
+        getCreatedMemes,
+        allMemes,
         getRandom,
+        getMemes,
         err
     } = props
 
-    
-
     return(
         <>
-            { randomMeme ?
+            { randomMeme.imgSrc ?
                 <div className='rounded pt-3 px-3'>
                     <h1 className='border-solid border-2 border-navy p-2 text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
                     <form onSubmit={handleSubmit} className='grid grid-cols-4 pt-2'>
@@ -34,8 +37,13 @@ export default function MemeForm(props){
                     </form>
                 </div>
             :
-                <h3> Loading... </h3>
-                }
+                <LoadingComp
+                    getMemes={getMemes}
+                    allMemes={allMemes}
+                    memes={memes}
+                    getCreatedMemes={getCreatedMemes}
+                />
+            }
             
         </>
     )

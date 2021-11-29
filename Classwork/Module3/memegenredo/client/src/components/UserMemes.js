@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import LoadingComp from '../components/Loading';
 
 // ** finish error handling and display **
 
 export default function UserMemes(props){
     const { 
         imgSrc,
-        key,
         userMemes,
         tempID,
         _api_id,
@@ -115,40 +115,46 @@ export default function UserMemes(props){
     };
 
     return(
-        <div className='bg-cream my-3 p-4'>
-            { !toggleEdit ?
-                <div className='grid m-auto p-0 h-auto w-auto'>
-                    <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
-                    <img src={imgSrc} alt={key}/>
-                    <div className='grid-cols-4 inline-grid'>
-                        { !toggleSave ? 
-                        <>
-                            <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
-                            <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
-                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-navy text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> submit </button>
-                        </>
-                        :
-                        <>
-                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> cancel </button>
-                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-babyBlue text-white' onClick={() => { saveMeme(imgSrc, initialUrl, _api_id, alias) }}> submit </button>
-                            <input className='col-span-4 text-sm' type='text' maxLength='18' pattern='[A-Za-z0-9]' onChange={e => setAlias(e.target.value)} title='Allowed: A-Z and 0-9' placeholder={`${alias||`Optional alias (press submit to skip)`}`}/>
-                        </>
-                        }
+        <>
+        {imgSrc ?
+            <div className='bg-cream my-3 p-4'>
+                { !toggleEdit ?
+                    <div className='grid m-auto p-0 h-auto w-auto'>
+                        <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
+                        <img src={imgSrc} alt={`user meme: ${tempID}`}/>
+                        <div className='grid-cols-4 inline-grid'>
+                            { !toggleSave ? 
+                            <>
+                                <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
+                                <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
+                                <button className='col-span-2 text-sm m-2 p-1 rounded bg-navy text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> submit </button>
+                            </>
+                            :
+                            <>
+                                <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> cancel </button>
+                                <button className='col-span-2 text-sm m-2 p-1 rounded bg-babyBlue text-white' onClick={() => { saveMeme(imgSrc, initialUrl, _api_id, alias) }}> submit </button>
+                                <input className='col-span-4 text-sm' type='text' maxLength='18' pattern='[A-Za-z0-9]' onChange={e => setAlias(e.target.value)} title='Allowed: A-Z and 0-9' placeholder={`${alias||`Optional alias (press submit to skip)`}`}/>
+                            </>
+                            }
+                        </div>
                     </div>
-                </div>
-                :
-                <div className='m-auto p-0 h-auto w-auto'>
-                    <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
-                    <img src={imgEditable.imgSrc} alt='editableImage'/>
-                    <span className='grid grid-cols-4'>
-                        <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> cancel </button>
-                        <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={(e) => handleEdit(e,tempID)}> save </button>
-                        <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
-                        <input required className='col-span-4 text-sm' name='topText' placeholder='Replacement text one' value={inputs.topText} onChange={handleChangeEdit}/>
-                        <input required className='col-span-4 text-sm' name='bottomText' placeholder='Replacement text two' value={inputs.bottomText} onChange={handleChangeEdit}/>
-                    </span>
-                </div>
+                    :
+                    <div className='m-auto p-0 h-auto w-auto'>
+                        <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
+                        <img src={imgEditable.imgSrc} alt='editableImage'/>
+                        <span className='grid grid-cols-4'>
+                            <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> cancel </button>
+                            <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={(e) => handleEdit(e,tempID)}> save </button>
+                            <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
+                            <input required className='col-span-4 text-sm' name='topText' placeholder='Replacement text one' value={inputs.topText} onChange={handleChangeEdit}/>
+                            <input required className='col-span-4 text-sm' name='bottomText' placeholder='Replacement text two' value={inputs.bottomText} onChange={handleChangeEdit}/>
+                        </span>
+                    </div>
+                }
+            </div>
+            :
+            <LoadingComp/>
             }
-        </div>
+        </>
         )
 }
