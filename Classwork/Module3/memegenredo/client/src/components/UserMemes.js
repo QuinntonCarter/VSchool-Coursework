@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// ** finish error handling and display **
 export default function UserMemes(props){
     const { 
         imgSrc,
@@ -20,6 +19,7 @@ export default function UserMemes(props){
         topText: '',
         bottomText: ''
     });
+    const [ alias, setAlias ] = useState('Optional alias (press submit to skip)')
 
     const [ imgEditable, setImgEditable ] = useState({
         imgSrc: initialUrl,
@@ -27,13 +27,21 @@ export default function UserMemes(props){
         tempID: tempID,
         _api_id: _api_id,
         created: created
-    })
+    });
     
-    // *** error: stop rendering if nothing to render after deletion; on delete at 0 index prevState not iterable error
     const deleteMeme = (id) => {
         const newMemes = userMemes.filter(memes => memes.tempID !== id)
         return setUserMemes(newMemes)
-    }
+    };
+
+    function saveMeme(src, initial, id){
+        setToggleSave(prevState => !prevState)
+        if(alias === 'Optional alias (press submit to skip)'){
+            submitMeme(src, initial, id, tempID)
+        } else {
+            submitMeme(src, initial, id, alias)
+        }
+    };
     
     const editPrev = () => {
         const prevImg = new FormData();
@@ -54,7 +62,7 @@ export default function UserMemes(props){
             }))
         )
         .catch(err => console.log(err))
-    }
+    };
     
     function handleChangeEdit(e){
         const { name, value } = e.target
@@ -101,7 +109,7 @@ export default function UserMemes(props){
             topText: '',
             bottomText: ''
         })
-    }
+    };
 
     return(
         <div className='bg-cream p-4'>
@@ -109,7 +117,7 @@ export default function UserMemes(props){
                 <div className='grid m-auto p-0 h-auto w-auto'>
                     <p className='text-xs'> Local ID: '{tempID}' created: {created} </p>
                     <img src={imgSrc} alt={key}/>
-                    <span className='grid-cols-4 inline-grid'>
+                    <div className='grid-cols-4 inline-grid'>
                         { !toggleSave ? 
                         <>
                             <button className='col-span-1 text-sm m-1 mt-1 p-1 rounded bg-soot text-white' onClick={()=> { setToggleEdit(prevState => !prevState) }}> edit </button>
@@ -119,11 +127,11 @@ export default function UserMemes(props){
                         :
                         <>
                             <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-salmon text-white' onClick={() => { setToggleSave(prevState => !prevState) }}> cancel </button>
-                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-babyBlue text-white' onClick={() => { submitMeme(imgSrc, initialUrl, _api_id) }}> submit </button>
-                            <input className='col-span-4 text-sm' type='text' placeholder='enter alias or name'/>
+                            <button className='col-span-2 text-sm m-1 mt-1 p-1 rounded bg-babyBlue text-white' onClick={() => { saveMeme(imgSrc, initialUrl, _api_id) }}> submit </button>
+                            <input className='col-span-4 text-sm' type='text' maxLength='18' pattern='[A-Za-z0-9]' onChange={e => setAlias(e.target.value)} title='Allowed: A-Z and 0-9' placeholder={`${alias}`}/>
                         </>
                         }
-                    </span>
+                    </div>
                 </div>
                 :
                 <div className='m-auto p-0 h-auto w-auto'>
@@ -133,8 +141,8 @@ export default function UserMemes(props){
                         <button className='col-span-1 text-sm m-2 p-1 rounded bg-salmon text-white' onClick={()=> setToggleEdit(prevState => !prevState)}> cancel </button>
                         <button className='col-span-1 text-sm m-2 p-1 rounded bg-soot text-white' onClick={(e) => handleEdit(e,tempID)}> save </button>
                         <button className='col-span-2 text-sm m-2 p-1 rounded bg-salmon text-gray-700' onClick={() => deleteMeme(tempID)}> delete </button>
-                        <input className='col-span-4 text-sm' name='topText' placeholder='Replacement text one' value={inputs.topText} onChange={handleChangeEdit}/>
-                        <input className='col-span-4 text-sm' name='bottomText' placeholder='Replacement text two' value={inputs.bottomText} onChange={handleChangeEdit}/>
+                        <input required className='col-span-4 text-sm' name='topText' placeholder='Replacement text one' value={inputs.topText} onChange={handleChangeEdit}/>
+                        <input required className='col-span-4 text-sm' name='bottomText' placeholder='Replacement text two' value={inputs.bottomText} onChange={handleChangeEdit}/>
                     </span>
                 </div>
             }

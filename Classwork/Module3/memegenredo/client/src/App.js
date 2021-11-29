@@ -13,14 +13,14 @@ export default function App() {
   const [ allMemes, setAllMemes ] = useState([]);
   // all memes created by current user
   const [ userMemes, setUserMemes ] = useState([]);
-  
+  // initial meme for editing
   const [ randomMeme, setRandomMeme ] = useState({
     name: '',
     imgSrc: '',
     initialUrl: '',
     id: ''
   });
-
+// GET memes from DB
   function getCreatedMemes(){
     axios.get(`/db`)
     .then(res => {
@@ -29,14 +29,14 @@ export default function App() {
     )
     .catch(err => console.log(err))
   };
-
+  // FETCH/GET memes for editing
   function getMemes(){
     fetch('https://api.imgflip.com/get_memes')
     .then((response) => response.json())
     .then((response) => {
         const { memes } = response.data
         const memesFit = memes.filter(memes => memes.box_count <= 2)
-        const randomMeme = memesFit[Math.floor(Math.random() * 73)]
+        const randomMeme = memesFit[Math.floor(Math.random() * 100)]
         setAllMemes(memesFit)
         setRandomMeme({
             name: randomMeme.name,
@@ -49,23 +49,21 @@ export default function App() {
     .catch(err => console.log(err))
 };
 
-   //refactor this into submit to db function:
-// submit with everything but the tempID 
-function submitMeme(source, url, id){
+// refactor this into submit to db function:
+function submitMeme(source, url, id, alias){
   const submittedMeme = {
       imgSrc: source,
       initialUrl: url,
-      _api_id: id
-  } 
-  console.log(submittedMeme)
-  // axios.post(`/db`, submittedMeme)
-  // .then(res => 
-  //     setMemes(prevState => ([...prevState, res.data]))
-  // )
-  // .catch(err => console.log(err))
-  // .finally(getCreatedMemes())
+      _api_id: id,
+      alias: alias
+  }
+  axios.post(`/db`, submittedMeme)
+  .then(res => 
+      setMemes(prevState => ([...prevState, res.data]))
+  )
+  .catch(err => console.log(err))
+  .finally(getCreatedMemes())
 };
-
 
   useEffect(() => {
       getMemes()

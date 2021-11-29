@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 
-
-// change so created memes initially save to localstorage and can
-// be submitted to db if so desire. 
-// able to delete via id from db being saved to localstorage temporarily
-
 const initInputs = { topText: '', bottomText: '' }
 
 export default function MemeGenerator(props){
@@ -94,10 +89,10 @@ export default function MemeGenerator(props){
                 initialUrl: randomMeme.initialUrl,
                 id: randomMeme.id
             })
-            )
+        )
         .catch(err => console.log(err))
         setInputs(initInputs)
-    }
+    };
 
     const getRandom = (e) => {
         e.preventDefault()
@@ -112,7 +107,7 @@ export default function MemeGenerator(props){
     };
 
     const mappedMemes = (memeObj) => 
-        memeObj ? memeObj.map(meme => 
+        memeObj.map(meme => 
             <UserMemes
                 key={meme.tempID}
                 {...randomMeme}
@@ -129,30 +124,20 @@ export default function MemeGenerator(props){
                 created={meme.created}
                 initialUrl={meme.initialUrl}
             />
-        ).reverse() 
-        : 
-        null
+        ).reverse()
 
-    console.log(userMemes)
 
         return(
-            <div className='flex flex-col pb-10 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
-                <MemeForm
-                    inputs={inputs}
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-                    getRandom={getRandom}
-                />
-                    {randomMeme ?
-                        <div className='rounded pt-3 p-3'>
-                            <h1 className='border-solid border-2 border-navy p-2 text-center bg-white rounded font-normal text-navy'>{randomMeme.name}</h1>
-                            <br/>
-                            <img className='mx-auto rounded border-white border-4' src={randomMeme.imgSrc} alt='initial-meme' />
-                        </div>
-                    :
-                        <h3> Loading... </h3>
-                    }
+            <div className='flex flex-col pb-12 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
+                    <MemeForm
+                        inputs={inputs}
+                        handleChange={handleChange}
+                        handleSubmit={handleSubmit}
+                        randomMeme={randomMeme}
+                        getRandom={getRandom}
+                    />
                     { userMemes ? mappedMemes(userMemes) : null }
+                <p className='pt-14 text-center text-xs font-mono text-blue-300'> Quinnton Carter 2021 </p>
             </div>
         )
 }
