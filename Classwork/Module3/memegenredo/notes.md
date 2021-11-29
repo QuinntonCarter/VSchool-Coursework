@@ -1,2 +1,1 @@
-= finish error handling and display
-= loading icon
+= atlas integration

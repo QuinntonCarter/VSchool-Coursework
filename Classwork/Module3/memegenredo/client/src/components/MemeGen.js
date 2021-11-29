@@ -6,6 +6,7 @@ const initInputs = { topText: '', bottomText: '' }
 
 export default function MemeGenerator(props){
     const {
+        errMsg,
         getMemes,
         // all memes from DB
         setMemes,
@@ -16,8 +17,7 @@ export default function MemeGenerator(props){
         setUserMemes,
         randomMeme,
         setRandomMeme,
-        submitMeme,
-        handleAuthError
+        submitMeme
     } = props
 
     const [ inputs, setInputs ] = useState(initInputs);
@@ -54,7 +54,7 @@ export default function MemeGenerator(props){
                 id: randomMeme.id
             }))
         )
-        .catch(err => handleAuthError(err.response.data.errMsg))
+        .catch(err => console.log(err))
     };
 
     function handleSubmit(e){
@@ -83,9 +83,7 @@ export default function MemeGenerator(props){
                     _api_id: randomMeme.id,
                     created: createdDate
                 }
-                
-            ])
-            ),
+            ])),
             // sets randomMeme key values to match default image's
             setRandomMeme({
                 name: randomMeme.name,
@@ -94,7 +92,7 @@ export default function MemeGenerator(props){
                 id: randomMeme.id
             })
         )
-        .catch(err => handleAuthError(err.response.data.errMsg))
+        .catch(err => console.log(err))
         // reset inputs to init
         setInputs(initInputs)
     };
@@ -137,6 +135,7 @@ export default function MemeGenerator(props){
         return(
             <div className='flex flex-col pb-12 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
                     <MemeForm
+                        errMsg={errMsg}
                         inputs={inputs}
                         handleChange={handleChange}
                         handleSubmit={handleSubmit}

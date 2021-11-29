@@ -22,10 +22,8 @@ export default function App() {
     id: ''
   });
 
-  function handleAuthError(errMsg){
-    setErrMsg(
-      errMsg
-    )
+  function handleDBError(errMsg){
+    setErrMsg(errMsg)
   };
 
 // GET memes from DB
@@ -33,9 +31,8 @@ export default function App() {
     axios.get(`/db`)
     .then(res => {
         setMemes(res.data)
-      }
-    )
-    .catch(err => handleAuthError(err.response.data.errMsg))
+      })
+    .catch(err => handleDBError(err))
   };
 
   // FETCH/GET memes for editing
@@ -55,10 +52,7 @@ export default function App() {
             boxes: randomMeme.box_count
         })
     })
-    .catch(err => 
-      // handleAuthError(err.response.data.errMsg)
-      console.log(err)
-      )
+    .catch(err => console.log(err))
 };
 
 // refactor this into submit to db function:
@@ -79,14 +73,14 @@ function submitMeme(source, url, id, alias){
       ])
       )
   )
-  .catch(err => handleAuthError(err.response.data.errMsg))
+  .catch(err => console.log(err))
   .finally(getCreatedMemes())
 };
 
 // gather initial data
   useEffect(() => {
       // getMemes()
-      // getCreatedMemes()
+      getCreatedMemes()
   },[])
 
   return (
@@ -96,8 +90,7 @@ function submitMeme(source, url, id, alias){
         <Route
           path="/" element={
             <MemeGenerator
-              err={errMsg}
-              handleAuthError={handleAuthError}
+              errMsg={errMsg}
               randomMeme={randomMeme}
               setRandomMeme={setRandomMeme}
               // for submit meme to DB

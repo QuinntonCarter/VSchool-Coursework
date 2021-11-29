@@ -13,7 +13,7 @@ export default function MemeForm(props){
         allMemes,
         getRandom,
         getMemes,
-        err
+        errMsg
     } = props
 
     return(
@@ -33,7 +33,7 @@ export default function MemeForm(props){
                         <img className='col-span-4 max-h-auto mx-auto rounded border-white border-4 m-3' src={randomMeme.imgSrc} alt='initial-meme' />
                         <input required className='col-span-4 focus:ring-2 text-xs focus:ring-gray-200' type='text' name='topText' placeholder='First text' value={inputs.topText} onChange={handleChange}/>
                         <input required className='col-span-4 focus:ring-2 text-xs focus:ring-gray-200' type='text' name='bottomText' placeholder='Second text' value={inputs.bottomText} onChange={handleChange}/>
-                        <h3> {err}</h3>
+                        <h3> {errMsg}</h3>
                     </form>
                 </div>
             :
