@@ -35,14 +35,13 @@ export default function App() {
     .catch(err => handleDBError(err))
   };
 
-  // FETCH/GET memes for editing
+ // FETCH/GET memes for editing
   function getMemes(){
-    fetch('https://api.imgflip.com/get_memes')
-    .then((response) => response.json())
+    axios.get('/resources')
     .then((response) => {
-        const { memes } = response.data
-        const memesFit = memes.filter(memes => memes.box_count <= 2)
-        const randomMeme = memesFit[Math.floor(Math.random() * 100)]
+      const { memes } = (response.data.data)
+      const memesFit = memes.filter(memes => memes.box_count <= 2)
+      const randomMeme = memesFit[Math.floor(Math.random() * 100)]
         setAllMemes(memesFit)
         setRandomMeme({
             name: randomMeme.name,
@@ -50,10 +49,11 @@ export default function App() {
             initialUrl: randomMeme.url,
             id: randomMeme.id,
             boxes: randomMeme.box_count
-        })
-    })
-    .catch(err => console.log(err))
-};
+      })
+      console.log('1st')
+  })
+  .catch(err => console.log(err))
+  };
 
 // refactor this into submit to db function:
 function submitMeme(source, url, id, alias){
@@ -70,8 +70,7 @@ function submitMeme(source, url, id, alias){
       setMemes(prevState => ([
         ...prevState, 
         res.data
-      ])
-      )
+      ]))
   )
   .catch(err => console.log(err))
   .finally(getCreatedMemes())
@@ -79,7 +78,6 @@ function submitMeme(source, url, id, alias){
 
 // gather initial data
   useEffect(() => {
-      // getMemes()
       getCreatedMemes()
   },[])
 

@@ -7,6 +7,7 @@ const initInputs = { topText: '', bottomText: '' }
 export default function MemeGenerator(props){
     const {
         errMsg,
+        memes,
         getMemes,
         // all memes from DB
         setMemes,
@@ -143,6 +144,7 @@ export default function MemeGenerator(props){
                         allMemes={allMemes}
                         getRandom={getRandom}
                         getMemes={getMemes}
+                        memes={memes}
                     />
                     { userMemes ? mappedMemes(userMemes) : null }
                 <p className='pt-14 text-center text-xs font-mono text-blue-300'> Quinnton Carter 2021 </p>
