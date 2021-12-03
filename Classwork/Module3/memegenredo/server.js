@@ -10,22 +10,19 @@ const {
     GET_URL,
     POST_URL,
     USERNAME,
-    PASSWORD
+    PASSWORD,
+    MONGODB_URI
 } = process.env
 
 app.use(express.json());
 app.use(morgan('dev'));
 
-mongoose.connect(
-    'mongodb://localhost:27017/memeGen',
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-    },
-    () => console.log('Connected to the meme DB')
-)
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+});
 
 app.use('/db', require('./routes/memeRouter.js'));
 

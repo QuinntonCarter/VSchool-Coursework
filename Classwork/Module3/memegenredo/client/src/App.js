@@ -22,9 +22,9 @@ export default function App() {
     id: ''
   });
 
-  function handleDBError(errMsg){
-    setErrMsg(errMsg)
-  };
+  // function handleDBError(errMsg){
+  //   setErrMsg(errMsg)
+  // };
 
 // GET memes from DB
   function getCreatedMemes(){
@@ -32,7 +32,7 @@ export default function App() {
     .then(res => {
         setMemes(res.data)
       })
-    .catch(err => handleDBError(err))
+    .catch(err => console.log(err))
   };
 
  // FETCH/GET memes for editing

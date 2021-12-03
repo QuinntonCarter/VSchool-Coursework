@@ -36,6 +36,7 @@ export default function MemeGenerator(props){
     function handleSubmit(e){
         e.preventDefault()
         const createdDate = JSON.stringify(new Date()).slice(1,11).replace('"', '')
+        // sends inputs through as params to endpoint to complete meme creation
         axios.get(`/create`, 
         { params: {
             template_id: randomMeme.id,
