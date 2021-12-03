@@ -36,11 +36,6 @@ export default function MemeGenerator(props){
     function handleSubmit(e){
         e.preventDefault()
         const createdDate = JSON.stringify(new Date()).slice(1,11).replace('"', '')
-        // fetch(`https://api.imgflip.com/caption_image?username=vschoolproject&password=testing!2021&template_id=${randomMeme.id}&text0=${inputs.topText}&text1=${inputs.bottomText}`,{
-        //     method: 'POST',
-        //     // body: captionData,
-        // })
-        // const queryParams = new URLSearchParams(`text0=`)
         axios.get('/create', 
         { params: {
             template_id: randomMeme.id,

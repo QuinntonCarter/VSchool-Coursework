@@ -44,6 +44,7 @@ app.get('/resources', (req, res, next) => {
 })
 
 app.get('/create', (req, res, next) => {
+    // fetch(`https://api.imgflip.com/caption_image?username=vschoolproject&password=testing!2021&template_id=${randomMeme.id}&text0=${inputs.topText}&text1=${inputs.bottomText}`
     axios({
         method: 'POST',
         url: POST_URL,
@@ -53,6 +54,7 @@ app.get('/create', (req, res, next) => {
             font: 'impact'
         },
         headers: {
+            // ** for dev **
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         }
