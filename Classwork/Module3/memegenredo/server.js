@@ -34,7 +34,7 @@ app.get('/resources', (req, res, next) => {
         method: 'GET',
         url: GET_URL,
         headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:9000/resources/', 
+            'Access-Control-Allow-Origin': 'http://localhost:9000, http://localhost:9000/, http://localhost:9000/resources/', 
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         },
     })
