@@ -11,7 +11,7 @@ const LoadingComp = (props) => {
     useEffect(() => {
         if(!randomMeme){
         getMemes()
-    }
+        }
     },[randomMeme, memes])
 
     return(

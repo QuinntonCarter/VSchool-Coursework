@@ -10,7 +10,7 @@ const {
     GET_URL,
     POST_URL,
     USERNAME,
-    PASS
+    PASSWORD
 } = process.env
 
 app.use(express.json());
@@ -34,7 +34,6 @@ app.get('/resources', (req, res, next) => {
         method: 'GET',
         url: GET_URL,
         headers: {
-            // 'Access-Control-Allow-Origin': 'http://localhost:9000, http://localhost:9000/memes, http://localhost:9000/db, http://localhost:9000/resources',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         },
@@ -44,14 +43,16 @@ app.get('/resources', (req, res, next) => {
 })
 
 app.get('/create', (req, res, next) => {
-    // fetch(`https://api.imgflip.com/caption_image?username=vschoolproject&password=testing!2021&template_id=${randomMeme.id}&text0=${inputs.topText}&text1=${inputs.bottomText}`
     axios({
         method: 'POST',
         url: POST_URL,
         params: {
             username: USERNAME,
-            password: PASS,
-            font: 'impact'
+            password: PASSWORD,
+            font: 'impact',
+            text0: req.query.text0,
+            text1: req.query.text1,
+            template_id: req.query.template_id
         },
         headers: {
             // ** for dev **

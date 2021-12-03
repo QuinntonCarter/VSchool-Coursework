@@ -36,46 +36,42 @@ export default function MemeGenerator(props){
     function handleSubmit(e){
         e.preventDefault()
         const createdDate = JSON.stringify(new Date()).slice(1,11).replace('"', '')
-        axios.get('/create', 
+        axios.get(`/create`, 
         { params: {
             template_id: randomMeme.id,
             text0: inputs.topText,
             text1: inputs.bottomText
             }
         })
-        // .then((res) => res.json())
-        .then((res) => console.log(res))
-
-        // .then(res => res.json())
-        // .then(res => 
+        .then(res => 
             // saves to userMemes array until it is submitted to db
             // by submitMeme function
-            // setUserMemes(prevState => ([
-            //     ...prevState,
-            //     {
-            //         imgSrc: res.data.url,
-            //         initialUrl: randomMeme.initialUrl,
-            //         tempID: res.data.page_url.slice(22),
-            //         _api_id: randomMeme.id,
-            //         created: createdDate
-            //     }
-            // ])),
+            setUserMemes(prevState => ([
+                ...prevState,
+                {
+                    imgSrc: res.data.url,
+                    initialUrl: randomMeme.initialUrl,
+                    // tempID: res.data.page_url.slice(22),
+                    _api_id: randomMeme.id,
+                    created: createdDate
+                }
+            ])),
             // sets randomMeme key values to match default image's
-        //     setRandomMeme({
-        //         name: randomMeme.name,
-        //         imgSrc: randomMeme.initialUrl,
-        //         initialUrl: randomMeme.initialUrl,
-        //         id: randomMeme.id
-        //     })
-        // )
-        // .catch(err => console.log(err))
-        // // reset inputs to init
-        // setInputs(initInputs)
+            setRandomMeme({
+                name: randomMeme.name,
+                imgSrc: randomMeme.initialUrl,
+                initialUrl: randomMeme.initialUrl,
+                id: randomMeme.id
+            })
+        )
+        .catch(err => console.log(err))
+        // reset inputs to init
+        setInputs(initInputs)
     };
 
     const getRandom = (e) => {
         e.preventDefault()
-        // variabl = finds random number and finds meme at index of that number
+        // variable finds random number and finds meme at index of that number
         const randomMeme = allMemes[Math.floor(Math.random() * (72)+1)]
         // sets that meme to randomMeme
         setRandomMeme({
