@@ -12,7 +12,7 @@ const LoadingComp = (props) => {
         if(!randomMeme){
         getMemes()
     }
-    },[memes])
+    },[randomMeme, memes])
 
     return(
         <div className="flex items-center h-screen justify-center ">

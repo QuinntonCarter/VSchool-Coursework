@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
+import axios from 'axios';
 
 const initInputs = { topText: '', bottomText: '' }
 
@@ -28,74 +29,53 @@ export default function MemeGenerator(props){
             setInputs(prevInputs => ({
             ...prevInputs,
             [name]: value,
-        }), generatePrev()
-        );
-    };
-
-    const generatePrev = () => {
-        const prevImg = new FormData();
-        prevImg.append('username', 'vschoolproject')
-        prevImg.append('password', 'testing!2021')
-        prevImg.append('template_id', randomMeme.id)
-        prevImg.append('text0', inputs.topText)
-        prevImg.append('text1', inputs.bottomText)
-        // fetches preview image url
-        fetch(`https://api.imgflip.com/caption_image`, {
-            method: 'POST',
-            body: prevImg,
         })
-        .then(res => res.json())
-        .then((res) => 
-        // sets preview img url to randomMeme imgSrc
-            setRandomMeme(prevInputs => ({
-                ...prevInputs,
-                name: randomMeme.name,
-                imgSrc: res.data ? res.data.url : randomMeme.imgSrc,
-                initialUrl: randomMeme.initialUrl,
-                id: randomMeme.id
-            }))
-        )
-        .catch(err => console.log(err))
+        );
     };
 
     function handleSubmit(e){
         e.preventDefault()
         const createdDate = JSON.stringify(new Date()).slice(1,11).replace('"', '')
-        const captionData = new FormData();
-        captionData.append('username', 'vschoolproject')
-        captionData.append('password', 'testing!2021')
-        captionData.append('template_id', randomMeme.id)
-        captionData.append('text0', inputs.topText)
-        captionData.append('text1', inputs.bottomText)
-        fetch(`https://api.imgflip.com/caption_image`,{
-            method: 'POST',
-            body: captionData,
+        // fetch(`https://api.imgflip.com/caption_image?username=vschoolproject&password=testing!2021&template_id=${randomMeme.id}&text0=${inputs.topText}&text1=${inputs.bottomText}`,{
+        //     method: 'POST',
+        //     // body: captionData,
+        // })
+        // const queryParams = new URLSearchParams(`text0=`)
+        axios.get('/create', 
+        { params: {
+            template_id: randomMeme.id,
+            text0: inputs.topText,
+            text1: inputs.bottomText
+            }
         })
-        .then(res => res.json())
-        .then(res => 
+        // .then((res) => res.json())
+        .then((res) => console.log(res))
+
+        // .then(res => res.json())
+        // .then(res => 
             // saves to userMemes array until it is submitted to db
             // by submitMeme function
-            setUserMemes(prevState => ([
-                ...prevState,
-                {
-                    imgSrc: res.data.url,
-                    initialUrl: randomMeme.initialUrl,
-                    tempID: res.data.page_url.slice(22),
-                    _api_id: randomMeme.id,
-                    created: createdDate
-                }
-            ])),
+            // setUserMemes(prevState => ([
+            //     ...prevState,
+            //     {
+            //         imgSrc: res.data.url,
+            //         initialUrl: randomMeme.initialUrl,
+            //         tempID: res.data.page_url.slice(22),
+            //         _api_id: randomMeme.id,
+            //         created: createdDate
+            //     }
+            // ])),
             // sets randomMeme key values to match default image's
-            setRandomMeme({
-                name: randomMeme.name,
-                imgSrc: randomMeme.initialUrl,
-                initialUrl: randomMeme.initialUrl,
-                id: randomMeme.id
-            })
-        )
-        .catch(err => console.log(err))
-        // reset inputs to init
-        setInputs(initInputs)
+        //     setRandomMeme({
+        //         name: randomMeme.name,
+        //         imgSrc: randomMeme.initialUrl,
+        //         initialUrl: randomMeme.initialUrl,
+        //         id: randomMeme.id
+        //     })
+        // )
+        // .catch(err => console.log(err))
+        // // reset inputs to init
+        // setInputs(initInputs)
     };
 
     const getRandom = (e) => {
@@ -132,6 +112,32 @@ export default function MemeGenerator(props){
             />
         ).reverse()
 
+
+        useEffect(() => {
+            const prevImg = new FormData();
+            prevImg.append('username', 'vschoolproject')
+            prevImg.append('password', 'testing!2021')
+            prevImg.append('template_id', randomMeme.id)
+            prevImg.append('text0', inputs.topText)
+            prevImg.append('text1', inputs.bottomText)
+            // fetches preview image url
+            fetch(`https://api.imgflip.com/caption_image`, {
+                method: 'POST',
+                body: prevImg,
+            })
+            .then(res => res.json())
+            .then((res) => 
+            // sets preview img url to randomMeme imgSrc
+                setRandomMeme(prevInputs => ({
+                    ...prevInputs,
+                    name: randomMeme.name,
+                    imgSrc: res.data ? res.data.url : randomMeme.imgSrc,
+                    initialUrl: randomMeme.initialUrl,
+                    id: randomMeme.id
+                }))
+            )
+            .catch(err => console.log(err))
+        }, [inputs.topText, inputs.bottomText])
 
         return(
             <div className='flex flex-col pb-12 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>

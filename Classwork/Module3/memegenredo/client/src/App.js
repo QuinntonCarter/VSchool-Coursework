@@ -50,7 +50,6 @@ export default function App() {
             id: randomMeme.id,
             boxes: randomMeme.box_count
       })
-      console.log('1st')
   })
   .catch(err => console.log(err))
   };

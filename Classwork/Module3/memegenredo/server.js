@@ -5,7 +5,13 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const axios = require('axios');
 
-const port = 9000
+const {
+    PORT,
+    GET_URL,
+    POST_URL,
+    USERNAME,
+    PASS
+} = process.env
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -26,12 +32,30 @@ app.use('/db', require('./routes/memeRouter.js'));
 app.get('/resources', (req, res, next) => {
     axios({
         method: 'GET',
-        url: 'https://api.imgflip.com/get_memes',
+        url: GET_URL,
         headers: {
             // 'Access-Control-Allow-Origin': 'http://localhost:9000, http://localhost:9000/memes, http://localhost:9000/db, http://localhost:9000/resources',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         },
+    })
+    .then(response => res.send(response.data))
+    .catch(err => console.log(err))
+})
+
+app.get('/create', (req, res, next) => {
+    axios({
+        method: 'POST',
+        url: POST_URL,
+        params: {
+            username: USERNAME,
+            password: PASS,
+            font: 'impact'
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
+        }
     })
     .then(response => res.send(response.data))
     .catch(err => console.log(err))
@@ -45,6 +69,6 @@ app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 })
 
-app.listen(port, () => {
-    console.log(`Server is running on local port ${port}`)
+app.listen(PORT, () => {
+    console.log(`Server is running on local port ${PORT}`)
 })
