@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoadingComp from '../components/Loading';
+import axios from 'axios';
 
 // ** finish error handling and display **
 
@@ -45,28 +46,6 @@ export default function UserMemes(props){
         submitMeme(src, initial, id, name)
     };
     
-    // creates edit preview
-    const editPrev = () => {
-        const prevImg = new FormData();
-        prevImg.append('username', 'vschoolproject')
-        prevImg.append('password', 'testing!2021')
-        prevImg.append('template_id', _api_id)
-        prevImg.append('text0', inputs.topText)
-        prevImg.append('text1', inputs.bottomText)
-        fetch(`https://api.imgflip.com/caption_image`, {
-            method: 'POST',
-            body: prevImg,
-        })
-        .then(res => res.json())
-        .then((res) => 
-            setImgEditable(prevInputs => ({
-                ...prevInputs, 
-                imgSrc: res.data ? res.data.url : imgEditable.imgSrc,
-            }))
-        )
-        .catch(err => console.log(err))
-    };
-    
     function handleChangeEdit(e){
         const { name, value } = e.target
             setInputs(prevInputs => ({
@@ -75,29 +54,43 @@ export default function UserMemes(props){
         }), editPrev()
         );
     };
+    
+    // creates edit preview
+    const editPrev = () => {
+        axios.get(`/create`, 
+        { params: {
+            template_id: _api_id,
+            text0: inputs.topText,
+            text1: inputs.bottomText
+            }
+        })
+        .then((res) => 
+            setImgEditable(prevInputs => ({
+                ...prevInputs, 
+                imgSrc: res.data.data ? res.data.data.url : imgEditable.imgSrc,
+            }))
+        )
+        .catch(err => console.log(err))
+    };
 
     // submits the edit
     const handleEdit = (e, id) => {
-        e.preventDefault()
         const createdDate = JSON.stringify(new Date()).slice(1,11)
-        const captionData = new FormData();
-        captionData.append('username', 'vschoolproject')
-        captionData.append('password', 'testing!2021')
-        captionData.append('template_id', _api_id)
-        captionData.append('text0', inputs.topText)
-        captionData.append('text1', inputs.bottomText)
-        fetch(`https://api.imgflip.com/caption_image`, {
-            method: 'POST',
-            body: captionData,
+        e.preventDefault()
+        axios.get(`/create`, 
+        { params: {
+            template_id: _api_id,
+            text0: inputs.topText,
+            text1: inputs.bottomText
+            }
         })
-        .then(res => res.json())
         .then((res) => {
             deleteMeme(id)
             setUserMemes(prevState => ([
                 ...prevState, {
-                    imgSrc: res.data.url,
+                    imgSrc: res.data.data.url,
                     initialUrl: initialUrl,
-                    tempID: res.data.page_url.slice(22),
+                    tempID: res.data.data.page_url.slice(22),
                     _api_id: _api_id,
                     created: createdDate
                 },

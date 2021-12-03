@@ -77,7 +77,8 @@ function submitMeme(source, url, id, alias){
 
 // gather initial data
   useEffect(() => {
-      getCreatedMemes()
+    getMemes()
+    getCreatedMemes()
   },[])
 
   return (

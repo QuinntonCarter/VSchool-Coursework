@@ -34,7 +34,7 @@ app.get('/resources', (req, res, next) => {
         method: 'GET',
         url: GET_URL,
         headers: {
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': 'http://localhost:9000/resources/', 
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         },
     })
@@ -49,14 +49,13 @@ app.get('/create', (req, res, next) => {
         params: {
             username: USERNAME,
             password: PASSWORD,
-            font: 'impact',
+            font: 'arial',
             text0: req.query.text0,
             text1: req.query.text1,
             template_id: req.query.template_id
         },
         headers: {
-            // ** for dev **
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': 'http://localhost:9000/create/',
             'Access-Control-Allow-Headers': 'Origin, X-Request-With, Content-Type, Accept'
         }
     })

@@ -49,9 +49,9 @@ export default function MemeGenerator(props){
             setUserMemes(prevState => ([
                 ...prevState,
                 {
-                    imgSrc: res.data.url,
+                    imgSrc: res.data.data.url,
                     initialUrl: randomMeme.initialUrl,
-                    // tempID: res.data.page_url.slice(22),
+                    tempID: res.data.data.page_url.slice(22),
                     _api_id: randomMeme.id,
                     created: createdDate
                 }
@@ -72,7 +72,7 @@ export default function MemeGenerator(props){
     const getRandom = (e) => {
         e.preventDefault()
         // variable finds random number and finds meme at index of that number
-        const randomMeme = allMemes[Math.floor(Math.random() * (72)+1)]
+        const randomMeme = allMemes[Math.floor(Math.random()*(73-1+1)+1)]
         // sets that meme to randomMeme
         setRandomMeme({
             name: randomMeme.name,
@@ -103,26 +103,20 @@ export default function MemeGenerator(props){
             />
         ).reverse()
 
-
         useEffect(() => {
-            const prevImg = new FormData();
-            prevImg.append('username', 'vschoolproject')
-            prevImg.append('password', 'testing!2021')
-            prevImg.append('template_id', randomMeme.id)
-            prevImg.append('text0', inputs.topText)
-            prevImg.append('text1', inputs.bottomText)
-            // fetches preview image url
-            fetch(`https://api.imgflip.com/caption_image`, {
-                method: 'POST',
-                body: prevImg,
+            axios.get(`/create`, 
+            { params: {
+                template_id: randomMeme.id,
+                text0: inputs.topText,
+                text1: inputs.bottomText
+                }
             })
-            .then(res => res.json())
             .then((res) => 
             // sets preview img url to randomMeme imgSrc
                 setRandomMeme(prevInputs => ({
                     ...prevInputs,
                     name: randomMeme.name,
-                    imgSrc: res.data ? res.data.url : randomMeme.imgSrc,
+                    imgSrc: res.data.data ? res.data.data.url : randomMeme.imgSrc,
                     initialUrl: randomMeme.initialUrl,
                     id: randomMeme.id
                 }))
