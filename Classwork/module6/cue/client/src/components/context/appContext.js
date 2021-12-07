@@ -1,38 +1,57 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { spotifyUser } from '../spotify.js';
+import { accessToken } from '../spotify.js';
 
 // refactor for use with spotify API (not for user information)
 export const AppContext = React.createContext();
 
 export default function AppContextProvider(props){
-    // will be sent to search.js and used in view
-    const [searchQuery, setSearchQuery] = useState([]);
-    const [songDetails, setSongDetails] = useState([]);
+    const spotifyUserAPI = axios.create();
 
+    spotifyUserAPI.interceptors.request.use(config => {
+        config.headers.Authorization = `Bearer ${accessToken}`
+        config.baseURL = 'https://api.spotify.com/v1'
+        return config
+    });
 
-    function searchByArtist(input){
-        var querySplit = input.query.split(' ').join('%20');
-        var artistSplit = input.artist.split(' ').join('%20');
-        spotifyUser.get(`/search?q=artist:${artistSplit}&type=${input.type}&name=${querySplit}`)
-        .then(res => console.log(res.data))
+    const [ monthlyArtists, setWeeklyArtists ] = useState({})
+    const [ monthlyTracks, setWeeklyTracks ] = useState({})
+    // /pull from mongodb, saved lists
+
+    useEffect(() => {
+        function getCurrentUserTop(type, limit, time_range){
+            spotifyUserAPI.get(`/me/top/${type}`,{
+            params: {
+                limit: limit,
+                time_range: time_range
+            }
+        })
+        .then(res => setWeeklyArtists(res.data))
         .catch(err => console.log(err))
-    }
+        }
+        getCurrentUserTop('artists', 5, 'short_term')
+    },[])
 
-    // // could be used to analyse songs
-    // function getDetails(id){
-    //     axios.get(`https://api.spotify.com/v1/`)
-    //     .then(res => setSongDetails(res.data))
-    //     .catch(err => console.log(err))
-    // }
+    useEffect(() => {
+        function getCurrentUserTop(type, limit, time_range){
+            spotifyUserAPI.get(`/me/top/${type}`,{
+            params: {
+                limit: limit,
+                time_range: time_range
+            }
+        })
+        .then(res => setWeeklyTracks(res.data))
+        .catch(err => console.log(err))
+        }
+        getCurrentUserTop('tracks', 5, 'short_term')
+    },[])
+
 
     return(
         <AppContext.Provider
         value={{
-            searchByArtist,
-            searchQuery,
-            setSearchQuery,
-            songDetails
+            monthlyArtists,
+            monthlyTracks
         }}>
             {props.children}
         </AppContext.Provider>

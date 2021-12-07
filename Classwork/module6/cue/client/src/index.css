@@ -1,3 +1,22 @@
+@import '/node_modules/tailwindcss/base.css';
+@import '/node_modules/tailwindcss/components.css';
+@import '/node_modules/tailwindcss/utilities.css';
+
+/* @layer base {
+  input {
+    @apply bg-cyan-400;
+  }
+  h2 {
+    @apply text-white;
+  }
+} */
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,23 +33,11 @@ code {
 
 /* this will be for phone but is also dev view  */
 body {
-  margin: 2vh;
+  /* margin: 2vh; */
   display: grid;
   justify-content: center;
   align-content: center;
   grid-template-columns: auto;
-}
-
-div.bannerWrapper {
-  margin: 0;
-}
-
-div.bannerWrapper > h1 {
-  font-size: 7vh;
-}
-
-div.bannerWrapper > img {
-  height: 40vh;
 }
 
 .navbarContainer > Link > i {

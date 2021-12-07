@@ -7,36 +7,39 @@ const { URLSearchParams } = require("url");
 const expressJwt = require("express-jwt");
 const mongoose = require("mongoose");
 
-const clientID = process.env.client_ID;
-const redirectURI = process.env.redirect_URI;
 const authEndpoint = "https://accounts.spotify.com/authorize";
 
-const port = 8888;
+const {
+  PORT,
+  SECRET,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI
+} = process.env;
 
 app.use(morgan("dev"));
 app.use(express.json()); // To parse JSON bodies
 
 const generateRandomString = (length) => {
-  let text = "";
+  let string = "";
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   for (let i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    string += possible.charAt(Math.floor(Math.random() * possible.length));
   }
-  return text;
+  return string;
 };
 
 const scopes = [
+  "user-read-playback-position",
   "user-read-playback-state",
   "user-read-currently-playing",
+  "user-read-recently-played",
   "user-read-email",
-  "user-read-private",
-  "playlist-read-collaborative",
-  "playlist-read-private",
   "user-library-read",
   "user-top-read",
-  "user-read-playback-position",
-  "user-read-recently-played",
+  "playlist-read-collaborative",
+  "playlist-read-private",
   "user-follow-read",
 ];
 
@@ -56,16 +59,14 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", require("./routes/authRouter.js"));
-app.use(
-  "/app",
-  expressJwt({
-    secret: process.env.SECRET,
+app.use("/app", expressJwt({
+    secret: SECRET,
     algorithms: ["sha1", "RS256", "HS256"],
   })
 );
-app.use("/app/tracks", require("./routes/trackRouter.js"));
-app.use("/app/albums", require("./routes/albumsRouter.js"));
+
 app.use("/app/lists", require("./routes/listsRouter.js"));
+// app.use("/app/users", require("./routes/userRouter.js"));
 
 app.get("/login", (req, res, next) => {
   const state = generateRandomString(16);
@@ -76,7 +77,7 @@ app.get("/login", (req, res, next) => {
     httpOnly: true,
   });
   const queryParams = new URLSearchParams(
-    `client_id=${clientID}&response_type=code&redirect_uri=${redirectURI}&state=${state}&scope=${scopes}`
+    `client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&state=${state}&scope=${scopes}`
   );
 
   res.redirect(`${authEndpoint}?${queryParams}`);
@@ -86,17 +87,18 @@ app.get("/callback", (req, res, next) => {
   const code = req.query.code || null;
   const grant = "authorization_code";
 
-  const queryParams = new URLSearchParams(
-    `grant_type=${grant}&code=${code}&redirect_uri=${redirectURI}`
-  );
     axios({
-    method: "post",
+    method: "POST",
     url: "https://accounts.spotify.com/api/token",
-    data: queryParams,
+    params: {
+      grant_type: grant,
+      code: code,
+      redirect_uri: REDIRECT_URI
+    },
     headers: {
         "content-type": "application/x-www-form-urlencoded",
         Authorization: `Basic ${new Buffer.from(
-        `${clientID}:${process.env.client_SECRET}`
+        `${CLIENT_ID}:${CLIENT_SECRET}`
         ).toString("base64")}`,
     },
     })
@@ -106,7 +108,9 @@ app.get("/callback", (req, res, next) => {
         const tokenParams = new URLSearchParams(
             `access_token=${access_token}&refresh_token=${refresh_token}&expires_in=${expires_in}`
         );
+        // *** change to website url before deploy ***
         res.redirect(`http://localhost:3000/?${tokenParams}`)
+        // res.redirect(`http://localhost:3000/`)
         } else {
         res.redirect(`/?${URLSearchParams({ error: "Invalid token" })}`);
         }
@@ -130,7 +134,7 @@ app.get("/refresh_token", (req, res) => {
     headers: {
       "content-type": "application/x-www-form-urlencoded",
       Authorization: `Basic ${new Buffer.from(
-        `${clientID}:${process.env.client_SECRET}`
+        `${CLIENT_ID}:${CLIENT_SECRET}`
       ).toString("base64")}`,
     },
   })
@@ -143,7 +147,6 @@ app.get("/refresh_token", (req, res) => {
 });
 
 // ** create logout enpoint that removes cookies and sends user back to login page
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Music app listening at ${PORT}`);
 });

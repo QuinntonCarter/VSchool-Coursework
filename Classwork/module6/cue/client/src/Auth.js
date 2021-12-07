@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import AuthForm from './components/forms/authForm.js';
 import { UserContext } from './components/context/userProvider.js';
 import { accessToken, getCurrentUserProfile } from './components/spotify.js';
+import axios from 'axios';
 
 export default function Auth(){
     const initInputs = {
@@ -73,7 +74,7 @@ export default function Auth(){
             }}
             fetchData();
         }if(!accessToken){
-
+            localStorage.clear()
         }
     }, [setSpotifyUserState, token]);
     

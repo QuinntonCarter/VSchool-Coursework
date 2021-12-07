@@ -1,32 +1,47 @@
-import { useContext } from 'react';
-// also doubles as profile view
-// inlcudes list components
+import { useContext, useState, useEffect } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+// also doubles as profile view, inlcudes weekly list component
+import { getCurrentUserTop } from '../components/spotify.js';
 // includes user information from userContext
 import { UserContext } from '../components/context/userProvider.js';
-
+import { AppContext } from '../components/context/appContext.js';
+import { RecentTracks } from '../components/recentTracks.js';
+import { RecentArtists } from '../components/recentArtists.js';
 
 export default function Profile(){
     const {
         user,
         spotifyUser
     } = useContext(UserContext)
-    // /pull from mongodb
-    const mappedLists = 'first option ternary; if lists? first here if not no lists yet'
+
+    const [ view, setView ] = useState('artists')
 
     return(
-        <div className="listprofileview-Container">
-            {console.log(spotifyUser)}
-            <select>
-                {/* const mappedLists here */}
-                <option> - no lists yet - </option>
-            </select>
-            <br/>
-            <i style={{fontSize: '27px'}} className="fab fa-spotify"/> <h3> Spotify: { spotifyUser ? spotifyUser.display_name : 'error'} </h3>
-            <h3> Username: @{user.username} </h3>
-            <img src={spotifyUser.images[0].url} alt='spotify-user-img' />
+        <div className='p-3 pt-4 pr-6 pl-6 pb-10'>
             <div>
-                <h1 style={{color: 'gray'}}> profile/list view placeholder </h1>
-                table will go here and lists
+                <h1 style={{color: 'gray'}}> past week top listens (toggle by artist or track) </h1>
+                click to view recent top
+                <br/>
+                <Link to={`/recent_mood_artists`}> 
+                    <input className='bg-cyan-200 text-cyan-800 rounded p-1 m-2' type='button' name='viewType' value='artists' onClick={e => setView(e.target.value)} />
+                </Link>
+                <Link to={`/recent_mood_tracks`}> 
+                    <input className='bg-cyan-200 text-cyan-800 rounded p-1 m-2' type='button' name='viewType'  value='tracks' onClick={e => setView(e.target.value)} />
+                </Link> 
+                <Switch>
+                    <Route 
+                        path={`/recent_mood_artists`}
+                        render={() => 
+                            <RecentArtists/>
+                    }>
+                    </Route>
+                    <Route
+                        path={`/recent_mood_tracks`}
+                        render={() => 
+                            <RecentTracks/>
+                    }>
+                    </Route>
+                </Switch>
             </div>
         </div>
     )

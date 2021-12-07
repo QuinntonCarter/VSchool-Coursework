@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { spotifyLogout } from '../spotify.js';
 
 // will need to refactor this to work with new cueappDB
 
@@ -64,13 +63,11 @@ export default function UserProvider(props){
     };
 
     function logout(){
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
         setUserState({
             user: {},
             token: '',
-        });   
-        spotifyLogout();     
+        });
+        localStorage.clear()
     };
 
 //err

@@ -7,17 +7,19 @@ import { UserContext } from './components/context/userProvider.js';
 import ProtectedRoute from './components/protectedRoute.js';
 import Banner from './components/banner.js';
 import Auth from './Auth.js';
+import { UserProfile } from './components/userProfile.js';
 import Navbar from './components/navbar.js';
 // views
-import Main from './views/main.js';
+import Lists from './views/lists.js';
 import Profile from './views/profile.js';
+import Search from './views/search.js';
 
 
 function App() {
   const { token } = useContext(UserContext)
 
   return (
-    <div className='mainContainer'>
+    <div className='bg-navy-900 h-screen overflow-scroll text-emerald-50'>
     <Banner/>
       <Switch>
         <Route
@@ -26,26 +28,35 @@ function App() {
         />
 
         <ProtectedRoute
-          path='/main/lists'
+          path='/search/:userID'
           redirectTo='/'
           token={token}
-          spotifyToken={accessToken}
-          component={Profile}
+          component={UserProfile}
           loading={false}
         />
 
         <ProtectedRoute
-          exact path='/main'
+          path='/search'
           redirectTo='/'
           token={token}
-          component={Main}
+          component={Search}
+          loading={false}
+        />
+
+        <ProtectedRoute
+          exact path='/lists'
+          redirectTo='/'
+          token={token}
+          spotifyToken={accessToken}
+          component={Lists}
           loading={false}
         />
 
         <Route
-          exact path='/'
+          path='/'
           render={() => accessToken && token ?
-            <Main/> 
+            <Profile
+              spotifyToken={accessToken}/> 
           :
             <Auth/>
           }

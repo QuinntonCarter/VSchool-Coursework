@@ -21,11 +21,7 @@ export const LOCALSTORAGE_VALUES = {
  * Clear out all localStorage items we've set and reload the page
  */
 export const spotifyLogout = () => {
-    // Clear all localStorage items
-    localStorage.removeItem('spotify_access_token')
-    localStorage.removeItem('spotify_refresh_token')
-    localStorage.removeItem('spotify_token_expire_time')
-    localStorage.removeItem('spotify_token_timestamp')
+  localStorage.clear()
 };
 
 /**
@@ -113,7 +109,8 @@ spotifyUserAPI.interceptors.request.use(config => {
     config.baseURL = 'https://api.spotify.com/v1'
     return config
 });
-export const spotifyUser = spotifyUserAPI
+
+
 export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');
 // // ** either by selection => album/ep etc name or song name
 // export const getSearchBy = (artist, selection) => spotifyUserAPI.get(`/search?q=artist:${artist}&track=${selection}`);
