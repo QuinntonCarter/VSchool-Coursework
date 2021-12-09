@@ -16,7 +16,12 @@ export default function AppContextProvider(props){
 
     const [ monthlyArtists, setWeeklyArtists ] = useState({})
     const [ monthlyTracks, setWeeklyTracks ] = useState({})
-    // /pull from mongodb, saved lists
+
+    function searchUser(inputs){
+        axios.get('/')
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+    }
 
     useEffect(() => {
         function getCurrentUserTop(type, limit, time_range){
@@ -51,7 +56,8 @@ export default function AppContextProvider(props){
         <AppContext.Provider
         value={{
             monthlyArtists,
-            monthlyTracks
+            monthlyTracks,
+            spotifyUserAPI
         }}>
             {props.children}
         </AppContext.Provider>

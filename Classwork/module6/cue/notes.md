@@ -1,14 +1,10 @@
-how:
-  + pull track index and set it to model property? track[i] = listNum
-
 todo next
     functionality:
         - create account needs to save spotify id to user model to block creation of multiple accounts by users
           + also save spotify username to user model
         - results view
-          + before and after searching
-        - DnD for lists
-          + send position information to backend to save oraganization
+        + before and after searching
+        + send position information to backend to save oraganization
         X create consts gets for search in spotify.js
         X implement routing between pages at certain endpoints
         X fix searchbar and import to main view

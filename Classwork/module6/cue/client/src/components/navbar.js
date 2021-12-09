@@ -12,11 +12,11 @@ export default function NavBar(props){
     } = useContext(UserContext)
 
     return(
-        <div className='flex flex-row justify-evenly mx-auto fixed bottom-0 w-screen p-2 bg-cyan-900'>
-            <Link to='/'> profile </Link>
-            <Link to='/search'> search </Link>
-            <Link to='/lists'> friends </Link>
-            <button onClick={logout}> logout </button>
+        <div className='flex flex-row justify-evenly fixed bottom-0 w-screen bg-cyan-700'>
+            <Link className='w-full p-3 pl-5' to='/recent_mood_artists'> <button> profile </button> </Link>
+            <Link className='w-full p-3' to='/lists'> <button> friends </button> </Link>
+            <Link className='w-full p-3' to='/search'> <button> search </button> </Link>
+            <button className='bg-cerise-700 w-full p-1' onClick={logout}> logout </button>
         </div>
     )
 }

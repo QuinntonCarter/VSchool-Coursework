@@ -8,6 +8,7 @@ import ProtectedRoute from './components/protectedRoute.js';
 import Banner from './components/banner.js';
 import Auth from './Auth.js';
 import { UserProfile } from './components/userProfile.js';
+import { CheckMood } from './components/checkMood.js';
 import Navbar from './components/navbar.js';
 // views
 import Lists from './views/lists.js';
@@ -44,6 +45,14 @@ function App() {
         />
 
         <ProtectedRoute
+          path='/check'
+          redirectTo='/'
+          token={token}
+          component={CheckMood}
+          loading={false}
+        />
+
+        <ProtectedRoute
           exact path='/lists'
           redirectTo='/'
           token={token}
@@ -55,8 +64,7 @@ function App() {
         <Route
           path='/'
           render={() => accessToken && token ?
-            <Profile
-              spotifyToken={accessToken}/> 
+            <Profile spotifyToken={accessToken}/> 
           :
             <Auth/>
           }

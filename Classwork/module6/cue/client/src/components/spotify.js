@@ -48,8 +48,8 @@ const refreshToken = async () => {
         LOCALSTORAGE_VALUES.refreshToken === 'undefined' ||
         (Date.now() - Number(LOCALSTORAGE_VALUES.timestamp) / 1000) < 1000
         ) {
-        console.error('No refresh token available');
-        spotifyLogout();
+          console.error('No refresh token available');
+          spotifyLogout();
         }
 
       // Use `/refresh_token` endpoint from our Node app

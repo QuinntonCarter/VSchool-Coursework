@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Route, Switch, Link } from 'react-router-dom'
 import SearchBar from '../components/forms/searchBar.js';
 
 // search view:
@@ -8,8 +9,9 @@ export default function Search(){
 
     return(
         <div className='searchView-Container'>
-            Find a friend and check their mood
+            Find a friend
             <SearchBar/>
+            
         </div>
     )
 }

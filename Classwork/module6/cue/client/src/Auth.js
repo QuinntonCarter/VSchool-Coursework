@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import AuthForm from './components/forms/authForm.js';
 import { UserContext } from './components/context/userProvider.js';
 import { accessToken, getCurrentUserProfile } from './components/spotify.js';
-import axios from 'axios';
 
 export default function Auth(){
     const initInputs = {
@@ -50,7 +49,7 @@ export default function Auth(){
     useEffect(()=> {
         if(accessToken){
         // ** get token from userState
-            localStorage.setItem('spotify_access_token', accessToken)
+            // localStorage.setItem('spotify_access_token', accessToken)
             setSpotifyUserState(prevState => ({
                 ...prevState,
                 spotifyToken: accessToken
