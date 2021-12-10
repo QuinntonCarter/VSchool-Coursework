@@ -13,7 +13,7 @@ import Navbar from './components/navbar.js';
 // views
 import Lists from './views/lists.js';
 import Profile from './views/profile.js';
-import Search from './views/search.js';
+import { Search } from './views/search.js';
 
 
 function App() {

@@ -1,6 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { UserContext } from '../components/context/userProvider.js';
 // import { AppContext } from '../components/context/appContext.js';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
@@ -9,7 +7,7 @@ import { CheckMood } from '../components/checkMood.js'
 export default function Profile(){
     // const {
 
-    // } = useContext(UserContext)
+    // } = useContext()
 
     return(
         <div className='p-3 pt-4 pr-6 pl-6 pb-10'>

@@ -17,7 +17,6 @@ export default function AuthForm(props){
             name='username'
             onChange={handleChange}
             placeholder='username'
-            // pattern='[A-Za-z]'
         />
         <input
             type='password'

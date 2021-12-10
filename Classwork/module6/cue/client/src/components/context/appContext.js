@@ -20,15 +20,18 @@ export default function AppContextProvider(props){
     const [ monthlyTracks, setWeeklyTracks ] = useState({})
     const [ foundUsers, setFoundUsers ] = useState([])
 
-    function searchUser(inputs){
-        const params = new URLSearchParams({ username: [inputs]})
-
-        // ** change form so no spaces are allowed in username **
-        userAxios.get(`/app/users`, params)
+    function search(inputs, type){
+        let parseInputs = inputs.split(' ').join('_')
+        userAxios.get(`/app/users`, {
+            params: {
+                username: parseInputs,
+                type: type
+            }
+        })
         .then(res => console.log(res.data))
         // .then(res => setFoundUsers(res.data))
         .catch(err => console.log(err))
-        .finally(() => console.log(foundUsers))
+        // .finally(() => console.log(foundUsers))
     }
 
     useEffect(() => {
@@ -65,7 +68,7 @@ export default function AppContextProvider(props){
             monthlyArtists,
             monthlyTracks,
             spotifyUserAPI,
-            searchUser,
+            search,
             foundUsers
         }}>
             {props.children}

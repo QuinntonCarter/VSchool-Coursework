@@ -1,28 +1,31 @@
 const express = require('express');
 const userRouter = express.Router();
 const User = require('../models/user.js');
+const List = require('../models/list.js');
 
-// GET all users
+// GET all users via query
 userRouter.get('/', (req, res, next) => {
-    console.log(req.query.username)
-    // User.find((err, users) => {
-    //     if(err){
-    //         res.status(500)
-    //         return next(err)
-    //     }
-    //     return res.status(200).send(users)
-    // })
-})
-
-userRouter.get('/search/:username', (req, res, next) => {
-    User.find({ username: req.params.username },
+if(req.query.type === 'friend'){
+    User.find({ username: req.query.username },
+        { isAdmin: 0, password: 0 },
         (err, users) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(200).send(users)
-        })
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(users)
+    })}
+    else if(req.query.type === 'mood'){
+        List.find({ mood: req.query.mood },
+            (err, lists) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send('lists will return here but how to parse them?')
+                // return res.status(200).send(lists)
+            })
+    }
 })
 
 module.exports = userRouter

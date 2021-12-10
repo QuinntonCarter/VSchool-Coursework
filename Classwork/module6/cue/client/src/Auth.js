@@ -32,12 +32,14 @@ export default function Auth(){
 
     function handleSignup(e){
         e.preventDefault()
-        signup(inputs)
+        const parseInputs = inputs.username.split(' ').join('_')
+        signup(parseInputs)
     };
 
     function handleLogin(e){
         e.preventDefault()
-        login(inputs)
+        const parseInputs = inputs.username.split(' ').join('_')
+        login(parseInputs)
     };
 
     function toggleForm(){

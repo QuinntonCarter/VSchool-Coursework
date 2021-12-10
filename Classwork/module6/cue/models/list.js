@@ -12,6 +12,10 @@ const list = new Schema({
         type: Date,
         default: Date.now
     },
+    mood: {
+        type: String,
+        required: true
+    },
     cueUser: {
         type: Schema.Types.ObjectId,
         ref: "User"
