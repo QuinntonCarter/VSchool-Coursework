@@ -185,6 +185,7 @@ export default function UserProvider(props){
             signup,
             login,
             logout,
+            userAxios,
             // addPost,
             // deletePost,
             // getUserPosts,

@@ -1,23 +1,21 @@
 import React, { useState, useContext } from 'react';
-
 import { AppContext } from '../context/appContext.js';
 
-export default function SearchBar(){
+export const SearchBar = () => {
     const [ inputs, setInputs ] = useState('');
-    const { searchByArtist } = useContext(AppContext);
+    const { searchUser } = useContext(AppContext);
 
     function handleSubmit(e){
         e.preventDefault()
-        searchByArtist(inputs)
-        setInputs('')
+        searchUser(inputs)
+        // setInputs('')
     }
 
     return(
-        <div className='searchBarWrapper'>
-            <form onSubmit={handleSubmit}>
-                <input type='text' name='query' value={inputs} onChange={e => setInputs(e.target.value)} placeholder='Search for user' required/>
-                <button className='searchBtn'> search </button>
-            </form>
-        </div>
+        <form className='grid' onSubmit={handleSubmit}>
+            <span className='text-left'> Find a friend </span>
+            <input className='text-indigo-900 p-1 rounded' type='text' value={inputs} onChange={e => setInputs(e.target.value)} placeholder={`what's their username?`} required/>
+            <button className='bg-cyan-200 text-cyan-800 rounded p-1 m-2'> search </button> 
+        </form>
     )
 }

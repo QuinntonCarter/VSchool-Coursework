@@ -3,21 +3,16 @@ import { Link } from 'react-router-dom';
 import { AppContext } from './context/appContext.js';
 
 export default function ResultComp(props){
-    const { name, songId, albumImg, artist, title, musicKey, bpm, timeSig } = props;
-    const { getDetails } = useContext(AppContext);
-
-    useEffect(() => {
-        getDetails(songId)
-    }, [])
+    // const {  } = props;
+    // const {
+    // } = useContext(AppContext);
+    const {
+        users
+    } = props
 
     return(
-        <div className='result'>
-            <div className='resultsInfo'> 
+        <div className=''>
 
-            </div>
-            <Link to='/resultDetails'>
-
-            </Link>
         </div>
     )
 }

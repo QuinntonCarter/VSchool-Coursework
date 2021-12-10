@@ -1,4 +1,6 @@
 todo next
+    first:
+    -   play with passing query to backend. returns undefined currently: appcontext and userrouter,
     functionality:
         - create account needs to save spotify id to user model to block creation of multiple accounts by users
           + also save spotify username to user model

@@ -17,6 +17,7 @@ export default function AuthForm(props){
             name='username'
             onChange={handleChange}
             placeholder='username'
+            // pattern='[A-Za-z]'
         />
         <input
             type='password'
@@ -25,8 +26,8 @@ export default function AuthForm(props){
             onChange={handleChange}
             placeholder='password'
         />
-        <button onClick={handleSubmit}> {btnText} </button>
-        <p style={{color: 'red'}}> {errMsg} </p>
+        <button className='bg-indigo-400 text-cyan-800 rounded p-1 m-2'> {btnText} </button>
+        <p className='text-cerise-900'> {errMsg} </p>
     </form>
     )
     

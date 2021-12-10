@@ -66,7 +66,7 @@ app.use("/app", expressJwt({
 );
 
 app.use("/app/lists", require("./routes/listsRouter.js"));
-// app.use("/app/users", require("./routes/userRouter.js"));
+app.use("/app/users", require("./routes/userRouter.js"));
 
 app.get("/login", (req, res, next) => {
   const state = generateRandomString(16);
