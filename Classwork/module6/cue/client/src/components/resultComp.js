@@ -1,15 +1,23 @@
-import { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { ResultDetails } from './resultDetails.js';
 import { AppContext } from './context/appContext.js';
 
-export default function ResultComp(props){
+export const ResultComp = () => {
     const {
-        foundUsers
+        found
         } = useContext(AppContext)
 
-    return(
-        <div className=''>
+        const mappedResults = found && found.map(item =>
+            <ResultDetails
+                username={item.username}
+                title={item.title && item.title}
+                mood={item.mood && item.mood}
+            />
+        )
 
-        </div>
+    return(
+        <div className='grid mt-2 bg-cyan-600'>
+            {mappedResults}
+        </div> 
     )
 }

@@ -8,13 +8,18 @@ const list = new Schema({
         type: String,
         required: true
     }],
+    title: {
+        type: String
+    },
     created: {
         type: Date,
         default: Date.now
     },
-    mood: {
-        type: String,
-        required: true
+    userMood: {
+        type: String
+    },
+    analysisMood: {
+        type: String
     },
     cueUser: {
         type: Schema.Types.ObjectId,

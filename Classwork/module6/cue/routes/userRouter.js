@@ -22,7 +22,7 @@ if(req.query.type === 'friend'){
                     res.status(500)
                     return next(err)
                 }
-                return res.status(200).send('lists will return here but how to parse them?')
+                return res.status(200).send('lists will return here but how to sort them?')
                 // return res.status(200).send(lists)
             })
     }

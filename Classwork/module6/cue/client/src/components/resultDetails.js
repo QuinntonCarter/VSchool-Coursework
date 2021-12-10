@@ -1,14 +1,14 @@
-import { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { AppContext } from '../appContext.js';
+import { Link } from 'react-router-dom';
 
-
-export default function ResultDetails(){
-
+export const ResultDetails = props => {
+    const {
+        username,
+        title
+    } = props
 
     return(
         <>
-
+        <Link> {username  || title} </Link>
         </>
     )
 }

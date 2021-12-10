@@ -13,12 +13,18 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios
+        userAxios,
+        spotifyUser : {
+            id
+        }
     } = useContext(UserContext)
 
-    const [ monthlyArtists, setWeeklyArtists ] = useState({})
-    const [ monthlyTracks, setWeeklyTracks ] = useState({})
-    const [ foundUsers, setFoundUsers ] = useState([])
+    const [ monthlyArtists, setWeeklyArtists ] = useState({});
+    const [ monthlyTracks, setWeeklyTracks ] = useState({});
+    const [ found, setFound ] = useState([]);
+    // for analysis of playlist feel **
+    const [ playlists, setPlaylists ] = useState([]);
+    const [ playlistTracks, setPlaylistTracks ] = useState([]);
 
     function search(inputs, type){
         let parseInputs = inputs.split(' ').join('_')
@@ -28,12 +34,28 @@ export default function AppContextProvider(props){
                 type: type
             }
         })
-        .then(res => console.log(res.data))
-        // .then(res => setFoundUsers(res.data))
+        .then(res => setFound(res.data))
         .catch(err => console.log(err))
-        // .finally(() => console.log(foundUsers))
     }
 
+    function getUserPlaylists(){
+        spotifyUserAPI.get(`/users/${id}/playlists`,{
+            params: {
+                limit: 50
+            }
+        })
+        .then(res => setPlaylists(res.data))
+        .catch(err => console.log(err))
+    }
+
+    // for finding overall playlist analysis data **
+    function getPlaylistTracks(id){
+        spotifyUserAPI.get(`/playlists/${id}/tracks`)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+    }
+    console.log(playlists)
+    
     useEffect(() => {
         function getCurrentUserTop(type, limit, time_range){
             spotifyUserAPI.get(`/me/top/${type}`,{
@@ -45,6 +67,9 @@ export default function AppContextProvider(props){
         .then(res => setWeeklyArtists(res.data))
         .catch(err => console.log(err))
         }
+        // * for testing
+        getUserPlaylists()
+        // 
         getCurrentUserTop('artists', 5, 'short_term')
     },[])
 
@@ -69,7 +94,7 @@ export default function AppContextProvider(props){
             monthlyTracks,
             spotifyUserAPI,
             search,
-            foundUsers
+            found
         }}>
             {props.children}
         </AppContext.Provider>

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { SearchBar } from '../components/forms/searchBar.js';
-import ResultComp from '../components/resultComp.js';
+import { ResultComp } from '../components/resultComp.js';
 
 export const Search = () => {
 
