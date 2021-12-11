@@ -25,17 +25,29 @@ export default function AppContextProvider(props){
     // for analysis of playlist feel **
     const [ playlists, setPlaylists ] = useState([]);
     const [ playlistTracks, setPlaylistTracks ] = useState([]);
-    const [ selectedItem, setSelectedItem ] = useState()
+    const [ selectedItem, setSelectedItem ] = useState({})
 
     function search(inputs, type){
+        // broken. fix inputs and routing in backend
         let parseInputs = inputs.split(' ').join('_')
         userAxios.get(`/app/users`, {
             params: {
-                username: parseInputs,
+                inputs: parseInputs,
                 type: type
             }
         })
-        .then(res => setFound(res.data))
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+    }
+
+    function getSelection(id, location){
+        userAxios.get(`/app/users`,{
+            params: {
+                id: id,
+                type: location
+            }
+        })
+        .then(res => console.log(res.data))
         .catch(err => console.log(err))
     }
 
@@ -97,7 +109,8 @@ export default function AppContextProvider(props){
             search,
             found,
             selectedItem,
-            setSelectedItem
+            setSelectedItem,
+            getSelection
         }}>
             {props.children}
         </AppContext.Provider>

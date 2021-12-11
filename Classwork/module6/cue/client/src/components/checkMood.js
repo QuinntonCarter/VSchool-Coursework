@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from './context/appContext';
 import { MoodItem } from './moodItem.js';
 
-export function CheckMood(){
+export function CheckMood(props){
     const {
         spotifyUserAPI
     } = useContext(AppContext)
@@ -27,7 +27,7 @@ export function CheckMood(){
     }, [type, amount, timeframe])
 
     const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item}/>)
-
+    console.log(props.test)
     return(
         <div className='p-3 pt-4 pb-10 bg-indigo-900 text-cyan-800 rounded m-6'>
             <input className='bg-cerise-700 text-sm text-cyan-50 rounded p-1 m-2 font-bold' type='button' value='go back'
