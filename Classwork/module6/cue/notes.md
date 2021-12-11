@@ -1,12 +1,10 @@
 todo next
     first:
-    -   play with passing query to backend. returns undefined currently: appcontext and userrouter,
+        - results view
     everything else:
         - create account needs to save spotify id to user model to block creation of multiple accounts by users
           + also save spotify username to user model
-        - results view
-        + before and after searching
-        + send position information to backend to save oraganization
+        X play with passing query to backend. returns undefined currently: appcontext and userrouter,
         X create consts gets for search in spotify.js
         X implement routing between pages at certain endpoints
         X fix searchbar and import to main view

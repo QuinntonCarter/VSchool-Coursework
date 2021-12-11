@@ -14,8 +14,7 @@ if(req.query.type === 'friend'){
             return next(err)
         }
         return res.status(200).send(users)
-    })}
-    else if(req.query.type === 'mood'){
+    })} else if(req.query.type === 'mood'){
         List.find({ mood: req.query.mood },
             (err, lists) => {
                 if(err){

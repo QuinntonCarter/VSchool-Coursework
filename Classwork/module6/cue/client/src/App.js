@@ -10,6 +10,7 @@ import Auth from './Auth.js';
 import { UserProfile } from './components/userProfile.js';
 import { CheckMood } from './components/checkMood.js';
 import Navbar from './components/navbar.js';
+import { SearchedItem } from './components/searchedItem.js';
 // views
 import Lists from './views/lists.js';
 import Profile from './views/profile.js';
@@ -29,10 +30,18 @@ function App() {
         />
 
         <ProtectedRoute
-          path='/search/:userID'
+          path='/user/:userID'
           redirectTo='/'
           token={token}
           component={UserProfile}
+          loading={false}
+        />
+
+        <ProtectedRoute
+          path='/results/:location'
+          redirectTo='/'
+          token={token}
+          component={SearchedItem}
           loading={false}
         />
 

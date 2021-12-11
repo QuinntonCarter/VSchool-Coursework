@@ -25,6 +25,7 @@ export default function AppContextProvider(props){
     // for analysis of playlist feel **
     const [ playlists, setPlaylists ] = useState([]);
     const [ playlistTracks, setPlaylistTracks ] = useState([]);
+    const [ selectedItem, setSelectedItem ] = useState()
 
     function search(inputs, type){
         let parseInputs = inputs.split(' ').join('_')
@@ -38,24 +39,24 @@ export default function AppContextProvider(props){
         .catch(err => console.log(err))
     }
 
-    function getUserPlaylists(){
+    function getCurrentUserPlaylists(){
         spotifyUserAPI.get(`/users/${id}/playlists`,{
             params: {
                 limit: 50
             }
         })
-        .then(res => setPlaylists(res.data))
+        .then(res => setPlaylists(res.data.items))
         .catch(err => console.log(err))
     }
 
-    // for finding overall playlist analysis data **
+    // for finding overall playlist analysis data; id = playlistId **
     function getPlaylistTracks(id){
         spotifyUserAPI.get(`/playlists/${id}/tracks`)
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
     }
     console.log(playlists)
-    
+
     useEffect(() => {
         function getCurrentUserTop(type, limit, time_range){
             spotifyUserAPI.get(`/me/top/${type}`,{
@@ -68,7 +69,7 @@ export default function AppContextProvider(props){
         .catch(err => console.log(err))
         }
         // * for testing
-        getUserPlaylists()
+        getCurrentUserPlaylists()
         // 
         getCurrentUserTop('artists', 5, 'short_term')
     },[])
@@ -94,7 +95,9 @@ export default function AppContextProvider(props){
             monthlyTracks,
             spotifyUserAPI,
             search,
-            found
+            found,
+            selectedItem,
+            setSelectedItem
         }}>
             {props.children}
         </AppContext.Provider>
