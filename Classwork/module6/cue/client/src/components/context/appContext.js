@@ -13,92 +13,73 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios,
-        spotifyUser : {
-            id
-        }
+        userAxios
     } = useContext(UserContext)
 
-    const [ monthlyArtists, setWeeklyArtists ] = useState({});
-    const [ monthlyTracks, setWeeklyTracks ] = useState({});
+    const [ monthlyArtists, setMonthlyArtists ] = useState({});
+    const [ monthlyTracks, setMonthlyTracks ] = useState({});
     const [ found, setFound ] = useState([]);
     // for analysis of playlist feel **
-    const [ playlists, setPlaylists ] = useState([]);
+    const [ playlists, setPlaylists ] = useState({ items:[], total: 0});
     const [ playlistTracks, setPlaylistTracks ] = useState([]);
     const [ selectedItem, setSelectedItem ] = useState({})
 
-    function search(inputs, type){
-        // broken. fix inputs and routing in backend
-        let parseInputs = inputs.split(' ').join('_')
+    const search = (inputs, type) => {
+        const parseInputs = inputs.split(' ').join('_')
         userAxios.get(`/app/users`, {
             params: {
                 inputs: parseInputs,
                 type: type
             }
         })
-        .then(res => console.log(res.data))
+        .then(res => setFound(res.data))
         .catch(err => console.log(err))
     }
 
-    function getSelection(id, location){
-        userAxios.get(`/app/users`,{
+    const getSelection = (id, location) => {
+        userAxios.get(`/app/users`, {
             params: {
                 id: id,
                 type: location
             }
         })
-        .then(res => console.log(res.data))
+        .then(res => setSelectedItem(res.data))
         .catch(err => console.log(err))
     }
 
-    function getCurrentUserPlaylists(){
-        spotifyUserAPI.get(`/users/${id}/playlists`,{
+    const getCurrentUserTop = async (type, limit, time_range) => {
+            const { data } = await spotifyUserAPI.get(`/me/top/${type}`,{
+            params: {
+                limit: limit,
+                time_range: time_range
+            }
+        })
+        return data
+        }
+
+    const getPlaylists = async (id) => {
+        const { data } = await spotifyUserAPI.get(`/users/${id}/playlists`,{
             params: {
                 limit: 50
             }
         })
-        .then(res => setPlaylists(res.data.items))
-        .catch(err => console.log(err))
+        return data
     }
 
     // for finding overall playlist analysis data; id = playlistId **
-    function getPlaylistTracks(id){
-        spotifyUserAPI.get(`/playlists/${id}/tracks`)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+    const getPlaylistTracks = async (id) => {
+        const { data } = await spotifyUserAPI.get(`/playlists/${id}/tracks`)
+        setPlaylistTracks(data)
     }
-    console.log(playlists)
-
+    
     useEffect(() => {
-        function getCurrentUserTop(type, limit, time_range){
-            spotifyUserAPI.get(`/me/top/${type}`,{
-            params: {
-                limit: limit,
-                time_range: time_range
-            }
-        })
-        .then(res => setWeeklyArtists(res.data))
-        .catch(err => console.log(err))
-        }
-        // * for testing
-        getCurrentUserPlaylists()
-        // 
         getCurrentUserTop('artists', 5, 'short_term')
-    },[])
-
-    useEffect(() => {
-        function getCurrentUserTop(type, limit, time_range){
-            spotifyUserAPI.get(`/me/top/${type}`,{
-            params: {
-                limit: limit,
-                time_range: time_range
-            }
-        })
-        .then(res => setWeeklyTracks(res.data))
+        .then(res => setMonthlyArtists(res))
         .catch(err => console.log(err))
-        }
         getCurrentUserTop('tracks', 5, 'short_term')
-    },[])
+        .then(res => setMonthlyTracks(res))
+        .catch(err => console.log(err))
+    }, [])
 
     return(
         <AppContext.Provider
@@ -108,9 +89,15 @@ export default function AppContextProvider(props){
             spotifyUserAPI,
             search,
             found,
+            setFound,
             selectedItem,
-            setSelectedItem,
-            getSelection
+            getSelection,
+            getPlaylists,
+            playlists,
+            setPlaylists,
+            getPlaylistTracks,
+            playlistTracks,
+            getCurrentUserTop
         }}>
             {props.children}
         </AppContext.Provider>

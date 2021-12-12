@@ -4,11 +4,11 @@ import { AppContext } from './context/appContext.js';
 
 export const ResultDetails = props => {
     const {
-        userId,
+        id,
         username,
-        resultId,
         title,
-        mood
+        mood,
+        item
     } = props
 
     const {
@@ -17,12 +17,11 @@ export const ResultDetails = props => {
 
     // useLocation and or useRef/Routematch? idk
     const location = props.username ? 'user' : 'results'
-    const id = props.username ? userId : resultId
 
     return(
-        <div onClick={() => getSelection(id, location)}>
-            <Link to={`/${location}/${id}`}> 
-                {username || title}
+        <div onClick={() => getSelection(id, location)} className='bg-indigo-500 p-2 rounded'>
+            <Link to={`/${location}/${id}`}>
+                <p> {username || title || item.name} </p>
             </Link>
             { mood }
         </div>

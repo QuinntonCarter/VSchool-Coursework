@@ -1,72 +1,98 @@
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from './context/appContext';
+import { UserContext } from './context/userProvider';
 import { MoodItem } from './moodItem.js';
 
-export function CheckMood(props){
+export const CheckMood = () => {
     const {
-        spotifyUserAPI
-    } = useContext(AppContext)
-
-    const [ type, setType ] = useState('artists')
-    const [ amount, setAmount ] = useState(3)
-    const [ timeframe, setTimeframe ] = useState('short_term')
-    const [ mood, setMood ] = useState([])
-
-    const history = useHistory()
+        getCurrentUserTop,
+        getPlaylists,
+        setPlaylists,
+        playlists
+    } = useContext(AppContext);
+    const {
+        spotifyUser : {
+            id
+        }
+    } = useContext(UserContext);
     
-    useEffect(() => {
-        spotifyUserAPI.get(`/me/top/${type}`,{
-            params: {
-                limit: amount,
-                time_range: timeframe
-            }
-        })
-        .then(res => setMood(res.data.items))
-        .catch(err => console.log(err))
-    }, [type, amount, timeframe])
+    const history = useHistory()
 
-    const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item}/>)
-    console.log(props.test)
+    const [ view, setView] = useState(false);
+    const [ type, setType ] = useState('artists');
+    const [ amount, setAmount ] = useState(3);
+    const [ timeframe, setTimeframe ] = useState('short_term');
+    const [ mood, setMood ] = useState([]);
+
+    useEffect(() => {
+        getCurrentUserTop(type, amount, timeframe)
+        .then(res => {
+            const { items } = res
+            setMood(items)})
+        .catch(err => console.log(err))
+
+        getPlaylists(id)
+        .then(res => {
+            const { items, total } = res
+            setPlaylists({
+                items: items,
+                total: total
+            })
+        })
+        .catch(err => console.log(err))
+    }, [type, amount, timeframe]);
+
+    const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item}/>);
+    const mappedPlaylists = playlists.items && playlists.items.map(item => <MoodItem color={'indigo'} item={item} />);
+
     return(
-        <div className='p-3 pt-4 pb-10 bg-indigo-900 text-cyan-800 rounded m-6'>
-            <input className='bg-cerise-700 text-sm text-cyan-50 rounded p-1 m-2 font-bold' type='button' value='go back'
-                onClick={() => history.goBack()}/>
-            <form className='p-3 text-md text-cocoa-900 grid grid-cols-1 gap-3 pr-6 pl-6'>
-                <select className='bg-indigo-200 text-center' onChange={e => setTimeframe(e.target.value)}>
-                    <option> - timeframe - </option>
-                    <option value='short_term' > monthly </option>
-                    <option value='medium_term' > biannual </option>
-                    <option value='long_term'> annual </option>
-                </select>
-                <select className='bg-indigo-200 text-center' onChange={e => setType(e.target.value)}>
-                    <option> - type - </option>
-                    <option value='artists' > artists </option>
-                    <option value='tracks'> tracks </option>
-                </select>
-                <select className='bg-indigo-200 text-center' onChange={e => setAmount(e.target.value)}>
-                    <option> - amount - </option>
-                    <option value='3' > top 3 </option>
-                    <option value='5'> top 5 </option>
-                    <option value='7'> top 7 </option>
-                    <option value='10'> top 10 </option>
-                    <option value='15'> top 15 </option>
-                    <option value='20'> top 20 </option>
-                    <option value='25'> top 25 </option>
-                    <option value='30'> top 30 </option>
-                    <option value='40'> top 40 </option>
-                    <option value='50'> top 50 </option>
-                </select>
-                <input className='bg-cyan-600 text-indigo-50 font-medium text-md rounded p-1 m-2' type='button' value='set mood.'/>
-            </form>
-            <p className='text-sm text-cerise-700'> top {amount} {type} 
-                {timeframe === 'short_term' && ' these past 30 days'} 
-                {timeframe === 'medium_term' && ' these past 6 months'}
-                {timeframe === 'long_term' && ' the past year'} 
-            </p>
-            <div className=' p-3 rounded'>
-            {mappedMood || 'the vibe is off. refresh the page.'}
+        <div className='grid container-main'>
+        <div className='p-3 pt-4 bg-indigo-800 text-cyan-800 rounded'>
+            <input onClick={() => history.goBack()} className='bg-cerise-700 text-xs text-cyan-50 font-bold btnbold-small' type='button' value='to profile'/>
+            <input onClick={() => setView(prevState => !prevState)} value={`view ${view ? `recent` : `playlists`}`} title='click to check moods of spotify playlists' className='btn text-sm' type='button'/>
+            { !view ?
+            <>
+                <form className='p-3 text-md text-cocoa-900 grid grid-cols-1 gap-3 pr-6 pl-6'>
+                    <select className='bg-indigo-200 text-center text-indigo-800 text-sm rounded-full' onChange={e => setAmount(e.target.value)}>
+                        <option value='3' > top 3 </option>
+                        <option value='5'> top 5 </option>
+                        <option value='8'> top 8 </option>
+                        <option value='10'> top 10 </option>
+                        <option value='15'> top 15 </option>
+                        <option value='20'> top 20 </option>
+                        <option value='25'> top 25 </option>
+                        <option value='30'> top 30 </option>
+                        <option value='40'> top 40 </option>
+                        <option value='50'> top 50 </option>
+                    </select>
+                    <select className='bg-indigo-200 text-center text-sm text-indigo-800 rounded-full' onChange={e => setTimeframe(e.target.value)}>
+                        <option value='short_term' > monthly </option>
+                        <option value='medium_term' > biannual </option>
+                        <option value='long_term'> annual </option>
+                    </select>
+                    <select className='bg-indigo-200 text-center text-indigo-800 text-sm rounded-full' onChange={e => setType(e.target.value)}>
+                        <option value='artists' > artists </option>
+                        <option value='tracks'> tracks </option>
+                    </select>
+                    <input className='bg-indigo-600 text-indigo-50 font-medium text-md btn' type='button' title='post as your mood' value='mood.'/>
+                </form>
+                <p className='text-sm text-cerise-50'> top <span className='text-xl'>{amount}</span> <span className='text-xl'> {type} </span> 
+                    {timeframe === 'short_term' && ` these past 30 days`} 
+                    {timeframe === 'medium_term' && ' these past 6 months'}
+                    {timeframe === 'long_term' && ' the past year'} 
+                </p>
+                <div className=' p-3 rounded'>
+                    {mappedMood || 'the vibe is off. refresh the page.'}
+                </div>
+            </>
+            :
+            <div className='p-3 text-md text-cocoa-50 grid grid-cols-1 gap-3 pr-6 pl-6'>
+                <p className='text-sm'> viewing <span className='text-xl'> {playlists.total} </span> playlists </p>
+                {mappedPlaylists}
             </div>
+            }
+        </div>
         </div>
     )
-}
+};

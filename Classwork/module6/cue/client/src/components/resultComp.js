@@ -12,7 +12,7 @@ export const ResultComp = () => {
                 username={item.username}
                 title={item.title && item.title}
                 mood={item.mood && item.mood}
-                userId={item._id}
+                id={item._id || item.id}
             />
         )
 

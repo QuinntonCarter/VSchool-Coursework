@@ -17,6 +17,9 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    friends: [{
+        type: String
+    }],
     isAdmin: {
         type: Boolean,
         default: false

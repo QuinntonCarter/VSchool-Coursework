@@ -12,7 +12,7 @@ export default function NavBar(props){
     } = useContext(UserContext)
 
     return(
-        <div className='flex flex-row justify-evenly fixed bottom-0 w-screen bg-cyan-700'>
+        <div className='flex flex-row justify-evenly fixed bottom-0 w-screen bg-navy-800'>
             <Link className='w-full p-3 pl-5' to='/recent_mood_artists'> <button> profile </button> </Link>
             <Link className='w-full p-3' to='/lists'> <button> friends </button> </Link>
             <Link className='w-full p-3' to='/search'> <button> search </button> </Link>

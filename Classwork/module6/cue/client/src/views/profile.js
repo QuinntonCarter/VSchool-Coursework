@@ -10,18 +10,20 @@ export default function Profile(){
     // } = useContext()
 
     return(
-        <div className='p-3 pt-4 pr-6 pl-6 pb-10'>
-                <Link to={'/check/moods'}>
-                    <input className='bg-cyan-200 text-cyan-800 rounded p-1 m-2' type='button' value='check longer'/>
-                </Link>
-                <h1 style={{color: 'gray'}}> past month top listens </h1>
-                click to view by
+        <div className='container-main'>
+                <span className='text-sm' > set <span className='text-indigo-300'> mood </span> or view more detailed stats  </span>
                 <br/>
+                <Link to={'/check/moods'}>
+                    <input className='bg-indigo-300 text-cyan-800 btn' type='button' value='mood view'/>
+                </Link>
+                <h1 className='text-sm' style={{color: 'gray'}}> past month top listens </h1>
+                {/* <span className='text-sm'> click to view </span> */}
+                {/* <br/> */}
                 <Link to={`/recent_mood_artists`}> 
-                    <input className='bg-cyan-200 text-cyan-800 rounded p-1 m-2' type='button' value='artists'/>
+                    <input className='bg-cyan-200 text-cyan-800 btn' type='button' value='artists'/>
                 </Link>
                 <Link to={`/recent_mood_tracks`}> 
-                    <input className='bg-cyan-200 text-cyan-800 rounded p-1 m-2' type='button' value='tracks'/>
+                    <input className='bg-cyan-200 text-cyan-800 btn' type='button' value='tracks'/>
                 </Link>
                 <Switch>
                     <Route

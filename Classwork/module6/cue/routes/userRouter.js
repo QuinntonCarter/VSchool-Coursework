@@ -21,11 +21,28 @@ if(req.query.type === 'friend'){
                     res.status(500)
                     return next(err)
                 }
-                return res.status(200).send('lists will return here but how to sort them?')
-                // return res.status(200).send(lists)
+                // return res.status(200).send('lists will return here but how to sort them?')
+                return res.status(200).send(lists)
             })
-    } else if (req.query.id){
-
+    } else if (req.query.type === 'results'){
+        List.findOne({ _id: req.query.id }, 
+            (err, results) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(results)
+            })
+    } else if(req.query.type === 'user'){
+        User.findOne({ _id: req.query.id },
+            { isAdmin: 0, password: 0 },
+            (err, users) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(users)
+            })
     }
 })
 

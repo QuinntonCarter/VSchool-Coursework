@@ -10,7 +10,7 @@ import Auth from './Auth.js';
 import { UserProfile } from './components/userProfile.js';
 import { CheckMood } from './components/checkMood.js';
 import Navbar from './components/navbar.js';
-import { SearchedItem } from './components/searchedItem.js';
+import { ResultsProfile } from './components/resultsProfile.js';
 // views
 import Lists from './views/lists.js';
 import Profile from './views/profile.js';
@@ -21,7 +21,7 @@ function App() {
   const { token } = useContext(UserContext)
 
   return (
-    <div className='bg-navy-900 h-screen overflow-scroll text-emerald-50'>
+    <div className='h-screen overflow-scroll text-emerald-50' style={{backgroundColor: 'black'}}>
     <Banner/>
       <Switch>
         <Route
@@ -41,7 +41,7 @@ function App() {
           path='/results/:location'
           redirectTo='/'
           token={token}
-          component={SearchedItem}
+          component={ResultsProfile}
           loading={false}
         />
 
