@@ -43,8 +43,8 @@ export const CheckMood = () => {
         .catch(err => console.log(err))
     }, [type, amount, timeframe]);
 
-    const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item}/>);
-    const mappedPlaylists = playlists.items && playlists.items.map(item => <MoodItem color={'indigo'} item={item} />);
+    const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
+    const mappedPlaylists = playlists.items && playlists.items.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
 
     return(
         <div className='grid container-main'>

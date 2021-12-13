@@ -3,11 +3,13 @@ TOS: can't store personal data or spotify user ids,
         - If the Spotify app is not installed then the link should say, GET SPOTIFY FREE
         - If the Spotify app is installed then use any of the following text strings: OPEN SPOTIFY, PLAY ON SPOTIFY or LISTEN ON SPOTIFY so probably on playlist pages
     + need to implement notice of accessing playlist metadata, notice of accessing account information only up to listening stats, created playlists and associated info/descriptions, linked email, and profile image but not account information for login or any payment info. notify they can delete their mood. accounts at any time.
+    + must have links to playlists via spotify
+
 todo next
     first:
-    - build GETS to parse playlists and return data as viewable
+        +   
     everything else:
-        + also save spotify username to user model
+
         X play with passing query to backend. returns undefined currently: appcontext and userrouter,
         X create consts gets for search in spotify.js
         X implement routing between pages at certain endpoints

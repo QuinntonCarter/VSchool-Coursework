@@ -73,7 +73,7 @@ function App() {
         <Route
           path='/'
           render={() => accessToken && token ?
-            <Profile spotifyToken={accessToken}/> 
+            <Profile/>
           :
             <Auth/>
           }

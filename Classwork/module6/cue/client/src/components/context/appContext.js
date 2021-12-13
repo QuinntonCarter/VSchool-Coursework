@@ -71,6 +71,21 @@ export default function AppContextProvider(props){
         const { data } = await spotifyUserAPI.get(`/playlists/${id}/tracks`)
         setPlaylistTracks(data)
     }
+
+    //*** */ make this into full out analysis; gets features and track analysis ***
+    //*** */ will need one more get and to probably map the ids through to the get/function ***
+    const getTracksFeatures = () => {
+        const test = playlistTracks.items.map((item) => {
+            return item.track.id
+        }).toString()
+        spotifyUserAPI.get(`/audio-features`, {
+            params: {
+                ids: test
+            }
+        })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+    }
     
     useEffect(() => {
         getCurrentUserTop('artists', 5, 'short_term')
@@ -80,6 +95,10 @@ export default function AppContextProvider(props){
         .then(res => setMonthlyTracks(res))
         .catch(err => console.log(err))
     }, [])
+
+    useEffect(() => {
+
+    },[])
 
     return(
         <AppContext.Provider
@@ -97,7 +116,8 @@ export default function AppContextProvider(props){
             setPlaylists,
             getPlaylistTracks,
             playlistTracks,
-            getCurrentUserTop
+            getCurrentUserTop,
+            getTracksFeatures
         }}>
             {props.children}
         </AppContext.Provider>

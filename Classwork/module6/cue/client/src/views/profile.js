@@ -1,13 +1,9 @@
 import { Switch, Route, Link } from 'react-router-dom';
-// import { AppContext } from '../components/context/appContext.js';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
 import { CheckMood } from '../components/checkMood.js'
 
 export default function Profile(){
-    // const {
-
-    // } = useContext()
 
     return(
         <div className='container-main'>
