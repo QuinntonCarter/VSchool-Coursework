@@ -9,7 +9,7 @@ import Banner from './components/banner.js';
 import Auth from './Auth.js';
 import { UserProfile } from './components/userProfile.js';
 import { CheckMood } from './components/checkMood.js';
-import Navbar from './components/navbar.js';
+import { Navbar } from './components/navbar.js';
 import { ResultsProfile } from './components/resultsProfile.js';
 // views
 import Lists from './views/lists.js';

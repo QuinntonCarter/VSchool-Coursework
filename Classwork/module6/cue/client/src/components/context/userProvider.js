@@ -47,7 +47,11 @@ export default function UserProvider(props){
     };
 
     function login(credentials){
-        axios.post('/auth/login', credentials)
+        const parsedInputs = {
+            username: credentials.username.split(' ').join('_'),
+            password: credentials.password
+        }
+        axios.post('/auth/login', parsedInputs)
         .then(res => {
             const { user, token } = res.data
             localStorage.setItem('token', token)

@@ -9,15 +9,38 @@ export const MoodItem = props => {
     } = props
 
     const {
-        getPlaylistTracks
+        getPlaylistTracks,
+        setFound
     } = useContext(AppContext)
 
     return item.owner ?
-        <div className={`rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
+        <div onClick={() => setFound(item)} className={`rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
             <Link to={`/results/${item.id}`}>
-                <p onClick={() => getPlaylistTracks(item.id)} className={`rounded p-1 bg-${color}-700 text-cyan-50 text-lg`}> {item.name}</p>
-                { item.owner && <p className='text-xs'> curated by {item.owner.display_name}</p> }
+                <p onClick={() => getPlaylistTracks(item.id)} className={`text-cyan-50 text-lg bg-${color}-700 p-1 rounded`}> {item.name} </p>
             </Link>
+                { item.owner && 
+                        item.owner.display_name === 'Spotify' ? 
+                        <div className='p-3' style={{backgroundColor: 'black'}}> 
+                            <p className='text-xs'> curated by <span className='font-medium text-md'> Spotify </span> </p>
+                            <a href={`https://open.spotify.com/playlist/${item.id}`}> 
+                                <span className='font-sans font-medium text-md pr-1'> Listen in Spotify </span>
+                                <i className='fab fa-spotify pt-4' style={{color: '#1DB954', fontSize: '34px'}}/>
+                            </a>
+                        </div> 
+                        :
+                        <div className='p-3' style={{backgroundColor: 'black'}}> 
+                            <p className='text-xs'> curated by </p>
+                            {` ${item.owner.display_name}`}
+                            <br/>
+                            <a href={`https://open.spotify.com/playlist/${item.id}`}> 
+                                <span className='p-3' style={{backgroundColor: 'black'}}>
+                                    <span className='font-sans font-medium text-md pr-1'> Listen in Spotify </span>
+                                    <i className='fab fa-spotify pt-4' style={{color: '#1DB954', fontSize: '34px'}}/>
+                                </span>
+                            </a>
+                        </div>
+                        
+                } 
         </div>
     :
         <div className={`list-item list-decimal list-inside rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>

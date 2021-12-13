@@ -29,8 +29,8 @@ export default function Banner() {
             :
         <div className='grid grid-cols-4'>
             <span className='col-span-3 text-xs'>
-                <i className='float-right col-span-1 fab fa-spotify' style={{fontSize: '210px', color: '#1DB954'}}/>
-                <h3 className='float-right pr-3'> { spotifyUser ? spotifyUser.display_name : 'error: cannot view username'} </h3>
+                <i className='float-right col-span-1 fab fa-spotify text-4xl' style={{color: '#1DB954'}}/>
+                <h3 className='float-right pr-5'> { spotifyUser ? spotifyUser.display_name : 'error: cannot view username'} </h3>
                 <img className='float-right h-20 p-4 rounded-full ' src={spotifyUser.images[0].url} alt='spotify-user-img' />
             </span>
         </div>
