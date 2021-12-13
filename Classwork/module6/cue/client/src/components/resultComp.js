@@ -5,7 +5,7 @@ import { AppContext } from './context/appContext.js';
 export const ResultComp = () => {
     const {
         found
-        } = useContext(AppContext)
+        } = useContext(AppContext);
 
         const mappedResults = found && found.map(item =>
             <ResultDetails
@@ -14,11 +14,11 @@ export const ResultComp = () => {
                 mood={item.mood && item.mood}
                 id={item._id || item.id}
             />
-        )
+        );
 
     return(
         <div className='grid mt-2 bg-cyan-600'>
             {mappedResults}
         </div> 
     )
-}
+};

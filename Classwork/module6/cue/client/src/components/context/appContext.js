@@ -14,7 +14,7 @@ export default function AppContextProvider(props){
     });
     const {
         userAxios
-    } = useContext(UserContext)
+    } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
     const [ monthlyTracks, setMonthlyTracks ] = useState({});
@@ -34,7 +34,7 @@ export default function AppContextProvider(props){
         })
         .then(res => setFound(res.data))
         .catch(err => console.log(err))
-    }
+    };
 
     const getSelection = (id, location) => {
         userAxios.get(`/app/users`, {
@@ -45,7 +45,7 @@ export default function AppContextProvider(props){
         })
         .then(res => setSelectedItem(res.data))
         .catch(err => console.log(err))
-    }
+    };
 
     const getCurrentUserTop = async (type, limit, time_range) => {
             const { data } = await spotifyUserAPI.get(`/me/top/${type}`,{
@@ -55,7 +55,7 @@ export default function AppContextProvider(props){
             }
         })
         return data
-        }
+        };
 
     const getPlaylists = async (id) => {
         const { data } = await spotifyUserAPI.get(`/users/${id}/playlists`,{
@@ -64,16 +64,16 @@ export default function AppContextProvider(props){
             }
         })
         return data
-    }
+    };
 
     // for finding overall playlist analysis data; id = playlistId **
     const getPlaylistTracks = async (id) => {
         const { data } = await spotifyUserAPI.get(`/playlists/${id}/tracks`)
         setPlaylistTracks(data)
-    }
+    };
 
-    //*** */ make this into full out analysis; gets features and track analysis ***
-    //*** */ will need one more get and to probably map the ids through to the get/function ***
+//*** */ make this into full out analysis; gets features and track analysis ***
+//*** */ will need one more get and to probably map the ids through to the get/function ***
     const getTracksFeatures = () => {
         const test = playlistTracks.items.map((item) => {
             return item.track.id
@@ -85,7 +85,7 @@ export default function AppContextProvider(props){
         })
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
-    }
+    };
     
     useEffect(() => {
         getCurrentUserTop('artists', 5, 'short_term')
@@ -94,11 +94,11 @@ export default function AppContextProvider(props){
         getCurrentUserTop('tracks', 5, 'short_term')
         .then(res => setMonthlyTracks(res))
         .catch(err => console.log(err))
-    }, [])
+    }, []);
 
     useEffect(() => {
 
-    },[])
+    },[]);
 
     return(
         <AppContext.Provider
@@ -122,4 +122,4 @@ export default function AppContextProvider(props){
             {props.children}
         </AppContext.Provider>
     )
-}
+};

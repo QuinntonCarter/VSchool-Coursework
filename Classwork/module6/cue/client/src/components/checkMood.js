@@ -87,6 +87,7 @@ export const CheckMood = () => {
                 </div>
             </>
             :
+            // playlist view
             <div className='p-3 text-md text-cocoa-50 grid grid-cols-1 gap-3 pr-6 pl-6'>
                 <p className='text-sm'> viewing <span className='text-xl'> {playlists.total} </span> playlists </p>
                 {mappedPlaylists}
