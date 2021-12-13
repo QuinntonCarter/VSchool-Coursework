@@ -19,10 +19,15 @@ export default function AppContextProvider(props){
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
     const [ monthlyTracks, setMonthlyTracks ] = useState({});
     const [ found, setFound ] = useState([]);
-    // for analysis of playlist feel **
+
     const [ playlists, setPlaylists ] = useState({ items:[], total: 0});
     const [ playlistTracks, setPlaylistTracks ] = useState([]);
-    const [ selectedItem, setSelectedItem ] = useState({})
+    const [ selectedItem, setSelectedItem ] = useState({});
+    const [ trackFeatures, setTrackFeatures ] = ([{
+        danceability: '',
+        energy: '',
+        tempo: ''
+    }])
 
     const search = (inputs, type) => {
         const parseInputs = inputs.split(' ').join('_')
@@ -46,6 +51,13 @@ export default function AppContextProvider(props){
         .then(res => setSelectedItem(res.data))
         .catch(err => console.log(err))
     };
+
+    // useCallback(
+    //     () => {
+    //         callback
+    //     },
+    //     [input],
+    // )
 
     const getCurrentUserTop = async (type, limit, time_range) => {
             const { data } = await spotifyUserAPI.get(`/me/top/${type}`,{
@@ -72,20 +84,28 @@ export default function AppContextProvider(props){
         setPlaylistTracks(data)
     };
 
-//*** */ make this into full out analysis; gets features and track analysis ***
-//*** */ will need one more get and to probably map the ids through to the get/function ***
     const getTracksFeatures = () => {
-        const test = playlistTracks.items.map((item) => {
+        const trackIdsString = playlistTracks.items.map(item => {
             return item.track.id
         }).toString()
         spotifyUserAPI.get(`/audio-features`, {
             params: {
-                ids: test
+                ids: trackIdsString
             }
         })
-        .then(res => console.log(res.data))
+        // map through to function 
+        .then(res => 
+            res.data.audio_features.map(item => test(item))
+        )
         .catch(err => console.log(err))
     };
+    
+//*** */ make this into full out analysis; gets features and track analysis ***
+// median tempo, key, loudness.
+    const test = (items) => {
+
+    }
+
     
     useEffect(() => {
         getCurrentUserTop('artists', 5, 'short_term')
@@ -96,9 +116,11 @@ export default function AppContextProvider(props){
         .catch(err => console.log(err))
     }, []);
 
+    // *** for testing
     useEffect(() => {
-
-    },[]);
+        console.log(trackFeatures)
+    },[trackFeatures]);
+    // ***
 
     return(
         <AppContext.Provider

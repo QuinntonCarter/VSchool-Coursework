@@ -18,7 +18,7 @@ export default function Banner() {
         <div className='grid grid-cols-4 grid-rows-1'>
             <span className='col-span-2 text-sm grid-cols-2 '>
                 <h1 className='font-sans text-2xl'> mood. </h1>
-                <h3> @{user.username} </h3>
+                <h3> @{user.username || 'Login'} </h3>
             </span> 
             <span className='col-span-2 text-xs grid-cols-2'>
                 <i className='float-right col-span-1 fab fa-spotify text-4xl'  style={{color: '#1DB954'}}/>

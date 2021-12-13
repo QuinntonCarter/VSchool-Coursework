@@ -9,9 +9,9 @@ TOS: can't store personal data or spotify user ids,
 todo next
     first:
         +   finish analysis of songs function
-        +   how to analyze songs?
+        +   add friends db ids to array in model
+        +   get friends posts
     everything else:
-
         X play with passing query to backend. returns undefined currently: appcontext and userrouter,
         X create consts gets for search in spotify.js
         X implement routing between pages at certain endpoints

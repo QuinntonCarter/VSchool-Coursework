@@ -1,9 +1,15 @@
-import { Switch, Route, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
-import { CheckMood } from '../components/checkMood.js'
+import { CheckMood } from '../components/checkMood.js';
 
 export default function Profile(){
+    const history = useHistory();
+
+    useEffect(() => {
+        history.push('/recent_mood_artists')
+    },[]);
 
     return(
         <div className='container-main'>
@@ -43,4 +49,4 @@ export default function Profile(){
                 </Switch>
         </div>
     )
-}
+};
