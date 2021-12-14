@@ -34,17 +34,16 @@ export const CheckMood = () => {
 
         getPlaylists(id)
         .then(res => {
-            const { items, total } = res
             setPlaylists({
-                items: items,
-                total: total
+                items: res,
+                total: res.length
             })
         })
         .catch(err => console.log(err))
     }, [type, amount, timeframe]);
 
     const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
-    const mappedPlaylists = playlists.items && playlists.items.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
+    const mappedPlaylists = playlists && playlists.items.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
 
     return(
         <div className='grid container-main'>

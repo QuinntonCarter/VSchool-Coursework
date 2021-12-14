@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 // from components
 import { accessToken } from './components/spotify.js';
 import { UserContext } from './components/context/userProvider.js';
@@ -15,10 +15,13 @@ import { ResultsProfile } from './components/resultsProfile.js';
 import Lists from './views/lists.js';
 import Profile from './views/profile.js';
 import { Search } from './views/search.js';
+import { AppContext } from './components/context/appContext.js';
 
 
 function App() {
   const { token } = useContext(UserContext)
+  const { found } = useContext(AppContext)
+
 
   return (
     <div className='h-screen overflow-scroll text-emerald-50' style={{backgroundColor: 'black'}}>
@@ -41,7 +44,7 @@ function App() {
           path='/results/:location'
           redirectTo='/'
           token={token}
-          component={ResultsProfile}
+          component={() => found.images ? <ResultsProfile/> : <Redirect to='/check/moods'/> }
           loading={false}
         />
 

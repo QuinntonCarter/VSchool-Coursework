@@ -13,7 +13,10 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios
+        userAxios,
+        spotifyUser: {
+            display_name
+        }
     } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
@@ -52,13 +55,6 @@ export default function AppContextProvider(props){
         .catch(err => console.log(err))
     };
 
-    // useCallback(
-    //     () => {
-    //         callback
-    //     },
-    //     [input],
-    // )
-
     const getCurrentUserTop = async (type, limit, time_range) => {
             const { data } = await spotifyUserAPI.get(`/me/top/${type}`,{
             params: {
@@ -66,7 +62,7 @@ export default function AppContextProvider(props){
                 time_range: time_range
             }
         })
-        return data
+            return data
         };
 
     const getPlaylists = async (id) => {
@@ -75,7 +71,11 @@ export default function AppContextProvider(props){
                 limit: 50
             }
         })
-        return data
+        // not spotif owned
+        const collected = data.items.filter(item => item.owner.display_name !== 'Spotify');
+        // less than or equal to 100 tracks
+        const fit = collected.filter(item => item.tracks.total <= 100)
+        return fit
     };
 
     // for finding overall playlist analysis data; id = playlistId **
@@ -84,28 +84,40 @@ export default function AppContextProvider(props){
         setPlaylistTracks(data)
     };
 
-    const getTracksFeatures = () => {
-        const trackIdsString = playlistTracks.items.map(item => {
-            return item.track.id
-        }).toString()
-        spotifyUserAPI.get(`/audio-features`, {
-            params: {
-                ids: trackIdsString
-            }
-        })
-        // map through to function 
-        .then(res => 
-            res.data.audio_features.map(item => test(item))
-        )
-        .catch(err => console.log(err))
-    };
+
+    // ** for later **
+    // const getTracksFeatures = async () => {
+    //     const trackIdsString = playlistTracks.items.map(item => {
+    //         return item.track.id
+    //     }).toString()
+    //     const { data } = await spotifyUserAPI.get(`/audio-features`, {
+    //         params: {
+    //             ids: trackIdsString
+    //         }
+    //     })
+    //     return data
+    //     // const parseNA = data.audio_features.filter(item => item !== null)
+    //     // test(parseNA)
+    // };
     
-//*** */ make this into full out analysis; gets features and track analysis ***
-// median tempo, key, loudness.
-    const test = (items) => {
+    //*** later  */ make this into full out analysis; gets features and track analysis ***
+    // median tempo, key, loudness.
+    // const test = (items) => {
+    //     let danceAbility = []
+    //     // valence, loudness, tempo, energy, danceability
+    //     const verHighDance = items.filter(item => item.danceability >= .75).map(item => item.danceability)
+    //     const highDance = items.filter(item => item.danceability >= .65 && item.danceability <= .75).map(item => item.danceability)
+    //     const mediumDance = items.filter(item => item.danceability <= .6 && item.danceability >= .4).map(item => item.danceability)
+    //     const lowDance = items.filter(item => item.danceability <= .4 && item.danceability >= .2).map(item => item.danceability)
+    //     const verLowDance = items.filter(item => item.danceability <= .2).map(item => item.danceability)
+    //     danceAbility.push({'extreme': verHighDance.length, 'veryhigh': highDance.length, 'medium':mediumDance.length, 'low':lowDance.length, 'extremelow': verLowDance.length})
+    //     Object.values(danceAbility).forEach(val => console.log(val))
+    //     // const len = arrSort.length
+    //     // const mid = (len / 2)
+    //     // const median = len % 2 === 0 ? (arrSort[mid] + arrSort[mid - 1]) / 2 : arrSort[mid - 1];
+    //     // console.log(mid)
 
-    }
-
+    // }
     
     useEffect(() => {
         getCurrentUserTop('artists', 5, 'short_term')
@@ -117,9 +129,9 @@ export default function AppContextProvider(props){
     }, []);
 
     // *** for testing
-    useEffect(() => {
-        console.log(trackFeatures)
-    },[trackFeatures]);
+    // useEffect(() => {
+    //     console.log(trackFeatures)
+    // },[trackFeatures]);
     // ***
 
     return(
@@ -139,7 +151,7 @@ export default function AppContextProvider(props){
             getPlaylistTracks,
             playlistTracks,
             getCurrentUserTop,
-            getTracksFeatures
+            // setMood
         }}>
             {props.children}
         </AppContext.Provider>

@@ -12,7 +12,7 @@ export const Navbar = () => {
         setFound
     } = useContext(AppContext);
     // resets found to nothing to prevent rendering issues between search results
-    const conditionalReset = (found) => found && setFound('')
+    const conditionalReset = (found) => found && setFound('');
     
     return(
         <div className='flex flex-row justify-evenly fixed bottom-0 w-screen bg-navy-800'>
@@ -22,4 +22,4 @@ export const Navbar = () => {
             <button className='bg-cerise-700 w-full p-1' onClick={logout}> logout </button>
         </div>
     )
-}
+};
