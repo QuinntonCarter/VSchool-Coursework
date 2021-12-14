@@ -13,10 +13,7 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios,
-        spotifyUser: {
-            display_name
-        }
+        userAxios
     } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
@@ -26,11 +23,12 @@ export default function AppContextProvider(props){
     const [ playlists, setPlaylists ] = useState({ items:[], total: 0});
     const [ playlistTracks, setPlaylistTracks ] = useState([]);
     const [ selectedItem, setSelectedItem ] = useState({});
-    const [ trackFeatures, setTrackFeatures ] = ([{
-        danceability: '',
-        energy: '',
-        tempo: ''
-    }])
+    // *** later maybe
+    // const [ trackFeatures, setTrackFeatures ] = ([{
+    //     danceability: '',
+    //     energy: '',
+    //     tempo: ''
+    // }])
 
     const search = (inputs, type) => {
         const parseInputs = inputs.split(' ').join('_')
