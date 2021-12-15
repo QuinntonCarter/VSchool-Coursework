@@ -37,8 +37,8 @@ export const MoodItem = props => {
     :
     // for reusability w other views
         <div className={`list-item list-decimal list-inside rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
-            {item.images && <img src={item.images[0].url} alt='playlist'/> }
-            {item.album && <img src={item.album.images[0].url} alt='playlist'/> }
+            {item.images && <img src={item.images[0].url || `no image available`} alt='playlist'/> }
+            {item.album && <img src={item.album.images[0].url || `no image available` } alt='playlist'/> }
             <p className={`text-cyan-50 text-lg`}> {item.artists && item.artists.map(artist => `${artist.name} -`)} <span className='text-cerise-400'> {item.name} </span> </p>
             { item.album && <p className={`text-xs rounded p-1  text-cyan-50`}> From '{item.album.name}'</p> }
             <p className={`text-xs text-cerise-100`}> {item.genres && item.genres.map(genre => `${genre} `)} </p>

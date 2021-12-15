@@ -7,7 +7,8 @@ export const ResultsProfile = () => {
     const {
         // setMood,
         playlistTracks,
-        found
+        found,
+        sharePlaylist
     } = useContext(AppContext);
 
     let history = useHistory();
@@ -22,12 +23,11 @@ export const ResultsProfile = () => {
             <div className='container-main text-left p-3 rounded' style={{backgroundColor: 'black'}}>
                 <a className='text-3xl p-3 rounded' href={`https://open.spotify.com/playlist/${found.id}`}> {found.name}
                 <br/>
-                <span className='text-sm'>click to listen via <span className='font-sans'> Spotify </span></span>
+                <span className='text-sm'>click here to listen via <span className='font-sans'> Spotify </span></span>
                 <i className='fab fa-spotify pl-1' style={{color: '#1DB954', fontSize: '34px'}}/>
                 </a>
                 {mappedTracks}
-            {/* // change so if found owner === current user, can share playlist. if not, cannot share playlist */}
-                <button className='btn bg-indigo-800 mt-7'> share playlist </button>
+                <button className='btn bg-indigo-800 mt-7' onClick={() => sharePlaylist()}> share playlist </button>
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ import { MoodItem } from './moodItem.js';
 
 export const CheckMood = () => {
     const {
+        sharePlaylist,
         getCurrentUserTop,
         getPlaylists,
         setPlaylists,
@@ -44,7 +45,7 @@ export const CheckMood = () => {
 
     const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
     const mappedPlaylists = playlists && playlists.items.map(item => <MoodItem color={'indigo'} item={item} key={item.id}/>);
-
+    console.log(mood)
     return(
         <div className='grid container-main'>
         <div className='p-3 pt-4 bg-indigo-800 text-cyan-800 rounded'>
@@ -74,7 +75,7 @@ export const CheckMood = () => {
                         <option value='artists' > artists </option>
                         <option value='tracks'> tracks </option>
                     </select>
-                    <input className='bg-indigo-600 text-indigo-50 font-medium text-md btn' type='button' title='post as your mood' value='post mood'/>
+                    <input onClick={() => sharePlaylist(mood)} className='bg-indigo-600 text-indigo-50 font-medium text-md btn' type='button' title='post as your mood' value='post mood.'/>
                 </form>
                 <p className='text-sm text-cerise-50'> top <span className='text-xl'>{amount}</span> <span className='text-xl'> {type} </span> 
                     {timeframe === 'short_term' && ` these past 30 days`} 

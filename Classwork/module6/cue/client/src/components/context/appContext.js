@@ -82,7 +82,19 @@ export default function AppContextProvider(props){
         setPlaylistTracks(data)
     };
 
-
+    const sharePlaylist = (list) => {
+        // const item = {
+        //     // images: list.images.map(item => item.images[0].url),
+        //     genres: list.map(item => item.genres),
+        //     name: list.map (item => item.name)
+        // }
+        const item = {}
+        list
+        console.log(item)
+        userAxios.post(`/app/lists`, list)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+    }
     // ** for later **
     // const getTracksFeatures = async () => {
     //     const trackIdsString = playlistTracks.items.map(item => {
@@ -149,7 +161,7 @@ export default function AppContextProvider(props){
             getPlaylistTracks,
             playlistTracks,
             getCurrentUserTop,
-            // setMood
+            sharePlaylist
         }}>
             {props.children}
         </AppContext.Provider>
