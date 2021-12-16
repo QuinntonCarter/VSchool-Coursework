@@ -3,7 +3,6 @@ import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
 import { CheckMood } from '../components/checkMood.js';
-import { AppContext } from '../components/context/appContext.js';
 
 export default function Profile(){
     const history = useHistory();

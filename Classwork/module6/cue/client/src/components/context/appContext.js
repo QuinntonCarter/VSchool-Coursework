@@ -69,11 +69,9 @@ export default function AppContextProvider(props){
                 limit: 50
             }
         })
-        // not spotif owned
+        // filter out spotify owned
         const collected = data.items.filter(item => item.owner.display_name !== 'Spotify');
-        // less than or equal to 100 tracks
-        const fit = collected.filter(item => item.tracks.total <= 100)
-        return fit
+        return collected
     };
 
     // for finding overall playlist analysis data; id = playlistId **
@@ -82,18 +80,11 @@ export default function AppContextProvider(props){
         setPlaylistTracks(data)
     };
 
-    const sharePlaylist = (list) => {
-        // const item = {
-        //     // images: list.images.map(item => item.images[0].url),
-        //     genres: list.map(item => item.genres),
-        //     name: list.map (item => item.name)
-        // }
-        const item = {}
-        list
-        console.log(item)
-        userAxios.post(`/app/lists`, list)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+    const shareItem = (list) => {
+        console.log(list)
+        // userAxios.post(`/app/lists`, list)
+        // .then(res => console.log(res.data))
+        // .catch(err => console.log(err))
     }
     // ** for later **
     // const getTracksFeatures = async () => {
@@ -139,9 +130,9 @@ export default function AppContextProvider(props){
     }, []);
 
     // *** for testing
-    // useEffect(() => {
-    //     console.log(trackFeatures)
-    // },[trackFeatures]);
+    useEffect(() => {
+        console.log(found)
+    },[found]);
     // ***
 
     return(
@@ -161,7 +152,7 @@ export default function AppContextProvider(props){
             getPlaylistTracks,
             playlistTracks,
             getCurrentUserTop,
-            sharePlaylist
+            shareItem
         }}>
             {props.children}
         </AppContext.Provider>

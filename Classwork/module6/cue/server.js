@@ -18,7 +18,7 @@ const {
 } = process.env;
 
 app.use(morgan("dev"));
-app.use(express.json()); // To parse JSON bodies
+app.use(express.json());
 
 const generateRandomString = (length) => {
   let string = "";

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from './context/appContext';
 
@@ -12,6 +12,36 @@ export const MoodItem = props => {
         getPlaylistTracks,
         setFound
     } = useContext(AppContext)
+
+    useEffect(() => {
+        if(item.type === 'artist'){
+            setFound({
+                selectionName: item.name,
+                genres: item.genres.map(genre => genre),
+                image: item.images[0].url,
+                href: item.external_urls.spotify,
+                type: item.type
+            })
+        } else if(item.type === 'track'){
+            setFound({
+                selectionName: item.album.name,
+                artists: item.artists.map(artist => artist.name),
+                image: item.album.images[0].url,
+                href: item.external_urls.spotify,
+                type: item.type
+            })
+        } else if(item.type === 'playlist'){
+            setFound({
+                name: item.name,
+                description: item.description,
+                owner: item.owner.display_name,
+                ownerProfile: item.owner.external_urls.spotify,
+                image: item.images[0].url,
+                type: item.type,
+                href: item.external_urls.spotify
+            })
+        }
+    },[])
     
     return item.owner ?
     // for playlist tracks view
@@ -37,7 +67,7 @@ export const MoodItem = props => {
     :
     // for reusability w other views
         <div className={`list-item list-decimal list-inside rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
-            {item.images && <img src={item.images[0].url || `no image available`} alt='playlist'/> }
+            {item.images && <img src={item.images[0].url} alt='playlist'/> }
             {item.album && <img src={item.album.images[0].url || `no image available` } alt='playlist'/> }
             <p className={`text-cyan-50 text-lg`}> {item.artists && item.artists.map(artist => `${artist.name} -`)} <span className='text-cerise-400'> {item.name} </span> </p>
             { item.album && <p className={`text-xs rounded p-1  text-cyan-50`}> From '{item.album.name}'</p> }

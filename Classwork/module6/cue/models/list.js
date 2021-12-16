@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 const list = new Schema({
     // artist or tracks
     selection: [{
+        selectionName: String,
+        genres: String,
+        image: String,
         type: String,
+        popularity: String,
         required: true
     }],
     title: {
@@ -14,12 +18,6 @@ const list = new Schema({
     created: {
         type: Date,
         default: Date.now
-    },
-    userMood: {
-        type: String
-    },
-    analysisMood: {
-        type: String
     },
     cueUser: {
         type: Schema.Types.ObjectId,

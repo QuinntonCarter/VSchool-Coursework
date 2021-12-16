@@ -1,14 +1,13 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from './context/appContext';
 
 
 export const ResultsProfile = () => {
     const {
-        // setMood,
+        shareItem,
         playlistTracks,
-        found,
-        sharePlaylist
+        found
     } = useContext(AppContext);
 
     let history = useHistory();
@@ -27,7 +26,7 @@ export const ResultsProfile = () => {
                 <i className='fab fa-spotify pl-1' style={{color: '#1DB954', fontSize: '34px'}}/>
                 </a>
                 {mappedTracks}
-                <button className='btn bg-indigo-800 mt-7' onClick={() => sharePlaylist()}> share playlist </button>
+                <button className='btn bg-indigo-800 mt-7' onClick={() => shareItem(found)}> share playlist </button>
             </div>
         </div>
     )
