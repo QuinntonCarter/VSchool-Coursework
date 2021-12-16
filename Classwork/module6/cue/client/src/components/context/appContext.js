@@ -13,7 +13,10 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios
+        userAxios,
+        spotifyUser: {
+            id
+        }
     } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
@@ -43,6 +46,7 @@ export default function AppContextProvider(props){
     };
 
     const getSelection = (id, location) => {
+        setFound()
         userAxios.get(`/app/users`, {
             params: {
                 id: id,
@@ -82,9 +86,15 @@ export default function AppContextProvider(props){
 
     const shareItem = (list) => {
         console.log(list)
-        // userAxios.post(`/app/lists`, list)
-        // .then(res => console.log(res.data))
-        // .catch(err => console.log(err))
+        if(list.type === 'playlist'){
+            userAxios.post(`/app/lists`, list)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+        } else {
+            userAxios.post(`/app/moods`, list)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+        }
     }
     // ** for later **
     // const getTracksFeatures = async () => {

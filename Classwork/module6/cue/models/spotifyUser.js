@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const spotifyUser = new Schema({
-    spotifyID : {
-        // pull from Spotify
-        type: String,
-        required: true
-    },
     email: {
     // pull from Spotify
         type: String

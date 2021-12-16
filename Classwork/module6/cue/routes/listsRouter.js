@@ -15,15 +15,15 @@ listsRouter.get(`/`, (req, res, next) => {
 
 // POST your list to the db
 listsRouter.post(`/`, (req, res, next) => {
-    console.log(req.body)
-    // const newList = new List(req.body)
-    // newList.save((err, savedList) => {
-    //     if(err){
-    //         res.status(500)
-    //         return next(err)
-    //     }
-    //     return res.status(201).send(savedList)
-    // })
+    req.body.cueUser = req.user._id
+    const newList = new List(req.body)
+    newList.save((err, savedList) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(201).send(savedList)
+    })
 });
 
 // ** revisit sending params and queries **

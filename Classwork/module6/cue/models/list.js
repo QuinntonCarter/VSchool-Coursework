@@ -4,15 +4,25 @@ const Schema = mongoose.Schema;
 // yearly view of selection (tracks or artists)
 const list = new Schema({
     // artist or tracks
-    selection: [{
-        selectionName: String,
-        genres: String,
-        image: String,
-        type: String,
-        popularity: String,
-        required: true
-    }],
-    title: {
+    description: {
+        type: String
+    },
+    type: {
+        type: String
+    },
+    ownerProfile: {
+        type: String
+    },
+    owner: {
+        type: String
+    },
+    href: {
+        type: String
+    },
+    image: {
+        type: String
+    },
+    name: {
         type: String
     },
     created: {

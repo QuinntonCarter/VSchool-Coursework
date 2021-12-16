@@ -17,6 +17,7 @@ export default function UserProvider(props){
         user: JSON.parse(localStorage.getItem('user')) || null,
         token: localStorage.getItem('token') || '',
         lists: [],
+        recentMood: {},
         errMsg: ''
     };
 
@@ -60,7 +61,8 @@ export default function UserProvider(props){
                 ...prevUserState,
                 user,
                 token,
-                lists: []
+                lists: [],
+                recentMood: {}
             }))
         })
         .catch(err => handleAuthError(err.response.data.errMsg))

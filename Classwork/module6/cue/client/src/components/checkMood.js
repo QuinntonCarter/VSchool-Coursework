@@ -20,7 +20,7 @@ export const CheckMood = () => {
         }
     } = useContext(UserContext);
     
-    const history = useHistory()
+    const history = useHistory();
 
     const [ view, setView] = useState(false);
     const [ type, setType ] = useState('artists');
@@ -28,14 +28,38 @@ export const CheckMood = () => {
     const [ timeframe, setTimeframe ] = useState('short_term');
     const [ mood, setMood ] = useState([]);
 
-
     useEffect(() => {
+        // gets top on load
         getCurrentUserTop(type, amount, timeframe)
         .then(res => {
             const { items } = res
-            setMood(items)})
+            setMood(items)
+            // pulls only needed metadata from JSON object
+            const forDB = items.map(item => {
+                let selectionParsed
+                if(item.type === 'artist'){
+                return {
+                    selectionName: item.name,
+                    genres: item.genres ? item.genres.map(genre => genre) : null,
+                    image: item.images[0] ? item.images[0].url : null,
+                    href: item.external_urls.spotify,
+                    type: item.type
+                }
+            } else if(item.type === 'track'){
+                return {
+                    selectionName: item.album.name,
+                    artists: item.artists.map(artist => artist.name),
+                    image: item.album.images[0] ? item.album.images[0].url : null,
+                    href: item.external_urls.spotify,
+                    type: item.type
+                }
+            }
+            return selectionParsed
+        })
+        // setFound to the items w only needed data
+            setFound(forDB)
+        })
         .catch(err => console.log(err))
-
         getPlaylists(id)
         .then(res => {
             setPlaylists({
@@ -44,6 +68,10 @@ export const CheckMood = () => {
             })
         })
         .catch(err => console.log(err))
+        // cleanup function
+        return () => {
+            setMood('')
+        }
     }, [type, amount, timeframe]);
 
     const mappedMood = mood && mood.map(item => <MoodItem color={'indigo'} item={item} key={item.id} setFound={setFound}/>);

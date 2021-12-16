@@ -6,9 +6,8 @@ TOS: can't store personal data or spotify user ids,
 todo next
     first:
         + playlists
-            -   POST
-            -   GET
-            -   DELETE
+            -   GET: friend's and user's lists
+            X   POST
         + users
             -   POST add friend
             +   add friends db ids to array in model

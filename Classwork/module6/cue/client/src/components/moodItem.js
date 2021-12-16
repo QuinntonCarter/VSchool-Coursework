@@ -11,44 +11,32 @@ export const MoodItem = props => {
     const {
         getPlaylistTracks,
         setFound
-    } = useContext(AppContext)
+    } = useContext(AppContext);
 
-    useEffect(() => {
-        if(item.type === 'artist'){
-            setFound({
-                selectionName: item.name,
-                genres: item.genres.map(genre => genre),
-                image: item.images[0].url,
-                href: item.external_urls.spotify,
-                type: item.type
-            })
-        } else if(item.type === 'track'){
-            setFound({
-                selectionName: item.album.name,
-                artists: item.artists.map(artist => artist.name),
-                image: item.album.images[0].url,
-                href: item.external_urls.spotify,
-                type: item.type
-            })
-        } else if(item.type === 'playlist'){
-            setFound({
-                name: item.name,
-                description: item.description,
-                owner: item.owner.display_name,
-                ownerProfile: item.owner.external_urls.spotify,
-                image: item.images[0].url,
-                type: item.type,
-                href: item.external_urls.spotify
-            })
-        }
-    },[])
+    let selectionParsed
     
+    // lost on every render warning, but it's intentional
+    useEffect(() => {
+        if(item.type === 'playlist'){
+            selectionParsed = {
+                    name: item.name,
+                    description: item.description ? item.description : null,
+                    owner: item.owner.display_name,
+                    ownerProfile: item.owner.external_urls.spotify,
+                    image: item.images[0] ? item.images[0].url : null,
+                    type: item.type,
+                    href: item.external_urls.spotify,
+                    spotifyId: item.id
+            }
+        }
+    }, []);
+
     return item.owner ?
     // for playlist tracks view
-        <div onClick={() => setFound(item)} className={`rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
+        <div onClick={() => setFound(selectionParsed)} className={`rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
             <Link to={`/results/${item.id}`}>
                 <span onClick={() => getPlaylistTracks(item.id)}>
-                    {item.images && <img src={item.images[0].url} alt='playlist'/> }
+                    { item.images[0].url && <img src={item.images[0].url} alt='playlist'/> }
                     <p className={`text-cyan-50 text-lg bg-${color}-700 p-1 rounded`}> {item.name} </p>
                 </span>
             </Link>
@@ -66,11 +54,11 @@ export const MoodItem = props => {
         </div>
     :
     // for reusability w other views
-        <div className={`list-item list-decimal list-inside rounded text-xs mb-2 bg-${color}-500 text-cyan-50 p-1`}>
-            {item.images && <img src={item.images[0].url} alt='playlist'/> }
+        <div className={`list-item list-decimal list-inside rounded text-xs mb-2 bg-${color}-500 text-cyan-50 font-semibold text-left p-1`}>
+            {item.images?.[0] && <img src={item.images[0].url} alt='playlist'/>}
             {item.album && <img src={item.album.images[0].url || `no image available` } alt='playlist'/> }
-            <p className={`text-cyan-50 text-lg`}> {item.artists && item.artists.map(artist => `${artist.name} -`)} <span className='text-cerise-400'> {item.name} </span> </p>
+            <p className={`text-cyan-50 text-lg text-center font-normal `}> {item.artists && item.artists.map(artist => `${artist.name} -`)} <span className='text-cerise-400'> {item.name} </span> </p>
             { item.album && <p className={`text-xs rounded p-1  text-cyan-50`}> From '{item.album.name}'</p> }
-            <p className={`text-xs text-cerise-100`}> {item.genres && item.genres.map(genre => `${genre} `)} </p>
+            <p className={`text-xs text-center font-normal text-cerise-100`}> {item.genres && item.genres.map(genre => `${genre} `)} </p>
         </div>
-}
+};

@@ -42,7 +42,7 @@ function App() {
           path='/results/:location'
           redirectTo='/'
           token={token}
-          component={() => found.images ? <ResultsProfile/> : <Redirect to='/check/moods'/> }
+          component={() => found.image ? <ResultsProfile/> : <Redirect to='/check/moods'/> }
           loading={false}
         />
 
