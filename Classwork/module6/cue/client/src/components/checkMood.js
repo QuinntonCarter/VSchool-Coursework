@@ -38,6 +38,7 @@ export const CheckMood = () => {
             const forDB = items.map(item => {
                 let selectionParsed
                 if(item.type === 'artist'){
+                    // no test label here..?
                 return {
                     selectionName: item.name,
                     genres: item.genres ? item.genres.map(genre => genre) : null,
@@ -45,17 +46,18 @@ export const CheckMood = () => {
                     href: item.external_urls.spotify,
                     type: item.type
                 }
-            } else if(item.type === 'track'){
-                return {
-                    selectionName: item.album.name,
-                    artists: item.artists.map(artist => artist.name),
-                    image: item.album.images[0] ? item.album.images[0].url : null,
-                    href: item.external_urls.spotify,
-                    type: item.type
+                } else if(item.type === 'track'){
+                    // no test label here..?
+                    return {
+                        selectionName: item.album.name,
+                        artists: item.artists.map(artist => artist.name),
+                        image: item.album.images[0] ? item.album.images[0].url : null,
+                        href: item.external_urls.spotify,
+                        type: item.type
+                    }
                 }
-            }
-            return selectionParsed
-        })
+                return selectionParsed
+            })
         // setFound to the items w only needed data
             setFound(forDB)
         })

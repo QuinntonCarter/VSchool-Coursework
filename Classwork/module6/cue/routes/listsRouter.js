@@ -41,7 +41,7 @@ listsRouter.get("/search/:userId", (req, res, next) => {
 
 listsRouter.delete("/:listId", (req, res, next) => {
     List.findOneAndDelete(
-        {_id: req.params.listId , user: req.user._id},
+        { _id: req.params.listId , user: req.user._id },
         (err, deletedList) => {
             if(err){
                 res.status(500)
