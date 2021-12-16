@@ -6,7 +6,6 @@ import { MoodItem } from './moodItem.js';
 
 export const CheckMood = () => {
     const {
-        shareItem,
         getCurrentUserTop,
         getPlaylists,
         setPlaylists,
@@ -15,6 +14,7 @@ export const CheckMood = () => {
         setFound
     } = useContext(AppContext);
     const {
+        shareItem,
         spotifyUser : {
             id
         }

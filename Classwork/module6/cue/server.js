@@ -7,14 +7,13 @@ const { URLSearchParams } = require("url");
 const expressJwt = require("express-jwt");
 const mongoose = require("mongoose");
 
-const authEndpoint = "https://accounts.spotify.com/authorize";
-
 const {
   PORT,
   SECRET,
   CLIENT_ID,
   CLIENT_SECRET,
-  REDIRECT_URI
+  REDIRECT_URI,
+  AUTHENDPOINT
 } = process.env;
 
 app.use(morgan("dev"));
@@ -81,7 +80,7 @@ app.get("/login", (req, res, next) => {
     `client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&state=${state}&scope=${scopes}`
   );
 
-  res.redirect(`${authEndpoint}?${queryParams}`);
+  res.redirect(`${AUTHENDPOINT}?${queryParams}`);
 });
 
 app.get("/callback", (req, res, next) => {

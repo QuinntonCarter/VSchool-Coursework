@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-// will need to refactor this to work with new cueappDB
+// ** refactor w user CRUD actions **
 
 export const UserContext = React.createContext();
 
@@ -18,6 +18,7 @@ export default function UserProvider(props){
         token: localStorage.getItem('token') || '',
         lists: [],
         recentMood: {},
+        friendPosts: [{}],
         errMsg: ''
     };
 
@@ -54,6 +55,7 @@ export default function UserProvider(props){
         }
         axios.post('/auth/login', parsedInputs)
         .then(res => {
+            console.log(res.data)
             const { user, token } = res.data
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))
@@ -91,31 +93,85 @@ export default function UserProvider(props){
         }))
     };
 
-    // CRUD
+    const shareItem = async (list) => {
+        if(list.type === 'playlist'){
+            const { data } = await userAxios.post(`/app/lists`, list)
+            console.log(data)
+            // .then(res => console.log(res.data))
+            // .catch(err => console.log(err))
+        } else {
+            const { data } = await userAxios.post(`/app/moods`, list)
+            console.log(data)
+            // .then(res => console.log(res.data))
+            // .catch(err => console.log(err))
+        }
+    };
+
+    const updateFollowStatus = async (status) => {
+        if(status === 'follow'){
+            const { data } = await userAxios.post('/user/friends', {
+                params: {
+                    type: 'follow'
+                }
+            })
+            console.log(data)
+            // .then(res => setUserState(res.data))
+            // .catch(err => console.log(err))
+        } else if(status ==='unfollow'){
+            const { data } = await userAxios.post('/user/friends', {
+                params: {
+                    type: 'unfollow'
+                }
+            })
+            console.log(data)
+            // .then(res => setUserState(prevState => ({
+            //     ...prevState,
+            //     friends: res.data
+            // })))
+            // .catch(err => console.log(err))
+        }
+    };
+
+// CRUD
 // get all posts in DB
-    // function getAllPosts(){
-        // userAxios.get('/api/posts')
-        // .then(res =>{
-        //         setUserState(prevState => ({
-        //             ...prevState,
-        //             allPosts: res.data
-        //         }))
+    const getFriendsStatus = () => {
+        userAxios.get(`/app/users`, {
+            params: {
+                type: 'friend'
+            }
+        })
+        .then(res => res.data.user.friends.map(friend => 
+            userAxios.get(`/app/moods/${friend._id}`)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+        ))
+                // setUserState(prevState => ({
+                //     ...prevState,
+                //     // **
+                //     friendPosts: [res.data.friends]
+                // }))
         //     }
         // )
-        // .catch(err => console.log(err.response.data.errMsg))
-    // };
+        .catch(err => console.log(err.response.data.errMsg))
+    };
 
-// get logged in user's posts * fix/work on backend
-    // function getUserPosts(userId){
-        // userAxios.get(`/api/posts/user/${userId}`)
+// get usersPosts **
+    const getUserPosts = async () => {
+        const { data } = await userAxios.get(`/app/users/${userState._id}`, {
+            params: {
+                type: 'user'
+            }
+        })
         // .then(res => {
-        //     setUserState(prevState => ({
-        //         ...prevState,
-        //         posts: res.data
-        //     }))
+            console.log(data)
+            // setUserState(prevState => ({
+            //     ...prevState,
+            //     recentMood: res.data.mood,
+            //     lists: res.data.lists
+            // }))
         // })
         // .catch(err => console.log(err.response.data.errMsg))
-    // };
+    };
 
 // new post POST
     // function addPost(newPost){
@@ -192,13 +248,12 @@ export default function UserProvider(props){
             login,
             logout,
             userAxios,
-            // addPost,
+            shareItem,
+            updateFollowStatus,
+            getFriendsStatus,
+            getUserPosts,
             // deletePost,
-            // getUserPosts,
             // getAllPosts,
-            // submitVote,
-            // postComment,
-            // deleteComment,
             resetAuthError
         }}>
             {props.children}

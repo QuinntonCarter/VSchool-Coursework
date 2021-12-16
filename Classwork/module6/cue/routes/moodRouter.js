@@ -40,8 +40,8 @@ moodRouter.post('/', (req, res, next) => {
                     })
                 })
         } else {
-            const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
-            console.log(newMood)
+            // const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
+            // console.log(newMood)
             newMood.save((err, mood) => {
                 if(err){
                     res.status(500)

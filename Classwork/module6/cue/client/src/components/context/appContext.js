@@ -13,8 +13,7 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios,
-        user
+        userAxios
     } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
@@ -82,17 +81,8 @@ export default function AppContextProvider(props){
         setPlaylistTracks(data)
     };
 
-    const shareItem = (list) => {
-        if(list.type === 'playlist'){
-            userAxios.post(`/app/lists`, list)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
-        } else {
-            userAxios.post(`/app/moods`, list)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
-        }
-    }
+
+
     // ** for later **
     // const getTracksFeatures = async () => {
     //     const trackIdsString = playlistTracks.items.map(item => {
@@ -126,7 +116,6 @@ export default function AppContextProvider(props){
     //     // console.log(mid)
 
     // }
-    
     useEffect(() => {
         getCurrentUserTop('artists', 5, 'short_term')
         .then(res => setMonthlyArtists(res))
@@ -158,8 +147,7 @@ export default function AppContextProvider(props){
             setPlaylists,
             getPlaylistTracks,
             playlistTracks,
-            getCurrentUserTop,
-            shareItem
+            getCurrentUserTop
         }}>
             {props.children}
         </AppContext.Provider>

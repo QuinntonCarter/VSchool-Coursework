@@ -8,6 +8,8 @@ todo next
         + playlists
             -   GET: friend's and user's lists
             X   POST
+        + Mood
+            X   post and overwrite mood
         + users
             -   POST add friend
             +   add friends db ids to array in model

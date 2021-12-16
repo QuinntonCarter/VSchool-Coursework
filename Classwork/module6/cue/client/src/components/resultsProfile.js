@@ -1,14 +1,17 @@
 import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AppContext } from './context/appContext';
+import { AppContext } from './context/appContext.js';
+import { UserContext} from './context/userProvider.js';
 
 export const ResultsProfile = () => {
     const {
-        shareItem,
         playlistTracks,
         setFound,
         found
     } = useContext(AppContext);
+    const {
+        shareItem
+    } = useContext(UserContext);
 
     let history = useHistory();
 
