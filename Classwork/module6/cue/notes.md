@@ -3,19 +3,23 @@ TOS: can't store personal data or spotify user ids,
     + must have links to playlists via spotify
     + playlist images must be square and not altered at all
 
+friends many to many
+playlists many to one
+moods one to one
+
 todo next
     first:
         + playlists
-            -   GET: friend's and user's lists
+            -   GET friend's and user's lists
             X   POST
         + Mood
-            X   post and overwrite mood
+            X   POST and overwrite mood
         + users
-            -   POST add friend
-            +   add friends db ids to array in model
-            -   DELETE remove friend
             -   DELETE user's profile
             -   GET friends posts
+            X   $push friends db ids to array in model
+            X   POST remove friend w $pull
+            X   POST add friend
         + routing:
             -   redirect if no user token, take out of local storage
     everything else:
