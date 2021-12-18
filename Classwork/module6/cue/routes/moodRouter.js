@@ -2,22 +2,20 @@ const express = require('express');
 const moodRouter = express.Router();
 const MoodList = require('../models/moodList.js');
 
-// GET all users' friends
+// GET all user's friends' recent moods
 moodRouter.get('/', (req, res, next) => {
-    MoodList.find({ friends: req.user._id},
-        // find req.user's id in friends array
-        (err, friends) => {
+    MoodList.find({ cueUser: req.query.id },
+        (err, friendMood) => {
             if(err){
                 res.sendStatus(500)
                 return next(err)
             }
-            return res.sendStatus(200).send(friends)
-        })
+            return res.sendStatus(200).send(friendMood)
+    })
 });
 
 // POST new mood and overwrite previous
 moodRouter.post('/', (req, res, next) => {
-    const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
     MoodList.findOne({cueUser: req.user._id},
         (err, found) => {
             if(err){
@@ -40,8 +38,8 @@ moodRouter.post('/', (req, res, next) => {
                     })
                 })
         } else {
-            // const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
-            // console.log(newMood)
+            const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
+            console.log(newMood)
             newMood.save((err, mood) => {
                 if(err){
                     res.status(500)

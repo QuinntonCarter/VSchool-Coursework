@@ -32,7 +32,6 @@ export default function Auth(){
 
     function handleSignup(e){
         e.preventDefault()
-
         signup(inputs)
     };
 
@@ -49,8 +48,6 @@ export default function Auth(){
 
     useEffect(()=> {
         if(accessToken){
-        // ** get token from userState
-            // localStorage.setItem('spotify_access_token', accessToken)
             setSpotifyUserState(prevState => ({
                 ...prevState,
                 spotifyToken: accessToken
@@ -69,7 +66,6 @@ export default function Auth(){
                 // just post to signup model route for new users
                 // setSpotifyProfile(data);
             } catch(err) {
-                // ** send error to auth handler
                 console.error(err);
             }}
             fetchData();

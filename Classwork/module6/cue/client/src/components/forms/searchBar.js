@@ -8,8 +8,6 @@ export const SearchBar = () => {
     } = useContext(AppContext);
     
     const [ type, setType ] = useState('friend');
-    const [ toggleMore, setToggleMore ] = useState(false);
-    const [ moodLevel, setMoodLevel ] = useState(0);
 
     const [ inputs, setInputs ] = useState('');
 

@@ -6,16 +6,17 @@ const MoodList = require('../models/moodList.js');
 
 // GET all users via query
 userRouter.get('/', (req, res, next) => {
-// if(req.query.type === 'friend'){
-//     User.find({ username: req.query.inputs },
-//         { isAdmin: 0, password: 0 },
-//         (err, users) => {
-//             if(err){
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(200).send(users)
-//     })}
+if(req.query.type === 'friend'){
+    // * can grab from query here but below is passed the same and grabbed as params... *
+    User.find({ username: req.query.inputs },
+        { isAdmin: 0, password: 0 },
+        (err, users) => {
+            if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(users)
+    })}
     if(req.query.type === 'results'){
         List.findOne({ _id: req.query.id }, 
             (err, results) => {
@@ -35,7 +36,7 @@ userRouter.get('/', (req, res, next) => {
                 }
                 return res.status(200).send(users)
         })
-    } else if(req.query.type === 'friend'){
+    } else if(req.query.type === 'status'){
         // find users whose friend array contains the requesting user's _id **
         User.find({ friends: req.user._id },
             { isAdmin: 0, password: 0 },
@@ -46,8 +47,8 @@ userRouter.get('/', (req, res, next) => {
                 }
                 return res.status(201).send(friends)
             })
-    }}
-)
+    }
+})
 
 // userRouter.get('/findFriends', (req, res, next) => {
 //     User.find({ friends: req.user._id },
@@ -80,24 +81,24 @@ userRouter.get('/', (req, res, next) => {
 
 // ** need to test **
 userRouter.post(`/friends`, (req, res, next) => {
-    if(req.query.type === 'follow'){
+    // ** watch for problems. being sent as params here but not being sent as params in above and being grabbed as query in above
+    if(req.body.params.type === 'follow'){
         User.findByIdAndUpdate(req.user._id, {
             $push: { 
-                friends: [req.user._id]
+                friends: [req.body.params.id]
             }
         },
     { new: true },
-    (err, updatedFriends)=> {
+    (err, updatedFriends) => {
         if(err){
             res.status(500)
             return next(err)
         }
         return res.status(201).send(updatedFriends)
-    })
-    } else if(req.query.type === 'unfollow'){
+    })} else if(req.body.params.type === 'unfollow'){
         User.findByIdAndUpdate(req.user._id, {
             $pull: { 
-                friends: {_id: req.user._id}
+                friends: { $in: [req.body.params.id] }
             }
         },
     { new: true },

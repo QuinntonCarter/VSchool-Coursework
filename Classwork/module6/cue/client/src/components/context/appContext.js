@@ -13,7 +13,8 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios
+        userAxios,
+        userState
     } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
@@ -55,17 +56,17 @@ export default function AppContextProvider(props){
     };
 
     const getCurrentUserTop = async (type, limit, time_range) => {
-            const { data } = await spotifyUserAPI.get(`/me/top/${type}`,{
+            const { data } = await spotifyUserAPI.get(`/me/top/${type}`, {
             params: {
                 limit: limit,
                 time_range: time_range
             }
         })
             return data
-        };
+    };
 
     const getPlaylists = async (id) => {
-        const { data } = await spotifyUserAPI.get(`/users/${id}/playlists`,{
+        const { data } = await spotifyUserAPI.get(`/users/${id}/playlists`, {
             params: {
                 limit: 50
             }
@@ -80,8 +81,6 @@ export default function AppContextProvider(props){
         const { data } = await spotifyUserAPI.get(`/playlists/${id}/tracks`)
         setPlaylistTracks(data)
     };
-
-
 
     // ** for later **
     // const getTracksFeatures = async () => {
@@ -114,8 +113,8 @@ export default function AppContextProvider(props){
     //     // const mid = (len / 2)
     //     // const median = len % 2 === 0 ? (arrSort[mid] + arrSort[mid - 1]) / 2 : arrSort[mid - 1];
     //     // console.log(mid)
-
     // }
+
     useEffect(() => {
         getCurrentUserTop('artists', 5, 'short_term')
         .then(res => setMonthlyArtists(res))
@@ -127,8 +126,7 @@ export default function AppContextProvider(props){
 
     // *** for testing
     useEffect(() => {
-        console.log(found)
-    },[found]);
+    },[]);
     // ***
 
     return(

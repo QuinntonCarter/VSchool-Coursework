@@ -9,17 +9,22 @@ export default function Lists(){
 
     // } = useContext(AppContext)
     const {
-        getFriendsStatus
+        getFriendsStatus,
+        userState: {
+            user: {
+                friends
+            }
+        }
     } = useContext(UserContext);
 
-    useEffect(() => {
-        getFriendsStatus()
-    },[])
+    // useEffect(() => {
+    //     getFriendsStatus()
+    // },[]);
 
     return(
-        <div className='resultCompWrapper' >
+        <div className='container-main' >
             <h1 style={{color: 'gray'}}> Mood lists posted by friends </h1>
-            
+            <button onClick={() => getFriendsStatus()}> test </button>
         </div>
     )
 }
