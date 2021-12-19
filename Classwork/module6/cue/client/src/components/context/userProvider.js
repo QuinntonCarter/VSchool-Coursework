@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// ** refactor w user CRUD actions **
-
 export const UserContext = React.createContext();
 
 const userAxios = axios.create();
@@ -18,7 +16,7 @@ export default function UserProvider(props){
         token: localStorage.getItem('token') || '',
         lists: [],
         recentMood: {},
-        friendPosts: [{}],
+        friendPosts: [],
         errMsg: ''
     };
 
@@ -75,7 +73,7 @@ export default function UserProvider(props){
         localStorage.clear()
     };
 
-    //err
+//  err
     function handleAuthError(errMsg){
         setUserState(prevState => ({
             ...prevState,
@@ -92,67 +90,83 @@ export default function UserProvider(props){
 
     const shareItem = async (list) => {
         if(list.type === 'playlist'){
-            const { data } = await userAxios.post(`/app/lists`, list)
-            .then(() => setUserState(prevState => ({...prevState, lists: [data]})))
+            userAxios.post(`/app/lists`, list)
+            .then((res) => setUserState(prevState => ({...prevState, lists: [res.data]})))
             .catch(err => console.log(err))
         } else {
-            const { data } = await userAxios.post(`/app/moods`, list)
-            .then(() => setUserState(prevState => ({...prevState, recentMood: data})))
+            userAxios.post(`/app/moods`, list)
+            .then((res) => setUserState(prevState => ({...prevState, recentMood: res.data})))
             .catch(err => console.log(err))
         }
     };
 
     const updateFollowStatus = (id, type) => {
-            userAxios.post(`/app/users/friends`, {
-                params: {
-                    type: type,
-                    id: id
-                }
-            })
-            .then(res => 
-                setUserState(prevState => ({
-                    ...prevState,
-                    user: res.data
-                }))
-                )
-            .catch(err => console.log(err))
-    };
-
-// CRUD
-// get all posts in DB
-    const getFriendsStatus = () => {
-        // userState.user.friends.map(item => 
-            userAxios.get('/app/moods', {
-                params: {
-                    id: userState.user.friends[0]
-                }
-            })
-            .then(res => console.log(res.data))
-        // )
-        //     .then(() => 
-        //         setUserState(prevState => ({
-        //             ...prevState, 
-        //             friendPosts: [data]})))
-        //     .catch(err => console.log(err))
-        // )
-    };
-
-// get usersPosts **
-    const getUserPosts = async () => {
-        const { data } = await userAxios.get(`/app/users/${userState.user._id}`, {
+        userAxios.post(`/app/users/friends`, {
             params: {
-                type: 'status'
+                type: type,
+                id: id
             }
         })
-        .then(() => {
+        .then(res => 
             setUserState(prevState => ({
                 ...prevState,
-                recentMood: data.mood,
-                lists: [data.lists]
+                user: {
+                    friends: res.data.friends
+                }
             }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
+            )
+        .catch(err => console.log(err))
     };
+
+// CRUD **
+// get all friends' posts in DB **
+    const getStatus = (type) => {
+        if(type === 'user'){
+        userAxios.get(`/app/moods`, {
+            params: {
+                type: type
+            }
+        })
+        .then(res => setUserState(prevState => ({
+            ...prevState,
+            recentMood: res.data})))
+        .catch(err => console.log(err))
+        } else if(type=== 'friends'){
+        userAxios.get('/app/moods', {
+            params: {
+                type: type
+            }
+        })
+        .then(res => setUserState(prevState => ({
+            ...prevState,
+            friendPosts: res.data})))
+        .catch(err => console.log(err))
+        }
+    };
+
+// get currentUsers recent posts
+    // const getPosts = async (type) => {
+    //     if(type === 'user'){
+    //     const { data } = await userAxios.get(`/app/users`, {
+    //         params: {
+    //             type: 'user',
+    //         }
+    //     })
+    //     .then(() => {
+    //         setUserState(prevState => ({
+    //             ...prevState,
+    //             recentMood: data.mood,
+    //             lists: [data.lists]
+    //         }))
+    //     })
+    //     .catch(err => console.log(err.response.data.errMsg))
+    // } else if(type=== 'friends'){
+    //     const { data } = await userAxios.get(`/app/users`, {
+    //         params: {
+    //             type: 'friends'
+    //         }
+    //     })
+    // }};
 
     useEffect(() => {
         console.log(userState)
@@ -236,8 +250,7 @@ export default function UserProvider(props){
             userAxios,
             shareItem,
             updateFollowStatus,
-            getFriendsStatus,
-            getUserPosts,
+            getStatus,
             // deletePost,
             // getAllPosts,
             resetAuthError

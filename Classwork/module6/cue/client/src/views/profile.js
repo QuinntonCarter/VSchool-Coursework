@@ -1,13 +1,20 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
 import { CheckMood } from '../components/checkMood.js';
+import { UserContext } from '../components/context/userProvider.js';
 
 export default function Profile(){
+    const {
+        getStatus
+    } = useContext(UserContext)
+
     const history = useHistory();
 
     useEffect(() => {
+        let type = 'user'
+        getStatus(type)
         history.push('/recent_mood_artists')
     },[]);
 

@@ -13,6 +13,30 @@ listsRouter.get(`/`, (req, res, next) => {
     })
 });
 
+// GET users' recent and all user's friends' lists
+listsRouter.get('/', (req, res, next) => {
+    if(req.query.type === 'friends'){
+        List.find({ cueUser: { $in: req.user.friends }},
+            (err, friendMood) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(friendMood)
+    })} else if(req.query.type === 'user') {
+        // query current user's recent posts
+        List.find({ cueUser: req.user._id },
+            { isAdmin: 0, password: 0 },
+            (err, friends) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(201).send(friends)
+            })
+    }
+});
+
 // POST your list to the db
 listsRouter.post(`/`, (req, res, next) => {
     req.body.cueUser = req.user._id
@@ -28,16 +52,16 @@ listsRouter.post(`/`, (req, res, next) => {
 
 // ** revisit sending params and queries **
 // GET all lists by user
-listsRouter.get("/search/:userId", (req, res, next) => {
-    List.find({ user: req.params.userId },
-        (err, lists) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(lists)
-    })
-});
+// listsRouter.get("/search", (req, res, next) => {
+//     List.find({ user: req.query.userLists },
+//         (err, lists) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(200).send(lists)
+//     })
+// });
 
 listsRouter.delete("/:listId", (req, res, next) => {
     List.findOneAndDelete(

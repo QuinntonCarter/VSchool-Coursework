@@ -2,31 +2,45 @@ const express = require('express');
 const moodRouter = express.Router();
 const MoodList = require('../models/moodList.js');
 
-// GET all user's friends' recent moods
+// GET users' recent and all user's friends' recent moods
 moodRouter.get('/', (req, res, next) => {
-    MoodList.find({ cueUser: req.query.id },
-        (err, friendMood) => {
-            if(err){
-                res.sendStatus(500)
-                return next(err)
-            }
-            return res.sendStatus(200).send(friendMood)
-    })
+    if(req.query.type === 'friends'){
+        MoodList.find({ cueUser: { $in: req.user.friends }},
+            (err, friendMood) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send(friendMood)
+    })} else if(req.query.type === 'user') {
+        // query current user's recent posts
+        MoodList.find({ cueUser: req.user._id },
+            { isAdmin: 0, password: 0 },
+            (err, friends) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(201).send(friends)
+        })
+    }
 });
 
 // POST new mood and overwrite previous
 moodRouter.post('/', (req, res, next) => {
-    MoodList.findOne({cueUser: req.user._id},
+    // overwrites previous post
+    const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
+    MoodList.findOne({ cueUser: req.user._id },
         (err, found) => {
             if(err){
-                res.sendStatus(500)
+                res.status(500)
                 return next(err)
             }
             if(found){
             return MoodList.findByIdAndDelete(found._id, 
                 (err, found) => {
                     if(err){
-                        res.sendStatus(500)
+                        res.status(500).send(`Error deleting ${found._id}`)
                         return next(err)
                     }
                     return newMood.save((err, mood) => {
@@ -38,8 +52,7 @@ moodRouter.post('/', (req, res, next) => {
                     })
                 })
         } else {
-            const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
-            console.log(newMood)
+            // else if no post, create post
             newMood.save((err, mood) => {
                 if(err){
                     res.status(500)

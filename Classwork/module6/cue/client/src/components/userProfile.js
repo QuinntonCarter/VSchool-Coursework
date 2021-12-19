@@ -22,8 +22,9 @@ export const UserProfile = () => {
             <button onClick={() => history.goBack()}
                 className='bg-cerise-700 text-cyan-50 text-sm font-bold btnbold-small'
             > go back </button>
-            <h3 className='text-cyan-50'> {`@${selectedItem.username}`} {selectedItem.created && `created ${selectedItem.created}`} {selectedItem.memberSince && `member since ${selectedItem.memberSince.slice(0,10)}`}  </h3>
-            <button className='btn bg-blue-300' onClick={() => updateFollowStatus(selectedItem._id, followStatus)}> {followStatus} </button>
+            <h1 className='text-cyan-50'> {user._id !== selectedItem._id ? `@${selectedItem.username}` : `It's you @${selectedItem.username}`}  </h1>
+            <h3 className='text-indigo-300'> {selectedItem.memberSince && `member since ${selectedItem.memberSince.slice(0,10)}`}  </h3>
+            {user._id !== selectedItem._id && <button className='btn bg-blue-300' onClick={() => updateFollowStatus(selectedItem._id, followStatus)}> {followStatus} </button>}
         </div>
     )
 };

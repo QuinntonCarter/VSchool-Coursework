@@ -13,8 +13,7 @@ export default function AppContextProvider(props){
         return config
     });
     const {
-        userAxios,
-        userState
+        userAxios
     } = useContext(UserContext);
 
     const [ monthlyArtists, setMonthlyArtists ] = useState({});
@@ -31,12 +30,12 @@ export default function AppContextProvider(props){
     //     tempo: ''
     // }])
 
-    const search = (inputs, type) => {
+    const search = (inputs) => {
         const parseInputs = inputs.split(' ').join('_')
         userAxios.get(`/app/users`, {
             params: {
                 inputs: parseInputs,
-                type: type
+                type: 'friend'
             }
         })
         .then(res => setFound(res.data))
