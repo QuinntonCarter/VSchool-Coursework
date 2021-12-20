@@ -27,7 +27,6 @@ export const CheckMood = () => {
     const [ amount, setAmount ] = useState(3);
     const [ timeframe, setTimeframe ] = useState('short_term');
     const [ mood, setMood ] = useState([]);
-
     useEffect(() => {
         // gets top on load
         getCurrentUserTop(type, amount, timeframe)
@@ -108,7 +107,7 @@ export const CheckMood = () => {
                         <option value='artists' > artists </option>
                         <option value='tracks'> tracks </option>
                     </select>
-                    <input onClick={() => shareItem(found)} className='bg-indigo-600 text-indigo-50 font-medium text-md btn' type='button' title='post as your mood' value='post mood.'/>
+                    <input onClick={() => shareItem(found, timeframe)} className='bg-indigo-600 text-indigo-50 font-medium text-md btn' type='button' title='post as your mood' value='post mood.'/>
                 </form>
                 <p className='text-sm text-cerise-50'> top <span className='text-xl'>{amount}</span> <span className='text-xl'> {type} </span> 
                     {timeframe === 'short_term' && ` these past 30 days`} 

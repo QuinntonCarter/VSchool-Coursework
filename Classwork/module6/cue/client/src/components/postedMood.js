@@ -5,15 +5,15 @@ export const PostedMood = props => {
         items
     } = props
 
-    const mappedItem = items.map(item => 
-        <>
+    const mappedItem = items.map((item, i) => 
+        <div className={`flex-1 p-1 text-auto list-item list-inside list-decimal`}>
+            <h3 className='text-cerise-500'> {item.selectionName} </h3>
             <img src={item.image} alt={item.id}/>
-            <h3> {item.selectionName} </h3>
-        </>
+        </div>
     )
 
     return(
-        <div>
+        <div className='flex flex-wrap'>
             {mappedItem}
         </div>
     )

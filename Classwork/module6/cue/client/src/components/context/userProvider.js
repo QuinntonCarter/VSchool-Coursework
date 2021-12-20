@@ -88,13 +88,17 @@ export default function UserProvider(props){
         }))
     };
 
-    const shareItem = async (list) => {
+    const shareItem = async (list, timeframe) => {
         if(list.type === 'playlist'){
-            userAxios.post(`/app/lists`, list)
+            userAxios.post(`/app/lists`, list, {
+                params: {
+                    time: timeframe
+                }
+            })
             .then((res) => setUserState(prevState => ({...prevState, lists: [res.data]})))
             .catch(err => console.log(err))
         } else {
-            userAxios.post(`/app/moods`, list)
+            userAxios.post(`/app/moods/${timeframe}`, list)
             .then((res) => setUserState(prevState => ({...prevState, recentMood: res.data})))
             .catch(err => console.log(err))
         }

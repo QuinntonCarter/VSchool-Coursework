@@ -27,9 +27,8 @@ moodRouter.get('/', (req, res, next) => {
 });
 
 // POST new mood and overwrite previous
-moodRouter.post('/', (req, res, next) => {
-    // overwrites previous post
-    const newMood = new MoodList({ items: req.body, cueUser: req.user._id })
+moodRouter.post('/:time', (req, res, next) => {
+    const newMood = new MoodList({ items: req.body, timeline: req.params.time, cueUser: req.user._id, userString: req.user.username })
     MoodList.findOne({ cueUser: req.user._id },
         (err, found) => {
             if(err){

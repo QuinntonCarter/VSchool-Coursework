@@ -28,7 +28,9 @@ const moodList = new Schema({
     cueUser: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    userString: String,
+    timeline: String
 })
 
 module.exports = mongoose.model("MoodList", moodList)
