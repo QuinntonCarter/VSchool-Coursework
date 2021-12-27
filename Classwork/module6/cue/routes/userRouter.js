@@ -3,7 +3,6 @@ const userRouter = express.Router();
 const User = require('../models/user.js');
 const List = require('../models/list.js');
 
-
 // GET users or item via db query
 userRouter.get('/', (req, res, next) => {
     if(req.query.type === 'friend'){
@@ -73,10 +72,18 @@ userRouter.get('/', (req, res, next) => {
                 })}
             });
 
-    // userRouter.delete(`/removeAcc`, (req, res, next) => {
-    //     User.findByIdAndDelete(req.user._id, {
-    //         (err, found)
-    //     })
-    // })
+    userRouter.delete(`/removeAcc`, (req, res, next) => {
+    User.find({ _id:req.user._id },
+        (err, found) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            console.log(found)
+            // if(req.user._id === found){
+            //     console.log(found)
+            // }
+        })
+    })
             
 module.exports = userRouter

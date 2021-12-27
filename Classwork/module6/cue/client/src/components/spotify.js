@@ -112,12 +112,3 @@ spotifyUserAPI.interceptors.request.use(config => {
 
 
 export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');
-// // ** either by selection => album/ep etc name or song name
-// export const getSearchBy = (artist, selection) => spotifyUserAPI.get(`/search?q=artist:${artist}&track=${selection}`);
-// // ****
-// export const getArtistTracks = (artistID) => spotifyUserAPI.get(`/artist/`);
-// // ****
-// export const getArtistAlbum = (artistID) => spotifyUserAPI.get(`/artists/${artistID}/albums`);
-// // use this w map to map through albumIDs and return tracks
-// export const getAlbumTracks = (albumID) => spotifyUserAPI.get(`/artists/${albumID}/tracks`);
-// export const getUserTopTracks = () => spotifyUserAPI.get(`/me/top/tracks?limit=3&time_range=short_term`);

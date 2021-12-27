@@ -55,18 +55,13 @@ export default function Auth(){
             const fetchData = async () => {
             try {
                 const { data } = await getCurrentUserProfile();
-                console.log(data)
-                localStorage.setItem('spotifyUser', JSON.stringify(data))
+                localStorage.setItem('spotifyUser', data)
                 setSpotifyUserState(prevState => ({
                     ...prevState,
                     spotifyUser: data
-                }))
-                // where user information should be sent to back for use in model
-                // will need to reapply email each time on login
-                // just post to signup model route for new users
-                // setSpotifyProfile(data);
+                }), console.log('set user to state'))
             } catch(err) {
-                console.error(err);
+                console.error('error setting to state', err);
             }}
             fetchData();
         }if(!accessToken){

@@ -1,31 +1,46 @@
 import { useContext, useEffect } from 'react';
-import { Switch, Route, Link, useHistory } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
 import { CheckMood } from '../components/checkMood.js';
 import { UserContext } from '../components/context/userProvider.js';
+import { PostedMood } from '../components/postedMood.js';
 
 export default function Profile(){
     const {
-        getStatus
-    } = useContext(UserContext)
+        getStatus,
+        userState
+    } = useContext(UserContext);
 
-    const history = useHistory();
+    // const recentMapped = userState.recentMood[0] && userState.recentMood[0].map(mood => 
+    //     <>
+    //         <h3 className='text-sm text-indigo-500'> {mood.userString}'s mood
+    //                 {mood.timeline === 'short_term' && ` these past 30 days`}
+    //                 {mood.timeline === 'medium_term' && ` these past 6 months`}
+    //                 {mood.timeline === 'long_term' && ` the past year`} 
+    //             </h3>
+    //         <PostedMood 
+    //             key={mood._id}
+    //             id={mood._id}
+    //             items={mood.items}
+    //             />
+    //     </>
+    // );
 
-    useEffect(() => {
-        let type = 'user'
-        getStatus(type)
-        history.push('/recent_mood_artists')
-    },[]);
+    // useEffect(() => {
+    //     let type = 'user'
+    //     getStatus(type)
+    // },[]);
+    console.log(userState)
 
     return(
         <div className='container-main'>
                 <span className='text-sm' > set <span className='text-indigo-300'> mood </span> or view more detailed stats  </span>
-                <br/>
                 <Link to={'/check/moods'}>
                     <input className='bg-indigo-300 text-cyan-800 btn' type='button' value='mood view'/>
                 </Link>
-                <h1 className='text-sm' style={{color: 'gray'}}> past month top listens </h1>
+                {/* {recentMapped} */}
+                <h1 className='text-sm pt-2' style={{color: 'gray'}}> past month top listens </h1>
                 {/* <span className='text-sm'> click to view </span> */}
                 {/* <br/> */}
                 <Link to={`/recent_mood_artists`}> 

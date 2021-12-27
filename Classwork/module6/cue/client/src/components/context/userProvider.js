@@ -15,7 +15,7 @@ export default function UserProvider(props){
         user: JSON.parse(localStorage.getItem('user')) || null,
         token: localStorage.getItem('token') || '',
         lists: [],
-        recentMood: {},
+        recentMood: [],
         friendPosts: [],
         errMsg: ''
     };
@@ -27,7 +27,7 @@ export default function UserProvider(props){
     };
 
     const [ spotifyUserState, setSpotifyUserState ] = useState(initSpotifyState);
-
+    console.log(spotifyUserState.spotifyUser)
     const [ userState, setUserState ] = useState(initState);
 
 // for auth
@@ -43,7 +43,7 @@ export default function UserProvider(props){
                 token
             }))
         })
-        .catch(err => handleAuthError(err.response.data.errMsg))
+        .catch(err => handleAuthError(err))
     };
 
     function login(credentials){
@@ -62,7 +62,7 @@ export default function UserProvider(props){
                 token
             }))
         })
-        .catch(err => handleAuthError(err.response.data.errMsg))
+        .catch(err => handleAuthError(err))
     };
 
     function logout(){
@@ -70,7 +70,11 @@ export default function UserProvider(props){
             user: {},
             token: '',
         });
-        localStorage.clear()
+        setSpotifyUserState({
+            spotifyUser: null,
+            spotifyToken: '',
+        });
+        // spotifyLogout()
     };
 
 //  err
@@ -124,31 +128,33 @@ export default function UserProvider(props){
 
 // CRUD **
 // get all friends' posts in DB **
-    const getStatus = (type) => {
+    const getStatus = async (type) => {
         if(type === 'user'){
-        userAxios.get(`/app/moods`, {
+        const { data } = userAxios.get(`/app/moods`, {
             params: {
                 type: type
             }
         })
-        .then(res => setUserState(prevState => ({
-            ...prevState,
-            recentMood: res.data})))
-        .catch(err => console.log(err))
+        return data
+        // setUserState(prevState => ({
+        //     ...prevState,
+        //     recentMood: [data]}))
+        //     console.log(userState)
         } else if(type=== 'friends'){
-        userAxios.get('/app/moods', {
+        const { data } = userAxios.get('/app/moods', {
             params: {
                 type: type
             }
         })
-        .then(res => setUserState(prevState => ({
-            ...prevState,
-            friendPosts: res.data})))
-        .catch(err => console.log(err))
-        }
+        return data
+    }
+        // setUserState(prevState => ({
+        //     ...prevState,
+        //     friendPosts: data}))
+        // }
     };
 
-// get currentUsers recent posts
+// get currentUsers recent playlist
     // const getPosts = async (type) => {
     //     if(type === 'user'){
     //     const { data } = await userAxios.get(`/app/users`, {
@@ -172,80 +178,27 @@ export default function UserProvider(props){
     //     })
     // }};
 
+    const deleteUserAccount = () => {
+        userAxios.delete(`/app/users/removeAcc`)
+        .then(res => console.log(res.data))
+        .then(logout())
+        .catch(err => console.log(err))
+    }
+
     useEffect(() => {
-        console.log(userState)
-    }, [userState])
-
-// new post POST
-    // function addPost(newPost){
-        // userAxios.post('/api/posts', newPost)
-        // .then(res => {
-        //     setUserState(prevState => ({
-        //         ...prevState,
-        //         allPosts: [...prevState.allPosts, res.data]
-        //     }))
-        // })
-        // .catch(err => console.log(err.response.data.errMsg))
-    // };
-
-// DELETE post
-    // function deletePost(postId){
-    //     userAxios.delete(`/api/posts/${postId}`)
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err))
-    //     .finally(getAllPosts())
-    // }
-
-// voting functionality
-    // function submitVote(vote, userId, postId){
-    //     userId === userState.user._id ?
-    //     console.log('Error: this is your own post or comment')
-    //     :
-    //     userAxios.put(`/api/posts/${vote}/${postId}`)
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err.response.data.errMsg))
-    //     .finally(getAllPosts())
-    // }
-
-// comments CRUD
-// GET all comments by user
-    // function getUserComm(userId){
-    //     userAxios.get(`/api/comment/user/${userId}`)
-    //     .then(res => {
-    //         setUserState(prevState => ({
-    //             ...prevState,
-    //             comments: res.data
-    //         }))
-    //     })
-    //     .catch(err => console.log(err.response.data.errMsg))
-    // };
-
-// POST comment
-    // function postComment(postId, newComment){
-    //     userAxios.put(`/api/comment/${postId}`, newComment)
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err.response.data.errMsg))
-    //     .finally(getAllPosts())
-    // }
-
-// DELETE comment ** check **
-    // function deleteComment(postId, comId){
-        // userAxios.put(`/api/${postId}/${comId}`)
-        // .then(res => {
-        //     setUserState(prevState => ({
-        //         ...prevState,
-        //         allPosts: [...prevState.allPosts, res.data]
-        //     }))
-        // })
-        // .catch(err => console.log(err.response.data.errMsg))
-        // .finally(getAllPosts())
-    // }
+        let type = 'user'
+        getStatus(type)
+        .then(res => setUserState(prevState => ({
+                ...prevState,
+                recentMood: [res]})),
+                console.log(userState))
+    }, [])
 
     return(
         <UserContext.Provider
         value={{
             ...userState,
-            ...spotifyUserState,
+            spotifyUserState,
             setSpotifyUserState,
             userState,
             signup,
@@ -255,8 +208,6 @@ export default function UserProvider(props){
             shareItem,
             updateFollowStatus,
             getStatus,
-            // deletePost,
-            // getAllPosts,
             resetAuthError
         }}>
             {props.children}
