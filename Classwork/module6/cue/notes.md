@@ -28,9 +28,6 @@ todo next
 
 Notes to self:
 
-** REVIEW ** :
-    - logout and auto logout if tokens are missing
-
     // *** functionality for later maybe, from app context ***
     // const [ trackFeatures, setTrackFeatures ] = ([{
     //     danceability: '',

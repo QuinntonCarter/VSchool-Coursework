@@ -27,7 +27,6 @@ export default function UserProvider(props){
     };
 
     const [ spotifyUserState, setSpotifyUserState ] = useState(initSpotifyState);
-    console.log(spotifyUserState.spotifyUser)
     const [ userState, setUserState ] = useState(initState);
 
 // for auth

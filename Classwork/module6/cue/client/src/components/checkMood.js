@@ -15,9 +15,10 @@ export const CheckMood = () => {
     } = useContext(AppContext);
     const {
         shareItem,
+        spotifyUserState:{
         spotifyUser : {
             id
-        }
+        }}
     } = useContext(UserContext);
     
     const history = useHistory();

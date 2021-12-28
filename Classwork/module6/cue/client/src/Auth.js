@@ -18,7 +18,7 @@ export default function Auth(){
         login,
         errMsg,
         resetAuthError,
-        spotifyUser,
+        spotifyUserState,
         setSpotifyUserState
     } = useContext(UserContext);
 
@@ -55,7 +55,7 @@ export default function Auth(){
             const fetchData = async () => {
             try {
                 const { data } = await getCurrentUserProfile();
-                localStorage.setItem('spotifyUser', data)
+                localStorage.setItem('spotifyUser', JSON.stringify(data))
                 setSpotifyUserState(prevState => ({
                     ...prevState,
                     spotifyUser: data
@@ -69,7 +69,7 @@ export default function Auth(){
         }
     }, [setSpotifyUserState, token]);
     
-    return spotifyUser ? 
+    return spotifyUserState.spotifyUser ? 
         <div className='authContainer'>
                 { !toggle ?
                     <>
