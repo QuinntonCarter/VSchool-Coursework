@@ -14,7 +14,8 @@ export default function Lists(){
         },
         userState: {
             friendLists
-        }
+        },
+        userState
     } = useContext(UserContext);
 
     const mappedFriendsMoods = friendPosts && friendPosts.map(post => 
@@ -56,11 +57,16 @@ export default function Lists(){
     return(
         <div className='container-main'>
             <div>
-            <span className='text-sm text-indigo-300'> friend moods </span>
+            <span className='text-sm text-indigo-300'> {userState.user.friends.length} friend and {friendPosts.length} posted moods </span>
+                <br/>
+                {friendPosts.length === 0 && <span className='text-sm text-cerise-500'> nothing to display </span>}
+
                 {mappedFriendsMoods}
             </div>
             <div className='pt-3'>
-                <span className='text-sm text text-submarine-300'> friend lists </span>
+                <span className='text-sm text text-submarine-300'> {userState.user.friends.length} friend and {friendLists.length} posted lists </span>
+                <br/>
+                {friendLists.length === 0 && <span className='text-sm text-cerise-500'> nothing to display </span>}
                 {mappedFriendLists}
             </div>
         </div>
