@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../components/context/userProvider.js';
 import { PostedMood } from '../components/postedMood.js';
+import { PostedList } from '../components/postedList.js';
 
 // friends' posts
 export default function Lists(){
@@ -10,6 +11,9 @@ export default function Lists(){
         setUserState,
         userState: {
             friendPosts
+        },
+        userState: {
+            friendLists
         }
     } = useContext(UserContext);
 
@@ -27,6 +31,13 @@ export default function Lists(){
             />
         </>
     );
+
+    const mappedFriendLists = friendLists && friendLists.map(list => 
+        <PostedList
+            list={list}
+            key={list._id}
+        />
+        )
 
     useEffect(() => {
         getStatus('friends')

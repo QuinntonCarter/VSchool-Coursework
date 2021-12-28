@@ -5,6 +5,7 @@ import { RecentArtists } from '../components/recentArtists.js';
 import { CheckMood } from '../components/checkMood.js';
 import { UserContext } from '../components/context/userProvider.js';
 import { PostedMood } from '../components/postedMood.js';
+import { PostedList } from '../components/postedList.js';
 
 export default function Profile(){
     const {
@@ -32,20 +33,12 @@ export default function Profile(){
         </>
     );
 
-    const recentPlaylist = userState.lists && userState.lists.map(list => 
+    const recentPlaylist = userState.lists[0] && userState.lists.map(list => 
         <>
-            <a className='text-sm text-indigo-500' href={list.ownerProfile}> {list.owner}'s mood
-                    {list.timeline === 'short_term' && ` these past 30 days`}
-                    {list.timeline === 'medium_term' && ` these past 6 months`}
-                    {list.timeline === 'long_term' && ` the past year`} 
-                </a>
-            <a href={list.href} title='open playlist in spotify'>
-                <PostedMood 
-                    key={list._id}
-                    id={list._id}
-                    items={list.items}
-                    />
-            </a>
+            <PostedList
+                list={list}
+                key={list._id}
+            />
         </>
         )
 
@@ -65,13 +58,14 @@ export default function Profile(){
 
     return(
         <div className='container-main'>
-                <span className='text-sm' > set <span className='text-indigo-300'> mood </span> or view more detailed stats  </span>
+                <span className='text-sm m-1 p-1' > set <span className='text-indigo-300'> mood </span> or view more detailed stats  </span>
                 <Link to={'/check/moods'}>
                     <input className='bg-indigo-300 text-cyan-800 btn' type='button' value='mood view'/>
                 </Link>
                 {recentMapped}
+                <p style={{color: 'gray'}} className='text-sm m-1'> posted playlist </p>
                 {recentPlaylist}
-                <h1 className='text-sm pt-2' style={{color: 'gray'}}> click to view past month top </h1>
+                <h1 className='text-sm m-1 p-1' style={{color: 'gray'}}> click to view past month top </h1>
                 <Link to={`/recent_mood_artists`}> 
                     <input className='bg-cyan-200 text-cyan-800 btn' type='button' value='artists'/>
                 </Link>
