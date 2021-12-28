@@ -30,5 +30,4 @@ export default function AuthForm(props){
         <p className='text-cerise-700'> {errMsg} </p>
     </form>
     )
-    
-}
+};
