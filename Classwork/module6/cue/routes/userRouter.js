@@ -2,6 +2,7 @@ const express = require('express');
 const userRouter = express.Router();
 const User = require('../models/user.js');
 const List = require('../models/list.js');
+const MoodList = require('../models/moodList.js');
 
 // GET users or item via db query
 userRouter.get('/', (req, res, next) => {
@@ -44,7 +45,7 @@ userRouter.get('/', (req, res, next) => {
                 res.status(500)
             return next(`You can't follow yourself`)
         } else {
-            User.findByIdAndUpdate(req.user._id, {
+            User.findOneAndUpdate({_id: req.user._id}, {
                 $push: { 
                     friends: [req.body.params.id]
                 }
@@ -72,17 +73,41 @@ userRouter.get('/', (req, res, next) => {
                 })}
             });
 
+            // delete account and list
     userRouter.delete(`/removeAcc`, (req, res, next) => {
-    User.findByIdAndDelete( req.user._id ,
-        (err, found) => {
-            if(err){
-                res.status(500)
-                return next(err)
+        MoodList.findOne({ cueUser: req.user._id },
+            (err, found) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                if(found){
+                return MoodList.findByIdAndDelete(found._id, 
+                    (err, found) => {
+                        if(err){
+                            res.status(500).send(`Error deleting ${found._id}`)
+                            return next(err)
+                        }
+                        return User.findByIdAndDelete(req.user._id,
+                            (err, deletedUser) => {
+                                if(err){
+                                    res.status(500)
+                                    return next(err)
+                                }
+                                return res.status(200).send(`Goodbye ${deletedUser}`)
+                            })
+                    })
+            } else {
+                // else if no list, just delete user
+                User.findByIdAndDelete(req.user._id,
+                    (err, deletedUser) => {
+                        if(err){
+                            res.status(500)
+                            return next(err)
+                        }
+                        return res.status(200).send(`Goodbye ${deletedUser}`)
+                    })
             }
-            console.log(found)
-            // if(req.user._id === found){
-            //     console.log(found)
-            // }
         })
     });
             

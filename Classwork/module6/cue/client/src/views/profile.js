@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
@@ -8,11 +8,16 @@ import { PostedMood } from '../components/postedMood.js';
 
 export default function Profile(){
     const {
+        getPosts,
         userState,
+        getStatus,
+        setUserState,
         deleteUserAccount
     } = useContext(UserContext);
 
-    const recentMapped = userState.recentMood[0] && userState.recentMood.map(mood => 
+    console.log(userState)
+
+    const recentMapped = userState.recentMood && userState.recentMood.map(mood => 
         <>
             <h3 className='text-sm text-indigo-500'> {mood.userString}'s mood
                     {mood.timeline === 'short_term' && ` these past 30 days`}
@@ -27,6 +32,37 @@ export default function Profile(){
         </>
     );
 
+    const recentPlaylist = userState.lists && userState.lists.map(list => 
+        <>
+            <a className='text-sm text-indigo-500' href={list.ownerProfile}> {list.owner}'s mood
+                    {list.timeline === 'short_term' && ` these past 30 days`}
+                    {list.timeline === 'medium_term' && ` these past 6 months`}
+                    {list.timeline === 'long_term' && ` the past year`} 
+                </a>
+            <a href={list.href} title='open playlist in spotify'>
+                <PostedMood 
+                    key={list._id}
+                    id={list._id}
+                    items={list.items}
+                    />
+            </a>
+        </>
+        )
+
+    useEffect(() => {
+        getStatus('user')
+        .then(res => setUserState(prevState => ({
+                ...prevState,
+                recentMood: res
+            }))
+        )
+        getPosts('user')
+        .then(res => setUserState(prevState => ({
+            ...prevState,
+            lists: res
+        })))
+    },[])
+
     return(
         <div className='container-main'>
                 <span className='text-sm' > set <span className='text-indigo-300'> mood </span> or view more detailed stats  </span>
@@ -34,6 +70,7 @@ export default function Profile(){
                     <input className='bg-indigo-300 text-cyan-800 btn' type='button' value='mood view'/>
                 </Link>
                 {recentMapped}
+                {recentPlaylist}
                 <h1 className='text-sm pt-2' style={{color: 'gray'}}> click to view past month top </h1>
                 <Link to={`/recent_mood_artists`}> 
                     <input className='bg-cyan-200 text-cyan-800 btn' type='button' value='artists'/>

@@ -3,7 +3,7 @@ export const PostedMood = props => {
         items
     } = props
 
-    const mappedItem = items.map((item, i) => 
+    const mappedItem = items && items.map((item, i) => 
         <figure className={`flex-1 text-auto`}>
             <figcaption className='text-cerise-500'> {item.selectionName} </figcaption>
             <img src={item.image} alt={item.id}/>

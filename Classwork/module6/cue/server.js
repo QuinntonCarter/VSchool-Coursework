@@ -146,6 +146,13 @@ app.get("/refresh_token", (req, res) => {
     });
 });
 
+app.use((err, req, res, next) => {
+  if(err.name === "UnauthorizedError"){
+      res.status(err.status)
+  }
+  return res.send({ errMsg: err.message })
+});
+
 // ** create logout enpoint that removes cookies and sends user back to login page
 app.listen(PORT, () => {
   console.log(`Music app listening at ${PORT}`);

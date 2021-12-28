@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 export const UserContext = React.createContext();
@@ -16,6 +16,8 @@ export default function UserProvider(props){
         token: localStorage.getItem('token') || '',
         lists: [],
         recentMood: [],
+        friends: [],
+        friendLists: [],
         friendPosts: [],
         errMsg: ''
     };
@@ -69,17 +71,15 @@ export default function UserProvider(props){
             user: {},
             token: '',
         });
-        setSpotifyUserState({
-            spotifyUser: null,
-            spotifyToken: '',
-        });
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
     };
 
 //  err
-    function handleAuthError(errMsg){
+    function handleAuthError(err){
         setUserState(prevState => ({
             ...prevState,
-            errMsg
+            errMsg: JSON.stringify(err.data)
         }))
     };
 
@@ -90,6 +90,7 @@ export default function UserProvider(props){
         }))
     };
 
+// share posts depending on type
     const shareItem = async (list, timeframe) => {
         if(list.type === 'playlist'){
             userAxios.post(`/app/lists`, list, {
@@ -101,11 +102,12 @@ export default function UserProvider(props){
             .catch(err => console.log(err))
         } else {
             userAxios.post(`/app/moods/${timeframe}`, list)
-            .then((res) => setUserState(prevState => ({...prevState, recentMood: res.data})))
+            .then((res) => setUserState(prevState => ({...prevState, recentMood: [res.data]})))
             .catch(err => console.log(err))
         }
     };
 
+    // follow and unfollow
     const updateFollowStatus = (id, type) => {
         userAxios.post(`/app/users/friends`, {
             params: {
@@ -116,15 +118,13 @@ export default function UserProvider(props){
         .then(res => 
             setUserState(prevState => ({
                 ...prevState,
-                user: {
-                    friends: res.data.friends
-                }
+                user: res.data
             }))
             )
         .catch(err => console.log(err))
     };
 
-// CRUD **
+
 // get all friends' posts in DB **
     const getStatus = async (type) => {
         if(type === 'user'){
@@ -134,7 +134,7 @@ export default function UserProvider(props){
             }
         })
         return data
-        } else if(type=== 'friends'){
+        } else if(type === 'friends'){
         const { data } = await userAxios.get('/app/moods', {
             params: {
                 type: type
@@ -144,53 +144,36 @@ export default function UserProvider(props){
     }};
 
 // get recent playlist
-    // const getPosts = async (type) => {
-    //     if(type === 'user'){
-    //     const { data } = await userAxios.get(`/app/users`, {
-    //         params: {
-    //             type: 'user',
-    //         }
-    //     })
-    //     .then(() => {
-    //         setUserState(prevState => ({
-    //             ...prevState,
-    //             recentMood: data.mood,
-    //             lists: [data.lists]
-    //         }))
-    //     })
-    //     .catch(err => console.log(err.response.data.errMsg))
-    // } else if(type=== 'friends'){
-    //     const { data } = await userAxios.get(`/app/users`, {
-    //         params: {
-    //             type: 'friends'
-    //         }
-    //     })
-    // }};
+    const getPosts = async (type) => {
+        if(type === 'user'){
+        const { data } = await userAxios.get(`/app/lists`, {
+            params: {
+                type: type,
+            }
+        })
+        return data
+    } else if(type === 'friends'){
+        const { data } = await userAxios.get(`/app/lists`, {
+            params: {
+                type: type
+            }
+        })
+        return data
+    }};
 
+    // delete account and logout
     const deleteUserAccount = () => {
         userAxios.delete(`/app/users/removeAcc`)
         .then(res => console.log(res.data))
-        .then(logout())
         .catch(err => console.log(err))
+        .finally(logout())
     }
-
-    useEffect(() => {
-        getStatus('user')
-        .then(res => setUserState(prevState => ({
-                ...prevState,
-                recentMood: res}))
-        )
-        getStatus('friends')
-        .then(res => setUserState(prevState => ({
-                ...prevState,
-                friendPosts: res}))
-        )
-    }, [])
 
     return(
         <UserContext.Provider
         value={{
             ...userState,
+            setUserState,
             spotifyUserState,
             setSpotifyUserState,
             userState,
@@ -202,6 +185,7 @@ export default function UserProvider(props){
             shareItem,
             updateFollowStatus,
             getStatus,
+            getPosts,
             resetAuthError
         }}>
             {props.children}
