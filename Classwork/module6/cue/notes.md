@@ -16,7 +16,7 @@ todo next
         + Mood
             X   POST and overwrite mood
         + users
-            -   DELETE user's profile
+            X   DELETE user's profile
             X   GET friends' posts
             X   $push friends db ids to array in model
             X   POST remove friend w $pull
