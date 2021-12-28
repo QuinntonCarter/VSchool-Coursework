@@ -29,6 +29,7 @@ listsRouter.get('/', (req, res, next) => {
 // POST your list to the db: overwrites previous posted list if found; if not just posts list to db
 listsRouter.post(`/`, (req, res, next) => {
     req.body.cueUser = req.user._id
+    req.body.userString = req.user.username
     const newList = new List(req.body)
     List.findOne({ cueUser: req.user._id },
         (err, found) => {

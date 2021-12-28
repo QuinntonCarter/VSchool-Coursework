@@ -33,7 +33,7 @@ export default function Profile(){
         </>
     );
 
-    const recentPlaylist = userState.lists[0] && userState.lists.map(list => 
+    const recentPlaylist = userState.lists && userState.lists.map(list => 
         <>
             <PostedList
                 list={list}

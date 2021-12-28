@@ -1,11 +1,12 @@
 export const PostedList = props => {
-    const{
+    const {
         list
     } = props
 
     return(
         <div className='border-solid border-2 border-cerise-600 pb-3'>
-            <a className='text-sm text-indigo-500 m-1 p-1' href={list.ownerProfile} title='open user in Spotify'> {list.owner} : {list.name}</a>
+            <p className='text-sm m-1 p-1'> {list.userString && list.userString} </p>
+            <a className='text-sm text-indigo-500 m-1 p-1' href={list.ownerProfile} title='open user in Spotify'> posted by: {list.owner} <br/> {list.name}</a>
             <a href={list.href} title='open playlist in Spotify'>
                 <img src={list.image} alt={list.name}/>
                 <a href={list.href}> 

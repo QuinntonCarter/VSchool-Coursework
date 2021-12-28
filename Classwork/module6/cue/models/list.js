@@ -32,6 +32,9 @@ const list = new Schema({
     cueUser: {
         type: Schema.Types.ObjectId,
         ref: "User"
+    },
+    userString: {
+        type: String
     }
 })
 

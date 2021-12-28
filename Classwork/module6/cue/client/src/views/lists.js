@@ -32,7 +32,7 @@ export default function Lists(){
         </>
     );
 
-    const mappedFriendLists = friendLists && friendLists.map(list => 
+    const mappedFriendLists = friendLists[0] && friendLists.map(list => 
         <PostedList
             list={list}
             key={list._id}
@@ -55,8 +55,14 @@ export default function Lists(){
 
     return(
         <div className='container-main'>
-            <h1 style={{color: 'gray'}}> Mood lists posted by friends </h1>
+            <div>
+            <span className='text-sm text-indigo-300'> friend moods </span>
                 {mappedFriendsMoods}
+            </div>
+            <div className='pt-3'>
+                <span className='text-sm text text-submarine-300'> friend lists </span>
+                {mappedFriendLists}
+            </div>
         </div>
     )
 };
