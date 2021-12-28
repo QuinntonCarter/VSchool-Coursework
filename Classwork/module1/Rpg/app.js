@@ -1,7 +1,7 @@
 var readline = require("readline-sync");
 var inventory = [ ];
 var hP = 30;
-const textDisplay = document["forText"]
+// const textDisplay = document["forText"]
 
 // textDisplay.addEventListener('submit', function {
 
@@ -89,13 +89,13 @@ const textDisplay = document["forText"]
 
 var mid =  {
     name:"Skeleton", 
-    health: 7, 
+    health: 17, 
     attack: 5, 
     voiceSound: "*bones clanking*"
 }
 var boss = {
     name: "Cyclops", 
-    health: 27, 
+    health: 37, 
     attack: 10, 
     voiceSound: "RAAAAAGGHHH!"
 }
@@ -107,38 +107,42 @@ var low = {
 }
 
 // Battle Menu Options //
-function tryToFlee() {
+function tryToFlee(enemy) {
     var sum = Math.floor(Math.random() * 2)
     if (sum === 0){
-        readline.keyInPause("The enemy blocks your path!")
+        readline.keyInPause(`The ${enemy.name} blocks your path!`)
         // enemyCounter()
         // battleMenu()
     } else {
+        enemy.health=0
         readline.keyInPause("You rush down an adjacent corridor and escape!")
-        walk()
+        return walk()
     }
 }
 
 function attack(enemy) {
-    var sum = Math.floor(Math.random() * 3)
+    var sum = Math.floor(Math.random() * 2)
     if (sum === 0){
+        let dam = enemy.health-=10
         console.log("Hit!"+sum)
-        readline.keyInPause("weapon reg damage placeholder")
-        enemy.health-=10
+        readline.keyInPause(`${dam}`)
+        return dam
     } else if (sum === 2){
+        let dam = enemy.health-=10
         console.log("Hit!"+sum)
-        readline.keyInPause("weapon reg damage placeholder")
-        enemy.health-=10
+        readline.keyInPause(`${dam}`)
+        return dam
     } else {
+        let dam = enemy.health-=20
         console.log("THWWAAAACK!!")
-        readline.keyInPause("weapon crit damage placeholder"+sum)
-        enemy.health-=20
+        readline.keyInPause(`${enemy.name} took 20 damage!`)
+        return dam
     }
 }
 
 // enemy attack/counter// 
 function enemyAttack(enemy) {
-    var sum = Math.floor(Math.random * 3)
+    var sum = Math.floor(Math.random * 2)
     if (sum === 0){
         console.log("The enemy attacks!")
         readline.keyInPause(enemy.name+ "dbl attack damage placeholder")
@@ -160,9 +164,9 @@ function enemyAppear() {
     if (sum === 0){
         return low
     } else if (sum === 1){
-        return boss
-    } else {
         return mid
+    } else {
+        return boss
     }
 }
 
@@ -178,23 +182,24 @@ function findItem() {
 
 // Battle Menu //
 function battleMenu(enemy) {
-        // while enemy and hero are alive
-        while (hP > 0 && enemy.health > 0){
-    let input = readline.keyInSelect(["Flee", "Attack"])
-    if (input === 0){
-        tryToFlee()
-    } else if (input === 1) {
-        attack(enemy)
-        console.log("Enemy: "+enemy.health)
-        if (enemy.health <= 0){
-            return
+    // while enemy and hero are alive
+    while (hP > 0 && enemy.health > 0){
+        let input = readline.keyInSelect(["Flee", "Attack"])
+        if(input === 0){
+            tryToFlee(enemy)
+        } else if (input === 1) {
+            attack(enemy)
+            readline.keyInPause(`${enemy.name} health: ${enemy.health}`)
+            if(enemy.health <= 0){
+                return walk()
+            } else {
+                enemyAttack(enemy)
+                console.log(playerName+ ": "+hP)
+            }
+        } else {
+            console.log("Invalid input")
         }
-        enemyAttack(enemy)
-        console.log(playerName+ ": "+hP)
-    } else {
-        console.log("Invalid input")
     }
-}
 }
 
 // Walk Function //

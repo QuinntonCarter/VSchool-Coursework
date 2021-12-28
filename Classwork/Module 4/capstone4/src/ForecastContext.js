@@ -63,33 +63,7 @@ function ForecastContextProvider(props) {
                     )
                 )
         }
-
-        // componentDidUpdate(){
-        //     // if (this.state.pullWeekly === true){
-        //         // BETA simplified loop
-        //         if(location){
-        //         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.currentDetails?.coord?.lat}&lon=${this.state.currentDetails?.coord?.lon}&units=imperial&exclude=minutely&appid=5ae7b3c76c2e696e51c9f8585a68c324`)
-        //         .then(response => response.json())
-        //         .then(data => 
-        //             this.setState({
-        //             weeklyDetails: data,
-        //             pullWeekly: false,
-        //             pullImg: true
-        //         })
-        //         )
-        //     // implement logic to pull images local to selected region from teleport api 
-        //         // } if (this.state.pullImg === true){
-        //         // var location = this.state.location.split(' ').join('-');
-        //         //     fetch(`https://api.teleport.org/api/urban_areas/slug:${location}/images/`)
-        //         //     .then(response => response.json())
-        //         //     .then(data =>
-        //         //         console.log(data))
-        //         // }
-        //     }
-        // }
-
-        // ** CLARIFY props will cause issues with rerendering if used to pass w CLASS, correct? 
-        // i don't think i'm understanding them correctly **
+        
     return(
         <div>
             {/* // displays another main */}

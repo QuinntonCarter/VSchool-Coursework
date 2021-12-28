@@ -11,7 +11,7 @@ postRouter.get("/", (req, res, next) => {
         }
         return res.status(200).send(posts)
     })
-})
+});
 
 // GET posts by a user's Id
 postRouter.get("/user/:userId", (req, res, next) => {
@@ -22,7 +22,7 @@ postRouter.get("/user/:userId", (req, res, next) => {
         }
         return res.status(200).send(posts)
     })
-})
+});
 
 // POST new post
 postRouter.post("/", (req, res, next) => {
@@ -50,7 +50,7 @@ postRouter.delete(`/:postId`, (req, res, next) => {
             return res.status(200).send(`Successfully deleted post: ${deletedPost.title}`)
         }
     )
-})
+});
 
 // increment vote
 postRouter.put("/upvote/:postId", (req, res, next) => {
@@ -68,7 +68,7 @@ postRouter.put("/upvote/:postId", (req, res, next) => {
             return res.status(201).send(updatedPost)
         }
     )
-})
+});
 
 // decrement vote
 postRouter.put("/downvote/:postId", (req, res, next) => {
@@ -86,6 +86,6 @@ postRouter.put("/downvote/:postId", (req, res, next) => {
             return res.status(201).send(updatedPost)
         }
         )
-    })
+    });
 
 module.exports = postRouter

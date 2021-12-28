@@ -48,7 +48,7 @@ commentRouter.put(`/:postId`, (req, res, next) => {
 commentRouter.put(`/:postId/:comId`, (req, res, next) => {
     const delCom = req.params.comId
     Post.findOneAndUpdate(
-        { _id: req.params.postId},
+        { _id: req.params.postId },
         { $pull: 
             { comment: { _id: delCom } }
         },

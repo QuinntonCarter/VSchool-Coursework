@@ -43,7 +43,7 @@ addEventListener('keydown',function(x){
 // adds event listener on B keydown that colors square to blue
 addEventListener('keydown',function(x){
     // calls styling to square
-    if(x.keyCode == 66)
+    if(x.key == 'b')
     square.style.backgroundColor = 'blue'
 })
 

@@ -3,7 +3,7 @@ import UserMemes from './UserMemes.js';
 import MemeForm from '../forms/MemeForm.js';
 import axios from 'axios';
 
-const initInputs = { topText: '', bottomText: '' }
+const initInputs = { topText: '', bottomText: '' };
 
 export default function MemeGenerator(props){
     const {
@@ -102,7 +102,7 @@ export default function MemeGenerator(props){
                 created={meme.created}
                 initialUrl={meme.initialUrl}
             />
-        ).reverse()
+        ).reverse();
 
         useEffect(() => {
             axios.get(`/create`, 
@@ -123,7 +123,7 @@ export default function MemeGenerator(props){
                 }))
             )
             .catch(err => console.log(err))
-        }, [inputs.topText, inputs.bottomText])
+        }, [inputs.topText, inputs.bottomText]);
 
         return(
             <div className='flex flex-col pb-12 pt-16 overflow-scroll bg-blue-200 w-screen p-3'>
@@ -138,8 +138,8 @@ export default function MemeGenerator(props){
                         getMemes={getMemes}
                         memes={memes}
                     />
-                    { userMemes ? mappedMemes(userMemes) : null }
+                    { userMemes && mappedMemes(userMemes)}
                 <p className='pt-14 text-center text-xs font-mono text-blue-300'> Quinnton Carter 2021 </p>
             </div>
         )
-}
+};
