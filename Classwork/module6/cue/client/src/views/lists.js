@@ -38,7 +38,7 @@ export default function Lists(){
             list={list}
             key={list._id}
         />
-        )
+        );
 
     useEffect(() => {
         getStatus('friends')
@@ -52,7 +52,7 @@ export default function Lists(){
             ...prevState,
             friendLists: res
         })))
-    },[])
+    },[]);
 
     return(
         <div className='container-main'>
@@ -60,7 +60,6 @@ export default function Lists(){
             <span className='text-sm text-indigo-300'> {userState.user.friends.length} friend and {friendPosts.length} posted moods </span>
                 <br/>
                 {friendPosts.length === 0 && <span className='text-sm text-cerise-500'> nothing to display </span>}
-
                 {mappedFriendsMoods}
             </div>
             <div className='pt-3'>
