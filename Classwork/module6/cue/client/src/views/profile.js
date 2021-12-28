@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { RecentTracks } from '../components/recentTracks.js';
 import { RecentArtists } from '../components/recentArtists.js';
@@ -8,30 +8,24 @@ import { PostedMood } from '../components/postedMood.js';
 
 export default function Profile(){
     const {
-        getStatus,
-        userState
+        userState,
+        deleteUserAccount
     } = useContext(UserContext);
 
-    // const recentMapped = userState.recentMood[0] && userState.recentMood[0].map(mood => 
-    //     <>
-    //         <h3 className='text-sm text-indigo-500'> {mood.userString}'s mood
-    //                 {mood.timeline === 'short_term' && ` these past 30 days`}
-    //                 {mood.timeline === 'medium_term' && ` these past 6 months`}
-    //                 {mood.timeline === 'long_term' && ` the past year`} 
-    //             </h3>
-    //         <PostedMood 
-    //             key={mood._id}
-    //             id={mood._id}
-    //             items={mood.items}
-    //             />
-    //     </>
-    // );
-
-    // useEffect(() => {
-    //     let type = 'user'
-    //     getStatus(type)
-    // },[]);
-    console.log(userState)
+    const recentMapped = userState.recentMood[0] && userState.recentMood.map(mood => 
+        <>
+            <h3 className='text-sm text-indigo-500'> {mood.userString}'s mood
+                    {mood.timeline === 'short_term' && ` these past 30 days`}
+                    {mood.timeline === 'medium_term' && ` these past 6 months`}
+                    {mood.timeline === 'long_term' && ` the past year`} 
+                </h3>
+            <PostedMood 
+                key={mood._id}
+                id={mood._id}
+                items={mood.items}
+                />
+        </>
+    );
 
     return(
         <div className='container-main'>
@@ -39,10 +33,8 @@ export default function Profile(){
                 <Link to={'/check/moods'}>
                     <input className='bg-indigo-300 text-cyan-800 btn' type='button' value='mood view'/>
                 </Link>
-                {/* {recentMapped} */}
-                <h1 className='text-sm pt-2' style={{color: 'gray'}}> past month top listens </h1>
-                {/* <span className='text-sm'> click to view </span> */}
-                {/* <br/> */}
+                {recentMapped}
+                <h1 className='text-sm pt-2' style={{color: 'gray'}}> click to view past month top </h1>
                 <Link to={`/recent_mood_artists`}> 
                     <input className='bg-cyan-200 text-cyan-800 btn' type='button' value='artists'/>
                 </Link>
@@ -69,6 +61,7 @@ export default function Profile(){
                     }>
                     </Route>
                 </Switch>
+                <button className='btnbold-small bg-cerise-900' onClick={deleteUserAccount}> delete profile </button>
         </div>
     )
 };

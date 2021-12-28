@@ -73,7 +73,7 @@ userRouter.get('/', (req, res, next) => {
             });
 
     userRouter.delete(`/removeAcc`, (req, res, next) => {
-    User.find({ _id:req.user._id },
+    User.findByIdAndDelete( req.user._id ,
         (err, found) => {
             if(err){
                 res.status(500)
@@ -84,6 +84,6 @@ userRouter.get('/', (req, res, next) => {
             //     console.log(found)
             // }
         })
-    })
+    });
             
 module.exports = userRouter

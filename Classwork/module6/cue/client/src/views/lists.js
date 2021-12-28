@@ -5,16 +5,10 @@ import { PostedMood } from '../components/postedMood.js';
 // friends' lists
 export default function Lists(){
     const {
-        getStatus,
         userState: {
             friendPosts
         }
     } = useContext(UserContext);
-
-    useEffect(() => {
-        let type = 'friends'
-        getStatus(type)
-    },[]);
     
     const mappedFriendsMoods = friendPosts.map(post => 
         <>

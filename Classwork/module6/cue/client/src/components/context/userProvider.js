@@ -74,7 +74,6 @@ export default function UserProvider(props){
             spotifyUser: null,
             spotifyToken: '',
         });
-        // spotifyLogout()
     };
 
 //  err
@@ -130,31 +129,22 @@ export default function UserProvider(props){
 // get all friends' posts in DB **
     const getStatus = async (type) => {
         if(type === 'user'){
-        const { data } = userAxios.get(`/app/moods`, {
+        const { data } = await userAxios.get(`/app/moods`, {
             params: {
                 type: type
             }
         })
         return data
-        // setUserState(prevState => ({
-        //     ...prevState,
-        //     recentMood: [data]}))
-        //     console.log(userState)
         } else if(type=== 'friends'){
-        const { data } = userAxios.get('/app/moods', {
+        const { data } = await userAxios.get('/app/moods', {
             params: {
                 type: type
             }
         })
         return data
-    }
-        // setUserState(prevState => ({
-        //     ...prevState,
-        //     friendPosts: data}))
-        // }
-    };
+    }};
 
-// get currentUsers recent playlist
+// get recent playlist
     // const getPosts = async (type) => {
     //     if(type === 'user'){
     //     const { data } = await userAxios.get(`/app/users`, {
@@ -186,12 +176,16 @@ export default function UserProvider(props){
     }
 
     useEffect(() => {
-        let type = 'user'
-        getStatus(type)
+        getStatus('user')
         .then(res => setUserState(prevState => ({
                 ...prevState,
-                recentMood: [res]})),
-                console.log(userState))
+                recentMood: res}))
+        )
+        getStatus('friends')
+        .then(res => setUserState(prevState => ({
+                ...prevState,
+                friendPosts: res}))
+        )
     }, [])
 
     return(
@@ -205,6 +199,7 @@ export default function UserProvider(props){
             login,
             logout,
             userAxios,
+            deleteUserAccount,
             shareItem,
             updateFollowStatus,
             getStatus,
