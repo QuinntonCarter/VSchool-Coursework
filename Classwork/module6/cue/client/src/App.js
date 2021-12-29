@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-// from components
+// from components/context
 import { accessToken } from './components/spotify.js';
 import { UserContext } from './components/context/userProvider.js';
+import { AppContext } from './components/context/appContext.js';
 // components
 import ProtectedRoute from './components/protectedRoute.js';
 import Banner from './components/banner.js';
@@ -15,7 +16,6 @@ import { ResultsProfile } from './components/resultsProfile.js';
 import Lists from './views/lists.js';
 import Profile from './views/profile.js';
 import { Search } from './views/search.js';
-import { AppContext } from './components/context/appContext.js';
 
 function App() {
   const { token } = useContext(UserContext)

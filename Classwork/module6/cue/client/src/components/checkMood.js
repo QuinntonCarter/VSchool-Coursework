@@ -13,6 +13,7 @@ export const CheckMood = () => {
         found,
         setFound
     } = useContext(AppContext);
+    
     const {
         shareItem,
         spotifyUserState:{

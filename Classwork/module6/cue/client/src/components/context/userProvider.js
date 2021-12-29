@@ -44,7 +44,7 @@ export default function UserProvider(props){
                 token
             }))
         })
-        .catch(err => handleAuthError(err))
+        .catch(err => handleAuthError(err.response.data.errMsg))
     };
 
     function login(credentials){
@@ -63,7 +63,7 @@ export default function UserProvider(props){
                 token
             }))
         })
-        .catch(err => handleAuthError(err))
+        .catch(err => handleAuthError(err.response.data.errMsg))
     };
 
     function logout(){
@@ -79,7 +79,7 @@ export default function UserProvider(props){
     function handleAuthError(err){
         setUserState(prevState => ({
             ...prevState,
-            errMsg: JSON.stringify(err.data)
+            errMsg: err
         }))
     };
 
@@ -165,9 +165,9 @@ export default function UserProvider(props){
     const deleteUserAccount = () => {
         userAxios.delete(`/app/users/removeAcc`)
         .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+        .catch(err => handleAuthError(err))
         .finally(logout())
-    }
+    };
 
     return(
         <UserContext.Provider

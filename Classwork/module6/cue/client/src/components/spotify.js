@@ -110,5 +110,4 @@ spotifyUserAPI.interceptors.request.use(config => {
     return config
 });
 
-
 export const getCurrentUserProfile = () => spotifyUserAPI.get('/me');

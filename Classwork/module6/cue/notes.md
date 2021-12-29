@@ -4,6 +4,7 @@ moods one to one
 
 todo final
     + add delete of playlists from db to user > deleteAcc route
+    + fix error handling
 
 Notes to self:
     // *** functionality for later maybe, from app context ***

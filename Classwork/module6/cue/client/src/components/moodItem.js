@@ -6,7 +6,7 @@ export const MoodItem = props => {
     const {
         item,
         color
-    } = props
+    } = props;
 
     const {
         getPlaylistTracks,

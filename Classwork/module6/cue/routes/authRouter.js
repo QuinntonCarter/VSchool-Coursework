@@ -32,11 +32,11 @@ authRouter.post("/login", (req, res, next) => {
     User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
         if(err){
         res.status(500)
-        return next(new Error("User and password not found or other error."))
+        return next(new Error("Something went wrong, please try again"))
         }
         if(!user){
         res.status(403)
-        return next(new Error("Username or Password are incorrect"))
+        return next(new Error("User not found"))
         }
         user.checkPassword(req.body.password, (err, isMatch) => {
         if(err){

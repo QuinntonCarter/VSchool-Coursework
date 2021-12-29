@@ -61,7 +61,7 @@ export default function Auth(){
                     spotifyUser: data
                 }))
             } catch(err) {
-                console.error('error setting to state', err);
+                console.error(err);
             }}
             fetchData();
         }if(!accessToken){

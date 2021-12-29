@@ -9,13 +9,12 @@ export const ResultDetails = props => {
         title,
         mood,
         item
-    } = props
+    } = props;
 
     const {
         getSelection
-    } = useContext(AppContext)
+    } = useContext(AppContext);
 
-    // useLocation and or useRef/Routematch? idk
     const location = props.username ? 'user' : 'results'
 
     return(
@@ -26,4 +25,4 @@ export const ResultDetails = props => {
             { mood }
         </div>
     )
-}
+};
