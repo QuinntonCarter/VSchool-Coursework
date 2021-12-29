@@ -73,7 +73,7 @@ userRouter.get('/', (req, res, next) => {
                 })}
             });
 
-            // delete account and list
+    // delete account and list
     userRouter.delete(`/removeAcc`, (req, res, next) => {
         MoodList.findOne({ cueUser: req.user._id },
             (err, found) => {

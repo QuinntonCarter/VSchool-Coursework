@@ -102,7 +102,7 @@ export default function Auth(){
             <p className='text-xs p-3'> <span className='text-indigo-500'> mood. </span> is an app built for viewing <span style={{color: '#1DB954'}}> Spotify </span> listening history among friends. 
             By using this app, you are agree to allow it to access your <span style={{color: '#1DB954'}}> Spotify </span> listening history and stats. 
             If you choose to post, you are agreeing to store the associated <span style={{color: '#1DB954'}}> Spotify </span> listening metadata for viewing by 
-            yourself and friends but no sensitive account information. <br/> <span className='text-indigo-600'> This app will never access or store sensitive account information. </span> </p>
+            yourself and friends but no sensitive account information. <br/> <span className='text-indigo-600'> This app will never access or store sensitive account information. </span> You may delete your account at any time.</p>
             <a className='btnbold-small bg-indigo-600' href="http://localhost:8888/login"> Login with Spotify </a>
         </div>
 };
