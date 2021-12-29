@@ -1,5 +1,8 @@
 import axios from 'axios';
 const spotifyUserAPI = axios.create();
+const { 
+  REACT_APP_API_URL
+} = process.env
 
 // declare localStorage keys
 export const LOCALSTORAGE_KEYS = {
@@ -106,7 +109,7 @@ export const accessToken = getAccessToken();
 
 spotifyUserAPI.interceptors.request.use(config => {
     config.headers.Authorization = `Bearer ${accessToken}`
-    config.baseURL = 'https://api.spotify.com/v1'
+    config.baseURL = REACT_APP_API_URL
     return config
 });
 

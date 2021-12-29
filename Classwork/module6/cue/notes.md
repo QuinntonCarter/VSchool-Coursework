@@ -4,6 +4,7 @@ moods one to one
 
 todo final
     + add delete of playlists from db to user > deleteAcc route
+    + add more stuff to searched profile page
 
 Notes to self:
     // *** functionality for later maybe, from app context ***

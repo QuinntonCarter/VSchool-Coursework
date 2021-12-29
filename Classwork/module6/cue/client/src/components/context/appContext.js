@@ -3,15 +3,21 @@ import axios from 'axios';
 import { accessToken } from '../spotify.js';
 import { UserContext } from './userProvider.js';
 
+const {
+    REACT_APP_API_URL,
+    REACT_APP_MOOD_SERVER_URL
+} = process.env
+
 export const AppContext = React.createContext();
 
 export default function AppContextProvider(props){
     const spotifyUserAPI = axios.create();
     spotifyUserAPI.interceptors.request.use(config => {
         config.headers.Authorization = `Bearer ${accessToken}`
-        config.baseURL = 'https://api.spotify.com/v1'
+        config.baseURL = REACT_APP_API_URL
         return config
     });
+
     const {
         userAxios
     } = useContext(UserContext);
@@ -26,7 +32,7 @@ export default function AppContextProvider(props){
 
     const search = (inputs) => {
         const parseInputs = inputs.split(' ').join('_')
-        userAxios.get(`/app/users`, {
+        userAxios.get(`${REACT_APP_MOOD_SERVER_URL}/app/users`, {
             params: {
                 inputs: parseInputs,
                 type: 'friend'
@@ -38,7 +44,7 @@ export default function AppContextProvider(props){
 
     const getSelection = (id, location) => {
         setFound()
-        userAxios.get(`/app/users`, {
+        userAxios.get(`${REACT_APP_MOOD_SERVER_URL}/app/users`, {
             params: {
                 id: id,
                 type: location
