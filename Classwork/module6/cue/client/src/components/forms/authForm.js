@@ -11,7 +11,7 @@ export default function AuthForm(props){
     } = props
 
     return(
-    <form className='container-main text-indigo-900' onSubmit={handleSubmit}>
+    <form className='text-indigo-900' onSubmit={handleSubmit}>
         <input className='m-3 p-1'
             value={username}
             name='username'
@@ -26,8 +26,8 @@ export default function AuthForm(props){
             onChange={handleChange}
             placeholder='password'
         />
-        <button className='bg-indigo-400 text-cyan-800 rounded p-1 m-2'> {btnText} </button>
-        <p className='text-cerise-700'> {errMsg} </p>
+        <button className='bg-indigo-400 text-cyan-800 rounded p-1 m-3 text-md'> {btnText} </button>
+        <p className='text-cerise-700 text-center font-medium'> {errMsg} </p>
     </form>
     )
 };

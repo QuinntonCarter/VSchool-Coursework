@@ -8,7 +8,7 @@ authRouter.post("/signup", (req, res, next) => {
     User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
         if(err){
         res.status(500)
-        return next(err)
+        return next(new Error('Something went wrong'))
         }
         if(user){
         res.status(403)
@@ -18,7 +18,7 @@ authRouter.post("/signup", (req, res, next) => {
         newUser.save((err, savedUser) => {
         if(err){
             res.status(500)
-            return next(err)
+            return next(new Error('Something went wrong'))
         }
                                 // payload,            // secret
         const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET)

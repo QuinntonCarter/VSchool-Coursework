@@ -51,12 +51,12 @@ userRouter.get('/', (req, res, next) => {
                 }
             },
             { new: true },
-            (err, updatedFriends) => {
+            (err, updatedUser) => {
                 if(err){
                     res.status(500)
                     return next(err)
                 }
-                return res.status(201).send(updatedFriends)
+                return res.status(201).send(updatedUser)
             })}} else if(req.body.params.type === 'unfollow'){
                 User.findByIdAndUpdate(req.user._id, {
                     $pull: { 
@@ -64,16 +64,16 @@ userRouter.get('/', (req, res, next) => {
                     }
                 },
                 { new: true },
-                (err, updatedFriends) => {
+                (err, updatedUser) => {
                     if(err){
                         res.status(500)
                         return next(err)
                     }
-                    return res.status(201).send(updatedFriends)
+                    return res.status(201).send(updatedUser)
                 })}
             });
 
-    // delete account and list
+            // delete account and list
     userRouter.delete(`/removeAcc`, (req, res, next) => {
         MoodList.findOne({ cueUser: req.user._id },
             (err, found) => {
@@ -94,7 +94,7 @@ userRouter.get('/', (req, res, next) => {
                                     res.status(500)
                                     return next(err)
                                 }
-                                return res.status(200).send(`Goodbye ${deletedUser}`)
+                                return res.status(200).send(`Goodbye ${deletedUser.username}`)
                             })
                     })
             } else {
@@ -105,7 +105,7 @@ userRouter.get('/', (req, res, next) => {
                             res.status(500)
                             return next(err)
                         }
-                        return res.status(200).send(`Goodbye ${deletedUser}`)
+                        return res.status(200).send(`Goodbye ${deletedUser.username}`)
                     })
             }
         })

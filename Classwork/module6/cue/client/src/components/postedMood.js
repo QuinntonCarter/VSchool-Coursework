@@ -11,7 +11,7 @@ export const PostedMood = props => {
     )
 
     return(
-        <div className='flex flex-wrap border-solid border-2 border-indigo-500 p-2'>
+        <div className='flex flex-wrap border-solid border-2 border-indigo-500 p-2 mb-3'>
             {mappedItem}
         </div>
     )

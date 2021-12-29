@@ -16,7 +16,7 @@ export default function Profile(){
         deleteUserAccount
     } = useContext(UserContext);
 
-    console.log(userState)
+    var playlistText = userState.lists ? 'posted playlist' : `you haven't posted a playlist`
 
     const recentMapped = userState.recentMood && userState.recentMood.map(mood => 
         <>
@@ -63,7 +63,7 @@ export default function Profile(){
                     <input className='bg-indigo-300 text-cyan-800 btn' type='button' value='mood view'/>
                 </Link>
                 {recentMapped}
-                <p style={{color: 'gray'}} className='text-sm m-1'> posted playlist </p>
+                <p style={{color: 'gray'}} className='text-sm m-1'> {playlistText} </p>
                 {recentPlaylist}
                 <h1 className='text-sm m-1 p-1' style={{color: 'gray'}}> click to view past month top </h1>
                 <Link to={`/recent_mood_artists`}> 

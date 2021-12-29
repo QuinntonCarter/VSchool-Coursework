@@ -72,7 +72,7 @@ export default function Auth(){
     return spotifyUserState.spotifyUser ? 
         <div className='container-main'>
                 { !toggle ?
-                    <div className='p-3'>
+                    <div className='container-main grid justify-items-stretch p-3'>
                         <h1 className='header text-lg'> Create Account </h1>
                             <AuthForm
                                 handleChange={handleChange}
@@ -81,10 +81,10 @@ export default function Auth(){
                                 btnText='create'
                                 errMsg={errMsg}
                             />
-                        <p style={{cursor: 'pointer'}} onClick={toggleForm}> I have an account! </p>
+                        <button onClick={toggleForm} className='text-center'> I have an account </button>
                     </div>
                     :
-                    <div className='p-3'>
+                    <div className='container-main grid justify-items-stretch p-3'>
                         <h1 className='header text-lg'> Login </h1>
                             <AuthForm
                                 handleChange={handleChange}
@@ -93,7 +93,7 @@ export default function Auth(){
                                 btnText='login'
                                 errMsg={errMsg}
                             />
-                        <p style={{cursor: 'pointer'}} onClick={toggleForm}> I'm not a member! </p>
+                        <button onClick={toggleForm} className='justify-self-center mt-0'> I'm not a member </button>
                     </div>
                 }
         </div>

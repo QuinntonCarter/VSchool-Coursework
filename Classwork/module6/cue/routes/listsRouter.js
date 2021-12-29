@@ -2,7 +2,7 @@ const express = require('express');
 const listsRouter = express.Router();
 const List = require('../models/list.js');
 
-// GET users' recent and all user's friends' lists
+// GET users' recent or all user's friends' lists
 listsRouter.get('/', (req, res, next) => {
     if(req.query.type === 'friends'){
         List.find({ cueUser: { $in: req.user.friends }},
@@ -64,18 +64,5 @@ listsRouter.post(`/`, (req, res, next) => {
         }
     })
 });
-
-// listsRouter.delete("/:listId", (req, res, next) => {
-//     List.findOneAndDelete(
-//         { _id: req.params.listId , user: req.user._id },
-//         (err, deletedList) => {
-//             if(err){
-//                 res.status(500)
-//                 return next(err)
-//             }
-//             return res.status(200).send(`Successfully deleted list: ${deletedList._id}`)
-//         }
-//     )
-// });
 
 module.exports = listsRouter

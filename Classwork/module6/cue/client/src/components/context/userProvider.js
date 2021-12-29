@@ -67,12 +67,12 @@ export default function UserProvider(props){
     };
 
     function logout(){
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         setUserState({
             user: {},
             token: '',
         });
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
     };
 
 //  err
@@ -118,15 +118,16 @@ export default function UserProvider(props){
         .then(res => 
             setUserState(prevState => ({
                 ...prevState,
-                user: res.data
+                user: res.data,
+                friends: res.data.friends
             }))
-            )
+        )
         .catch(err => console.log(err))
     };
 
 
-// get all friends' posts in DB **
-    const getStatus = async (type) => {
+// get all friends' mood in DB **
+    const getStatus = async (type, searched) => {
         if(type === 'user'){
         const { data } = await userAxios.get(`/app/moods`, {
             params: {
@@ -141,7 +142,15 @@ export default function UserProvider(props){
             }
         })
         return data
-    }};
+        } else if(type === 'searched'){
+            const { data } = await userAxios.get('/app/moods', {
+                params: {
+                    type: type,
+                    searched: searched
+                }
+            })
+            return data
+        }};
 
 // get recent playlist
     const getPosts = async (type) => {
@@ -165,8 +174,8 @@ export default function UserProvider(props){
     const deleteUserAccount = () => {
         userAxios.delete(`/app/users/removeAcc`)
         .then(res => console.log(res.data))
-        .catch(err => handleAuthError(err))
-        .finally(logout())
+        .catch(err => handleAuthError(err.response.data.errMsg))
+        setTimeout(() => { logout() }, 1000)
     };
 
     return(

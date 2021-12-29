@@ -18,7 +18,7 @@ export default function Lists(){
         userState
     } = useContext(UserContext);
 
-    const mappedFriendsMoods = friendPosts && friendPosts.map(post => 
+    const mappedFriendsMoods = friendPosts ? friendPosts.map(post => 
         <>
             <h3 className='text-sm text-indigo-500'> {post.userString}'s mood
                 {post.timeline === 'short_term' && ` these past 30 days`}
@@ -31,14 +31,22 @@ export default function Lists(){
                 items={post.items}
             />
         </>
-    );
+        )
+        :
+        <>
+            <span className='text-sm text-cerise-500'> nothing to display </span>
+        </>
 
-    const mappedFriendLists = friendLists[0] && friendLists.map(list => 
+    const mappedFriendLists = friendLists ? friendLists.map(list => 
         <PostedList
             list={list}
             key={list._id}
         />
-        );
+        )
+        :
+        <>
+            <span className='text-sm text-cerise-500'> nothing to display </span>
+        </>
 
     useEffect(() => {
         getStatus('friends')
@@ -52,20 +60,18 @@ export default function Lists(){
             ...prevState,
             friendLists: res
         })))
-    },[]);
+    }, [userState.friends]);
 
     return(
         <div className='container-main'>
             <div>
-            <span className='text-sm text-indigo-300'> {userState.user.friends.length} friend and {friendPosts.length} posted moods </span>
+            <span className='text-sm text-indigo-300'> {userState.user.friends && userState.user.friends.length} friends and {friendPosts && friendPosts.length} posted moods </span>
                 <br/>
-                {friendPosts.length === 0 && <span className='text-sm text-cerise-500'> nothing to display </span>}
                 {mappedFriendsMoods}
             </div>
             <div className='pt-3'>
-                <span className='text-sm text text-submarine-300'> {userState.user.friends.length} friend and {friendLists.length} posted lists </span>
+                <span className='text-sm text text-submarine-300'> {userState.user.friends && userState.user.friends.length} friends and {friendLists && friendLists.length} posted lists </span>
                 <br/>
-                {friendLists.length === 0 && <span className='text-sm text-cerise-500'> nothing to display </span>}
                 {mappedFriendLists}
             </div>
         </div>

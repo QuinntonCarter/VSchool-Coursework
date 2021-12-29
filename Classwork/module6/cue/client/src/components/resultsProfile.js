@@ -9,6 +9,7 @@ export const ResultsProfile = () => {
         setFound,
         found
     } = useContext(AppContext);
+    
     const {
         shareItem
     } = useContext(UserContext);

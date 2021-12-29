@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from './context/appContext.js';
 import { UserContext } from './context/userProvider.js';
@@ -8,14 +8,20 @@ export const UserProfile = () => {
     const {
         selectedItem
     } = useContext(AppContext);
+
     const {
         updateFollowStatus,
-        userState: { user }
+        userState: { user },
+        getStatus
     } = useContext(UserContext);
 
     const history = useHistory();
-    
     const followStatus = user.friends && user.friends.includes(selectedItem._id) ? 'unfollow' : 'follow';
+    
+    console.log(selectedItem)
+    useEffect(() => {
+        getStatus('searched', selectedItem._id)
+    }, [])
 
     return(
         <div className='container-main'>

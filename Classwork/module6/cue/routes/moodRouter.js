@@ -24,6 +24,16 @@ moodRouter.get('/', (req, res, next) => {
                 }
                 return res.status(201).send(user)
         })
+    } else if (req.query.type === 'searched'){
+        MoodList.find({ cueUser: req.query.searched },
+            { isAdmin: 0, password: 0},
+            (err, user) => {
+                if(err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(201).send(user)
+            })
     }
 });
 
