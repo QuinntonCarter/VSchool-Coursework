@@ -77,7 +77,7 @@ app.get("/login", (req, res, next) => {
     httpOnly: true,
   });
   const queryParams = new URLSearchParams(
-    `client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&state=${state}&scope=${scopes}`
+    `client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&state=${state}&scope=${scopes}&show_dialog=true`
   );
 
   res.redirect(`${AUTHENDPOINT}?${queryParams}`);
