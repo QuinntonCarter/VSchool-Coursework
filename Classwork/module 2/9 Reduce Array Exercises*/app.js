@@ -54,24 +54,28 @@
 // console.log(JSON.stringify(result.join("")))
 
 // // 3) Turn an array of voter objects into a count of how many people voted
-// // let voters = [
-// // {
-// //     name: "Cletus",
-// //     voted: false
-// // },
-// // {
-// //     name: "Bertha",
-// //     voted: true
-// // },
-// // {
-// //     name: "Marcus",
-// //     voted: true
-// // },
-// // {
-// //     name: "Darell",
-// //     voted: true 
-// // }
-// // ]
+let voters = [
+{
+    name: "Cletus",
+    age: 18,
+    voted: false
+},
+{
+    name: "Bertha",
+    age: 27,
+    voted: true
+},
+{
+    name: "Marcus",
+    age: 34,
+    voted: true
+},
+{
+    name: "Darell",
+    age: 55,
+    voted: true 
+}
+]
 
 // // // let result = voters.reduce(function(final,voter){
 // // // if(voter.voted){
@@ -80,65 +84,70 @@
 // // // }, 0)
 // // // console.log(result)
 
-// // // 4) Given an array of all your wishlist items, figure out 
-// // //      how much it would cost to just buy everything at once
+// 4) Given an array of all your wishlist items, figure out 
+//      how much it would cost to just buy everything at once
 
-// // let wishlist = [
-// // {
-// //     item: "Sekiro",
-// //     price: 54.99
-// // },
-// // {
-// //     item: "Record Player",
-// //     price: 249.99
-// // },
-// // {
-// //     item: "Headphones",
-// //     price: 149.99
-// // },
-// // {
-// //     item: "Vinyl",
-// //     price: 129.99
-// // },
-// // ]
-// // // arg1 gathers vals, arg2 iterates
-// // // let total = wishlist.reduce(function(final, wish){
-// // //     return final + wish.price
-// // // // forgetting the comma before the iteration start 
-// // // // val will break code, every function is a closure, closures used before data you strted with
-// // //  // so.. must be "},0)"
-// // // },0)
-// // // console.log(total)
+// let wishlist = [
+// {
+//     item: "Sekiro",
+//     price: 54.99
+// },
+// {
+//     item: "Record Player",
+//     price: 249.99
+// },
+// {
+//     item: "Headphones",
+//     price: 149.99
+// },
+// {
+//     item: "Vinyl",
+//     price: 129.99
+// },
+// ]
+// arg1 gathers vals, arg2 iterates
+// let total = wishlist.reduce(function(final, wish){
+//     return final + wish.price
+// forgetting the comma before the iteration start 
+// val will break code, every function is a closure, closures used before data you strted with
+ // so.. must be "},0)"
+// },0)
+// console.log(total)
 
-// // // 5) Given an array of arrays, flatten them into a single array
-// // var arrayofarr = [
-// //     ["hummus"],
-// //     [1,2,3,4],
-// //     ["work"]
-// // ]
+// 5) Given an array of arrays, flatten them into a single array
+var arrayofarr = [
+    ["hummus"],
+    [1,2,3,4],
+    ["work"]
+]
 
-// // // let result = arrayofarr.reduce(function(final,current){
-// // //     // creates variable that concats all arr for push
-// // //     let three = final.concat(current)
-// // //     // push to [] outside of function
-// // //     three.push()
-// // //     return three
-// // // },[])
+let result = arrayofarr.reduce((final,current) => {
+    // creates variable that concats all arr for push
+    let three = final.concat(current)
+    // push to [] outside of function
+    three.push()
+    return three
+},[])
 
-// // // console.log(result)
+console.log(result)
 
 // // // 6) Given an array of potential voters, return an object 
 // // //      representing the results of the vote
-// // let votecount = voters.reduce(function(final,voter){
-// //     if(voter.voted){
-// //         final.didVote++
-// //     } else {
-// //         final.didntVote++
-// //     }
-// //     return final
-// // }, { didVote: 0, didntVote:0})
+let votecount = voters.reduce(function(final,voter){
+    if((voter.age <= 25 && voter.age >= 18) && voter.voted){
+        final.youngVote++
+    } if(voter.age <= 25 && voter.age >= 18){
+        final.youngPeople++
+    } if(voter.age >= 26 && voter.age <= 35){
+        final.midPeople++
+    } if ((voter.age >= 26 && voter.age >= 35) && voter.voted){
+        final.midVote++
+    } if(voter.age >= 36 && voter.age <= 55){
+        final.oldPeople++
+    } if ((voter.age >= 36 && voter.age <= 55) && voter.voted){
+        final.oldVote++
+    }
+    return final
+}, { youngVote: 0, youngPeople: 0, midVote: 0, midPeople: 0, oldVote:0, oldPeople: 0 })
 
-// // console.log(votecount)
-
-
-
+console.log(votecount)
