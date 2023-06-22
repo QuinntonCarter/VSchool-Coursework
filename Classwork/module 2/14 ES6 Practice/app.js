@@ -126,7 +126,7 @@ const animals = [
 
 // FAT arrow function
 
-const filterForDogs = animals.filter(x => { if (x.type === "dog"){ return true} else { return false} })
+const filterForDogs = animals.filter(x => { if (x.type === "dog"){ return true } else { return false } })
 
 console.log(filterForDogs)
 

@@ -151,3 +151,16 @@ let votecount = voters.reduce(function(final,voter){
 }, { youngVote: 0, youngPeople: 0, midVote: 0, midPeople: 0, oldVote:0, oldPeople: 0 })
 
 console.log(votecount)
+
+const test = [['here it is APPEND'], ['test this out']]
+
+function solution(queries) {
+    const queriesString = queries.toString().replace('APPEND', '')
+    const queriesArr = queriesString.split(' ')
+    let newInput = []
+    for(let i = 0; i <= queriesArr.length; i++){
+        return queriesArr.concat(newInput).join(' ')
+    }
+}
+
+console.log(solution(test))

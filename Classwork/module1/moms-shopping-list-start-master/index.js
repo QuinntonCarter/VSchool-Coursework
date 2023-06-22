@@ -16,7 +16,7 @@ form.addEventListener('submit', (e) => {
         editInput.placeholder = placeholderVal
         newItem.textContent = 'Edit'
         newItem.append(editInput)
-        // // // // // //
+
         const saveEdit = document.createElement('button')
         saveEdit.textContent = 'Save'
         newItem.append(saveEdit)

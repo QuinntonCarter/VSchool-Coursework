@@ -11,7 +11,7 @@ app.use('/', (req, res, next) => {
 
 app.use('/', (req, res, next) => {
     console.log('running get')
-    req.body = {title: "h3ll0 w0rld!"}
+    req.body = { title: "h3ll0 w0rld!" }
     next()
 })
 

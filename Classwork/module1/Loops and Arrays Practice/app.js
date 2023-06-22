@@ -1,14 +1,17 @@
 // 1
 ///////
-// var officeItems = ["stapler", "monitor", "computer", "desk", "lamp", "computer", "lamp", "stapler", "computer",  "computer"]
+var officeItems = ["stapler", "monitor", "computer", "desk", "lamp", "computer", "lamp", "stapler", "computer",  "computer"]
+const tes = "computer"
+const test = (arr, query) =>  {
+    for (let i=0; i < arr.length; i++){
+    let arr1 = []
+    if(officeItems[i] === query){
+        arr1.push(officeItems[i])
+    }
+    console.log(arr1.length)
+}}
 
-// for (let i=0; i < officeItems.length; i++){
-//     if(officeItems[i] === "computer"){
-//         console.log(officeItems[i])
-//     } else {
-//         console.log("nah")
-//     }
-// }
+console.log(test(officeItems, tes))
 
 // -----------------------------------------------------------------------------------------------------------------------------
 // 2
@@ -57,12 +60,12 @@
 // 3
 ///////
 ///////
-var arrayOfArrays = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
+// var arrayOfArrays = [
+//     [1, 2, 3],
+//     [4, 5, 6],
+//     [7, 8, 9]
+// ]
 
-for (let i=0; i < arrayOfArrays.length; i++) {
-    console.log(arrayOfArrays[i])
-}
+// for (let i=0; i < arrayOfArrays.length; i++) {
+//     console.log(arrayOfArrays[i])
+// }

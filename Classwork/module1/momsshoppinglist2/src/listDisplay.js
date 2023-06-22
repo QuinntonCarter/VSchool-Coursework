@@ -14,7 +14,7 @@ function listDisplay(props){
     return(
         <div>
             <button onClick={erase}>x</button>
-            <button>Edit</button>
+            <button onClick={edit}>Edit</button>
             <h3> {props.item} </h3>
         </div>
     )

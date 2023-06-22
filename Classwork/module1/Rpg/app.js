@@ -18,7 +18,7 @@ var hP = 30;
 //     }
 
 //  Items Variables //
-// var items = {
+// var items = [
 //     bSword = {
 //         name: "Broken Sword",
 //         damage: 4
@@ -36,7 +36,7 @@ var hP = 30;
 //             hP.reduce(10,hP) => 10+hP
 //         }
 //     }
-// }
+// ]
         
 
 // or
@@ -230,7 +230,7 @@ while (rpg) {
         let explore = true
 
         while (explore) {
-            if (command === "w") { 
+            if (command === "w") {
                 walk()
                 var command = readline.keyIn("*PRESS W TO WALK*")
             } else if (command === "p") {

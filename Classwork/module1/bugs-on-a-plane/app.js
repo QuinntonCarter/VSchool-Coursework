@@ -33,5 +33,5 @@
 
 button.addEventListener("submit", function (e) {
     e.window.alert("First Name: " + firstName + "\nLast Name: " + lastName + "\nAge: " + age + "\nGender: " + gender + "\nTravel Location: " + location + "\nDiet: " + diet + "\nAwesome, now if you die, it won't be an accident.."
-    )};
+    )})
 
