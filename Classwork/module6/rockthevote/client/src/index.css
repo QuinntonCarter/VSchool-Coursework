@@ -2,7 +2,7 @@
     border-radius: 4px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
-    background-color: oldlace
+    background-color: pink
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans&display=swap');
@@ -326,7 +326,7 @@ div.interactionStyle > button.deleteBtn {
 /* comments style */
 .commentContainer {
     grid-column: auto;
-    background-color: peachpuff;
+    background-color: white;
     height: auto;
     width: auto;
     border-radius: 0;
@@ -343,4 +343,14 @@ div.commentStyle > h6 {
     background-color: transparent;
     height: auto;
     width: auto;
+}
+
+section.postsGrid {
+    /* text-align: -webkit-center; */
+    /* text-align: center; */
+}
+
+section.commentsGrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
 }

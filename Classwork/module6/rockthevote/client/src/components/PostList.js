@@ -1,61 +1,74 @@
-import React, {  useContext, useState, useEffect } from 'react';
-import { UserContext } from '../context/UserProvider.js';
+import React, { useContext, useState, useEffect } from 'react';
+import { AppContext } from './context/AppProvider.js';
+// import { UserContext } from './context/UserProvider.js';
 import Posts from './Posts.js';
 
-export default function PostList(props) {
-    const { allPosts } = props
-    const { getAllPosts } = useContext(UserContext)
-    let initView = allPosts.map(posts => <Posts {...posts} _id={posts._id} userId={posts.user} key={posts._id} />).reverse()
+export default function PostList() {
+    const {
+        posts,
+    } = useContext(AppContext);
+    const [ postView, setPostView ] = useState();
 
-    let unpopularSort = allPosts.sort((a,b) => a.votes - b.votes )
-    let unpopularView = unpopularSort.map(posts => <Posts {...posts} _id={posts._id} userId={posts.user} key={posts._id} />)
+    const initView = posts.allPosts.map(post => {
+        return <Posts {...post} _id={post._id} userId={post.user} key={post._id} />
+    });
+    const newestSort = posts.allPosts.map(post => {
+        return <Posts {...post} _id={post._id} userId={post.user} key={post._id} />
+    }).reverse();
+    const unpopularSort = posts.allPosts.sort((a, b) => a.votes - b.votes ).map(post => {
+        return <Posts {...post} _id={post._id} userId={post.user} key={post._id} />
+    });
+    // sort by likes
+    const popularSort = posts.allPosts.sort((a, b) => b.votes - a.votes).map(post => {
+        return <Posts {...post} _id={post._id} userId={post.user} key={post._id} />
+    });
 
-    let popularSort = allPosts.sort((a,b) => b.votes - a.votes)
-    let popularView = popularSort.map(posts => <Posts {...posts} _id={posts._id} userId={posts.user} key={posts._id} />)
+    useEffect(() => {
 
-    const [ view, setView ] = useState({
-        reverse: false,
-        popular: true,
-        unpopular: false
-    })
+    }, []);
 
-    function changeClass(option){
-        if(option === 'popular'){
-            setView({
-                reverse: false,
-                popular: true,
-                unpopular: false
-            })
-        } if(option === 'unpopular'){
-            setView({
-                reverse: false,
-                popular: false,
-                unpopular: true
-            })
-        } if(option === 'newest'){
-            setView({
-                reverse: true,
-                popular: false,
-                unpopular: false
-            })
-        }
+    function setView(option){
+        switch(option){
+            case 'popular':
+                setPostView(popularSort);
+                break;
+            case 'unpopular':
+                setPostView(unpopularSort);
+            break;
+            case 'newest':
+                setPostView(newestSort);
+            break;
+            case 'init':
+                setPostView(initView);
+            break;
+            default:
+        };
     }
 
     useEffect(() => {
-        getAllPosts()
-    }, [])
+        return () => {
+            setPostView('')
+        }
+    }, []);
 
-    
-    return(
+    useEffect(() => {
+
+        return () => {
+
+        }
+    }, []);
+
+    return (
         <div className='postList'>
             <div className='sortViewBar'>
-                <button onClick={() => changeClass('popular')}> popular </button>
-                <button onClick={() => changeClass('newest')}> newest </button>
-                <button onClick={() => changeClass('unpopular')}> unpopular </button>
+                <select onChange={(e) => setView(e.target.value)}>
+                    <option value={'init'}> all posts </option>
+                    <option value={'popular'}> popular </option>
+                    <option value={'newest'}> newest </option>
+                    <option value={'unpopular'}> unpopular </option>
+                </select>
             </div>
-            { view.reverse ? initView : null }
-            { view.popular ? popularView : null }
-            { view.unpopular === true ? unpopularView : null }
+            { postView ? postView : initView }
         </div>
     )
-}
+};

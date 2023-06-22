@@ -1,7 +1,14 @@
 *** STOP messing with CSS, pleb. implement functionality first ***
 
 REVIEW:
-- CSS/layout    
+- overhaul CSS styles
+    + IMPLEMENT SASS
+
+# *** Bugs ***
+    ## + ** Fix sort delayed flip issue **
+    + Fix date/slice issue in comment comp (?)
+    + Fix post comment issue--content not displaying
+# *** *** ***
 
 GOALS:
 - button component for postlist to toggle post views (and user/all view possibly)
@@ -31,6 +38,7 @@ FUTURE DEV:
     + maybe send ids into array and delete that array on function call
 - nightmode/alt views
 
+RESTYLE THIS
 
 notes:
 useEffect(()=> {

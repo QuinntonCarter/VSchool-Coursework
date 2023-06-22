@@ -1,37 +1,42 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../../context/UserProvider.js';
-import CommentComp from '../CommentComp.js';
+import React, { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../context/UserProvider.js';
+import { AppContext } from '../context/AppProvider.js';
+import CommentList from '../CommentList.js';
 
-export default React.memo(function PostInteractionBar(props){
-    const {
-        comment,
+export default function PostInteractionBar({
+        comments,
+        setPostComments,
         votes,
         _id,
         _userId,
         userString,
-        voted
-    } = props
+        voted,
+        userId
+    }){
     
     const { 
-        deletePost,
+        user
+    } = useContext(UserContext);
+
+    const {
+        deleteComment,
         submitVote,
         postComment,
-        user
-    } = useContext(UserContext)
+        appError,
+        setAppError,
+    } = useContext(AppContext);
     
     const initInputs = {
         content: '',
         comAuth: `${user.username}`,
         _authId: ``,
         date: new Date()
-    }
+    };
 
-    const [inputs, setInputs] = useState(initInputs)
-    const [toggleReply, setToggleReply] = useState(false)
+    const [ inputs, setInputs ] = useState(initInputs);
+    const [ toggleReply, setToggleReply ] = useState(false);
 
-    function handleDelete(id){
-        deletePost(id)
-    }
+    const isCommentAuthor = userId === user._id;
 
     function handleChange(e){
         const { name, value } = e.target
@@ -39,24 +44,37 @@ export default React.memo(function PostInteractionBar(props){
             ...prevState,
             [name]: value
         }))
-    }
+    };
     
     function voteValidation(vote, userId, id, username){
-        const hasVoted = voted.includes(username)
-        hasVoted ?
-        console.log(`Error: you've already voted here`)
-        :
-        submitVote(vote, userId, id)
-    }
+        const userHasVoted = voted.includes(username);
+        if (userHasVoted) {
+            setAppError(`Error: you've already voted here`)
+        } else {
+            submitVote(vote, userId, id)
+        }
+    };
 
-    function submitComment(e, postId, textInput){
-        e.preventDefault()
-        postComment(postId, textInput)
-        setInputs(initInputs)
-        setToggleReply(false)
-    }
+    async function submitComment(e, postId) {
+        e.preventDefault();
+        await postComment(postId, inputs)
+            .then(data => setPostComments(data))
+            .catch(error => setAppError(error));
+        await setInputs(initInputs);
+        await setToggleReply(false);
+    };
 
-    return(
+    function handleDelete(postId, id) {
+        deleteComment(postId, id)
+            .then(data => console.log(data))
+            .catch(error => setAppError(error));
+    };
+
+    useEffect(() => {
+        console.log(comments)
+    }, [comments]);
+
+    return (
         <div className='interactionStyle'>
             <h4 title='# of votes'>
                 <i
@@ -67,7 +85,7 @@ export default React.memo(function PostInteractionBar(props){
                     onClick={() => voteValidation("downvote", _userId, _id, user.username)}
                     title={ userString === user.username ? 'cannot vote on your own content' : 'downvote' || voted.includes(user.username) ? `you've already voted` : `downvote` } className='fas fa-thumbs-down'/>
             </h4>
-            <h6 className='comments'> { comment.length } comments </h6>
+            <h6 className='comments'> { comments.length } comments </h6>
             { !toggleReply ?
                 <h6
                     title='open reply form'
@@ -88,7 +106,7 @@ export default React.memo(function PostInteractionBar(props){
                             value={inputs.content}
                         />
                         <button
-                            onClick={(e) => submitComment(e, _id, inputs)}
+                            onClick={(e) => submitComment(e, _id)}
                             style={{color: 'rgb(233, 110, 110)'}}
                         > reply </button>
                         <button
@@ -99,18 +117,17 @@ export default React.memo(function PostInteractionBar(props){
                     </form>
                 </div>
             }
-            { props.userId === user._id ?
+            { isCommentAuthor &&
                 <button
                     onClick={() => handleDelete(_id)}
                     className='deleteBtn'
                 > delete </button>
-                :
-                ''
             }
-            <CommentComp
+            <CommentList
                 postId={_id}
-                comments={comment}
+                comments={comments}
+                key={_id}
             />
         </div>
     )
-})
+};

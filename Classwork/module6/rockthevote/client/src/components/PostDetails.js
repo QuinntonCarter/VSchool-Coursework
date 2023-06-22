@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../context/UserProvider.js';
+import { UserContext } from './context/UserProvider.js';
 import Loading from '../Loading.js';
 
 export default function PostDetails(props){

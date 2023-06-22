@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import AuthForm from './forms/AuthForm.js';
-import { UserContext } from '../context/UserProvider.js';
+import { UserContext } from './context/UserProvider.js';
 
 const initInputs = { username:'', password:'' }
 

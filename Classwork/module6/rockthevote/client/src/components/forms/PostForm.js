@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../context/AppProvider';
 
 const initInputs = {
     title: '',
     content: '',
     imgSrc: ''
-}
+};
 
-export default function PostForm(props){
-    const [inputs, setInputs] = useState(initInputs)
-    const {addPost} = props
+export default function PostForm(){
+    const [ inputs, setInputs ] = useState(initInputs)
+    const { title, content, imgSrc } = inputs
+    const {
+        addPost
+    } = useContext(AppContext);
 
     function handleChange(e){
         const {name, value} = e.target
@@ -16,38 +20,39 @@ export default function PostForm(props){
             ...prevInputs,
             [name]: value
         }))
-    }
+    };
 
     function handleSubmit(e){
         e.preventDefault()
         addPost(inputs)
         setInputs(initInputs)
-    }
+    };
 
-    const { title, content, imgSrc } = inputs
+    // useEffect(() => {
+        // setInputs(prevInputs => ({
+        //     ...prevInputs,
+        //     [name]: value
+        // }))
+    // }, [inputs])
 
-    return(
+    return (
         <form 
             className='postForm'
-            onSubmit={handleSubmit}
-        >
+            onSubmit={handleSubmit}>
             <input
                 name='imgSrc'
                 value={imgSrc}
                 onChange={handleChange}
                 placeholder='enter image URL'
-                required
-            />
+                required/>
             <input
                 className='input'
                 name='title'
                 value={title}
                 onChange={handleChange}
                 placeholder='enter post title'
-                maxLength='35
-                '
-                required
-            />
+                maxLength='35'
+                required/>
             <br/>
             <textarea
                 name='content'
@@ -55,9 +60,8 @@ export default function PostForm(props){
                 onChange={handleChange}
                 placeholder='enter post content'
                 maxLength='2000'
-                required
-            />
-            <button> create new post </button>
+                required/>
+            <button> submit post </button>
         </form>
     )
-}
+};

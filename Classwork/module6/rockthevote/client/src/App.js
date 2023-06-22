@@ -10,10 +10,15 @@ import PostDetails from './components/PostDetails.js';
 
 // import Loading from './Loading.js';
 
-import { UserContext } from './context/UserProvider.js';
+import { UserContext } from './components/context/UserProvider.js';
 
 function App() {
-  const { token, logout, loading } = useContext(UserContext)
+  const {
+      token,
+      logout,
+      loading 
+    } = useContext(UserContext);
+
   return (
     <>
       {token && <Navbar logout={logout} token={token}/>}

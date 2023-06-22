@@ -1,11 +1,30 @@
-import { useContext } from 'react';
-import { UserContext } from '../context/UserProvider.js';
+import { useContext, useEffect } from 'react';
 import Posts from './Posts.js'
+import Comment from './Comment.js';
+import { AppContext } from './context/AppProvider.js';
+import { UserContext } from './context/UserProvider.js';
 
 export default function Profile(){
-    const { user: { username }, user: { memberSince },  posts, comments } = useContext(UserContext)
-    // find a way to select last item in array and insert it as arg in this .lastIndexOf()
-    const userPostsMapped = posts.map(posts =>
+    const {
+        user,
+        user: { 
+            username
+        },
+        user: {
+            memberSince
+        },
+    } = useContext(UserContext);
+
+    const {
+        posts,
+        getUserComments,
+        comments,
+        setComments,
+        // appError,
+        setAppError,
+    } = useContext(AppContext);
+
+    const userPostsMapped = posts.userPosts && posts.userPosts.map(posts =>
         <div className='profilePosts'>
             <Posts
                 {...posts}
@@ -14,24 +33,37 @@ export default function Profile(){
                 key={posts._id}
             />
         </div>
-    )
+    );
 
-    const userCommentsMapped = comments.map(comment =>
-        <div class="comment" style={{display: 'grid', justifySelf: 'center'}}>
-            <h5> {comment.date} </h5>
-            <p> {comment.content} </p>
-        </div>
-    )
+    // ** turn into comment component **
+    const userCommentsMapped = comments.userComments ?
+        comments.userComments.map(comment => <Comment {...comment} key={comment._id} />
+        )
+        : 
+        <p> No comments to display </p>
+
+    useEffect(() => {
+        getUserComments(user._id)
+        .then(res => 
+            setComments({
+                userComments: res
+            })
+        )
+        .catch(err => setAppError(err))
+    }, []);
 
     return(
         <div>
             <h1> @{ username } </h1>
             <h3> member since: { memberSince.slice(0,10) } </h3>
             <h3> posts: </h3>
+            <section className="postsGrid">
                 { userPostsMapped }
-            {/* will need to create comment component, which maps through and displays comments, may need to add userComments arr to state n map that way */}
+            </section>
             <h3> comments: </h3>
-            { userCommentsMapped }
+            <section className="commentsGrid">
+                { userCommentsMapped }
+            </section>
         </div>
     )
-}
+};

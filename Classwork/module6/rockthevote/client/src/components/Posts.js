@@ -1,11 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostInteractionBar from './forms/PostInteractionBar.js';
-import { UserContext } from '../context/UserProvider.js';
+import { UserContext } from './context/UserProvider.js';
+import { AppContext } from './context/AppProvider.js';
 
-
-export default function Posts(props){
-    const {
+export default function Posts({
         userId,
         userString,
         votedUsers,
@@ -16,12 +15,19 @@ export default function Posts(props){
         posted,
         votes,
         _id
-    } = props
+    }){
+    const {
+        user,
+    } = useContext(UserContext);
 
-    const { user, deletePost } = useContext(UserContext)
+    const {
+        deletePost
+    } = useContext(AppContext);
 
-    return(
-        <>
+    const [ postComments, setPostComments ] = useState(comment);
+    const isPostAuthor = userId === user._id;
+
+    return (
             <div className='postStyle'>
                 <a title='View full size image' href={ imgSrc } rel='noreferrer' target='_blank'> 
                     <img src={ imgSrc } alt={ imgSrc }/>
@@ -37,24 +43,23 @@ export default function Posts(props){
                         <p> { content } </p>
                     </div>
                     { 
-                        userId !== user._id ?
-                        ''
-                    :
-                    <button
-                        onClick={() => deletePost(_id)}
-                        className='deleteBtn'
-                    > x </button>
-                }
+                        isPostAuthor &&
+                        <button
+                            onClick={() => deletePost(_id)}
+                            className='deleteBtn'
+                            title='Click here to delete this post'
+                        > Delete Post </button>
+                    }
                 <PostInteractionBar
                     commLength={comment.length}
                     votes={votes}
                     voted={votedUsers}
-                    comment={comment}
+                    comments={postComments}
+                    setPostComments={setPostComments}
                     _id={_id}
                     _userId={userId}
                     userString={userString}
                 />
             </div>
-        </>
     )
-}
+};
